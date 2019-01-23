@@ -40,6 +40,7 @@
             this.stateDropDown.Name = "stateDropDown";
             this.stateDropDown.Size = new System.Drawing.Size(800, 21);
             this.stateDropDown.TabIndex = 0;
+            this.stateDropDown.SelectedIndexChanged += new System.EventHandler(this.stateDropDown_SelectedIndexChanged);
             // 
             // cityDropDown
             // 
