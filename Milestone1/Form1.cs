@@ -7,12 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-//using System
 
 namespace Milestone1
 {
     public partial class Form1 : Form
     {
+
+        public class Business
+        {
+            public string name { get; set; }
+            public string state { get; set; }
+            public string city { get; set; }
+        }
+
         public Form1()
         {
             string[] test = new string[] { "test1", "test2", "Arizona" };
@@ -27,6 +34,16 @@ namespace Milestone1
             // TODO:
             // interact with database to query the list of states contained within      
             // update states dropdown menu
+
+            DataGridViewTextBoxColumn col1 = new DataGridViewTextBoxColumn();
+            col1.HeaderText = "Business name";
+            col1.Width = 255;
+            businessGrid.Columns.Add(col1);
+
+            DataGridViewTextBoxColumn col2 = new DataGridViewTextBoxColumn();
+            col2.HeaderText = "State";
+            col2.Width = 255;
+            businessGrid.Columns.Add(col2);
         }
 
         private void stateDropDown_SelectedIndexChanged(object sender, EventArgs e)
