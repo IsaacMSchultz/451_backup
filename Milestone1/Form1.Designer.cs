@@ -56,10 +56,13 @@
             // 
             // businessGrid
             // 
+            this.businessGrid.AllowUserToAddRows = false;
+            this.businessGrid.AllowUserToDeleteRows = false;
             this.businessGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.businessGrid.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.businessGrid.Location = new System.Drawing.Point(0, 48);
             this.businessGrid.Name = "businessGrid";
+            this.businessGrid.ReadOnly = true;
             this.businessGrid.Size = new System.Drawing.Size(800, 402);
             this.businessGrid.TabIndex = 2;
             // 

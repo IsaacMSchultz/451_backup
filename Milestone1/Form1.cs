@@ -25,6 +25,7 @@ namespace Milestone1
             string[] test = new string[] { "test1", "test2", "Arizona" };
             string[] testCity = new string[] { "Tucson", "Pheonix" };
             InitializeComponent();
+            initializeDropDowns();
             stateDropDown.Items.AddRange(test);
             cityDropDown.Items.AddRange(testCity);
         }
