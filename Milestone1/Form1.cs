@@ -36,5 +36,10 @@ namespace Milestone1
             // query database to get list of cities in the selected state
             // update city dropdown with list
         }
+
+        private void cityDropDown_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // populate data into businessGrid from database
+        }
     }
 }

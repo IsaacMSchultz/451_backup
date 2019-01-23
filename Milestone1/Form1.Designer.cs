@@ -30,10 +30,10 @@
         {
             this.stateDropDown = new System.Windows.Forms.ComboBox();
             this.cityDropDown = new System.Windows.Forms.ComboBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.businessGrid = new System.Windows.Forms.DataGridView();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // stateDropDown
@@ -52,15 +52,16 @@
             this.cityDropDown.Name = "cityDropDown";
             this.cityDropDown.Size = new System.Drawing.Size(678, 21);
             this.cityDropDown.TabIndex = 1;
+            this.cityDropDown.SelectedIndexChanged += new System.EventHandler(this.cityDropDown_SelectedIndexChanged);
             // 
-            // dataGridView1
+            // businessGrid
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 48);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(800, 402);
-            this.dataGridView1.TabIndex = 2;
+            this.businessGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.businessGrid.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.businessGrid.Location = new System.Drawing.Point(0, 48);
+            this.businessGrid.Name = "businessGrid";
+            this.businessGrid.Size = new System.Drawing.Size(800, 402);
+            this.businessGrid.TabIndex = 2;
             // 
             // textBox1
             // 
@@ -87,12 +88,12 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.businessGrid);
             this.Controls.Add(this.cityDropDown);
             this.Controls.Add(this.stateDropDown);
             this.Name = "Form1";
             this.Text = "Milestone 1 Sample Application";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -102,7 +103,7 @@
 
         private System.Windows.Forms.ComboBox stateDropDown;
         private System.Windows.Forms.ComboBox cityDropDown;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView businessGrid;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
     }
