@@ -28,13 +28,45 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.stateDropDown = new System.Windows.Forms.ComboBox();
+            this.cityDropDown = new System.Windows.Forms.ComboBox();
+            this.SuspendLayout();
+            // 
+            // stateDropDown
+            // 
+            this.stateDropDown.Dock = System.Windows.Forms.DockStyle.Top;
+            this.stateDropDown.FormattingEnabled = true;
+            this.stateDropDown.Location = new System.Drawing.Point(0, 0);
+            this.stateDropDown.Name = "stateDropDown";
+            this.stateDropDown.Size = new System.Drawing.Size(800, 21);
+            this.stateDropDown.TabIndex = 0;
+            // 
+            // cityDropDown
+            // 
+            this.cityDropDown.Dock = System.Windows.Forms.DockStyle.Top;
+            this.cityDropDown.FormattingEnabled = true;
+            this.cityDropDown.Location = new System.Drawing.Point(0, 21);
+            this.cityDropDown.Name = "cityDropDown";
+            this.cityDropDown.Size = new System.Drawing.Size(800, 21);
+            this.cityDropDown.TabIndex = 1;
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            this.Controls.Add(this.cityDropDown);
+            this.Controls.Add(this.stateDropDown);
+            this.Name = "Form1";
+            this.Text = "Milestone 1 Sample Application";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.ComboBox stateDropDown;
+        private System.Windows.Forms.ComboBox cityDropDown;
     }
 }
 
