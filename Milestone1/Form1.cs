@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Npgsql;
 
 namespace Milestone1
 {
@@ -35,6 +36,16 @@ namespace Milestone1
             // TODO:
             // interact with database to query the list of states contained within      
             // update states dropdown menu
+
+            // 'using' keyword to auto call dispose when we are done.
+            using (var connection = new NpgsqlConnection("Host=localhost; Username=postgres; Password=greatPassword; Database=milestone1db"))
+            {
+                connection.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    
+                }
+            }
 
             DataGridViewTextBoxColumn col1 = new DataGridViewTextBoxColumn();
             col1.HeaderText = "Business name";
