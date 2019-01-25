@@ -25,20 +25,14 @@ namespace Milestone1
 
         public Form1()
         {
-            //string[] test = new string[] { "test1", "test2", "Arizona" };
-            //string[] testCity = new string[] { "Tucson", "Pheonix" };
             InitializeComponent();
             initializeDropDowns();
-            //stateDropDown.Items.AddRange(test);
-            //cityDropDown.Items.AddRange(testCity);
         }
 
         private void initializeDropDowns()
         {
-            // TODO:
             // interact with database to query the list of states contained within      
-            // update states dropdown menu
-
+            // update states dropdown menu with the list of distinct states
             // 'using' keyword to auto call dispose when we are done.
             using (var connection = new NpgsqlConnection(LOGININFO))
             {
@@ -50,9 +44,7 @@ namespace Milestone1
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
-                        {
                             stateDropDown.Items.Add(reader.GetString(0));
-                        }
                     }
                 }
                 connection.Close();
@@ -64,13 +56,13 @@ namespace Milestone1
             businessGrid.Columns.Add(col1);
 
             DataGridViewTextBoxColumn col2 = new DataGridViewTextBoxColumn();
-            col2.HeaderText = "State";
-            col2.Width = 255;
+            col2.HeaderText = "City";
+            col2.Width = 115;
             businessGrid.Columns.Add(col2);
 
             DataGridViewTextBoxColumn col3 = new DataGridViewTextBoxColumn();
-            col3.HeaderText = "city";
-            col3.Width = 255;
+            col3.HeaderText = "State";
+            col3.Width = 50;
             businessGrid.Columns.Add(col3);
         }
 
@@ -78,24 +70,19 @@ namespace Milestone1
         {
             ComboBox box = (ComboBox)sender; //casts sender as a ComboBox
 
-            // need to look in MSD
-
             // query database to get list of cities in the selected state
             // update city dropdown with list
-
             using (var connection = new NpgsqlConnection(LOGININFO))
             {
                 connection.Open();
                 using (var cmd = new NpgsqlCommand())
                 {
                     cmd.Connection = connection;
-                    cmd.CommandText = "SELECT distinct city FROM business WHERE city == " + box.SelectedItem + " ORDER BY city;";
+                    cmd.CommandText = "SELECT distinct city FROM business WHERE business.state = '" + box.SelectedItem + "' ORDER BY city;";
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
-                        {
                             cityDropDown.Items.Add(reader.GetString(0));
-                        }
                     }
                 }
                 connection.Close();
@@ -104,21 +91,26 @@ namespace Milestone1
 
         private void cityDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // populate data into businessGrid from database
+            while (businessGrid.RowCount > 0)
+                businessGrid.Rows.RemoveAt(0);
 
+            // populate data into businessGrid from database with the city and state from each dropdown.
             using (var connection = new NpgsqlConnection(LOGININFO))
             {
                 connection.Open();
                 using (var cmd = new NpgsqlCommand())
                 {
                     cmd.Connection = connection;
-                    cmd.CommandText = "SELECT * FROM business ORDER BY state;";
+                    cmd.CommandText = "SELECT * FROM business WHERE city = '" + cityDropDown.SelectedItem + "' AND state = '" + stateDropDown.SelectedItem + "' ORDER BY state;";
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
                             Console.WriteLine(reader.GetString(0));
+                            Console.WriteLine(reader.GetString(1));
+                            Console.WriteLine(reader.GetString(2));
                             //cityDropDown.Items.Add(reader.GetString(0));
+                            businessGrid.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2));
                         }
                     }
                 }
