@@ -53,17 +53,17 @@ namespace Milestone1
             // Create the column headers for the data grid view.
             DataGridViewTextBoxColumn col1 = new DataGridViewTextBoxColumn();
             col1.HeaderText = "Business name";
-            col1.Width = 255;
+            //col1.Width = 255;
             businessGrid.Columns.Add(col1);
 
             DataGridViewTextBoxColumn col2 = new DataGridViewTextBoxColumn();
             col2.HeaderText = "City";
-            col2.Width = 115;
+            //col2.Width = 115;
             businessGrid.Columns.Add(col2);
 
             DataGridViewTextBoxColumn col3 = new DataGridViewTextBoxColumn();
             col3.HeaderText = "State";
-            col3.Width = 50;
+            //col3.Width = 50;
             businessGrid.Columns.Add(col3);
         }
 
@@ -105,10 +105,8 @@ namespace Milestone1
                     cmd.CommandText = "SELECT * FROM business WHERE city = '" + cityDropDown.SelectedItem + "' AND state = '" + stateDropDown.SelectedItem + "' ORDER BY state;";
                     using (var reader = cmd.ExecuteReader())
                     {
-                        while (reader.Read())
-                        {
-                            businessGrid.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2));
-                        }
+                        while (reader.Read())                        
+                            businessGrid.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2));                        
                     }
                 }
                 connection.Close();
