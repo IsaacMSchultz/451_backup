@@ -34,27 +34,33 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.groupBox = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).BeginInit();
             this.groupBox.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // stateDropDown
             // 
-            this.stateDropDown.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.stateDropDown.Dock = System.Windows.Forms.DockStyle.Top;
             this.stateDropDown.FormattingEnabled = true;
-            this.stateDropDown.Location = new System.Drawing.Point(122, 0);
+            this.stateDropDown.Location = new System.Drawing.Point(0, 13);
+            this.stateDropDown.Margin = new System.Windows.Forms.Padding(0);
             this.stateDropDown.Name = "stateDropDown";
-            this.stateDropDown.Size = new System.Drawing.Size(678, 21);
+            this.stateDropDown.Size = new System.Drawing.Size(763, 21);
             this.stateDropDown.TabIndex = 0;
             this.stateDropDown.SelectedIndexChanged += new System.EventHandler(this.stateDropDown_SelectedIndexChanged);
             // 
             // cityDropDown
             // 
-            this.cityDropDown.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cityDropDown.Dock = System.Windows.Forms.DockStyle.Top;
             this.cityDropDown.FormattingEnabled = true;
-            this.cityDropDown.Location = new System.Drawing.Point(122, 20);
+            this.cityDropDown.Location = new System.Drawing.Point(0, 34);
+            this.cityDropDown.Margin = new System.Windows.Forms.Padding(0);
             this.cityDropDown.Name = "cityDropDown";
-            this.cityDropDown.Size = new System.Drawing.Size(678, 21);
+            this.cityDropDown.Size = new System.Drawing.Size(763, 21);
             this.cityDropDown.TabIndex = 1;
             this.cityDropDown.SelectedIndexChanged += new System.EventHandler(this.cityDropDown_SelectedIndexChanged);
             // 
@@ -65,34 +71,34 @@
             this.businessGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.businessGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.businessGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.businessGrid.Location = new System.Drawing.Point(0, 41);
+            this.businessGrid.Location = new System.Drawing.Point(0, 72);
             this.businessGrid.Name = "businessGrid";
             this.businessGrid.ReadOnly = true;
-            this.businessGrid.Size = new System.Drawing.Size(800, 409);
+            this.businessGrid.Size = new System.Drawing.Size(800, 378);
             this.businessGrid.TabIndex = 2;
             // 
             // textBox1
             // 
-            this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox1.Location = new System.Drawing.Point(6, 3);
+            this.textBox1.Location = new System.Drawing.Point(0, 16);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(0);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(116, 13);
+            this.textBox1.Size = new System.Drawing.Size(40, 13);
             this.textBox1.TabIndex = 3;
             this.textBox1.Text = "State";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBox2
             // 
-            this.textBox2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox2.Location = new System.Drawing.Point(6, 23);
+            this.textBox2.Location = new System.Drawing.Point(0, 37);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(0);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(116, 13);
+            this.textBox2.Size = new System.Drawing.Size(40, 13);
             this.textBox2.TabIndex = 4;
             this.textBox2.Text = "City";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -101,16 +107,44 @@
             // 
             this.groupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.groupBox.Controls.Add(this.stateDropDown);
-            this.groupBox.Controls.Add(this.textBox2);
-            this.groupBox.Controls.Add(this.cityDropDown);
-            this.groupBox.Controls.Add(this.textBox1);
+            this.groupBox.Controls.Add(this.groupBox2);
+            this.groupBox.Controls.Add(this.groupBox1);
             this.groupBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.groupBox.Location = new System.Drawing.Point(0, 0);
+            this.groupBox.Margin = new System.Windows.Forms.Padding(0);
             this.groupBox.Name = "groupBox";
-            this.groupBox.Size = new System.Drawing.Size(800, 41);
-            this.groupBox.TabIndex = 5;
+            this.groupBox.Padding = new System.Windows.Forms.Padding(0);
+            this.groupBox.Size = new System.Drawing.Size(800, 72);
+            this.groupBox.TabIndex = 0;
             this.groupBox.TabStop = false;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.cityDropDown);
+            this.groupBox2.Controls.Add(this.stateDropDown);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Location = new System.Drawing.Point(37, 13);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(0);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(0);
+            this.groupBox2.Size = new System.Drawing.Size(763, 59);
+            this.groupBox2.TabIndex = 2;
+            this.groupBox2.TabStop = false;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.textBox2);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupBox1.Location = new System.Drawing.Point(0, 13);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(0);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(0);
+            this.groupBox1.Size = new System.Drawing.Size(37, 59);
+            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabStop = false;
             // 
             // Form1
             // 
@@ -123,7 +157,9 @@
             this.Text = "Milestone 1 Sample Application";
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).EndInit();
             this.groupBox.ResumeLayout(false);
-            this.groupBox.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -136,6 +172,8 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.GroupBox groupBox;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }
 

@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Npgsql;
+using System;
 using System.Windows.Forms;
-using Npgsql;
 
 namespace Milestone1
 {
@@ -71,6 +64,9 @@ namespace Milestone1
         {
             ComboBox box = (ComboBox)sender; //casts sender as a ComboBox
 
+            if (cityDropDown.Items.Count > 0) //removes all the data previously in the grid.
+                cityDropDown.Items.Clear();
+
             // query database to get list of cities in the selected state
             // update city dropdown with list
             using (var connection = new NpgsqlConnection(LOGININFO))
@@ -92,8 +88,8 @@ namespace Milestone1
 
         private void cityDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
-            while (businessGrid.RowCount > 0) //removes all the data previously in the grid.
-                businessGrid.Rows.RemoveAt(0);
+            if (businessGrid.RowCount > 0) //removes all the data previously in the grid.
+                businessGrid.Rows.Clear();
 
             // populate data into businessGrid from database with the city and state from each dropdown.
             using (var connection = new NpgsqlConnection(LOGININFO))
