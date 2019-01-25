@@ -16,7 +16,7 @@ namespace Milestone1
 
         private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone1db";
 
-        public class Business
+        public class Business //Not Used for now.
         {
             public string name { get; set; }
             public string state { get; set; }
@@ -50,6 +50,7 @@ namespace Milestone1
                 connection.Close();
             }
 
+            // Create the column headers for the data grid view.
             DataGridViewTextBoxColumn col1 = new DataGridViewTextBoxColumn();
             col1.HeaderText = "Business name";
             col1.Width = 255;
@@ -91,7 +92,7 @@ namespace Milestone1
 
         private void cityDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
-            while (businessGrid.RowCount > 0)
+            while (businessGrid.RowCount > 0) //removes all the data previously in the grid.
                 businessGrid.Rows.RemoveAt(0);
 
             // populate data into businessGrid from database with the city and state from each dropdown.
@@ -106,10 +107,6 @@ namespace Milestone1
                     {
                         while (reader.Read())
                         {
-                            Console.WriteLine(reader.GetString(0));
-                            Console.WriteLine(reader.GetString(1));
-                            Console.WriteLine(reader.GetString(2));
-                            //cityDropDown.Items.Add(reader.GetString(0));
                             businessGrid.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2));
                         }
                     }
