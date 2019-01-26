@@ -46,8 +46,6 @@
             // 
             this.businessGrid.AllowUserToAddRows = false;
             this.businessGrid.AllowUserToDeleteRows = false;
-            this.businessGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.businessGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.businessGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.businessGrid.Location = new System.Drawing.Point(0, 42);
             this.businessGrid.Name = "businessGrid";
@@ -90,6 +88,7 @@
             this.cityDropDown.Name = "cityDropDown";
             this.cityDropDown.Size = new System.Drawing.Size(760, 21);
             this.cityDropDown.TabIndex = 1;
+            this.cityDropDown.Text = "Cities will be displayed once a state is selected...";
             this.cityDropDown.SelectedIndexChanged += new System.EventHandler(this.cityDropDown_SelectedIndexChanged);
             // 
             // stateDropDown
@@ -101,6 +100,7 @@
             this.stateDropDown.Name = "stateDropDown";
             this.stateDropDown.Size = new System.Drawing.Size(760, 21);
             this.stateDropDown.TabIndex = 0;
+            this.stateDropDown.Text = "Select state...";
             this.stateDropDown.SelectedIndexChanged += new System.EventHandler(this.stateDropDown_SelectedIndexChanged);
             // 
             // panel1
@@ -144,7 +144,7 @@
             this.Controls.Add(this.businessGrid);
             this.Controls.Add(this.panel3);
             this.Name = "Form1";
-            this.Text = "Milestone 1 Sample Application";
+            this.Text = "Milestone 1";
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);

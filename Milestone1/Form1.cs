@@ -46,17 +46,17 @@ namespace Milestone1
             // Create the column headers for the data grid view.
             DataGridViewTextBoxColumn col1 = new DataGridViewTextBoxColumn();
             col1.HeaderText = "Business name";
-            //col1.Width = 255;
+            col1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             businessGrid.Columns.Add(col1);
 
             DataGridViewTextBoxColumn col2 = new DataGridViewTextBoxColumn();
             col2.HeaderText = "City";
-            //col2.Width = 115;
+            col2.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             businessGrid.Columns.Add(col2);
 
             DataGridViewTextBoxColumn col3 = new DataGridViewTextBoxColumn();
             col3.HeaderText = "State";
-            //col3.Width = 50;
+            col3.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             businessGrid.Columns.Add(col3);
         }
 
