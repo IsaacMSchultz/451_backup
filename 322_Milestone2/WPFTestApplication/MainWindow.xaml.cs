@@ -23,6 +23,7 @@ namespace WPFTestApplication
         public MainWindow()
         {
             InitializeComponent();
+            myMap.Focus();
         }
     }
 }
