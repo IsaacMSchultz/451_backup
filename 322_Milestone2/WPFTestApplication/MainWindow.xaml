@@ -8,6 +8,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <m:Map CredentialsProvider="AhPk0uUY9oPiv1qtktPfoKz7Za6HoO9gsv-9156pujS6xdZ5TKWz2RQyufDflyqt"/>
+      <m:Map CredentialsProvider="AhPk0uUY9oPiv1qtktPfoKz7Za6HoO9gsv-9156pujS6xdZ5TKWz2RQyufDflyqt" x:Name="myMap" Mode="AerialWithLabels" Center="36.806029,-95.407007" ZoomLevel="4"/>
     </Grid>
 </Window>
