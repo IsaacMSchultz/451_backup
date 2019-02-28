@@ -1,5 +1,6 @@
 import json
 import psycopg2
+import time
 
 def cleanStr4SQL(s):
     return s.replace("'","`").replace("\n"," ")
@@ -12,6 +13,7 @@ def int2BoolStr (value):
 
 def insert2BusinessTable():
     #reading the JSON file
+    startingTime = time.process_time()
     with open('./business.JSON','r') as f:    #TODO: update path for the input file
         #outfile =  open('./yelp_business.SQL', 'w')  #uncomment this line if you are writing the INSERT statements to an output file.
         line = f.readline()
@@ -20,7 +22,7 @@ def insert2BusinessTable():
         #connect to yelpdb database on postgres server using psycopg2
         #TODO: update the database name, username, and password
         try:
-            conn = psycopg2.connect("dbname='yelpdb' user='postgres' host='localhost' password='none'")
+            conn = psycopg2.connect("dbname='pythonTest' user='postgres' host='localhost' password='greatPassword'")
         except:
             print('Unable to connect to the database!')
         cur = conn.cursor()
@@ -49,7 +51,7 @@ def insert2BusinessTable():
         cur.close()
         conn.close()
 
-    print(count_line)
+    print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")
     #outfile.close()  #uncomment this line if you are writing the INSERT statements to an output file.
     f.close()
 
