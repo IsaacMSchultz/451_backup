@@ -181,7 +181,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.panel4);
             this.Name = "Form1";
-            this.Text = "Milestone 1";
+            this.Text = "Milestone 2";
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).EndInit();
             this.SelctionDropDownPanel.ResumeLayout(false);
             this.SelectionHeaderPanel.ResumeLayout(false);
