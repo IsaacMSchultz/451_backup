@@ -29,18 +29,20 @@
         private void InitializeComponent()
         {
             this.businessGrid = new System.Windows.Forms.DataGridView();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.StateHeader = new System.Windows.Forms.TextBox();
+            this.CityHeader = new System.Windows.Forms.TextBox();
             this.cityDropDown = new System.Windows.Forms.ComboBox();
             this.stateDropDown = new System.Windows.Forms.ComboBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.SelctionDropDownPanel = new System.Windows.Forms.Panel();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.SelectionHeaderPanel = new System.Windows.Forms.Panel();
+            this.ZipHeader = new System.Windows.Forms.TextBox();
+            this.SelectionPanel = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).BeginInit();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
+            this.SelctionDropDownPanel.SuspendLayout();
+            this.SelectionHeaderPanel.SuspendLayout();
+            this.SelectionPanel.SuspendLayout();
             this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,38 +50,37 @@
             // 
             this.businessGrid.AllowUserToAddRows = false;
             this.businessGrid.AllowUserToDeleteRows = false;
-            this.businessGrid.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.businessGrid.Location = new System.Drawing.Point(0, 42);
+            this.businessGrid.Location = new System.Drawing.Point(107, 125);
             this.businessGrid.Name = "businessGrid";
             this.businessGrid.ReadOnly = true;
-            this.businessGrid.Size = new System.Drawing.Size(800, 408);
+            this.businessGrid.Size = new System.Drawing.Size(612, 270);
             this.businessGrid.TabIndex = 2;
             // 
-            // textBox1
+            // StateHeader
             // 
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox1.Location = new System.Drawing.Point(0, 3);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(40, 13);
-            this.textBox1.TabIndex = 3;
-            this.textBox1.Text = "State";
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.StateHeader.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.StateHeader.Cursor = System.Windows.Forms.Cursors.Default;
+            this.StateHeader.Location = new System.Drawing.Point(0, 3);
+            this.StateHeader.Margin = new System.Windows.Forms.Padding(0);
+            this.StateHeader.Name = "StateHeader";
+            this.StateHeader.ReadOnly = true;
+            this.StateHeader.Size = new System.Drawing.Size(40, 13);
+            this.StateHeader.TabIndex = 3;
+            this.StateHeader.Text = "State";
+            this.StateHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // textBox2
+            // CityHeader
             // 
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox2.Location = new System.Drawing.Point(0, 24);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(40, 13);
-            this.textBox2.TabIndex = 4;
-            this.textBox2.Text = "City";
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.CityHeader.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.CityHeader.Cursor = System.Windows.Forms.Cursors.Default;
+            this.CityHeader.Location = new System.Drawing.Point(0, 24);
+            this.CityHeader.Margin = new System.Windows.Forms.Padding(0);
+            this.CityHeader.Name = "CityHeader";
+            this.CityHeader.ReadOnly = true;
+            this.CityHeader.Size = new System.Drawing.Size(40, 13);
+            this.CityHeader.TabIndex = 4;
+            this.CityHeader.Text = "City";
+            this.CityHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // cityDropDown
             // 
@@ -105,43 +106,68 @@
             this.stateDropDown.Text = "Select state...";
             this.stateDropDown.SelectedIndexChanged += new System.EventHandler(this.stateDropDown_SelectedIndexChanged);
             // 
-            // panel1
+            // SelctionDropDownPanel
             // 
-            this.panel1.Controls.Add(this.cityDropDown);
-            this.panel1.Controls.Add(this.stateDropDown);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(40, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(760, 42);
-            this.panel1.TabIndex = 3;
+            this.SelctionDropDownPanel.Controls.Add(this.comboBox1);
+            this.SelctionDropDownPanel.Controls.Add(this.cityDropDown);
+            this.SelctionDropDownPanel.Controls.Add(this.stateDropDown);
+            this.SelctionDropDownPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SelctionDropDownPanel.Location = new System.Drawing.Point(40, 0);
+            this.SelctionDropDownPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.SelctionDropDownPanel.Name = "SelctionDropDownPanel";
+            this.SelctionDropDownPanel.Size = new System.Drawing.Size(760, 63);
+            this.SelctionDropDownPanel.TabIndex = 3;
             // 
-            // panel2
+            // comboBox1
             // 
-            this.panel2.Controls.Add(this.textBox2);
-            this.panel2.Controls.Add(this.textBox1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(40, 42);
-            this.panel2.TabIndex = 4;
+            this.comboBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(0, 42);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(0);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(760, 21);
+            this.comboBox1.TabIndex = 2;
+            this.comboBox1.Text = "Zipcodes will be displayed once a city is selected...";
             // 
-            // panel3
+            // SelectionHeaderPanel
             // 
-            this.panel3.Controls.Add(this.panel1);
-            this.panel3.Controls.Add(this.panel2);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Margin = new System.Windows.Forms.Padding(0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(800, 42);
-            this.panel3.TabIndex = 5;
+            this.SelectionHeaderPanel.Controls.Add(this.ZipHeader);
+            this.SelectionHeaderPanel.Controls.Add(this.CityHeader);
+            this.SelectionHeaderPanel.Controls.Add(this.StateHeader);
+            this.SelectionHeaderPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.SelectionHeaderPanel.Location = new System.Drawing.Point(0, 0);
+            this.SelectionHeaderPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.SelectionHeaderPanel.Name = "SelectionHeaderPanel";
+            this.SelectionHeaderPanel.Size = new System.Drawing.Size(40, 63);
+            this.SelectionHeaderPanel.TabIndex = 4;
+            // 
+            // ZipHeader
+            // 
+            this.ZipHeader.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ZipHeader.Cursor = System.Windows.Forms.Cursors.Default;
+            this.ZipHeader.Location = new System.Drawing.Point(0, 42);
+            this.ZipHeader.Margin = new System.Windows.Forms.Padding(0);
+            this.ZipHeader.Name = "ZipHeader";
+            this.ZipHeader.ReadOnly = true;
+            this.ZipHeader.Size = new System.Drawing.Size(40, 13);
+            this.ZipHeader.TabIndex = 5;
+            this.ZipHeader.Text = "Zip";
+            this.ZipHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // SelectionPanel
+            // 
+            this.SelectionPanel.Controls.Add(this.SelctionDropDownPanel);
+            this.SelectionPanel.Controls.Add(this.SelectionHeaderPanel);
+            this.SelectionPanel.Location = new System.Drawing.Point(0, 0);
+            this.SelectionPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.SelectionPanel.Name = "SelectionPanel";
+            this.SelectionPanel.Size = new System.Drawing.Size(800, 63);
+            this.SelectionPanel.TabIndex = 5;
             // 
             // panel4
             // 
             this.panel4.Controls.Add(this.businessGrid);
-            this.panel4.Controls.Add(this.panel3);
+            this.panel4.Controls.Add(this.SelectionPanel);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
@@ -157,10 +183,10 @@
             this.Name = "Form1";
             this.Text = "Milestone 1";
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.panel3.ResumeLayout(false);
+            this.SelctionDropDownPanel.ResumeLayout(false);
+            this.SelectionHeaderPanel.ResumeLayout(false);
+            this.SelectionHeaderPanel.PerformLayout();
+            this.SelectionPanel.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -168,14 +194,16 @@
 
         #endregion
         private System.Windows.Forms.DataGridView businessGrid;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox StateHeader;
+        private System.Windows.Forms.TextBox CityHeader;
         private System.Windows.Forms.ComboBox cityDropDown;
         private System.Windows.Forms.ComboBox stateDropDown;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel SelctionDropDownPanel;
+        private System.Windows.Forms.Panel SelectionHeaderPanel;
+        private System.Windows.Forms.Panel SelectionPanel;
         private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.TextBox ZipHeader;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 
