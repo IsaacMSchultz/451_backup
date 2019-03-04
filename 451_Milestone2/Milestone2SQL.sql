@@ -32,13 +32,15 @@ CREATE TABLE User (
 
 CREATE TABLE Review (
     review_id CHAR(22),
+    business_id CHAR(22),
+    user_id CHAR(22),
     review_stars INTEGER,
     date DATE,
     text VARCHAR(1000),
     useful_vote INTEGER,
     funny_vote INTEGER,
     cool_vote INTEGER,
-    PRIMARY KEY (review_id)
+    PRIMARY KEY (review_id, business_id, user_id)
 );
 
 CREATE TABLE Friend (
