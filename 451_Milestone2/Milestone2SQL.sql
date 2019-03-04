@@ -30,10 +30,6 @@ CREATE TABLE User (
     PRIMARY KEY (user_id)
 );
 
---CREATE TABLE Friend (
-    
---);
-
 CREATE TABLE Review (
     review_id CHAR(22),
     review_stars INTEGER,
@@ -43,4 +39,37 @@ CREATE TABLE Review (
     funny_vote INTEGER,
     cool_vote INTEGER,
     PRIMARY KEY (review_id)
+);
+
+CREATE TABLE Category (
+    business_id CHAR(22),
+    category_name VARCHAR(20),
+    PRIMARY KEY (Business_id, category_name),
+    FOREIGN KEY business_id REFERENCES Business(Business_id);
+);
+
+CREATE TABLE Attributes (
+    business_id CHAR(22),
+    attribute_name VARCHAR(20),
+    attribute_value VARCHAR(30),
+    PRIMARY KEY (Business_id, attribute_value),
+    FOREIGN KEY business_id REFERENCES Business(Business_id);
+);
+
+CREATE TABLE Hours (
+    business_id CHAR(22),
+    day VARCHAR(20),
+    open TIME,
+    close TIME,
+    PRIMARY KEY (Business_id, day),
+    FOREIGN KEY business_id REFERENCES Business(Business_id);
+);
+
+CREATE TABLE Checkins (
+    business_id CHAR(22),
+    day VARCHAR(20),
+    time TIME,
+    count INTEGER,
+    PRIMARY KEY (Business_id, day, time),
+    FOREIGN KEY business_id REFERENCES Business(Business_id);
 );
