@@ -33,24 +33,25 @@
             this.CityHeader = new System.Windows.Forms.TextBox();
             this.cityDropDown = new System.Windows.Forms.ComboBox();
             this.stateDropDown = new System.Windows.Forms.ComboBox();
-            this.SelctionDropDownPanel = new System.Windows.Forms.Panel();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.SelectionHeaderPanel = new System.Windows.Forms.Panel();
-            this.ZipHeader = new System.Windows.Forms.TextBox();
-            this.SelectionPanel = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.cityCheckBox = new System.Windows.Forms.CheckedListBox();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.checkedListBox2 = new System.Windows.Forms.CheckedListBox();
+            this.ZipText = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).BeginInit();
-            this.SelctionDropDownPanel.SuspendLayout();
-            this.SelectionHeaderPanel.SuspendLayout();
-            this.SelectionPanel.SuspendLayout();
-            this.panel4.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // businessGrid
             // 
             this.businessGrid.AllowUserToAddRows = false;
             this.businessGrid.AllowUserToDeleteRows = false;
-            this.businessGrid.Location = new System.Drawing.Point(107, 125);
+            this.businessGrid.Location = new System.Drawing.Point(55, 168);
             this.businessGrid.Name = "businessGrid";
             this.businessGrid.ReadOnly = true;
             this.businessGrid.Size = new System.Drawing.Size(612, 270);
@@ -60,7 +61,7 @@
             // 
             this.StateHeader.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.StateHeader.Cursor = System.Windows.Forms.Cursors.Default;
-            this.StateHeader.Location = new System.Drawing.Point(0, 3);
+            this.StateHeader.Location = new System.Drawing.Point(0, 4);
             this.StateHeader.Margin = new System.Windows.Forms.Padding(0);
             this.StateHeader.Name = "StateHeader";
             this.StateHeader.ReadOnly = true;
@@ -73,7 +74,7 @@
             // 
             this.CityHeader.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.CityHeader.Cursor = System.Windows.Forms.Cursors.Default;
-            this.CityHeader.Location = new System.Drawing.Point(0, 24);
+            this.CityHeader.Location = new System.Drawing.Point(0, 33);
             this.CityHeader.Margin = new System.Windows.Forms.Padding(0);
             this.CityHeader.Name = "CityHeader";
             this.CityHeader.ReadOnly = true;
@@ -84,9 +85,8 @@
             // 
             // cityDropDown
             // 
-            this.cityDropDown.Dock = System.Windows.Forms.DockStyle.Top;
             this.cityDropDown.FormattingEnabled = true;
-            this.cityDropDown.Location = new System.Drawing.Point(0, 21);
+            this.cityDropDown.Location = new System.Drawing.Point(31, 122);
             this.cityDropDown.Margin = new System.Windows.Forms.Padding(0);
             this.cityDropDown.Name = "cityDropDown";
             this.cityDropDown.Size = new System.Drawing.Size(760, 21);
@@ -96,98 +96,145 @@
             // 
             // stateDropDown
             // 
-            this.stateDropDown.Dock = System.Windows.Forms.DockStyle.Top;
             this.stateDropDown.FormattingEnabled = true;
-            this.stateDropDown.Location = new System.Drawing.Point(0, 0);
+            this.stateDropDown.Location = new System.Drawing.Point(40, 0);
             this.stateDropDown.Margin = new System.Windows.Forms.Padding(0);
             this.stateDropDown.Name = "stateDropDown";
+            this.tableLayoutPanel2.SetRowSpan(this.stateDropDown, 3);
             this.stateDropDown.Size = new System.Drawing.Size(760, 21);
             this.stateDropDown.TabIndex = 0;
             this.stateDropDown.Text = "Select state...";
             this.stateDropDown.SelectedIndexChanged += new System.EventHandler(this.stateDropDown_SelectedIndexChanged);
             // 
-            // SelctionDropDownPanel
+            // tableLayoutPanel1
             // 
-            this.SelctionDropDownPanel.Controls.Add(this.comboBox1);
-            this.SelctionDropDownPanel.Controls.Add(this.cityDropDown);
-            this.SelctionDropDownPanel.Controls.Add(this.stateDropDown);
-            this.SelctionDropDownPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SelctionDropDownPanel.Location = new System.Drawing.Point(40, 0);
-            this.SelctionDropDownPanel.Margin = new System.Windows.Forms.Padding(0);
-            this.SelctionDropDownPanel.Name = "SelctionDropDownPanel";
-            this.SelctionDropDownPanel.Size = new System.Drawing.Size(760, 63);
-            this.SelctionDropDownPanel.TabIndex = 3;
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.cityCheckBox, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.CityHeader, 0, 1);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 21);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(400, 79);
+            this.tableLayoutPanel1.TabIndex = 2;
             // 
-            // comboBox1
+            // cityCheckBox
             // 
-            this.comboBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(0, 42);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(760, 21);
-            this.comboBox1.TabIndex = 2;
-            this.comboBox1.Text = "Zipcodes will be displayed once a city is selected...";
+            this.cityCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cityCheckBox.FormattingEnabled = true;
+            this.cityCheckBox.Location = new System.Drawing.Point(40, 0);
+            this.cityCheckBox.Margin = new System.Windows.Forms.Padding(0);
+            this.cityCheckBox.MultiColumn = true;
+            this.cityCheckBox.Name = "cityCheckBox";
+            this.tableLayoutPanel1.SetRowSpan(this.cityCheckBox, 3);
+            this.cityCheckBox.Size = new System.Drawing.Size(360, 79);
+            this.cityCheckBox.TabIndex = 0;
+            this.cityCheckBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.cityCheckBox_ItemCheck);
             // 
-            // SelectionHeaderPanel
+            // tableLayoutPanel2
             // 
-            this.SelectionHeaderPanel.Controls.Add(this.ZipHeader);
-            this.SelectionHeaderPanel.Controls.Add(this.CityHeader);
-            this.SelectionHeaderPanel.Controls.Add(this.StateHeader);
-            this.SelectionHeaderPanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.SelectionHeaderPanel.Location = new System.Drawing.Point(0, 0);
-            this.SelectionHeaderPanel.Margin = new System.Windows.Forms.Padding(0);
-            this.SelectionHeaderPanel.Name = "SelectionHeaderPanel";
-            this.SelectionHeaderPanel.Size = new System.Drawing.Size(40, 63);
-            this.SelectionHeaderPanel.TabIndex = 4;
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel3.SetColumnSpan(this.tableLayoutPanel2, 2);
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Controls.Add(this.stateDropDown, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.StateHeader, 0, 1);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 3;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(800, 21);
+            this.tableLayoutPanel2.TabIndex = 7;
             // 
-            // ZipHeader
+            // tableLayoutPanel3
             // 
-            this.ZipHeader.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.ZipHeader.Cursor = System.Windows.Forms.Cursors.Default;
-            this.ZipHeader.Location = new System.Drawing.Point(0, 42);
-            this.ZipHeader.Margin = new System.Windows.Forms.Padding(0);
-            this.ZipHeader.Name = "ZipHeader";
-            this.ZipHeader.ReadOnly = true;
-            this.ZipHeader.Size = new System.Drawing.Size(40, 13);
-            this.ZipHeader.TabIndex = 5;
-            this.ZipHeader.Text = "Zip";
-            this.ZipHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel4, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel1, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel2, 0, 0);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 2;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 21F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(800, 100);
+            this.tableLayoutPanel3.TabIndex = 8;
             // 
-            // SelectionPanel
+            // tableLayoutPanel4
             // 
-            this.SelectionPanel.Controls.Add(this.SelctionDropDownPanel);
-            this.SelectionPanel.Controls.Add(this.SelectionHeaderPanel);
-            this.SelectionPanel.Location = new System.Drawing.Point(0, 0);
-            this.SelectionPanel.Margin = new System.Windows.Forms.Padding(0);
-            this.SelectionPanel.Name = "SelectionPanel";
-            this.SelectionPanel.Size = new System.Drawing.Size(800, 63);
-            this.SelectionPanel.TabIndex = 5;
+            this.tableLayoutPanel4.ColumnCount = 2;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.Controls.Add(this.checkedListBox2, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.ZipText, 0, 1);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(400, 21);
+            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 3;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(400, 79);
+            this.tableLayoutPanel4.TabIndex = 8;
             // 
-            // panel4
+            // checkedListBox2
             // 
-            this.panel4.Controls.Add(this.businessGrid);
-            this.panel4.Controls.Add(this.SelectionPanel);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(0, 0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(800, 450);
-            this.panel4.TabIndex = 6;
+            this.checkedListBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkedListBox2.FormattingEnabled = true;
+            this.checkedListBox2.Location = new System.Drawing.Point(40, 0);
+            this.checkedListBox2.Margin = new System.Windows.Forms.Padding(0);
+            this.checkedListBox2.MultiColumn = true;
+            this.checkedListBox2.Name = "checkedListBox2";
+            this.tableLayoutPanel4.SetRowSpan(this.checkedListBox2, 3);
+            this.checkedListBox2.Size = new System.Drawing.Size(360, 79);
+            this.checkedListBox2.TabIndex = 0;
+            // 
+            // ZipText
+            // 
+            this.ZipText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ZipText.Cursor = System.Windows.Forms.Cursors.Default;
+            this.ZipText.Location = new System.Drawing.Point(0, 33);
+            this.ZipText.Margin = new System.Windows.Forms.Padding(0);
+            this.ZipText.Name = "ZipText";
+            this.ZipText.ReadOnly = true;
+            this.ZipText.Size = new System.Drawing.Size(40, 13);
+            this.ZipText.TabIndex = 4;
+            this.ZipText.Text = "Zip";
+            this.ZipText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.panel4);
+            this.Controls.Add(this.tableLayoutPanel3);
+            this.Controls.Add(this.cityDropDown);
+            this.Controls.Add(this.businessGrid);
             this.Name = "Form1";
             this.Text = "Milestone 2";
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).EndInit();
-            this.SelctionDropDownPanel.ResumeLayout(false);
-            this.SelectionHeaderPanel.ResumeLayout(false);
-            this.SelectionHeaderPanel.PerformLayout();
-            this.SelectionPanel.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -198,12 +245,13 @@
         private System.Windows.Forms.TextBox CityHeader;
         private System.Windows.Forms.ComboBox cityDropDown;
         private System.Windows.Forms.ComboBox stateDropDown;
-        private System.Windows.Forms.Panel SelctionDropDownPanel;
-        private System.Windows.Forms.Panel SelectionHeaderPanel;
-        private System.Windows.Forms.Panel SelectionPanel;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.TextBox ZipHeader;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.CheckedListBox cityCheckBox;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.CheckedListBox checkedListBox2;
+        private System.Windows.Forms.TextBox ZipText;
     }
 }
 
