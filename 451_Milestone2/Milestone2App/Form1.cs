@@ -2,7 +2,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace Milestone1
+namespace Milestone2App
 {
     public partial class Form1 : Form
     {
