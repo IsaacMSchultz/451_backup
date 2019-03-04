@@ -7,7 +7,7 @@ namespace Milestone2App
     public partial class Form1 : Form
     {
 
-        private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone1db";
+        private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone2db";
 
         public class Business //Not Used for now.
         {

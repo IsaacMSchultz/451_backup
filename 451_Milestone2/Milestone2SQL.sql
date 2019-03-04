@@ -15,13 +15,13 @@ CREATE TABLE Business (
     PRIMARY KEY (business_id)
 );
 
-CREATE TABLE User (
+CREATE TABLE YelpUser (
     user_id CHAR(22),
+    name VARCHAR(100),
     average_stars FLOAT,
     cool INTEGER,
     funny INTEGER,
     useful INTEGER,
-    name VARCHAR(100),
     fans INTEGER,
     review_count INTEGER,
     yelping_since DATE,
@@ -47,21 +47,22 @@ CREATE TABLE Friend (
     user_id CHAR(22),
     friend_id CHAR(22),
     PRIMARY KEY (user_id, friend_id),
-    FOREIGN KEY user_id REFERENCES User(user_id)
+    FOREIGN KEY (user_id) REFERENCES YelpUser(user_id)
 );
 
 CREATE TABLE Favorite (
     user_id CHAR(22),
     favorited_business CHAR(22),
     PRIMARY KEY (user_id, favorited_business),
-    FOREIGN KEY user_id REFERENCES User(user_id)
+    FOREIGN KEY (user_id) REFERENCES YelpUser(user_id),
+    FOREIGN KEY (favorited_business) REFERENCES Business(business_id)
 );
 
 CREATE TABLE Category (
     business_id CHAR(22),
     category_name VARCHAR(20),
     PRIMARY KEY (Business_id, category_name),
-    FOREIGN KEY business_id REFERENCES Business(Business_id);
+    FOREIGN KEY (business_id) REFERENCES Business(Business_id);
 );
 
 CREATE TABLE Attributes (
@@ -69,7 +70,7 @@ CREATE TABLE Attributes (
     attribute_name VARCHAR(20),
     attribute_value VARCHAR(30),
     PRIMARY KEY (Business_id, attribute_value),
-    FOREIGN KEY business_id REFERENCES Business(Business_id);
+    FOREIGN KEY (business_id) REFERENCES Business(Business_id);
 );
 
 CREATE TABLE Hours (
@@ -78,7 +79,7 @@ CREATE TABLE Hours (
     open TIME,
     close TIME,
     PRIMARY KEY (Business_id, day),
-    FOREIGN KEY business_id REFERENCES Business(Business_id);
+    FOREIGN KEY (business_id) REFERENCES Business(Business_id);
 );
 
 CREATE TABLE Checkins (
@@ -87,5 +88,5 @@ CREATE TABLE Checkins (
     time TIME,
     count INTEGER,
     PRIMARY KEY (Business_id, day, time),
-    FOREIGN KEY business_id REFERENCES Business(Business_id);
+    FOREIGN KEY (business_id) REFERENCES Business(Business_id);
 );
