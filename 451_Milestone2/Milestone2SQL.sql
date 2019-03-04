@@ -41,6 +41,20 @@ CREATE TABLE Review (
     PRIMARY KEY (review_id)
 );
 
+CREATE TABLE Friend (
+    user_id CHAR(22),
+    friend_id CHAR(22),
+    PRIMARY KEY (user_id, friend_id),
+    FOREIGN KEY user_id REFERENCES User(user_id)
+);
+
+CREATE TABLE Favorite (
+    user_id CHAR(22),
+    favorited_business CHAR(22),
+    PRIMARY KEY (user_id, favorited_business),
+    FOREIGN KEY user_id REFERENCES User(user_id)
+);
+
 CREATE TABLE Category (
     business_id CHAR(22),
     category_name VARCHAR(20),
