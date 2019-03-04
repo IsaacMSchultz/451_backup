@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using System;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace Milestone2App
 {
@@ -64,8 +65,8 @@ namespace Milestone2App
         {
             ComboBox box = (ComboBox)sender; //casts sender as a ComboBox
 
-            if (cityDropDown.Items.Count > 0) //removes all the data previously in the grid.
-                cityDropDown.Items.Clear();
+            if (cityCheckBox.Items.Count > 0) //removes all the data previously in the grid.
+                cityCheckBox.Items.Clear();
 
             // query database to get list of cities in the selected state
             // update city dropdown with list
@@ -79,7 +80,8 @@ namespace Milestone2App
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
-                            cityDropDown.Items.Add(reader.GetString(0));
+                            //cityDropDown.Items.Add(reader.GetString(0));
+                            cityCheckBox.Items.Add(reader.GetString(0));
                     }
                 }
                 connection.Close();
@@ -106,6 +108,23 @@ namespace Milestone2App
                     }
                 }
                 connection.Close();
+            }
+        }
+
+        private void cityCheckBox_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            List<string> checkedItems = new List<string>();
+            foreach (var item in cityCheckBox.CheckedItems)
+                checkedItems.Add(item.ToString());
+
+            if (e.NewValue == CheckState.Checked)
+                checkedItems.Add(cityCheckBox.Items[e.Index].ToString());
+            else
+                checkedItems.Remove(cityCheckBox.Items[e.Index].ToString());
+
+            foreach (string item in checkedItems)
+            {
+
             }
         }
     }
