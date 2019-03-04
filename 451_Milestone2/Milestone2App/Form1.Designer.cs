@@ -1,4 +1,4 @@
-﻿namespace Milestone1
+﻿namespace Milestone2App
 {
     partial class Form1
     {
@@ -36,17 +36,19 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // businessGrid
             // 
             this.businessGrid.AllowUserToAddRows = false;
             this.businessGrid.AllowUserToDeleteRows = false;
-            this.businessGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.businessGrid.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.businessGrid.Location = new System.Drawing.Point(0, 42);
             this.businessGrid.Name = "businessGrid";
             this.businessGrid.ReadOnly = true;
@@ -136,13 +138,22 @@
             this.panel3.Size = new System.Drawing.Size(800, 42);
             this.panel3.TabIndex = 5;
             // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.businessGrid);
+            this.panel4.Controls.Add(this.panel3);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel4.Location = new System.Drawing.Point(0, 0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(800, 450);
+            this.panel4.TabIndex = 6;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.businessGrid);
-            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.panel4);
             this.Name = "Form1";
             this.Text = "Milestone 1";
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).EndInit();
@@ -150,6 +161,7 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -163,6 +175,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel4;
     }
 }
 
