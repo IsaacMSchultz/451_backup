@@ -62,7 +62,7 @@ CREATE TABLE Category (
     business_id CHAR(22),
     category_name VARCHAR(20),
     PRIMARY KEY (Business_id, category_name),
-    FOREIGN KEY (business_id) REFERENCES Business(Business_id);
+    FOREIGN KEY (business_id) REFERENCES Business(Business_id)
 );
 
 CREATE TABLE Attributes (
@@ -70,7 +70,7 @@ CREATE TABLE Attributes (
     attribute_name VARCHAR(20),
     attribute_value VARCHAR(30),
     PRIMARY KEY (Business_id, attribute_value),
-    FOREIGN KEY (business_id) REFERENCES Business(Business_id);
+    FOREIGN KEY (business_id) REFERENCES Business(Business_id)
 );
 
 CREATE TABLE Hours (
@@ -79,7 +79,7 @@ CREATE TABLE Hours (
     open TIME,
     close TIME,
     PRIMARY KEY (Business_id, day),
-    FOREIGN KEY (business_id) REFERENCES Business(Business_id);
+    FOREIGN KEY (business_id) REFERENCES Business(Business_id)
 );
 
 CREATE TABLE Checkins (
@@ -88,5 +88,5 @@ CREATE TABLE Checkins (
     time TIME,
     count INTEGER,
     PRIMARY KEY (Business_id, day, time),
-    FOREIGN KEY (business_id) REFERENCES Business(Business_id);
+    FOREIGN KEY (business_id) REFERENCES Business(Business_id)
 );
