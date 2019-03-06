@@ -31,14 +31,13 @@
             this.businessGrid = new System.Windows.Forms.DataGridView();
             this.StateHeader = new System.Windows.Forms.TextBox();
             this.CityHeader = new System.Windows.Forms.TextBox();
-            this.cityDropDown = new System.Windows.Forms.ComboBox();
             this.stateDropDown = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.cityCheckBox = new System.Windows.Forms.CheckedListBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.checkedListBox2 = new System.Windows.Forms.CheckedListBox();
+            this.zipCheckBox = new System.Windows.Forms.CheckedListBox();
             this.ZipText = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -83,17 +82,6 @@
             this.CityHeader.TabIndex = 4;
             this.CityHeader.Text = "City";
             this.CityHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // cityDropDown
-            // 
-            this.cityDropDown.FormattingEnabled = true;
-            this.cityDropDown.Location = new System.Drawing.Point(268, 100);
-            this.cityDropDown.Margin = new System.Windows.Forms.Padding(0);
-            this.cityDropDown.Name = "cityDropDown";
-            this.cityDropDown.Size = new System.Drawing.Size(172, 21);
-            this.cityDropDown.TabIndex = 1;
-            this.cityDropDown.Text = "PlaceholderOfOldFunctionality";
-            this.cityDropDown.SelectedIndexChanged += new System.EventHandler(this.cityDropDown_SelectedIndexChanged);
             // 
             // stateDropDown
             // 
@@ -181,7 +169,7 @@
             this.tableLayoutPanel4.ColumnCount = 2;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Controls.Add(this.checkedListBox2, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.zipCheckBox, 1, 0);
             this.tableLayoutPanel4.Controls.Add(this.ZipText, 0, 1);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(400, 21);
@@ -194,18 +182,18 @@
             this.tableLayoutPanel4.Size = new System.Drawing.Size(400, 94);
             this.tableLayoutPanel4.TabIndex = 8;
             // 
-            // checkedListBox2
+            // zipCheckBox
             // 
-            this.checkedListBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkedListBox2.FormattingEnabled = true;
-            this.checkedListBox2.Location = new System.Drawing.Point(40, 0);
-            this.checkedListBox2.Margin = new System.Windows.Forms.Padding(0);
-            this.checkedListBox2.MultiColumn = true;
-            this.checkedListBox2.Name = "checkedListBox2";
-            this.tableLayoutPanel4.SetRowSpan(this.checkedListBox2, 3);
-            this.checkedListBox2.Size = new System.Drawing.Size(360, 94);
-            this.checkedListBox2.TabIndex = 0;
-            this.checkedListBox2.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBox2_ItemCheck);
+            this.zipCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.zipCheckBox.FormattingEnabled = true;
+            this.zipCheckBox.Location = new System.Drawing.Point(40, 0);
+            this.zipCheckBox.Margin = new System.Windows.Forms.Padding(0);
+            this.zipCheckBox.MultiColumn = true;
+            this.zipCheckBox.Name = "zipCheckBox";
+            this.tableLayoutPanel4.SetRowSpan(this.zipCheckBox, 3);
+            this.zipCheckBox.Size = new System.Drawing.Size(360, 94);
+            this.zipCheckBox.TabIndex = 0;
+            this.zipCheckBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.zipCheckBox_ItemCheck);
             // 
             // ZipText
             // 
@@ -227,7 +215,6 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.businessGrid);
             this.Controls.Add(this.tableLayoutPanel3);
-            this.Controls.Add(this.cityDropDown);
             this.Name = "Form1";
             this.Text = "Milestone 2";
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).EndInit();
@@ -246,14 +233,13 @@
         private System.Windows.Forms.DataGridView businessGrid;
         private System.Windows.Forms.TextBox StateHeader;
         private System.Windows.Forms.TextBox CityHeader;
-        private System.Windows.Forms.ComboBox cityDropDown;
         private System.Windows.Forms.ComboBox stateDropDown;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.CheckedListBox cityCheckBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private System.Windows.Forms.CheckedListBox checkedListBox2;
+        private System.Windows.Forms.CheckedListBox zipCheckBox;
         private System.Windows.Forms.TextBox ZipText;
     }
 }
