@@ -22,7 +22,8 @@ def insert2BusinessTable():
         #connect to yelpdb database on postgres server using psycopg2
         #TODO: update the database name, username, and password
         try:
-            conn = psycopg2.connect("dbname='pythonTest' user='postgres' host='localhost' password='greatPassword'")
+            conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='localhost' password='greatPassword'")
+            #conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
         except:
             print('Unable to connect to the database!')
         cur = conn.cursor()
@@ -31,12 +32,11 @@ def insert2BusinessTable():
             data = json.loads(line)
             # Generate the INSERT statement for the cussent business
             # TODO: The below INSERT statement is based on a simple (and incomplete) businesstable schema. Update the statement based on your own table schema and
-            # include values for all businessTable attributes
-            sql_str = "INSERT INTO businessTable (business_id, name, address,state,city,zipcode,latitude,longitude,stars,reviewcount,numCheckins,openStatus) " \
-                      "VALUES ('" + cleanStr4SQL(data['business_id']) + "','" + cleanStr4SQL(data["name"]) + "','" + cleanStr4SQL(data["address"]) + "','" + \
-                      cleanStr4SQL(data["state"]) + "','" + cleanStr4SQL(data["city"]) + "','" + cleanStr4SQL(data["postal_code"]) + "'," + str(data["latitude"]) + "," + \
-                      str(data["longitude"]) + "," + str(data["stars"]) + "," + str(data["review_count"]) + ",0 ,"  + \
-                      int2BoolStr(data["is_open"]) + ");"
+            # include values for all businessTable attributes                                                                    \/ num_checkins,
+            sql_str = "INSERT INTO Business (business_id, name, city, state, zipcode, latitude, longitude, address, review_count, is_open, stars) " \
+                      "VALUES ('" + cleanStr4SQL(data['business_id']) + "','" + cleanStr4SQL(data["name"]) + "','" + cleanStr4SQL(data["city"]) + "','" + \
+                      cleanStr4SQL(data["state"]) + "','" + cleanStr4SQL(data["postal_code"]) + "','" + cleanStr4SQL(data["latitude"]) + "'," + str(data["longitude"]) + "," + \
+                      str(data["address"]) + "," + str(data["review_count"]) + "," + int2BoolStr(data["is_open"]) + "," + str(data["stars"]) + ");"
             try:
                 cur.execute(sql_str)
             except:
