@@ -51,10 +51,11 @@
             // 
             this.businessGrid.AllowUserToAddRows = false;
             this.businessGrid.AllowUserToDeleteRows = false;
-            this.businessGrid.Location = new System.Drawing.Point(55, 168);
+            this.businessGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.businessGrid.Location = new System.Drawing.Point(0, 0);
             this.businessGrid.Name = "businessGrid";
             this.businessGrid.ReadOnly = true;
-            this.businessGrid.Size = new System.Drawing.Size(612, 270);
+            this.businessGrid.Size = new System.Drawing.Size(800, 450);
             this.businessGrid.TabIndex = 2;
             // 
             // StateHeader
@@ -86,10 +87,10 @@
             // cityDropDown
             // 
             this.cityDropDown.FormattingEnabled = true;
-            this.cityDropDown.Location = new System.Drawing.Point(31, 122);
+            this.cityDropDown.Location = new System.Drawing.Point(0, 100);
             this.cityDropDown.Margin = new System.Windows.Forms.Padding(0);
             this.cityDropDown.Name = "cityDropDown";
-            this.cityDropDown.Size = new System.Drawing.Size(760, 21);
+            this.cityDropDown.Size = new System.Drawing.Size(97, 21);
             this.cityDropDown.TabIndex = 1;
             this.cityDropDown.Text = "Cities will be displayed once a state is selected...";
             this.cityDropDown.SelectedIndexChanged += new System.EventHandler(this.cityDropDown_SelectedIndexChanged);
