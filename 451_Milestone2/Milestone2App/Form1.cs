@@ -2,6 +2,7 @@
 using System;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using static System.Windows.Forms.CheckedListBox;
 
 namespace Milestone2App
 {
@@ -113,29 +114,40 @@ namespace Milestone2App
 
         private void cityCheckBox_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            List<string> checkedItems = new List<string>();
-            foreach (var item in cityCheckBox.CheckedItems)
-                checkedItems.Add(item.ToString());
+            CheckedListBox CheckBox = (CheckedListBox)sender; //casts the sending object as a checkedbox
 
-            if (e.NewValue == CheckState.Checked)
+            //Console.WriteLine(e.CurrentValue.ToString() + e.Index.ToString() + e.NewValue.ToString());
+
+            CheckedItemCollection checkedBoxes = CheckBox.CheckedItems; //get all the checkedItems from before the new one was added.
+
+            List<string> checkedItems = new List<string>();
+
+            foreach (string item in checkedBoxes) // add all the checked Items into our list that holds their string names.
+            {
+                checkedItems.Add(item);
+            }
+
+
+            if (e.NewValue == CheckState.Checked) //add or remove the check box item that just changed to the list
                 checkedItems.Add(cityCheckBox.Items[e.Index].ToString());
             else
                 checkedItems.Remove(cityCheckBox.Items[e.Index].ToString());
 
-            if (businessGrid.RowCount > 0) //removes all the data previously in the grid.
-                businessGrid.Rows.Clear();
+            businessGrid.Rows.Clear(); //removes all the data previously in the grid.
 
-            string orList = "";
-            if (checkedItems.Count > 0) //if there are items that are checked.
+            if (checkedItems.Count == 0) //if there are no items that are checked.
+                return; //end the call
+
+            
+
+            string orList = "AND city IN (SELECT city FROM business WHERE "; //building subquery to find all the cities in the listbox
+            foreach (string item in checkedItems)
             {
-                orList = "AND city IN (SELECT city FROM business WHERE "; //building subquery to find all the cities in the listbox
-                foreach (string item in checkedItems)
-                {
-                    orList += "city = '" + item + "' OR "; // city = 'string' OR 
-                }
-                orList = orList.Substring(0, orList.Length - 3); // Cuts off the final "OR "
-                orList += ')';
+                Console.WriteLine(item);
+                orList += "city = '" + item + "' OR "; // city = 'string' OR 
             }
+            orList = orList.Substring(0, orList.Length - 3); // Cuts off the final "OR "
+            orList += ')';
 
             // populate data into businessGrid from database with the city and state from each check box
             using (var connection = new NpgsqlConnection(LOGININFO))
