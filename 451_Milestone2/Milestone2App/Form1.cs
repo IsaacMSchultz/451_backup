@@ -90,29 +90,6 @@ namespace Milestone2App
             }
         }
 
-        private void cityDropDown_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (businessGrid.RowCount > 0) //removes all the data previously in the grid.
-                businessGrid.Rows.Clear();
-
-            // populate data into businessGrid from database with the city and state from each dropdown.
-            using (var connection = new NpgsqlConnection(LOGININFO))
-            {
-                connection.Open();
-                using (var cmd = new NpgsqlCommand())
-                {
-                    cmd.Connection = connection;
-                    cmd.CommandText = "SELECT * FROM business WHERE city = '" + cityDropDown.SelectedItem + "' AND state = '" + stateDropDown.SelectedItem + "' ORDER BY state;";
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())                        
-                            businessGrid.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2));                        
-                    }
-                }
-                connection.Close();
-            }
-        }
-
         private void cityCheckBox_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             CheckedListBox CheckBox = (CheckedListBox)sender; //casts the sending object as a checkedbox
@@ -140,50 +117,59 @@ namespace Milestone2App
             orList = orList.Substring(0, orList.Length - 3); // Cuts off the final "OR "
             orList += ')';
 
-            // populate data into businessGrid from database with the city and state from each check box
+            // populate data into zipcode checkbox from database with the city and state from each check box
             using (var connection = new NpgsqlConnection(LOGININFO))
             {
                 connection.Open();
                 using (var cmd = new NpgsqlCommand())
                 {
                     cmd.Connection = connection;
-                    cmd.CommandText = "SELECT * FROM business WHERE state = '" + stateDropDown.SelectedItem + "'" + orList + " ORDER BY state;";
+                    cmd.CommandText = "SELECT zipcode FROM business WHERE state = '" + stateDropDown.SelectedItem + "'" + orList + " ORDER BY state;";
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
-                            businessGrid.Rows.Add(reader["name"], reader["city"], reader["state"]);
+                            zipCheckBox.Items.Add(reader.GetString(0));
                     }
                 }
                 connection.Close();
             }
         }
 
-        private void checkedListBox2_ItemCheck(object sender, ItemCheckEventArgs e)
+        private void zipCheckBox_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            CheckedListBox CheckBox = (CheckedListBox)sender; //casts the sending object as a checkedbox
-            List<string> checkedItems = new List<string>();
+            CheckedListBox senderCheckBox = (CheckedListBox)sender; //casts the sending object as a checkedbox
+            List<string> zipItems = new List<string>();
 
-            foreach (string item in CheckBox.CheckedItems) // add all the checked Items into our list that holds their string names.            
-                checkedItems.Add(item);
+            foreach (string item in senderCheckBox.CheckedItems) // add all the checked Items into our list that holds their string names.            
+                zipItems.Add(item);
 
             if (e.NewValue == CheckState.Checked) //add or remove the check box item that just changed to the list
-                checkedItems.Add(cityCheckBox.Items[e.Index].ToString());
+                zipItems.Add(senderCheckBox.Items[e.Index].ToString());
             else
-                checkedItems.Remove(cityCheckBox.Items[e.Index].ToString());
+                zipItems.Remove(senderCheckBox.Items[e.Index].ToString());
 
             businessGrid.Rows.Clear(); //removes all the data previously in the grid.
 
-            if (checkedItems.Count == 0) //if there are no items that are checked.
+            if (zipItems.Count == 0) //if there are no items that are checked.
                 return; //end the call
 
             string orList = "AND city IN (SELECT city FROM business WHERE "; //building subquery to find all the cities in the listbox
-            foreach (string item in checkedItems)
+            foreach (string item in cityCheckBox.CheckedItems)
             {
                 Console.WriteLine(item);
                 orList += "city = '" + item + "' OR "; // city = 'string' OR 
             }
             orList = orList.Substring(0, orList.Length - 3); // Cuts off the final "OR "
-            orList += ')';
+            orList += ") ";
+
+            orList += "AND zipcode IN (SELECT zipcode FROM business WHERE "; //building subquery to find all the zipcodes in the listbox
+            foreach (string item in zipItems)
+            {
+                Console.WriteLine(item);
+                orList += "zipcode = '" + item + "' OR ";
+            }
+            orList = orList.Substring(0, orList.Length - 3);
+            orList += ") ";
 
             // populate data into businessGrid from database with the city and state from each check box
             using (var connection = new NpgsqlConnection(LOGININFO))
