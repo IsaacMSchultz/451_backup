@@ -52,10 +52,10 @@
             this.businessGrid.AllowUserToAddRows = false;
             this.businessGrid.AllowUserToDeleteRows = false;
             this.businessGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.businessGrid.Location = new System.Drawing.Point(0, 100);
+            this.businessGrid.Location = new System.Drawing.Point(0, 115);
             this.businessGrid.Name = "businessGrid";
             this.businessGrid.ReadOnly = true;
-            this.businessGrid.Size = new System.Drawing.Size(800, 350);
+            this.businessGrid.Size = new System.Drawing.Size(800, 335);
             this.businessGrid.TabIndex = 2;
             // 
             // StateHeader
@@ -75,7 +75,7 @@
             // 
             this.CityHeader.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.CityHeader.Cursor = System.Windows.Forms.Cursors.Default;
-            this.CityHeader.Location = new System.Drawing.Point(0, 33);
+            this.CityHeader.Location = new System.Drawing.Point(0, 40);
             this.CityHeader.Margin = new System.Windows.Forms.Padding(0);
             this.CityHeader.Name = "CityHeader";
             this.CityHeader.ReadOnly = true;
@@ -123,7 +123,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(400, 79);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(400, 94);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // cityCheckBox
@@ -135,7 +135,7 @@
             this.cityCheckBox.MultiColumn = true;
             this.cityCheckBox.Name = "cityCheckBox";
             this.tableLayoutPanel1.SetRowSpan(this.cityCheckBox, 3);
-            this.cityCheckBox.Size = new System.Drawing.Size(360, 79);
+            this.cityCheckBox.Size = new System.Drawing.Size(360, 94);
             this.cityCheckBox.TabIndex = 0;
             this.cityCheckBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.cityCheckBox_ItemCheck);
             // 
@@ -173,7 +173,7 @@
             this.tableLayoutPanel3.RowCount = 2;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 21F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(800, 100);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(800, 115);
             this.tableLayoutPanel3.TabIndex = 8;
             // 
             // tableLayoutPanel4
@@ -191,7 +191,7 @@
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(400, 79);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(400, 94);
             this.tableLayoutPanel4.TabIndex = 8;
             // 
             // checkedListBox2
@@ -203,14 +203,15 @@
             this.checkedListBox2.MultiColumn = true;
             this.checkedListBox2.Name = "checkedListBox2";
             this.tableLayoutPanel4.SetRowSpan(this.checkedListBox2, 3);
-            this.checkedListBox2.Size = new System.Drawing.Size(360, 79);
+            this.checkedListBox2.Size = new System.Drawing.Size(360, 94);
             this.checkedListBox2.TabIndex = 0;
+            this.checkedListBox2.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBox2_ItemCheck);
             // 
             // ZipText
             // 
             this.ZipText.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ZipText.Cursor = System.Windows.Forms.Cursors.Default;
-            this.ZipText.Location = new System.Drawing.Point(0, 33);
+            this.ZipText.Location = new System.Drawing.Point(0, 40);
             this.ZipText.Margin = new System.Windows.Forms.Padding(0);
             this.ZipText.Name = "ZipText";
             this.ZipText.ReadOnly = true;
