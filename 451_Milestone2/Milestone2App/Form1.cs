@@ -122,10 +122,38 @@ namespace Milestone2App
             else
                 checkedItems.Remove(cityCheckBox.Items[e.Index].ToString());
 
-            foreach (string item in checkedItems)
-            {
+            if (businessGrid.RowCount > 0) //removes all the data previously in the grid.
+                businessGrid.Rows.Clear();
 
+            string orList = "";
+            if (checkedItems.Count > 0) //if there are items that are checked.
+            {
+                orList = "AND city IN (SELECT city FROM business"; //building subquery to find all the cities in the listbox
+                foreach (string item in checkedItems)
+                {
+                    orList += " OR city = '";
+                    orList += item + "'";
+                }
             }
+
+            // populate data into businessGrid from database with the city and state from each check box
+            using (var connection = new NpgsqlConnection(LOGININFO))
+            {
+                connection.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = connection;
+                    cmd.CommandText = "SELECT * FROM business WHERE state = '" + stateDropDown.SelectedItem + "'" + orList + " ORDER BY state;";
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                            businessGrid.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2));
+                    }
+                }
+                connection.Close();
+            }
+
+
         }
     }
 }
