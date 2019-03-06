@@ -128,12 +128,13 @@ namespace Milestone2App
             string orList = "";
             if (checkedItems.Count > 0) //if there are items that are checked.
             {
-                orList = "AND city IN (SELECT city FROM business"; //building subquery to find all the cities in the listbox
+                orList = "AND city IN (SELECT city FROM business WHERE "; //building subquery to find all the cities in the listbox
                 foreach (string item in checkedItems)
                 {
-                    orList += " OR city = '";
-                    orList += item + "'";
+                    orList += "city = '" + item + "' OR "; // city = 'string' OR 
                 }
+                orList = orList.Substring(0, orList.Length - 3); // Cuts off the final "OR "
+                orList += ')';
             }
 
             // populate data into businessGrid from database with the city and state from each check box
@@ -147,7 +148,7 @@ namespace Milestone2App
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
-                            businessGrid.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2));
+                            businessGrid.Rows.Add(reader["name"], reader["city"], reader["state"]);
                     }
                 }
                 connection.Close();

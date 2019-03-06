@@ -52,10 +52,10 @@
             this.businessGrid.AllowUserToAddRows = false;
             this.businessGrid.AllowUserToDeleteRows = false;
             this.businessGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.businessGrid.Location = new System.Drawing.Point(0, 0);
+            this.businessGrid.Location = new System.Drawing.Point(0, 100);
             this.businessGrid.Name = "businessGrid";
             this.businessGrid.ReadOnly = true;
-            this.businessGrid.Size = new System.Drawing.Size(800, 450);
+            this.businessGrid.Size = new System.Drawing.Size(800, 350);
             this.businessGrid.TabIndex = 2;
             // 
             // StateHeader
@@ -87,16 +87,17 @@
             // cityDropDown
             // 
             this.cityDropDown.FormattingEnabled = true;
-            this.cityDropDown.Location = new System.Drawing.Point(0, 100);
+            this.cityDropDown.Location = new System.Drawing.Point(268, 100);
             this.cityDropDown.Margin = new System.Windows.Forms.Padding(0);
             this.cityDropDown.Name = "cityDropDown";
-            this.cityDropDown.Size = new System.Drawing.Size(97, 21);
+            this.cityDropDown.Size = new System.Drawing.Size(172, 21);
             this.cityDropDown.TabIndex = 1;
-            this.cityDropDown.Text = "Cities will be displayed once a state is selected...";
+            this.cityDropDown.Text = "PlaceholderOfOldFunctionality";
             this.cityDropDown.SelectedIndexChanged += new System.EventHandler(this.cityDropDown_SelectedIndexChanged);
             // 
             // stateDropDown
             // 
+            this.stateDropDown.Dock = System.Windows.Forms.DockStyle.Fill;
             this.stateDropDown.FormattingEnabled = true;
             this.stateDropDown.Location = new System.Drawing.Point(40, 0);
             this.stateDropDown.Margin = new System.Windows.Forms.Padding(0);
@@ -112,8 +113,8 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.cityCheckBox, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.CityHeader, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.cityCheckBox, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 21);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
@@ -223,9 +224,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.businessGrid);
             this.Controls.Add(this.tableLayoutPanel3);
             this.Controls.Add(this.cityDropDown);
-            this.Controls.Add(this.businessGrid);
             this.Name = "Form1";
             this.Text = "Milestone 2";
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).EndInit();
