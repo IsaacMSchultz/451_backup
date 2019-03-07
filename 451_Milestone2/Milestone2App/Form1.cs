@@ -134,6 +134,12 @@ namespace Milestone2App
             {
                 foreach (string item in checkedItems)
                     zipCheckBox.Items.Remove(item);
+
+                List<string> newZipBoxItems = new List<string>(); //a list that holds all the data we will pass to the grid updater function
+                foreach (string item in zipCheckBox.CheckedItems)
+                    newZipBoxItems.Add(item);
+
+                updateGrid(newZipBoxItems); //we need to update the datagrid to remove all the elements that are no longer selectable in the zipcode box
             }
 
             
@@ -147,14 +153,22 @@ namespace Milestone2App
             foreach (string item in senderCheckBox.CheckedItems) // add all the checked Items into our list that holds their string names.            
                 zipItems.Add(item);
 
-            if (e.NewValue == CheckState.Checked) //add or remove the check box item that just changed to the list
-                zipItems.Add(senderCheckBox.Items[e.Index].ToString());
-            else
-                zipItems.Remove(senderCheckBox.Items[e.Index].ToString());
+            if (e != null) //if the function is called without an argument, which is when its being called from within another event.
+            {
+                if (e.NewValue == CheckState.Checked) //add or remove the check box item that just changed to the list
+                    zipItems.Add(senderCheckBox.Items[e.Index].ToString());
+                else
+                    zipItems.Remove(senderCheckBox.Items[e.Index].ToString());
+            }
 
+            updateGrid(zipItems);
+        }
+
+        private void updateGrid(List<string> zipContents)
+        {
             businessGrid.Rows.Clear(); //removes all the data previously in the grid.
 
-            if (zipItems.Count == 0) //if there are no items that are checked.
+            if (zipContents.Count == 0) //if there are no items that are checked.
                 return; //end the call
 
             string orList = "AND city IN (SELECT city FROM business WHERE "; //building subquery to find all the cities in the listbox
@@ -167,7 +181,7 @@ namespace Milestone2App
             orList += ") ";
 
             orList += "AND zipcode IN (SELECT zipcode FROM business WHERE "; //building subquery to find all the zipcodes in the listbox
-            foreach (string item in zipItems)
+            foreach (string item in zipContents)
             {
                 Console.WriteLine(item);
                 orList += "zipcode = '" + item + "' OR ";
