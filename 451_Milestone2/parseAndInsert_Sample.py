@@ -22,8 +22,8 @@ def insert2BusinessTable():
         #connect to yelpdb database on postgres server using psycopg2
         #TODO: update the database name, username, and password
         try:
-            #conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='localhost' password='greatPassword'")
-            conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
+            conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='localhost' password='greatPassword'")
+            #conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
         except:
             print('Unable to connect to the database!')
         cur = conn.cursor()
