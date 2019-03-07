@@ -9,8 +9,8 @@ namespace Milestone2App
     public partial class Form1 : Form
     {
 
-        //private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone2db";
-        private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone2db";
+        private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone2db";
+        //private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone2db";
 
         public class Business //Not Used for now.
         {
@@ -47,20 +47,25 @@ namespace Milestone2App
             }
 
             // Create the column headers for the data grid view.
-            DataGridViewTextBoxColumn col1 = new DataGridViewTextBoxColumn();
-            col1.HeaderText = "Business name";
-            col1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            businessGrid.Columns.Add(col1);
+            DataGridViewTextBoxColumn nameColumn = new DataGridViewTextBoxColumn();
+            nameColumn.HeaderText = "Business name";
+            nameColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            businessGrid.Columns.Add(nameColumn);
 
-            DataGridViewTextBoxColumn col2 = new DataGridViewTextBoxColumn();
-            col2.HeaderText = "City";
-            col2.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            businessGrid.Columns.Add(col2);
+            DataGridViewTextBoxColumn zipColumn = new DataGridViewTextBoxColumn();
+            zipColumn.HeaderText = "Zip";
+            zipColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            businessGrid.Columns.Add(zipColumn);
 
-            DataGridViewTextBoxColumn col3 = new DataGridViewTextBoxColumn();
-            col3.HeaderText = "State";
-            col3.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            businessGrid.Columns.Add(col3);
+            DataGridViewTextBoxColumn cityColumn = new DataGridViewTextBoxColumn();
+            cityColumn.HeaderText = "City";
+            cityColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            businessGrid.Columns.Add(cityColumn);
+
+            DataGridViewTextBoxColumn stateColumn = new DataGridViewTextBoxColumn();
+            stateColumn.HeaderText = "State";
+            stateColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            businessGrid.Columns.Add(stateColumn);
         }
 
         private void stateDropDown_SelectedIndexChanged(object sender, EventArgs e)
@@ -114,21 +119,8 @@ namespace Milestone2App
 
             if (e.NewValue == CheckState.Checked) //add or remove the check box item that just changed to the list
             {
-
-                // if (CheckBox.CheckedItems.Count == 0) //if there are no items that are checked.
-                //   return; //end the call
-                /*
-                string orList = "AND city IN (SELECT city FROM business WHERE "; //building subquery to find all the cities in the listbox
-                foreach (string item in checkedItems)
-                {
-                    Console.WriteLine(item);
-                    orList += "city = '" + item + "' OR "; // city = 'string' OR 
-                }
-                orList = orList.Substring(0, orList.Length - 3); // Cuts off the final "OR "
-                orList += ')';*/
                 foreach (string item in checkedItems)
                     zipCheckBox.Items.Add(item);
-
             }
             else
             {
@@ -200,7 +192,7 @@ namespace Milestone2App
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
-                            businessGrid.Rows.Add(reader["name"], reader["city"], reader["state"]);
+                            businessGrid.Rows.Add(reader["name"], reader["zipcode"], reader["city"], reader["state"]);
                     }
                 }
                 connection.Close();
