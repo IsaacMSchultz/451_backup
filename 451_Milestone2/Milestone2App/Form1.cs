@@ -95,44 +95,48 @@ namespace Milestone2App
             CheckedListBox CheckBox = (CheckedListBox)sender; //casts the sending object as a checkedbox
             List<string> checkedItems = new List<string>();
 
-            foreach (string item in CheckBox.CheckedItems) // add all the checked Items into our list that holds their string names.            
-                checkedItems.Add(item);            
-
-            if (e.NewValue == CheckState.Checked) //add or remove the check box item that just changed to the list
-                checkedItems.Add(cityCheckBox.Items[e.Index].ToString());
-            else
-                checkedItems.Remove(cityCheckBox.Items[e.Index].ToString());
-
-            businessGrid.Rows.Clear(); //removes all the data previously in the grid.
-
-            if (checkedItems.Count == 0) //if there are no items that are checked.
-                return; //end the call
-            
-            string orList = "AND city IN (SELECT city FROM business WHERE "; //building subquery to find all the cities in the listbox
-            foreach (string item in checkedItems)
-            {
-                Console.WriteLine(item);
-                orList += "city = '" + item + "' OR "; // city = 'string' OR 
-            }
-            orList = orList.Substring(0, orList.Length - 3); // Cuts off the final "OR "
-            orList += ')';
-
-            // populate data into zipcode checkbox from database with the city and state from each check box
+            // need to remove the zipcodes from that city from the zipBox
             using (var connection = new NpgsqlConnection(LOGININFO))
             {
                 connection.Open();
                 using (var cmd = new NpgsqlCommand())
                 {
                     cmd.Connection = connection;
-                    cmd.CommandText = "SELECT zipcode FROM business WHERE state = '" + stateDropDown.SelectedItem + "'" + orList + " ORDER BY state;";
+                    cmd.CommandText = "SELECT DISTINCT zipcode FROM business WHERE state = '" + stateDropDown.SelectedItem + "' AND city = '" + cityCheckBox.Items[e.Index].ToString() + "' ORDER BY zipcode;";
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
-                            zipCheckBox.Items.Add(reader.GetString(0));
+                            checkedItems.Add(reader.GetString(0));
                     }
                 }
                 connection.Close();
             }
+
+            if (e.NewValue == CheckState.Checked) //add or remove the check box item that just changed to the list
+            {
+
+                // if (CheckBox.CheckedItems.Count == 0) //if there are no items that are checked.
+                //   return; //end the call
+                /*
+                string orList = "AND city IN (SELECT city FROM business WHERE "; //building subquery to find all the cities in the listbox
+                foreach (string item in checkedItems)
+                {
+                    Console.WriteLine(item);
+                    orList += "city = '" + item + "' OR "; // city = 'string' OR 
+                }
+                orList = orList.Substring(0, orList.Length - 3); // Cuts off the final "OR "
+                orList += ')';*/
+                foreach (string item in checkedItems)
+                    zipCheckBox.Items.Add(item);
+
+            }
+            else
+            {
+                foreach (string item in checkedItems)
+                    zipCheckBox.Items.Remove(item);
+            }
+
+            
         }
 
         private void zipCheckBox_ItemCheck(object sender, ItemCheckEventArgs e)
