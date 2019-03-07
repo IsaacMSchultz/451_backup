@@ -40,7 +40,7 @@ def insert2BusinessTable():
             try:
                 cur.execute(sql_str)
             except Exception as e:
-                print("Insert failed! " + str(e))
+                print("Insert failed! " + str(e) + "\nOn line: " + str(count_line))
             conn.commit()
             # optionally you might write the INSERT statement to a file.
             # outfile.write(sql_str)
