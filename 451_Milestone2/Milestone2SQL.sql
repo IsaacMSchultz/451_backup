@@ -31,7 +31,7 @@ CREATE TABLE YelpUser (
 );
 
 CREATE TABLE Review (
-    review_id CHAR(22),
+    review_id CHAR(22) UNIQUE,
     business_id CHAR(22),
     user_id CHAR(22),
     review_stars INTEGER NOT NULL,
@@ -40,12 +40,14 @@ CREATE TABLE Review (
     useful_vote INTEGER,
     funny_vote INTEGER,
     cool_vote INTEGER,
-    PRIMARY KEY (review_id, business_id, user_id)
+    PRIMARY KEY (review_id, business_id, user_id),
+    FOREIGN KEY (business_id) REFERENCES Business(business_id),
+    FOREIGN KEY (user_id) REFERENCES User(user_id)
 );
 
 CREATE TABLE Friend (
     user_id CHAR(22),
-    friend_id CHAR(22),
+    friend_id CHAR(22) UNIQUE, -- CHECK that friend and user are not the same.
     PRIMARY KEY (user_id, friend_id),
     FOREIGN KEY (user_id) REFERENCES YelpUser(user_id)
 );
