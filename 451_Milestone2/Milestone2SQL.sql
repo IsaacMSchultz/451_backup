@@ -1,32 +1,32 @@
 CREATE TABLE Business (
     business_id CHAR(22),
-    name VARCHAR(200),
-    city VARCHAR(20),
-    state CHAR(2),
-    zipcode CHAR(5),
-    latitude FLOAT,
-    longitude FLOAT,
-    address VARCHAR(150),
+    name VARCHAR(200) NOT NULL,
+    city VARCHAR(20) NOT NULL,
+    state CHAR(2) NOT NULL,
+    zipcode CHAR(5) NOT NULL,
+    latitude FLOAT NOT NULL,
+    longitude FLOAT NOT NULL,
+    address VARCHAR(150) NOT NULL,
     review_count INTEGER,
     num_checkins INTEGER,
     reviewRating FLOAT, -- I dont know exactly what this is??? but its in the schema so I'm keeping it
-    is_open BOOLEAN,
+    is_open BOOLEAN NOT NULL,
     stars FLOAT,
     PRIMARY KEY (business_id)
 );
 
 CREATE TABLE YelpUser (
     user_id CHAR(22),
-    name VARCHAR(100),
+    name VARCHAR(100) NOT NULL,
     average_stars FLOAT,
     cool INTEGER,
     funny INTEGER,
     useful INTEGER,
     fans INTEGER,
     review_count INTEGER,
-    yelping_since DATE,
-    user_latitiude FLOAT,
-    user_longitude FLOAT,
+    yelping_since DATE NOT NULL,
+    user_latitiude FLOAT NOT NULL,
+    user_longitude FLOAT NOT NULL,
     PRIMARY KEY (user_id)
 );
 
@@ -34,8 +34,8 @@ CREATE TABLE Review (
     review_id CHAR(22),
     business_id CHAR(22),
     user_id CHAR(22),
-    review_stars INTEGER,
-    date DATE,
+    review_stars INTEGER NOT NULL,
+    date DATE NOT NULL,
     text VARCHAR(1000),
     useful_vote INTEGER,
     funny_vote INTEGER,
@@ -76,8 +76,8 @@ CREATE TABLE Attributes (
 CREATE TABLE Hours (
     business_id CHAR(22),
     day VARCHAR(20),
-    open TIME,
-    close TIME,
+    open TIME NOT NULL,
+    close TIME NOT NULL,
     PRIMARY KEY (Business_id, day),
     FOREIGN KEY (business_id) REFERENCES Business(Business_id)
 );
@@ -86,7 +86,7 @@ CREATE TABLE Checkins (
     business_id CHAR(22),
     day VARCHAR(20),
     time TIME,
-    count INTEGER,
+    count INTEGER NOT NULL,
     PRIMARY KEY (Business_id, day, time),
     FOREIGN KEY (business_id) REFERENCES Business(Business_id)
 );
