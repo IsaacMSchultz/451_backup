@@ -64,19 +64,20 @@ DROP TRIGGER countCheckin ON checkins;
 CREATE OR REPLACE FUNCTION defineIncrementCountCheckin() RETURNS trigger AS '
 BEGIN
     UPDATE CHECKINS
-    SET num_checkins = SELECT COUNT(count) FROM checkins WHERE checkins.business_id = NEW.business_id GROUP BY count
-    WHERE Business.business_id = NEW.business_id;
+    SET count = count + 1
+    WHERE checkins.business_id = NEW.business_id
+    AND checkins.day = NEW.day
+    AND checkins.time = NEW.time;
     RETURN NEW;
 END
 ' LANGUAGE plpgsql;
 
-CREATE TRIGGER countCheckinIn
-AFTER INSERT ON Review
+CREATE TRIGGER countCheckinInsert
+AFTER INSERT ON Checkins
 FOR EACH ROW
-WHEN (NEW.review_id IS NOT NULL)
-EXECUTE PROCEDURE defineCountReview();
+EXECUTE PROCEDURE defineIncrementCountCheckin();
 
-INSERT INTO Review VALUES ('1111111111111111111111', '2eJEUJIP54tex7T9YOcLSw','1111111111111111111112', 5,'1996-10-07','it was bland',1,2,3);
+INSERT INTO Checkins VALUES ('2eJEUJIP54tex7T9YOcLSw','Friday', '20:00"');
 SELECT * FROM Business WHERE business_id = '2eJEUJIP54tex7T9YOcLSw';
 
 DROP TRIGGER countReview ON review;

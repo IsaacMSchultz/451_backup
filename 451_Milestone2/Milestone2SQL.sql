@@ -88,7 +88,7 @@ CREATE TABLE Checkins (
     business_id CHAR(22),
     day VARCHAR(20),
     time TIME,
-    count INTEGER NOT NULL,
+    count INTEGER DEFAULT 1, -- changed not null to default 1
     PRIMARY KEY (Business_id, day, time),
     FOREIGN KEY (business_id) REFERENCES Business(Business_id)
 );
