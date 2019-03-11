@@ -31,29 +31,29 @@ DROP TRIGGER countReview ON review;
 -- Update on a checkin, handles counting the num_checkins for the business.
 -----------------------------------------------------------------------------------------------------------------------------------------------
 
-CREATE OR REPLACE FUNCTION defineCountCheckin() RETURNS trigger AS '
+CREATE OR REPLACE FUNCTION defineCountCheckin() RETURNS trigger AS $countCheckin$
 BEGIN
     UPDATE Business
-    SET num_checkins = (SELECT COUNT(count) FROM checkins WHERE checkins.business_id = NEW.business_id GROUP BY count)
+    SET num_checkins = (SELECT SUM(count) FROM checkins WHERE checkins.business_id = NEW.business_id GROUP BY business_id)
     WHERE Business.business_id = NEW.business_id;
+	RAISE NOTICE 'OLD.business_id %', (SELECT SUM(count) FROM checkins WHERE checkins.business_id = NEW.business_id GROUP BY business_id);
     RETURN NEW;
 END
-' LANGUAGE plpgsql;
-
---test
-SELECT COUNT(count) FROM checkins WHERE checkins.business_id = NEW.business_id GROUP BY count
-
+$countCheckin$ LANGUAGE plpgsql;
 
 CREATE TRIGGER countCheckin
 AFTER UPDATE ON checkins
 FOR EACH ROW
-EXECUTE PROCEDURE defineCountReview();
+EXECUTE PROCEDURE defineCountCheckin();
 
 -- test 
+--INSERT INTO checkins VALUES ('QpRfQtlbwlmqUsq4DKjqqw', 'Monday', '01:00:00',  1);
+--INSERT INTO checkins VALUES ('QpRfQtlbwlmqUsq4DKjqqw', 'Monday', '04:00:00',  6);
+
 UPDATE checkins 
 SET count = count + 1
-WHERE business_id = '2eJEUJIP54tex7T9YOcLSw' AND hour = "1:00" AND day = "Monday";
-SELECT * FROM Business WHERE business_id = '2eJEUJIP54tex7T9YOcLSw';
+WHERE business_id = 'QpRfQtlbwlmqUsq4DKjqqw' AND time = '01:00:00' AND day = 'Monday';
+SELECT * FROM Business WHERE business_id = 'QpRfQtlbwlmqUsq4DKjqqw';
 
 DROP TRIGGER countCheckin ON checkins;
 
@@ -133,6 +133,50 @@ SELECT user_id FROM yelpUser;
 SELECT * FROM Review;
 
 INSERT INTO yelpuser VALUES ('1111111111111111111112', 'bob', 0, 0, 0, 0, 0, 0,'1996-10-07', 1.1, 1.2);
+
+
+
+
+
+
+
+CREATE OR REPLACE FUNCTION defineCountCheckin() RETURNS trigger AS $countCheckin$
+BEGIN
+    UPDATE Business
+    SET num_checkins = (SELECT SUM(count) FROM checkins WHERE checkins.business_id = NEW.business_id GROUP BY business_id)
+    WHERE Business.business_id = NEW.business_id;
+	RAISE NOTICE 'OLD.business_id %', (SELECT SUM(count) FROM checkins WHERE checkins.business_id = NEW.business_id GROUP BY business_id);
+    RETURN NEW;
+END
+$countCheckin$ LANGUAGE plpgsql;
+
+--test
+SELECT * FROM checkins WHERE checkins.business_id = 'QpRfQtlbwlmqUsq4DKjqqw';
+-- -- SELECT * FROM checkins WHERE checkins.business_id = 'dwQEZBFen2GdihLLfWeexA';
+--  SELECT SUM(count) FROM checkins WHERE checkins.business_id = 'dwQEZBFen2GdihLLfWeexA' GROUP BY business_id;
+-- SELECT * FROM Business WHERE num_checkins = 98563;
+
+-- 98563
+
+--  UPDATE Business
+--      SET num_checkins = 1--(SELECT SUM(count) FROM checkins WHERE checkins.business_id = NEW.business_id GROUP BY count)
+--      WHERE Business.business_id = 'dwQEZBFen2GdihLLfWeexA';
+
+CREATE TRIGGER countCheckin
+AFTER UPDATE ON checkins
+FOR EACH ROW
+EXECUTE PROCEDURE defineCountCheckin();
+
+-- test 
+--INSERT INTO checkins VALUES ('QpRfQtlbwlmqUsq4DKjqqw', 'Monday', '01:00:00',  1);
+--INSERT INTO checkins VALUES ('QpRfQtlbwlmqUsq4DKjqqw', 'Monday', '04:00:00',  6);
+
+UPDATE checkins 
+SET count = count + 1
+WHERE business_id = 'QpRfQtlbwlmqUsq4DKjqqw' AND time = '01:00:00' AND day = 'Monday';
+SELECT * FROM Business WHERE business_id = 'QpRfQtlbwlmqUsq4DKjqqw';
+
+DROP TRIGGER countCheckin ON checkins;
 */
 
 
