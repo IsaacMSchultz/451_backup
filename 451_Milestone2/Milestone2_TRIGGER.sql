@@ -34,7 +34,7 @@ DROP TRIGGER countReview ON review;
 CREATE OR REPLACE FUNCTION defineCountCheckin() RETURNS trigger AS '
 BEGIN
     UPDATE Business
-    SET num_checkins = SELECT COUNT(count) FROM checkins WHERE checkins.business_id = NEW.business_id GROUP BY count
+    SET num_checkins = (SELECT COUNT(count) FROM checkins WHERE checkins.business_id = NEW.business_id GROUP BY count)
     WHERE Business.business_id = NEW.business_id;
     RETURN NEW;
 END
