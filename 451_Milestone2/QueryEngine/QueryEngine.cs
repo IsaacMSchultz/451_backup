@@ -16,9 +16,12 @@ namespace QueryEngine
 
         private void DataChanged(object sender, PropertyChangedEventArgs e) // Event handler for when user data changes.
         {
+            // good model of how we will be implementing this class
             if (sender is Review reviewChanged)
-            { // 
-                reviewChanged.userID;
+            {
+                if (e.PropertyName == "text"){
+                    
+                }
             }
             YelpPropertyChanged(sender, e);
         }
@@ -27,5 +30,7 @@ namespace QueryEngine
         {
             yelpDataChanged?.Invoke(sender, e);
         }
+
+        private void 
     }
 }
