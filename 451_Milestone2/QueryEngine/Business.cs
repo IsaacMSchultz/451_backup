@@ -13,9 +13,11 @@ namespace QueryEngine
         private string businessId;
         private Location businessLocation;        
         private int fans;
-        private int reviewCOunt;
+        private int reviewCount;
         private double avgStars;
         // Add a list of attributes/ hours?
+        List<Attribute> businessAttributes;
+        List<Hours> businessHours;
 
         public event PropertyChangedEventHandler BusinessPropertyChanged; // event for notifying that there was a property changed. 
 
@@ -42,11 +44,11 @@ namespace QueryEngine
         public Hours(string newDay, string newOpenTime, string newCloseTime)
         {
             this.day = newDay;
-            this.open_Time = newOpenTime;
-            this.close_Time = newCloseTime;
+            this.openTime = newOpenTime;
+            this.closeTime = newCloseTime;
         }
         private string day { get; set; }
-        private string close_Time { get; set; }
-        private string open_Time { get; set; }
+        private string closeTime { get; set; }
+        private string openTime { get; set; }
     }
 }
