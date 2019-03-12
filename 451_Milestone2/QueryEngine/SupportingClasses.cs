@@ -9,7 +9,15 @@ namespace QueryEngine
     class Location
     {
         private double latitude;
+        private double longitude;
+        private string city;
+        private string state;
+        private string address;
+        private string zipcode;
 
-        private string city;        
+        public void compareDistance() //gets the distance between two locations???
+        {
+
+        }
     }
 }

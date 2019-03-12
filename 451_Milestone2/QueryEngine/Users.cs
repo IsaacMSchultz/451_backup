@@ -19,8 +19,7 @@ namespace QueryEngine
     class User : BasicUser
     {
         private string name;
-        private double latitude;
-        private double longitude;
+        private Location userLocation;
         private string id;
         private int coolVotes;
         private int funnyVotes;
