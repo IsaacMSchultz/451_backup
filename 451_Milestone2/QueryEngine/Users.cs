@@ -19,14 +19,25 @@ namespace QueryEngine
     class User : BasicUser
     {
         private string name;
-        private Location userLocation;
+        private Location location;
         private string id;
         private int coolVotes;
         private int funnyVotes;
-        private int useFull;
+        private int usefulVotes;
         private int fans;
-        private int reviewCOunt;
+        private int reviewCount;
         private double avgStars;
+
+
+        public string UserId { get { return id; } }
+        public string UserName { get { return name; } }
+        public Location UserLocation { get { return location; } }
+        public int UserCoolVotes { get { return coolVotes; } }
+        public int UserFunnyVotes { get { return funnyVotes; } }
+        public int UserUsefulVotes { get { return usefulVotes; } }
+        public int UserFans { get { return fans; } }
+        public int UserReviewCount { get { return reviewCount; } }
+        public double UserAvgStars { get { return avgStars; } }
 
         public event PropertyChangedEventHandler userPropertyChanged; //event for notifying that there was a property changed. 
 
