@@ -10,12 +10,8 @@ namespace QueryEngine
     class Business
     {
         private string name;
-        private double latitude;
-        private double longitude;
-        private string id;
-        private int coolVotes;
-        private int funnyVotes;
-        private int useFull;
+        private string businessId;
+        private Location businessLocation;        
         private int fans;
         private int reviewCOunt;
         private double avgStars;
