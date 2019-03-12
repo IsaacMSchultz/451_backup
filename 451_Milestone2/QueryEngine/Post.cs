@@ -12,10 +12,18 @@ namespace QueryEngine
         protected string userId;
         protected string date;
         protected string text;
-        protected bool flag;
+        protected bool flag; //if the post is flagged to be checked by a moderator
         protected int coolVotes;
         protected int funnyVotes;
         protected int usefulVotes;
+
+        public string UserId { get { return userId; } }
+        public string Date { get { return date; } }
+        public string Text { get { return text; } }
+        public bool Flag { get { return flag; } }
+        public int CoolVotes { get { return coolVotes; } }
+        public int FunnyVotes { get { return funnyVotes; } }
+        public int UsefulVotes { get { return usefulVotes; } }
 
         internal virtual void getDeleted()
         {
@@ -28,6 +36,10 @@ namespace QueryEngine
         private string reviewId;
         private string businessId;
         private int stars;
+
+        public string ReviewId { get { return reviewId; } }
+        public string BusinessId { get { return businessId; } }
+        public int Stars { get { return stars; } }
 
         public event PropertyChangedEventHandler reviewPropertyChanged; // notifies when a review has changed
 
@@ -57,6 +69,9 @@ namespace QueryEngine
     {
         private string replyId;
         private string reviewId;
+
+        public string ReplyId { get { return replyId; } }
+        public string ReviewId { get { return reviewId; } }
 
         public event PropertyChangedEventHandler replyPropertyChanged; // notifies when reply has changed
 
