@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace QueryEngine
 {
-    public class Class1
+    class Location
     {
+        private double latitude;
+
+        private string city;        
     }
 }
