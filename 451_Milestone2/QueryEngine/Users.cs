@@ -12,7 +12,7 @@ namespace QueryEngine
     {
         public void Search() // function prototype to handle searching for all users
         {
-
+            // will trigger some kind of event to let the GUI know what the search returned.
         }
     }
 
