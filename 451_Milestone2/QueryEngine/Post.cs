@@ -9,13 +9,13 @@ namespace QueryEngine
 {
     public abstract class Post
     {
-        protected string User_Id;
-        protected string Date;
-        protected string Text;
-        protected bool Flag;
-        protected int Cool_Votes;
-        protected int Funny_Votes;
-        protected int Useful_Votes;
+        protected string userId;
+        protected string date;
+        protected string text;
+        protected bool flag;
+        protected int coolVotes;
+        protected int funnyVotes;
+        protected int usefulVotes;
 
         internal virtual void getDeleted()
         {
@@ -25,16 +25,21 @@ namespace QueryEngine
 
     public class Review : Post
     {
-        private string Review_Id;
-        private string Business_Id;
+        private string reviewId;
+        private string businessId;
         private int stars;
 
         public event PropertyChangedEventHandler reviewPropertyChanged; // notifies when a review has changed
 
-        public Review(string business_Id, int strs, string text)
+        public Review(string newBusinessId, int numStars, string newText)
         {
-            // generated a review_Id (22 characters long)
+            // generate a review_Id (22 characters long)
+            // for now, have the user enter the businessId but implement better later on
             // call method in QueryEngine to insert a new Review into database
+
+            this.businessId = newBusinessId;
+            this.stars = numStars;
+            this.text = newText;
         }
 
         override internal void getDeleted()
@@ -55,11 +60,12 @@ namespace QueryEngine
 
         public event PropertyChangedEventHandler replyPropertyChanged; // notifies when reply has changed
 
-        public Reply(string business_Id, string review_Id, string text){
+        public Reply(string business_Id, string newReviewId, string newText){
             // Change this to allow the GUI to have an event to grab the current review business_Id from QueryEngine
             // generate a Reply_Id
-            
-            this.replyId
+
+            this.reviewId = newReviewId;
+            this.text = newText;
         }
 
         override internal void getDeleted()
