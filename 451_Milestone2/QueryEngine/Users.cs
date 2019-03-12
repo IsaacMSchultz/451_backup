@@ -30,42 +30,42 @@ namespace QueryEngine
 
         public event PropertyChangedEventHandler userPropertyChanged; //event for notifying that there was a property changed. 
 
-        public void WriteReview()
+        public void WriteReview(string reviewText)
         {
 
         }
 
-        public void Checkin()
+        public void Checkin(string businessId)
         {
 
         }
 
-        public void RateBusiness()
+        public void RateBusiness(string businessId)
         {
 
         }
 
-        public void FlagPost()
+        public void FlagPost(string postId)
         {
 
         }
 
-        public void VoteOnReview()
+        public void VoteOnReview(string reviewId)
         {
 
         }
         
-        public void AddFriend()
+        public void AddFriend(string friendId)
         {
 
         }
 
-        public void RemoveFriend()
+        public void RemoveFriend(string friendId)
         {
 
         }
 
-        public void DeleteReview() //only for deleing the users own review
+        public void DeleteReview(string reviewId) //only for deleing the users own review
         {
 
         }
@@ -80,14 +80,14 @@ namespace QueryEngine
             return true;
         }
 
-        public void WriteReply() //possible extra credit to track replies on comments.
+        public void WriteReply(string replyText, string postId) //possible extra credit to track replies on comments.
         {
 
         }
 
         public void EditPost()
         {
-
+            OnUserPropertyChanged(this, new PropertyChangedEventArgs("postText"));
         }
 
         private void OnUserPropertyChanged(object sender, PropertyChangedEventArgs e) //event handler for a change in user data.
@@ -109,12 +109,12 @@ namespace QueryEngine
         private string businessId;
         private string businessName;
 
-        public void FlagPost()
+        public void FlagPost(string postId)
         {
 
         }
 
-        public void WriteReply() //possible extra credit to track replies on comments.
+        public void WriteReply(string replyText, string postId) //possible extra credit to track replies on comments.
         {
 
         }
@@ -130,22 +130,14 @@ namespace QueryEngine
 
         }
 
-        public void RemoveContent(Post badPost)
+        public void RemoveContent(string badPostId)
         {
 
         }
 
-        public void BanUser(string userID)
+        public void BanUser(string userId)
         {
 
         }
-    }
-
-    public class Checkin
-    {
-        private string business_Id;
-        private string day; // may need to select a different data type
-        private string time; // ^
-        private int count;
     }
 }
