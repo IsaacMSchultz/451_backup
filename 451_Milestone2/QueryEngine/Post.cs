@@ -50,15 +50,16 @@ namespace QueryEngine
 
     public class Reply : Post // Potential Extra Credit
     {
-        private string Reply_Id { get; set; }
-        private string Review_Id { get; }
+        private string replyId;
+        private string reviewId;
 
         public event PropertyChangedEventHandler replyPropertyChanged; // notifies when reply has changed
 
         public Reply(string business_Id, string review_Id, string text){
             // Change this to allow the GUI to have an event to grab the current review business_Id from QueryEngine
             // generate a Reply_Id
-
+            
+            this.replyId
         }
 
         override internal void getDeleted()
