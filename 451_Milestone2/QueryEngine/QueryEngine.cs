@@ -7,8 +7,25 @@ using System.ComponentModel;
 
 namespace QueryEngine
 {
-    class QueryEngine
+    /// <summary>
+    /// 
+    /// </summary>
+    class QueryEngine 
     {
         public event PropertyChangedEventHandler yelpDataChanged; // event for notifying that there was a property changed. 
+
+        private void DataChanged(object sender, PropertyChangedEventArgs e) // Event handler for when user data changes.
+        {
+            if (sender is Review reviewChanged)
+            { // 
+                reviewChanged.userID;
+            }
+            YelpPropertyChanged(sender, e);
+        }
+
+        private void YelpPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            yelpDataChanged?.Invoke(sender, e);
+        }
     }
 }
