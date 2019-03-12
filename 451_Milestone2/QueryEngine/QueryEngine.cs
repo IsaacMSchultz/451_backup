@@ -9,5 +9,6 @@ namespace QueryEngine
 {
     class QueryEngine
     {
+        public event PropertyChangedEventHandler yelpDataChanged; //event for notifying that there was a property changed. 
     }
 }

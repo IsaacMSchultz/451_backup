@@ -9,13 +9,13 @@ namespace QueryEngine
 {
     public abstract class Post
     {
-        protected string User_Id { get; }
-        protected string Date { get; set; }
-        protected string Text { get; set; }
-        protected bool Flag { get; set; }
-        protected int Cool_Votes { get; set; }
-        protected int Funny_Votes { get; set; }
-        protected int Useful_Votes { get; set; }
+        protected string User_Id;
+        protected string Date;
+        protected string Text;
+        protected bool Flag;
+        protected int Cool_Votes;
+        protected int Funny_Votes;
+        protected int Useful_Votes;
 
         internal virtual void getDeleted()
         {
@@ -25,9 +25,9 @@ namespace QueryEngine
 
     public class Review : Post
     {
-        private string Review_Id { get; set; }
-        private string Business_Id { get; }
-        private int stars { get; set; }
+        private string Review_Id;
+        private string Business_Id;
+        private int stars;
 
         public event PropertyChangedEventHandler reviewPropertyChanged; // notifies when a review has changed
 
