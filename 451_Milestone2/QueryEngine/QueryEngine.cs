@@ -19,9 +19,12 @@ namespace QueryEngine
             // good model of how we will be implementing this class
             if (sender is Review reviewChanged)
             {
-                if (e.PropertyName == "text"){
-                    
+                if (e.PropertyName == "newReview")
+                {
+                    // run an INSERT if the reviewId is not in the database
                 }
+
+                // "UPDATE review WHERE review.reviewId = " AND reviewChanged.reviewId AND " 
             }
             YelpPropertyChanged(sender, e);
         }
@@ -31,6 +34,30 @@ namespace QueryEngine
             yelpDataChanged?.Invoke(sender, e);
         }
 
-        private void 
+        // Another implementation idea- not sure if we will use these
+
+        //private void BusinessNameChanged()
+        //{
+        //}
+
+        //private void BusinessLocationChanged()
+        //{
+        //}
+
+        //private void BusinessOpenChanged()
+        //{
+        //}
+
+        //private void BusinessStarsChanged() // may be handled in triggers
+        //{
+        //}
+
+        //private void BusinessReviewCountChanged() // ^
+        //{
+        //}
+
+        //private void BusinessCheckinsChanged() // ^^
+        //{
+        //}
     }
 }
