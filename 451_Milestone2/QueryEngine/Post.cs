@@ -52,6 +52,8 @@ namespace QueryEngine
             this.businessId = newBusinessId;
             this.stars = numStars;
             this.text = newText;
+
+            OnReviewPropertyChanged(this, new PropertyChangedEventArgs("newReview"));
         }
 
         override internal void getDeleted()
