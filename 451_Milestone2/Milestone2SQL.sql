@@ -25,8 +25,8 @@ CREATE TABLE YelpUser (
     fans INTEGER,
     review_count INTEGER,
     yelping_since DATE NOT NULL,
-    user_latitiude FLOAT NOT NULL,
-    user_longitude FLOAT NOT NULL,
+    user_latitude FLOAT, -- Doesn't exist in the json files
+    user_longitude FLOAT,
     PRIMARY KEY (user_id)
 );
 
@@ -42,7 +42,7 @@ CREATE TABLE Review (
     cool_vote INTEGER,
     PRIMARY KEY (review_id, business_id, user_id),
     FOREIGN KEY (business_id) REFERENCES Business(business_id),
-    FOREIGN KEY (user_id) REFERENCES User(user_id)
+    FOREIGN KEY (user_id) REFERENCES YelpUser(user_id)
 );
 
 CREATE TABLE Friend (
