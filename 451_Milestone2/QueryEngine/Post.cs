@@ -10,6 +10,7 @@ namespace QueryEngine
     public abstract class Post
     {
         protected string userId;
+        protected string postId;
         protected string date;
         protected string text;
         protected bool flag; //if the post is flagged to be checked by a moderator
@@ -18,6 +19,7 @@ namespace QueryEngine
         protected int usefulVotes;
 
         public string UserId { get { return userId; } }
+        public string PostId { get { return postId; } }
         public string Date { get { return date; } }
         public string Text { get { return text; } }
         public bool Flag { get { return flag; } }
@@ -40,11 +42,11 @@ namespace QueryEngine
 
     public class Review : Post
     {
-        private string reviewId;
+        //private string reviewId;
         private string businessId;
         private int stars;
 
-        public string ReviewId { get { return reviewId; } }
+        //public string ReviewId { get { return reviewId; } }
         public string BusinessId { get { return businessId; } }
         public int Stars { get { return stars; } }
 
@@ -76,10 +78,10 @@ namespace QueryEngine
 
     public class Reply : Post // Potential Extra Credit
     {
-        private string replyId;
+        //private string replyId;
         private string reviewId;
 
-        public string ReplyId { get { return replyId; } }
+        //public string ReplyId { get { return replyId; } }
         public string ReviewId { get { return reviewId; } }
 
         //public event PropertyChangedEventHandler replyPropertyChanged; // notifies when reply has changed
