@@ -144,6 +144,53 @@ def insert2ReviewTable(): #Should have 416479
     #outfile.close()  #uncomment this line if you are writing the INSERT statements to an output file.
     f.close()
 
+def insert2CheckinTable(): #Should have 416479
+    #reading the JSON file
+    startingTime = time.process_time()
+    with open('./yelp_checkin.JSON','r') as f:    #TODO: update path for the input file
+        #outfile =  open('./yelp_business.SQL', 'w')  #uncomment this line if you are writing the INSERT statements to an output file.
+        line = f.readline()
+        count_line = 0
+
+        #connect to yelpdb database on postgres server using psycopg2
+        #TODO: update the database name, username, and password
+        try:
+            conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='localhost' password='greatPassword'")
+            #conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
+        except:
+            print('Unable to connect to the database!')
+        cur = conn.cursor()
+
+        while line:
+            data = json.loads(line)
+            # Generate the INSERT statement for the cussent business
+            # TODO: The below INSERT statement is based on a simple (and incomplete) businesstable schema. Update the statement based on your own table schema and
+            # include values for all businessTable attributes                                                                    \/ num_checkins,
+            sql_str = "INSERT INTO Checkins (business_id, day, time) " \
+                    "VALUES ('" + cleanStr4SQL(data["business_id"]) + "','" + 'Monday' + "','" + (str([item for item in[item for item in data["time"]]])) + ");"
+                    #Bad, do not do^
+
+
+                    #insert intp checkins (day, time)
+            try:
+                cur.execute(sql_str)
+            except Exception as e:
+                print("Insert failed! " + str(e) + "\nOn line: " + str(count_line))
+            conn.commit()
+            # optionally you might write the INSERT statement to a file.
+            # outfile.write(sql_str)
+
+            line = f.readline()
+            count_line +=1
+
+        cur.close()
+        conn.close()
+
+    print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")
+    #outfile.close()  #uncomment this line if you are writing the INSERT statements to an output file.
+    f.close()
+
 #insert2BusinessTable()
 #insert2UserTable()
-insert2ReviewTable()
+#insert2ReviewTable()
+insert2CheckinTable()
