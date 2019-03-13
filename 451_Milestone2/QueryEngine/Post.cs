@@ -25,9 +25,16 @@ namespace QueryEngine
         public int FunnyVotes { get { return funnyVotes; } }
         public int UsefulVotes { get { return usefulVotes; } }
 
+        public event PropertyChangedEventHandler PostPropertyChanged; // notifies when reply has changed
+
         internal virtual void getDeleted()
         {
 
+        }
+
+        internal void OnPostPropertyChanged(object sender, PropertyChangedEventArgs e) // event handler for a change in post data
+        {
+            OnPostPropertyChanged(this, e);
         }
     }
 
@@ -41,7 +48,7 @@ namespace QueryEngine
         public string BusinessId { get { return businessId; } }
         public int Stars { get { return stars; } }
 
-        public event PropertyChangedEventHandler reviewPropertyChanged; // notifies when a review has changed
+        //public event PropertyChangedEventHandler reviewPropertyChanged; // notifies when a review has changed
 
         public Review(string newBusinessId, int numStars, string newText)
         {
@@ -53,7 +60,7 @@ namespace QueryEngine
             this.stars = numStars;
             this.text = newText;
 
-            OnReviewPropertyChanged(this, new PropertyChangedEventArgs("newReview"));
+            OnPostPropertyChanged(this, new PropertyChangedEventArgs("newReview"));
         }
 
         override internal void getDeleted()
@@ -61,10 +68,10 @@ namespace QueryEngine
 
         }
 
-        private void OnReviewPropertyChanged(object sender, PropertyChangedEventArgs e) // event handler for a change in review data
-        {
+        //private void OnPostPropertyChanged(object sender, PropertyChangedEventArgs e) // event handler for a change in review data
+        //{
             // Handle event in the QueryEngine class
-        }
+        //}
     }
 
     public class Reply : Post // Potential Extra Credit
@@ -75,7 +82,7 @@ namespace QueryEngine
         public string ReplyId { get { return replyId; } }
         public string ReviewId { get { return reviewId; } }
 
-        public event PropertyChangedEventHandler replyPropertyChanged; // notifies when reply has changed
+        //public event PropertyChangedEventHandler replyPropertyChanged; // notifies when reply has changed
 
         public Reply(string business_Id, string newReviewId, string newText){
             // Change this to allow the GUI to have an event to grab the current review business_Id from QueryEngine
@@ -90,9 +97,9 @@ namespace QueryEngine
 
         }
 
-        private void OnReplyPropertyChanged(object sender, PropertyChangedEventArgs e) // event handler for a change in reply data
-        {
+        //private void OnPostPropertyChanged(object sender, PropertyChangedEventArgs e) // event handler for a change in reply data
+        //{
             // Handle event in the QueryEngine class
-        }
+        //}
     }
 }
