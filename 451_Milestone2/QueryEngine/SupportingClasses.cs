@@ -15,15 +15,15 @@ namespace QueryEngine
         private string address;
         private string zipcode;
 
-        public void compareDistance(Location secondLocation) // gets the distance between two locations???
+        public int compareDistance(Location secondLocation) // gets the distance between two locations???
         {
-
+            return 0;
         }
     }
 
     public class Checkin
     {
-        private string business_Id;
+        private string businessId;
         private string day; // may need to select a different data type
         private string time; // ^
         private int count;
