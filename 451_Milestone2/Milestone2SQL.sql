@@ -31,12 +31,12 @@ CREATE TABLE YelpUser (
 );
 
 CREATE TABLE Review (
-    review_id CHAR(22) UNIQUE,
+    review_id CHAR(22),
     business_id CHAR(22),
     user_id CHAR(22),
     review_stars INTEGER NOT NULL,
     date DATE NOT NULL,
-    text VARCHAR(1000),
+    text TEXT,
     useful_vote INTEGER,
     funny_vote INTEGER,
     cool_vote INTEGER,
