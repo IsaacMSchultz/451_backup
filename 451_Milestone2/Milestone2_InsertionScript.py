@@ -169,9 +169,7 @@ def insert2CheckinTable(): #Should have 416479
             sql_str = "INSERT INTO Checkins (business_id, day, time) " \
                     "VALUES ('" + cleanStr4SQL(data["business_id"]) + "','" + 'Monday' + "','" + (str([item for item in[item for item in data["time"]]])) + ");"
                     #Bad, do not do^
-
-
-                    #insert intp checkins (day, time)
+                
             try:
                 cur.execute(sql_str)
             except Exception as e:
@@ -190,7 +188,29 @@ def insert2CheckinTable(): #Should have 416479
     #outfile.close()  #uncomment this line if you are writing the INSERT statements to an output file.
     f.close()
 
+def testCheckinInsert():
+    connection = psycopg2.connect("dbname='milestone2db' user='postgres' host='localhost' password='greatPassword'")
+    cursor = connection.cursor()
+
+    data = []
+
+    with open('./yelp_checkin.JSON') as f: 
+        for line in f:
+            data.append(json.loads(line))
+
+    fields = [
+        'time',
+        'business_id'
+    ]
+    
+    for item in data:
+        my_data = [item[field] for field in fields] # gets the days and business_id
+        my_data.append(cleanStr4SQL(data['business_id']))
+        insert_query = "INSERT INTO Checkins VALUES (%s, %s)"
+        cursor.execute(insert_query, tuple(my_data))
+    
 #insert2BusinessTable()
 #insert2UserTable()
 #insert2ReviewTable()
-insert2CheckinTable()
+#insert2CheckinTable()
+testCheckinInsert()
