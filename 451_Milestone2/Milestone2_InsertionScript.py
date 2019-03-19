@@ -83,6 +83,7 @@ def insert2UserTable(): #Should have 192999
                       str(data["review_count"]) + "','" + str(data["yelping_since"]) + "');"     
             try:
                 cur.execute(sql_str)
+                print("Insert success\n")
             except Exception as e:
                 print("Insert failed! " + str(e) + "\nOn line: " + str(count_line))
             conn.commit()
@@ -205,12 +206,11 @@ def testCheckinInsert():
     
     for item in data:
         my_data = [item[field] for field in fields] # gets the days and business_id
-        my_data.append(cleanStr4SQL(data['business_id']))
+        #my_data.append(cleanStr4SQL(data['business_id']))
         insert_query = "INSERT INTO Checkins VALUES (%s, %s)"
         cursor.execute(insert_query, tuple(my_data))
     
-#insert2BusinessTable()
-#insert2UserTable()
-#insert2ReviewTable()
-#insert2CheckinTable()
-testCheckinInsert()
+#insert2BusinessTable() #Needs nested items
+#insert2UserTable() #Needs nested friends/ info
+insert2ReviewTable() #Done
+#insert2CheckinTable() #Not done
