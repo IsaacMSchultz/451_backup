@@ -14,13 +14,11 @@ def int2BoolStr (value):
 def insert2BusinessTable(): #Should have 11481
     #reading the JSON file
     startingTime = time.process_time()
-    with open('./yelp_business.JSON','r') as f:    #TODO: update path for the input file
-        #outfile =  open('./yelp_business.SQL', 'w')  #uncomment this line if you are writing the INSERT statements to an output file.
+    with open('./yelp_business.JSON','r') as f:    
+        
         line = f.readline()
-        count_line = 0
 
-        #connect to yelpdb database on postgres server using psycopg2
-        #TODO: update the database name, username, and password
+        count_line = 0
         try:
             conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='localhost' password='greatPassword'")
             #conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
@@ -30,20 +28,144 @@ def insert2BusinessTable(): #Should have 11481
 
         while line:
             data = json.loads(line)
-            # Generate the INSERT statement for the cussent business
-            # TODO: The below INSERT statement is based on a simple (and incomplete) businesstable schema. Update the statement based on your own table schema and
-            # include values for all businessTable attributes                                                                    \/ num_checkins,
-            sql_str = "INSERT INTO Business (business_id, name, city, state, zipcode, latitude, longitude, address, review_count, is_open, stars) " \
+            
+            sql_str = "INSERT INTO Business (business_id, name, city, state, zipcode, latitude, longitude, address, review_count, is_open, stars, num_checkins, reviewRating) " \
                       "VALUES ('" + cleanStr4SQL(data['business_id']) + "','" + cleanStr4SQL(data["name"]) + "','" + cleanStr4SQL(data["city"]) + "','" + \
                       cleanStr4SQL(data["state"]) + "','" + cleanStr4SQL(data["postal_code"]) + "','" + str(data["latitude"]) + "'," + str(data["longitude"]) + ",'" + \
-                      cleanStr4SQL(data["address"]) + "'," + str(data["review_count"]) + "," + int2BoolStr(data["is_open"]) + "," + str(data["stars"]) + ");"     
+                      cleanStr4SQL(data["address"]) + "'," + "0" + "," + int2BoolStr(data["is_open"]) + "," + str(data["stars"]) + "," + "0" + "," "0.0" + ");" 
             try:
                 cur.execute(sql_str)
             except Exception as e:
                 print("Insert failed! " + str(e) + "\nOn line: " + str(count_line))
             conn.commit()
-            # optionally you might write the INSERT statement to a file.
-            # outfile.write(sql_str)
+
+            line = f.readline()
+            count_line +=1
+
+        cur.close()
+        conn.close()
+
+    print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")
+    #outfile.close()  #uncomment this line if you are writing the INSERT statements to an output file.
+    f.close()
+
+def insert2CategoriesTable(): #
+    startingTime = time.process_time()
+    with open('./yelp_business.JSON','r') as f:
+        line = f.readline()
+        count_line = 0
+        try:
+            conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='localhost' password='greatPassword'")
+            #conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
+        except:
+            print('Unable to connect to the database!')
+        cur = conn.cursor()
+
+        while line:
+            data = json.loads(line)
+
+            business_id = str(cleanStr4SQL(data['business_id'])) 
+
+            for k, v in data.items():
+                if k == "categories":
+                    categories = v
+
+                    for item in categories:
+                        cur.execute("INSERT INTO Category (business_id, category_name) VALUES ('" + business_id + "','" + cleanStr4SQL(item) + "');")
+                       
+            try:
+                print("Insert success\n") #get rid of try/ except
+            except Exception as e:
+                print("Insert failed! " + str(e) + "\nOn line: " + str(count_line))
+            conn.commit()
+
+            line = f.readline()
+            count_line +=1
+
+        cur.close()
+        conn.close()
+
+    print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")
+    f.close()
+
+def insert2HoursTable(): 
+    startingTime = time.process_time()
+    with open('./yelp_business.JSON','r') as f:
+        line = f.readline()
+        count_line = 0
+        try:
+            conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='localhost' password='greatPassword'")
+            #conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
+        except:
+            print('Unable to connect to the database!')
+        cur = conn.cursor()
+
+        while line:
+            data = json.loads(line)
+
+            business_id = str(cleanStr4SQL(data['business_id'])) 
+
+            for k, v in data.items():
+                if k == "hours":
+                    hours = v
+
+                    for day, combinedTimes in hours.items():
+                        print("test")
+                        times = combinedTimes.split('-')
+                        #parse the times to split into open and close times
+                        cur.execute("INSERT INTO Hours (business_id, day, open, close) VALUES ('" + business_id + "','" + cleanStr4SQL(day) + "','" + cleanStr4SQL(times[0]) + "','" + cleanStr4SQL(times[1]) + "');")
+                       
+            conn.commit()
+
+            line = f.readline()
+            count_line +=1
+
+        cur.close()
+        conn.close()
+
+    print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")
+    f.close()
+
+def insert2AttributesTable(): #Should have 11481
+    startingTime = time.process_time()
+    with open('./yelp_business.JSON','r') as f:
+        line = f.readline()
+        count_line = 0
+        try:
+            conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='localhost' password='greatPassword'")
+            #conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
+        except:
+            print('Unable to connect to the database!')
+        cur = conn.cursor()
+
+        while line:
+            data = json.loads(line)
+
+            business_id = str(cleanStr4SQL(data['business_id'])) 
+
+            for k, v in data.items():
+                if k == "attributes":
+                    attributes = v
+
+                    for name, value in attributes.items():
+                        if isinstance(value, dict): 
+                            # parse through list
+                            inner = value
+                            for innerName, innerValue in inner.items():
+                                if innerValue != False:
+                                    #print("test")
+                                    cur.execute("INSERT INTO Attributes (business_id, attribute_name, attribute_value) VALUES ('" + business_id + "','" + innerName + "','" + str(innerValue) + "');")
+
+                        elif value != False: 
+                            #print("only add true")
+                            cur.execute("INSERT INTO Attributes (business_id, attribute_name, attribute_value) VALUES ('" + business_id + "','" + name + "','" + str(value) + "');")
+                        
+           
+            try:
+                print("Insert success\n") #get rid of try/ except
+            except Exception as e:
+                print("Insert failed! " + str(e) + "\nOn line: " + str(count_line))
+            conn.commit()
 
             line = f.readline()
             count_line +=1
@@ -214,12 +336,6 @@ def insert2FriendsTable(): #Should have 192999
                         cur.execute(sql_str)
                         sql_str = "INSERT INTO Friend (user_id, friend_id) " \
                             "VALUES ('" + cleanStr4SQL(user_id) + "','"
-                        # "INSERT INTO Friend (user_id, friend_id) VALUES ('nWDevhc2XTaAyRM29vZK6g','DheUtq-7vWqJtMH_WSgBGA');"
-
-                        #"INSERT INTO Yelpuser (user_id, name, average_stars, cool, funny, useful, fans, review_count, yelping_since) VALUES ('om5ZiponkpRqUNa3pVPiRg','Andrea','3.94','40110','10882','83681',835,'2559','2006-01-18');"
-                    #print("friends: " , k , " : " , v)
-
-                   
 
             try:
                 #cur.execute(sql_str)
@@ -227,8 +343,6 @@ def insert2FriendsTable(): #Should have 192999
             except Exception as e:
                 print("Insert failed! " + str(e) + "\nOn line: " + str(count_line))
             conn.commit()
-            # optionally you might write the INSERT statement to a file.
-            # outfile.write(sql_str)
 
             line = f.readline()
             count_line +=1
@@ -245,4 +359,7 @@ def insert2FriendsTable(): #Should have 192999
 #insert2ReviewTable()
 #insert2CheckinTable()
 #testCheckinInsert()
-insert2FriendsTable()
+#insert2FriendsTable()
+#insert2CategoriesTable()
+#insert2AttributesTable()
+insert2HoursTable()
