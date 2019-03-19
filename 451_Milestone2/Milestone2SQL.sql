@@ -27,6 +27,7 @@ CREATE TABLE YelpUser (
     yelping_since DATE NOT NULL,
     user_latitude FLOAT, -- Doesn't exist in the json files
     user_longitude FLOAT,
+    friends_List TEXT, -- Added to test inserting friends
     PRIMARY KEY (user_id)
 );
 
@@ -47,7 +48,7 @@ CREATE TABLE Review (
 
 CREATE TABLE Friend (
     user_id CHAR(22),
-    friend_id CHAR(22) UNIQUE, -- CHECK that friend and user are not the same.
+    friend_id CHAR(22), -- CHECK that friend and user are not the same.
     PRIMARY KEY (user_id, friend_id),
     FOREIGN KEY (user_id) REFERENCES YelpUser(user_id)
 );
