@@ -63,16 +63,16 @@ CREATE TABLE Favorite (
 
 CREATE TABLE Category (
     business_id CHAR(22),
-    category_name VARCHAR(20),
+    category_name VARCHAR(50),
     PRIMARY KEY (Business_id, category_name),
     FOREIGN KEY (business_id) REFERENCES Business(Business_id)
 );
 
 CREATE TABLE Attributes (
     business_id CHAR(22),
-    attribute_name VARCHAR(20),
-    attribute_value VARCHAR(30),
-    PRIMARY KEY (Business_id, attribute_value),
+    attribute_name VARCHAR(40),
+    attribute_value VARCHAR(40),
+    PRIMARY KEY (Business_id, attribute_name),
     FOREIGN KEY (business_id) REFERENCES Business(Business_id)
 );
 
