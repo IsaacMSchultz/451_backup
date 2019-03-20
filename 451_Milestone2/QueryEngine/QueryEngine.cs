@@ -12,7 +12,13 @@ namespace QueryEngine
     /// </summary>
     class QueryEngine 
     {
+        private string searchQuery;
         public event PropertyChangedEventHandler yelpDataChanged; // event for notifying that there was a property changed. 
+
+        QueryEngine()
+        {
+            searchQuery = "";
+        }
 
         private void DataChanged(object sender, PropertyChangedEventArgs e) // Event handler for when user data changes.
         {
@@ -34,6 +40,9 @@ namespace QueryEngine
             yelpDataChanged?.Invoke(sender, e);
         }
 
-        //public void 
+        public void addSearchParameter()
+        {
+
+        }
     }
 }
