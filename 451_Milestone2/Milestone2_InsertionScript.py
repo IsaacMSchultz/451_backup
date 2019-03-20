@@ -251,16 +251,6 @@ except:
     print('Unable to connect to the database!')
 cur = conn.cursor()
     
-<<<<<<< HEAD
-#insert2BusinessTable(conn, cur)
-#insert2UserTable(conn, cur)
-#insert2ReviewTable(conn, cur)
-#insert2CheckinTable(conn, cur)
-#insert2FriendsTable(conn, cur)
-#insert2CategoriesTable(conn, cur)
-insert2AttributesTable(conn, cur)
-#insert2HoursTable(conn, cur)
-=======
 insert2BusinessTable(conn, cur)
 insert2UserTable(conn, cur)
 insert2ReviewTable(conn, cur)
@@ -269,7 +259,6 @@ insert2FriendsTable(conn, cur)
 insert2CategoriesTable(conn, cur)
 insert2AttributesTable(conn, cur)
 insert2HoursTable(conn, cur)
->>>>>>> 8d7de199d5e198c46e6a1724073eac26fc2c59fc
 
 cur.close()
 conn.close()
