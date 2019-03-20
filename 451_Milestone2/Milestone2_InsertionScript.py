@@ -12,7 +12,6 @@ def int2BoolStr (value):
         return 'True'
 
 def insert2BusinessTable(): #Should have 11481
-    #reading the JSON file
     startingTime = time.process_time()
     with open('./yelp_business.JSON','r') as f:    
         
@@ -37,6 +36,7 @@ def insert2BusinessTable(): #Should have 11481
                 cur.execute(sql_str)
             except Exception as e:
                 print("Insert failed! " + str(e) + "\nOn line: " + str(count_line))
+
             conn.commit()
 
             line = f.readline()
@@ -46,10 +46,9 @@ def insert2BusinessTable(): #Should have 11481
         conn.close()
 
     print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")
-    #outfile.close()  #uncomment this line if you are writing the INSERT statements to an output file.
     f.close()
 
-def insert2CategoriesTable(): #
+def insert2CategoriesTable(): #Has 33619
     startingTime = time.process_time()
     with open('./yelp_business.JSON','r') as f:
         line = f.readline()
@@ -73,10 +72,6 @@ def insert2CategoriesTable(): #
                     for item in categories:
                         cur.execute("INSERT INTO Category (business_id, category_name) VALUES ('" + business_id + "','" + cleanStr4SQL(item) + "');")
                        
-            try:
-                print("Insert success\n") #get rid of try/ except
-            except Exception as e:
-                print("Insert failed! " + str(e) + "\nOn line: " + str(count_line))
             conn.commit()
 
             line = f.readline()
@@ -88,7 +83,7 @@ def insert2CategoriesTable(): #
     print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")
     f.close()
 
-def insert2HoursTable(): 
+def insert2HoursTable(): #Has 55502
     startingTime = time.process_time()
     with open('./yelp_business.JSON','r') as f:
         line = f.readline()
@@ -110,9 +105,7 @@ def insert2HoursTable():
                     hours = v
 
                     for day, combinedTimes in hours.items():
-                        print("test")
                         times = combinedTimes.split('-')
-                        #parse the times to split into open and close times
                         cur.execute("INSERT INTO Hours (business_id, day, open, close) VALUES ('" + business_id + "','" + cleanStr4SQL(day) + "','" + cleanStr4SQL(times[0]) + "','" + cleanStr4SQL(times[1]) + "');")
                        
             conn.commit()
@@ -126,7 +119,7 @@ def insert2HoursTable():
     print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")
     f.close()
 
-def insert2AttributesTable(): #Should have 11481
+def insert2AttributesTable(): #Has 97117
     startingTime = time.process_time()
     with open('./yelp_business.JSON','r') as f:
         line = f.readline()
@@ -148,23 +141,15 @@ def insert2AttributesTable(): #Should have 11481
                     attributes = v
 
                     for name, value in attributes.items():
-                        if isinstance(value, dict): 
-                            # parse through list
+                        if isinstance(value, dict):
                             inner = value
                             for innerName, innerValue in inner.items():
                                 if innerValue != False:
-                                    #print("test")
                                     cur.execute("INSERT INTO Attributes (business_id, attribute_name, attribute_value) VALUES ('" + business_id + "','" + innerName + "','" + str(innerValue) + "');")
 
                         elif value != False: 
-                            #print("only add true")
                             cur.execute("INSERT INTO Attributes (business_id, attribute_name, attribute_value) VALUES ('" + business_id + "','" + name + "','" + str(value) + "');")
                         
-           
-            try:
-                print("Insert success\n") #get rid of try/ except
-            except Exception as e:
-                print("Insert failed! " + str(e) + "\nOn line: " + str(count_line))
             conn.commit()
 
             line = f.readline()
@@ -174,19 +159,14 @@ def insert2AttributesTable(): #Should have 11481
         conn.close()
 
     print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")
-    #outfile.close()  #uncomment this line if you are writing the INSERT statements to an output file.
     f.close()
 
 def insert2UserTable(): #Should have 192999
-    #reading the JSON file
     startingTime = time.process_time()
-    with open('./yelp_user.JSON','r') as f:    #TODO: update path for the input file
-        #outfile =  open('./yelp_business.SQL', 'w')  #uncomment this line if you are writing the INSERT statements to an output file.
+    with open('./yelp_user.JSON','r') as f:
         line = f.readline()
         count_line = 0
 
-        #connect to yelpdb database on postgres server using psycopg2
-        #TODO: update the database name, username, and password
         try:
             conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='localhost' password='greatPassword'")
             #conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
@@ -205,13 +185,10 @@ def insert2UserTable(): #Should have 192999
                       str(data["review_count"]) + "','" + str(data["yelping_since"]) + "');"     
             try:
                 cur.execute(sql_str)
-                print("Insert success\n")
             except Exception as e:
                 print("Insert failed! " + str(e) + "\nOn line: " + str(count_line))
+            
             conn.commit()
-            # optionally you might write the INSERT statement to a file.
-            # outfile.write(sql_str)
-
             line = f.readline()
             count_line +=1
 
@@ -219,7 +196,6 @@ def insert2UserTable(): #Should have 192999
         conn.close()
 
     print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")
-    #outfile.close()  #uncomment this line if you are writing the INSERT statements to an output file.
     f.close()
 
 def insert2ReviewTable(): #Should have 416479
@@ -228,7 +204,6 @@ def insert2ReviewTable(): #Should have 416479
         line = f.readline()
         count_line = 0
 
-        #connect to yelpdb database on postgres server using psycopg2
         try:
             conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='localhost' password='greatPassword'")
             #conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
@@ -258,20 +233,11 @@ def insert2ReviewTable(): #Should have 416479
     print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")
     f.close()
 
-def insert2CheckinTable(): #Should have 416479
-    #reading the JSON file
+def insert2CheckinTable(): #Has 481360
     startingTime = time.process_time()
-
-    sql_str = "INSERT INTO Checkins (business_id, day, time) " \
-                    "VALUES ("
-
-    with open('./yelp_checkin.JSON','r') as f:    #TODO: update path for the input file
-        #outfile =  open('./yelp_business.SQL', 'w')  #uncomment this line if you are writing the INSERT statements to an output file.
+    with open('./yelp_checkin.JSON','r') as f:
         line = f.readline()
         count_line = 0
-
-        #connect to yelpdb database on postgres server using psycopg2
-        #TODO: update the database name, username, and password
         try:
             conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='localhost' password='greatPassword'")
             #conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
@@ -281,17 +247,21 @@ def insert2CheckinTable(): #Should have 416479
 
         while line:
             data = json.loads(line)
-            
-            """  sql_str = "INSERT INTO Checkins (business_id, day, time) " \
-                    "VALUES ('" + cleanStr4SQL(data["business_id"]) + "','" + 'Monday' + "','" + (str([item for item in[item for item in data["time"]]])) + ");" """
-                
-            try:
-                cur.execute(sql_str)
-            except Exception as e:
-                print("Insert failed! " + str(e) + "\nOn line: " + str(count_line))
+
+            business_id = str(cleanStr4SQL(data['business_id'])) 
+
+            for k, v in data.items():
+                if k == "time":
+                    week = v
+
+                    for name, value in week.items():
+                        if isinstance(value, dict): 
+                            # parse through list
+                            inner = value
+                            for innerName, innerValue in inner.items():
+                                cur.execute("INSERT INTO Checkins (business_id, day, time, count) VALUES ('" + business_id + "','" + name + "','" + innerName + "','" + str(innerValue) + "');")
+
             conn.commit()
-            # optionally you might write the INSERT statement to a file.
-            # outfile.write(sql_str)
 
             line = f.readline()
             count_line +=1
@@ -303,7 +273,7 @@ def insert2CheckinTable(): #Should have 416479
     #outfile.close()  #uncomment this line if you are writing the INSERT statements to an output file.
     f.close()
 
-def insert2FriendsTable(): #Should have 192999
+def insert2FriendsTable(): #Has 1052706
     #reading the JSON file
     startingTime = time.process_time()
     with open('./yelp_user.JSON','r') as f: 
@@ -337,11 +307,6 @@ def insert2FriendsTable(): #Should have 192999
                         sql_str = "INSERT INTO Friend (user_id, friend_id) " \
                             "VALUES ('" + cleanStr4SQL(user_id) + "','"
 
-            try:
-                #cur.execute(sql_str)
-                print("Insert success\n")
-            except Exception as e:
-                print("Insert failed! " + str(e) + "\nOn line: " + str(count_line))
             conn.commit()
 
             line = f.readline()
@@ -351,15 +316,13 @@ def insert2FriendsTable(): #Should have 192999
         conn.close()
 
     print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")
-    #outfile.close()  #uncomment this line if you are writing the INSERT statements to an output file.
     f.close()
     
 #insert2BusinessTable()
 #insert2UserTable()
 #insert2ReviewTable()
-#insert2CheckinTable()
-#testCheckinInsert()
+insert2CheckinTable()
 #insert2FriendsTable()
 #insert2CategoriesTable()
 #insert2AttributesTable()
-insert2HoursTable()
+#insert2HoursTable()
