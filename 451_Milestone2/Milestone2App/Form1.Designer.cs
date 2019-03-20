@@ -36,20 +36,20 @@
             this.stateDropDown = new System.Windows.Forms.ComboBox();
             this.StateHeader = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.categoriesCheckBox = new System.Windows.Forms.CheckedListBox();
+            this.categoriesTextBox = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.zipCheckBox = new System.Windows.Forms.CheckedListBox();
             this.ZipText = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.categoriesCheckBox = new System.Windows.Forms.CheckedListBox();
-            this.categoriesTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
-            this.tableLayoutPanel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // businessGrid
@@ -61,7 +61,7 @@
             this.businessGrid.Margin = new System.Windows.Forms.Padding(0);
             this.businessGrid.Name = "businessGrid";
             this.businessGrid.ReadOnly = true;
-            this.businessGrid.Size = new System.Drawing.Size(600, 450);
+            this.businessGrid.Size = new System.Drawing.Size(600, 270);
             this.businessGrid.TabIndex = 2;
             // 
             // CityHeader
@@ -164,12 +164,54 @@
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 4;
+            this.tableLayoutPanel5.SetRowSpan(this.tableLayoutPanel3, 2);
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(200, 450);
             this.tableLayoutPanel3.TabIndex = 8;
+            // 
+            // tableLayoutPanel6
+            // 
+            this.tableLayoutPanel6.ColumnCount = 1;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel6.Controls.Add(this.categoriesCheckBox, 1, 1);
+            this.tableLayoutPanel6.Controls.Add(this.categoriesTextBox, 1, 0);
+            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 310);
+            this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 2;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(200, 140);
+            this.tableLayoutPanel6.TabIndex = 9;
+            // 
+            // categoriesCheckBox
+            // 
+            this.categoriesCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.categoriesCheckBox.FormattingEnabled = true;
+            this.categoriesCheckBox.Location = new System.Drawing.Point(0, 13);
+            this.categoriesCheckBox.Margin = new System.Windows.Forms.Padding(0);
+            this.categoriesCheckBox.MultiColumn = true;
+            this.categoriesCheckBox.Name = "categoriesCheckBox";
+            this.categoriesCheckBox.Size = new System.Drawing.Size(200, 127);
+            this.categoriesCheckBox.TabIndex = 0;
+            // 
+            // categoriesTextBox
+            // 
+            this.categoriesTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.categoriesTextBox.Cursor = System.Windows.Forms.Cursors.Default;
+            this.categoriesTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.categoriesTextBox.Location = new System.Drawing.Point(0, 0);
+            this.categoriesTextBox.Margin = new System.Windows.Forms.Padding(0);
+            this.categoriesTextBox.Name = "categoriesTextBox";
+            this.categoriesTextBox.ReadOnly = true;
+            this.categoriesTextBox.Size = new System.Drawing.Size(200, 13);
+            this.categoriesTextBox.TabIndex = 4;
+            this.categoriesTextBox.Text = "Categories";
+            this.categoriesTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tableLayoutPanel4
             // 
@@ -224,51 +266,11 @@
             this.tableLayoutPanel5.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            this.tableLayoutPanel5.RowCount = 1;
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel5.RowCount = 2;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel5.Size = new System.Drawing.Size(800, 450);
             this.tableLayoutPanel5.TabIndex = 8;
-            // 
-            // tableLayoutPanel6
-            // 
-            this.tableLayoutPanel6.ColumnCount = 1;
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel6.Controls.Add(this.categoriesCheckBox, 1, 1);
-            this.tableLayoutPanel6.Controls.Add(this.categoriesTextBox, 1, 0);
-            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 310);
-            this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.tableLayoutPanel6.RowCount = 2;
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(200, 140);
-            this.tableLayoutPanel6.TabIndex = 9;
-            // 
-            // categoriesCheckBox
-            // 
-            this.categoriesCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.categoriesCheckBox.FormattingEnabled = true;
-            this.categoriesCheckBox.Location = new System.Drawing.Point(0, 13);
-            this.categoriesCheckBox.Margin = new System.Windows.Forms.Padding(0);
-            this.categoriesCheckBox.MultiColumn = true;
-            this.categoriesCheckBox.Name = "categoriesCheckBox";
-            this.categoriesCheckBox.Size = new System.Drawing.Size(200, 127);
-            this.categoriesCheckBox.TabIndex = 0;
-            // 
-            // categoriesTextBox
-            // 
-            this.categoriesTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.categoriesTextBox.Cursor = System.Windows.Forms.Cursors.Default;
-            this.categoriesTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.categoriesTextBox.Location = new System.Drawing.Point(0, 0);
-            this.categoriesTextBox.Margin = new System.Windows.Forms.Padding(0);
-            this.categoriesTextBox.Name = "categoriesTextBox";
-            this.categoriesTextBox.ReadOnly = true;
-            this.categoriesTextBox.Size = new System.Drawing.Size(200, 13);
-            this.categoriesTextBox.TabIndex = 4;
-            this.categoriesTextBox.Text = "Categories";
-            this.categoriesTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // Form1
             // 
@@ -284,11 +286,11 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel6.ResumeLayout(false);
+            this.tableLayoutPanel6.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
-            this.tableLayoutPanel6.ResumeLayout(false);
-            this.tableLayoutPanel6.PerformLayout();
             this.ResumeLayout(false);
 
         }
