@@ -115,7 +115,13 @@ def insert2AttributesTable(conn, cur): #Has 97117
 
                         elif value != False: 
                             cur.execute("INSERT INTO Attributes (business_id, attribute_name, attribute_value) VALUES ('" + business_id + "','" + name + "','" + str(value) + "');")
-                        
+
+                elif k == "categories":
+                    categories = v
+
+                    for item in categories:
+                        cur.execute("INSERT INTO Category (business_id, category_name) VALUES ('" + business_id + "','" + cleanStr4SQL(item) + "');")
+                     
             conn.commit()
 
             line = f.readline()
@@ -248,10 +254,10 @@ cur = conn.cursor()
 #insert2BusinessTable(conn, cur)
 #insert2UserTable(conn, cur)
 #insert2ReviewTable(conn, cur)
-insert2CheckinTable(conn, cur)
+#insert2CheckinTable(conn, cur)
 #insert2FriendsTable(conn, cur)
 #insert2CategoriesTable(conn, cur)
-#insert2AttributesTable(conn, cur)
+insert2AttributesTable(conn, cur)
 #insert2HoursTable(conn, cur)
 
 cur.close()
