@@ -136,9 +136,44 @@ namespace QueryEngine
         /// TODO: build the actual function!
         /// TODO: maybe return a list of tuples instead??? this might make it easier to add them?
         /// </remarks>
-        private string[,] ExecuteQuery(string query)
+        private List<List<string>> ExecuteQuery(string query)
         {
-            return new string[1, 1];
+            List<List<string>> list = new List<List<string>>();
+            using (var connection = new NpgsqlConnection(LOGININFO))
+            {
+                connection.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = connection;
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                            list.Rows.Add(reader["name"], reader["zipcode"], reader["city"], reader["state"]);
+                    }
+                }
+                connection.Close();
+            }
+            return 
+        }
+
+        private List<Business> ExecuteBusinessQuery(string query){
+
+            List<Business> businesses = new List<Business>();
+            
+            using (var connection = new NpgsqlConnection(LOGININFO))
+            {
+                connection.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = connection;
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                            businesses.Add(new Business(reader["name"], reader["zipcode"], reader["city"], reader["state"]);
+                    }
+                }
+                connection.Close();
+            }
         }
 
         private void YelpPropertyChanged(object sender, PropertyChangedEventArgs e)
