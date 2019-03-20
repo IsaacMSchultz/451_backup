@@ -9,16 +9,6 @@ namespace Milestone2App
     public partial class Form1 : Form
     {
 
-        private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone2db";
-        //private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone2db";
-
-        public class Business //Not Used for now.
-        {
-            public string name { get; set; }
-            public string state { get; set; }
-            public string city { get; set; }
-        }
-
         public Form1()
         {
             InitializeComponent();
@@ -27,24 +17,7 @@ namespace Milestone2App
 
         private void initializeDropDowns()
         {
-            // interact with database to query the list of states contained within      
-            // update states dropdown menu with the list of distinct states
-            // 'using' keyword to auto call dispose when we are done.
-            using (var connection = new NpgsqlConnection(LOGININFO))
-            {
-                connection.Open();
-                using (var cmd = new NpgsqlCommand())
-                {
-                    cmd.Connection = connection;
-                    cmd.CommandText = "SELECT distinct state FROM business ORDER BY state;";
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                            stateDropDown.Items.Add(reader.GetString(0));
-                    }
-                }
-                connection.Close();
-            }
+
 
             // Create the column headers for the data grid view.
             DataGridViewTextBoxColumn nameColumn = new DataGridViewTextBoxColumn();
