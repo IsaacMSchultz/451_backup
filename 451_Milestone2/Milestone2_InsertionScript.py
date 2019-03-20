@@ -11,19 +11,12 @@ def int2BoolStr (value):
     else:
         return 'True'
 
-def insert2BusinessTable(): #Should have 11481
+def insert2BusinessTable(conn, cur): #Should have 11481
     startingTime = time.process_time()
     with open('./yelp_business.JSON','r') as f:    
         
         line = f.readline()
-
         count_line = 0
-        try:
-            conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='localhost' password='greatPassword'")
-            #conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
-        except:
-            print('Unable to connect to the database!')
-        cur = conn.cursor()
 
         while line:
             data = json.loads(line)
@@ -42,23 +35,14 @@ def insert2BusinessTable(): #Should have 11481
             line = f.readline()
             count_line +=1
 
-        cur.close()
-        conn.close()
-
     print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")
     f.close()
 
-def insert2CategoriesTable(): #Has 33619
+def insert2CategoriesTable(conn, cur): #Has 33619
     startingTime = time.process_time()
     with open('./yelp_business.JSON','r') as f:
         line = f.readline()
         count_line = 0
-        try:
-            conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='localhost' password='greatPassword'")
-            #conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
-        except:
-            print('Unable to connect to the database!')
-        cur = conn.cursor()
 
         while line:
             data = json.loads(line)
@@ -72,28 +56,19 @@ def insert2CategoriesTable(): #Has 33619
                     for item in categories:
                         cur.execute("INSERT INTO Category (business_id, category_name) VALUES ('" + business_id + "','" + cleanStr4SQL(item) + "');")
                        
-            conn.commit()
+            conn.commit() #what does this do?
 
             line = f.readline()
-            count_line +=1
-
-        cur.close()
-        conn.close()
+            count_line +=1        
 
     print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")
     f.close()
 
-def insert2HoursTable(): #Has 55502
+def insert2HoursTable(conn, cur): #Has 55502
     startingTime = time.process_time()
     with open('./yelp_business.JSON','r') as f:
         line = f.readline()
         count_line = 0
-        try:
-            conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='localhost' password='greatPassword'")
-            #conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
-        except:
-            print('Unable to connect to the database!')
-        cur = conn.cursor()
 
         while line:
             data = json.loads(line)
@@ -113,24 +88,15 @@ def insert2HoursTable(): #Has 55502
             line = f.readline()
             count_line +=1
 
-        cur.close()
-        conn.close()
-
     print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")
     f.close()
 
-def insert2AttributesTable(): #Has 97117
+def insert2AttributesTable(conn, cur): #Has 97117
     startingTime = time.process_time()
     with open('./yelp_business.JSON','r') as f:
         line = f.readline()
         count_line = 0
-        try:
-            conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='localhost' password='greatPassword'")
-            #conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
-        except:
-            print('Unable to connect to the database!')
-        cur = conn.cursor()
-
+        
         while line:
             data = json.loads(line)
 
@@ -155,30 +121,17 @@ def insert2AttributesTable(): #Has 97117
             line = f.readline()
             count_line +=1
 
-        cur.close()
-        conn.close()
-
     print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")
     f.close()
 
-def insert2UserTable(): #Should have 192999
+def insert2UserTable(conn, cur): #Should have 192999
     startingTime = time.process_time()
     with open('./yelp_user.JSON','r') as f:
         line = f.readline()
         count_line = 0
 
-        try:
-            conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='localhost' password='greatPassword'")
-            #conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
-        except:
-            print('Unable to connect to the database!')
-        cur = conn.cursor()
-
         while line:
             data = json.loads(line)
-            # Generate the INSERT statement for the cussent business
-            # TODO: The below INSERT statement is based on a simple (and incomplete) businesstable schema. Update the statement based on your own table schema and
-            # include values for all businessTable attributes                                                                    \/ num_checkins,
             sql_str = "INSERT INTO Yelpuser (user_id, name, average_stars, cool, funny, useful, fans, review_count, yelping_since) " \
                       "VALUES ('" + cleanStr4SQL(data['user_id']) + "','" + cleanStr4SQL(data["name"]) + "','" + str(data["average_stars"]) + "','" + \
                       str(data["cool"]) + "','" + str(data["funny"]) + "','" + str(data["useful"]) + "'," + str(data["fans"]) + ",'" + \
@@ -192,24 +145,14 @@ def insert2UserTable(): #Should have 192999
             line = f.readline()
             count_line +=1
 
-        cur.close()
-        conn.close()
-
     print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")
     f.close()
 
-def insert2ReviewTable(): #Should have 416479
+def insert2ReviewTable(conn, cur): #Should have 416479
     startingTime = time.process_time()
     with open('./yelp_review.JSON','r') as f:    #TODO: update path for the input file
         line = f.readline()
         count_line = 0
-
-        try:
-            conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='localhost' password='greatPassword'")
-            #conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
-        except:
-            print('Unable to connect to the database!')
-        cur = conn.cursor()
 
         while line:
             data = json.loads(line)
@@ -227,23 +170,14 @@ def insert2ReviewTable(): #Should have 416479
             line = f.readline()
             count_line +=1
 
-        cur.close()
-        conn.close()
-
     print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")
     f.close()
 
-def insert2CheckinTable(): #Has 481360
+def insert2CheckinTable(conn, cur): #Has 481360
     startingTime = time.process_time()
     with open('./yelp_checkin.JSON','r') as f:
         line = f.readline()
         count_line = 0
-        try:
-            conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='localhost' password='greatPassword'")
-            #conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
-        except:
-            print('Unable to connect to the database!')
-        cur = conn.cursor()
 
         while line:
             data = json.loads(line)
@@ -266,27 +200,16 @@ def insert2CheckinTable(): #Has 481360
             line = f.readline()
             count_line +=1
 
-        cur.close()
-        conn.close()
-
-    print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")
-    #outfile.close()  #uncomment this line if you are writing the INSERT statements to an output file.
+    print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")    
     f.close()
 
-def insert2FriendsTable(): #Has 1052706
+def insert2FriendsTable(conn, cur): #Has 1052706
     #reading the JSON file
     startingTime = time.process_time()
     with open('./yelp_user.JSON','r') as f: 
         #outfile =  open('./yelp_business.SQL', 'w')  #uncomment this line if you are writing the INSERT statements to an output file.
         line = f.readline()
         count_line = 0
-
-        try:
-            conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='localhost' password='greatPassword'")
-            #conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
-        except:
-            print('Unable to connect to the database!')
-        cur = conn.cursor()
 
         while line:
             data = json.loads(line)                                                           
@@ -312,17 +235,24 @@ def insert2FriendsTable(): #Has 1052706
             line = f.readline()
             count_line +=1
 
-        cur.close()
-        conn.close()
-
     print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")
     f.close()
+
+try:
+    conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='localhost' password='greatPassword'")
+    #conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
+except:
+    print('Unable to connect to the database!')
+cur = conn.cursor()
     
-#insert2BusinessTable()
-#insert2UserTable()
-#insert2ReviewTable()
-insert2CheckinTable()
-#insert2FriendsTable()
-#insert2CategoriesTable()
-#insert2AttributesTable()
-#insert2HoursTable()
+#insert2BusinessTable(conn, cur)
+#insert2UserTable(conn, cur)
+#insert2ReviewTable(conn, cur)
+insert2CheckinTable(conn, cur)
+#insert2FriendsTable(conn, cur)
+#insert2CategoriesTable(conn, cur)
+#insert2AttributesTable(conn, cur)
+#insert2HoursTable(conn, cur)
+
+cur.close()
+conn.close()
