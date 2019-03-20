@@ -8,15 +8,7 @@ using System.ComponentModel;
 
 namespace QueryEngine
 {
-    public abstract class BasicUser
-    {
-        public void Search() // function prototype to handle searching for all users
-        {
-            // will trigger some kind of event to let the GUI know what the search returned
-        }
-    }
-
-    class User : BasicUser
+    class User
     {
         private string name;
         private Location location;
@@ -107,7 +99,7 @@ namespace QueryEngine
         }
     }
 
-    public class UnRegisteredUser : BasicUser
+    public class UnRegisteredUser
     {
         public bool Register() //function to handle building a new user class with the information the new user types in.
         {
@@ -115,7 +107,7 @@ namespace QueryEngine
         }
     }
 
-    public class BusinessAdmin : BasicUser
+    public class BusinessAdmin
     {
         private string businessId;
         private string businessName;
@@ -131,7 +123,7 @@ namespace QueryEngine
         }
     }
 
-    public class Moderator : BasicUser //extra credit possibility
+    public class Moderator //extra credit possibility
     {
         private string moderatorId;
         private string name;
