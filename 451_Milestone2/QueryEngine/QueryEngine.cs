@@ -34,30 +34,6 @@ namespace QueryEngine
             yelpDataChanged?.Invoke(sender, e);
         }
 
-        // Another implementation idea- not sure if we will use these
-
-        //private void BusinessNameChanged()
-        //{
-        //}
-
-        //private void BusinessLocationChanged()
-        //{
-        //}
-
-        //private void BusinessOpenChanged()
-        //{
-        //}
-
-        //private void BusinessStarsChanged() // may be handled in triggers
-        //{
-        //}
-
-        //private void BusinessReviewCountChanged() // ^
-        //{
-        //}
-
-        //private void BusinessCheckinsChanged() // ^^
-        //{
-        //}
+        //public void 
     }
 }
