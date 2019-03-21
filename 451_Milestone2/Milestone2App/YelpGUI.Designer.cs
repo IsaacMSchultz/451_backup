@@ -59,32 +59,30 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
             this.textBox10 = new System.Windows.Forms.TextBox();
-            this.YelpingSinceValue = new System.Windows.Forms.TextBox();
+            this.textBox9 = new System.Windows.Forms.TextBox();
             this.textBox8 = new System.Windows.Forms.TextBox();
-            this.StarsValue = new System.Windows.Forms.TextBox();
+            this.textBox7 = new System.Windows.Forms.TextBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
-            this.NameValue = new System.Windows.Forms.TextBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox13 = new System.Windows.Forms.TextBox();
-            this.FansValue = new System.Windows.Forms.TextBox();
+            this.textBox12 = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
             this.textBox11 = new System.Windows.Forms.TextBox();
-            this.FunnyValue = new System.Windows.Forms.TextBox();
+            this.textBox17 = new System.Windows.Forms.TextBox();
             this.textBox18 = new System.Windows.Forms.TextBox();
-            this.CoolValue = new System.Windows.Forms.TextBox();
+            this.textBox19 = new System.Windows.Forms.TextBox();
             this.textBox20 = new System.Windows.Forms.TextBox();
-            this.UsefulValue = new System.Windows.Forms.TextBox();
+            this.textBox21 = new System.Windows.Forms.TextBox();
             this.textBox14 = new System.Windows.Forms.TextBox();
-            this.LatitudeValue = new System.Windows.Forms.TextBox();
+            this.textBox15 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox22 = new System.Windows.Forms.TextBox();
-            this.LongitudeValue = new System.Windows.Forms.TextBox();
+            this.textBox16 = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
             this.PlayerIDListBox = new System.Windows.Forms.ListBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.UserNameEntryTextBox = new System.Windows.Forms.TextBox();
-            this.ReviewCount = new System.Windows.Forms.TextBox();
-            this.ReviewCountValue = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -520,22 +518,20 @@
             this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel11.Controls.Add(this.textBox10, 0, 3);
-            this.tableLayoutPanel11.Controls.Add(this.YelpingSinceValue, 1, 2);
+            this.tableLayoutPanel11.Controls.Add(this.textBox9, 1, 2);
             this.tableLayoutPanel11.Controls.Add(this.textBox8, 0, 2);
-            this.tableLayoutPanel11.Controls.Add(this.StarsValue, 1, 1);
+            this.tableLayoutPanel11.Controls.Add(this.textBox7, 1, 1);
             this.tableLayoutPanel11.Controls.Add(this.textBox6, 0, 1);
-            this.tableLayoutPanel11.Controls.Add(this.NameValue, 1, 0);
+            this.tableLayoutPanel11.Controls.Add(this.textBox5, 1, 0);
             this.tableLayoutPanel11.Controls.Add(this.textBox4, 0, 0);
             this.tableLayoutPanel11.Controls.Add(this.textBox13, 2, 1);
-            this.tableLayoutPanel11.Controls.Add(this.FansValue, 3, 1);
+            this.tableLayoutPanel11.Controls.Add(this.textBox12, 3, 1);
             this.tableLayoutPanel11.Controls.Add(this.tableLayoutPanel14, 1, 3);
             this.tableLayoutPanel11.Controls.Add(this.textBox14, 0, 5);
-            this.tableLayoutPanel11.Controls.Add(this.LatitudeValue, 1, 5);
+            this.tableLayoutPanel11.Controls.Add(this.textBox15, 1, 5);
             this.tableLayoutPanel11.Controls.Add(this.textBox1, 2, 5);
             this.tableLayoutPanel11.Controls.Add(this.textBox22, 0, 4);
-            this.tableLayoutPanel11.Controls.Add(this.LongitudeValue, 3, 5);
-            this.tableLayoutPanel11.Controls.Add(this.ReviewCount, 2, 0);
-            this.tableLayoutPanel11.Controls.Add(this.ReviewCountValue, 3, 0);
+            this.tableLayoutPanel11.Controls.Add(this.textBox16, 3, 5);
             this.tableLayoutPanel11.Location = new System.Drawing.Point(0, 15);
             this.tableLayoutPanel11.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel11.Name = "tableLayoutPanel11";
@@ -546,67 +542,67 @@
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel11.Size = new System.Drawing.Size(1056, 170);
+            this.tableLayoutPanel11.Size = new System.Drawing.Size(1056, 148);
             this.tableLayoutPanel11.TabIndex = 5;
             // 
             // textBox10
             // 
             this.textBox10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox10.Location = new System.Drawing.Point(0, 72);
+            this.textBox10.Location = new System.Drawing.Point(0, 66);
             this.textBox10.Margin = new System.Windows.Forms.Padding(0);
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(176, 22);
             this.textBox10.TabIndex = 16;
             this.textBox10.Text = "Votes";
             // 
-            // YelpingSinceValue
+            // textBox9
             // 
-            this.tableLayoutPanel11.SetColumnSpan(this.YelpingSinceValue, 3);
-            this.YelpingSinceValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.YelpingSinceValue.Location = new System.Drawing.Point(176, 50);
-            this.YelpingSinceValue.Margin = new System.Windows.Forms.Padding(0);
-            this.YelpingSinceValue.Name = "YelpingSinceValue";
-            this.YelpingSinceValue.Size = new System.Drawing.Size(880, 22);
-            this.YelpingSinceValue.TabIndex = 15;
+            this.tableLayoutPanel11.SetColumnSpan(this.textBox9, 3);
+            this.textBox9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox9.Location = new System.Drawing.Point(176, 44);
+            this.textBox9.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.Size = new System.Drawing.Size(880, 22);
+            this.textBox9.TabIndex = 15;
             // 
             // textBox8
             // 
             this.textBox8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox8.Location = new System.Drawing.Point(0, 50);
+            this.textBox8.Location = new System.Drawing.Point(0, 44);
             this.textBox8.Margin = new System.Windows.Forms.Padding(0);
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(176, 22);
             this.textBox8.TabIndex = 14;
             this.textBox8.Text = "Yelping Since";
             // 
-            // StarsValue
+            // textBox7
             // 
-            this.StarsValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.StarsValue.Location = new System.Drawing.Point(176, 28);
-            this.StarsValue.Margin = new System.Windows.Forms.Padding(0);
-            this.StarsValue.Name = "StarsValue";
-            this.StarsValue.Size = new System.Drawing.Size(351, 22);
-            this.StarsValue.TabIndex = 13;
+            this.textBox7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox7.Location = new System.Drawing.Point(176, 22);
+            this.textBox7.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(351, 22);
+            this.textBox7.TabIndex = 13;
             // 
             // textBox6
             // 
             this.textBox6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox6.Location = new System.Drawing.Point(0, 28);
+            this.textBox6.Location = new System.Drawing.Point(0, 22);
             this.textBox6.Margin = new System.Windows.Forms.Padding(0);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(176, 22);
             this.textBox6.TabIndex = 12;
             this.textBox6.Text = "Stars";
             // 
-            // NameValue
+            // textBox5
             // 
-            this.NameValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.NameValue.Location = new System.Drawing.Point(176, 0);
-            this.NameValue.Margin = new System.Windows.Forms.Padding(0);
-            this.NameValue.Name = "NameValue";
-            this.NameValue.Size = new System.Drawing.Size(351, 22);
-            this.NameValue.TabIndex = 11;
+            this.tableLayoutPanel11.SetColumnSpan(this.textBox5, 3);
+            this.textBox5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox5.Location = new System.Drawing.Point(176, 0);
+            this.textBox5.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(880, 22);
+            this.textBox5.TabIndex = 11;
             // 
             // textBox4
             // 
@@ -621,21 +617,21 @@
             // textBox13
             // 
             this.textBox13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox13.Location = new System.Drawing.Point(527, 28);
+            this.textBox13.Location = new System.Drawing.Point(527, 22);
             this.textBox13.Margin = new System.Windows.Forms.Padding(0);
             this.textBox13.Name = "textBox13";
             this.textBox13.Size = new System.Drawing.Size(176, 22);
             this.textBox13.TabIndex = 19;
             this.textBox13.Text = "Fans";
             // 
-            // FansValue
+            // textBox12
             // 
-            this.FansValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FansValue.Location = new System.Drawing.Point(703, 28);
-            this.FansValue.Margin = new System.Windows.Forms.Padding(0);
-            this.FansValue.Name = "FansValue";
-            this.FansValue.Size = new System.Drawing.Size(353, 22);
-            this.FansValue.TabIndex = 18;
+            this.textBox12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox12.Location = new System.Drawing.Point(703, 22);
+            this.textBox12.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox12.Name = "textBox12";
+            this.textBox12.Size = new System.Drawing.Size(353, 22);
+            this.textBox12.TabIndex = 18;
             // 
             // tableLayoutPanel14
             // 
@@ -648,13 +644,13 @@
             this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
             this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
             this.tableLayoutPanel14.Controls.Add(this.textBox11, 0, 0);
-            this.tableLayoutPanel14.Controls.Add(this.FunnyValue, 1, 0);
+            this.tableLayoutPanel14.Controls.Add(this.textBox17, 1, 0);
             this.tableLayoutPanel14.Controls.Add(this.textBox18, 2, 0);
-            this.tableLayoutPanel14.Controls.Add(this.CoolValue, 3, 0);
+            this.tableLayoutPanel14.Controls.Add(this.textBox19, 3, 0);
             this.tableLayoutPanel14.Controls.Add(this.textBox20, 4, 0);
-            this.tableLayoutPanel14.Controls.Add(this.UsefulValue, 5, 0);
+            this.tableLayoutPanel14.Controls.Add(this.textBox21, 5, 0);
             this.tableLayoutPanel14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel14.Location = new System.Drawing.Point(176, 72);
+            this.tableLayoutPanel14.Location = new System.Drawing.Point(176, 66);
             this.tableLayoutPanel14.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel14.Name = "tableLayoutPanel14";
             this.tableLayoutPanel14.RowCount = 1;
@@ -672,14 +668,14 @@
             this.textBox11.TabIndex = 0;
             this.textBox11.Text = "Funny";
             // 
-            // FunnyValue
+            // textBox17
             // 
-            this.FunnyValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FunnyValue.Location = new System.Drawing.Point(251, 0);
-            this.FunnyValue.Margin = new System.Windows.Forms.Padding(0);
-            this.FunnyValue.Name = "FunnyValue";
-            this.FunnyValue.Size = new System.Drawing.Size(125, 22);
-            this.FunnyValue.TabIndex = 1;
+            this.textBox17.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox17.Location = new System.Drawing.Point(251, 0);
+            this.textBox17.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox17.Name = "textBox17";
+            this.textBox17.Size = new System.Drawing.Size(125, 22);
+            this.textBox17.TabIndex = 1;
             // 
             // textBox18
             // 
@@ -691,14 +687,14 @@
             this.textBox18.TabIndex = 2;
             this.textBox18.Text = "Cool";
             // 
-            // CoolValue
+            // textBox19
             // 
-            this.CoolValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CoolValue.Location = new System.Drawing.Point(501, 0);
-            this.CoolValue.Margin = new System.Windows.Forms.Padding(0);
-            this.CoolValue.Name = "CoolValue";
-            this.CoolValue.Size = new System.Drawing.Size(125, 22);
-            this.CoolValue.TabIndex = 3;
+            this.textBox19.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox19.Location = new System.Drawing.Point(501, 0);
+            this.textBox19.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox19.Name = "textBox19";
+            this.textBox19.Size = new System.Drawing.Size(125, 22);
+            this.textBox19.TabIndex = 3;
             // 
             // textBox20
             // 
@@ -710,39 +706,39 @@
             this.textBox20.TabIndex = 4;
             this.textBox20.Text = "Useful";
             // 
-            // UsefulValue
+            // textBox21
             // 
-            this.UsefulValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.UsefulValue.Location = new System.Drawing.Point(751, 0);
-            this.UsefulValue.Margin = new System.Windows.Forms.Padding(0);
-            this.UsefulValue.Name = "UsefulValue";
-            this.UsefulValue.Size = new System.Drawing.Size(129, 22);
-            this.UsefulValue.TabIndex = 5;
+            this.textBox21.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox21.Location = new System.Drawing.Point(751, 0);
+            this.textBox21.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox21.Name = "textBox21";
+            this.textBox21.Size = new System.Drawing.Size(129, 22);
+            this.textBox21.TabIndex = 5;
             // 
             // textBox14
             // 
             this.textBox14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox14.Location = new System.Drawing.Point(0, 121);
+            this.textBox14.Location = new System.Drawing.Point(0, 115);
             this.textBox14.Margin = new System.Windows.Forms.Padding(0);
             this.textBox14.Name = "textBox14";
             this.textBox14.Size = new System.Drawing.Size(176, 22);
             this.textBox14.TabIndex = 21;
             this.textBox14.Text = "Longitude";
             // 
-            // LatitudeValue
+            // textBox15
             // 
-            this.LatitudeValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LatitudeValue.Location = new System.Drawing.Point(176, 121);
-            this.LatitudeValue.Margin = new System.Windows.Forms.Padding(0);
-            this.LatitudeValue.Name = "LatitudeValue";
-            this.LatitudeValue.Size = new System.Drawing.Size(351, 22);
-            this.LatitudeValue.TabIndex = 22;
-            this.LatitudeValue.Text = "Longitude";
+            this.textBox15.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox15.Location = new System.Drawing.Point(176, 115);
+            this.textBox15.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox15.Name = "textBox15";
+            this.textBox15.Size = new System.Drawing.Size(351, 22);
+            this.textBox15.TabIndex = 22;
+            this.textBox15.Text = "Longitude";
             // 
             // textBox1
             // 
             this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Location = new System.Drawing.Point(527, 121);
+            this.textBox1.Location = new System.Drawing.Point(527, 115);
             this.textBox1.Margin = new System.Windows.Forms.Padding(0);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(176, 22);
@@ -754,22 +750,22 @@
             // 
             this.tableLayoutPanel11.SetColumnSpan(this.textBox22, 4);
             this.textBox22.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox22.Location = new System.Drawing.Point(0, 99);
+            this.textBox22.Location = new System.Drawing.Point(0, 93);
             this.textBox22.Margin = new System.Windows.Forms.Padding(0);
             this.textBox22.Name = "textBox22";
             this.textBox22.Size = new System.Drawing.Size(1056, 22);
             this.textBox22.TabIndex = 25;
             this.textBox22.Text = "Location:";
             // 
-            // LongitudeValue
+            // textBox16
             // 
-            this.LongitudeValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LongitudeValue.Location = new System.Drawing.Point(703, 121);
-            this.LongitudeValue.Margin = new System.Windows.Forms.Padding(0);
-            this.LongitudeValue.Name = "LongitudeValue";
-            this.LongitudeValue.Size = new System.Drawing.Size(353, 22);
-            this.LongitudeValue.TabIndex = 23;
-            this.LongitudeValue.Text = "Longitude";
+            this.textBox16.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox16.Location = new System.Drawing.Point(703, 115);
+            this.textBox16.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox16.Name = "textBox16";
+            this.textBox16.Size = new System.Drawing.Size(353, 22);
+            this.textBox16.TabIndex = 23;
+            this.textBox16.Text = "Longitude";
             // 
             // tableLayoutPanel13
             // 
@@ -825,23 +821,6 @@
             this.UserNameEntryTextBox.TabIndex = 11;
             this.UserNameEntryTextBox.Text = "Enter name...";
             this.UserNameEntryTextBox.TextChanged += new System.EventHandler(this.UserNameEntryTextBox_TextChanged);
-            // 
-            // ReviewCount
-            // 
-            this.ReviewCount.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ReviewCount.Location = new System.Drawing.Point(530, 3);
-            this.ReviewCount.Name = "ReviewCount";
-            this.ReviewCount.Size = new System.Drawing.Size(170, 22);
-            this.ReviewCount.TabIndex = 26;
-            this.ReviewCount.Text = "Review Count";
-            // 
-            // ReviewCountValue
-            // 
-            this.ReviewCountValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ReviewCountValue.Location = new System.Drawing.Point(706, 3);
-            this.ReviewCountValue.Name = "ReviewCountValue";
-            this.ReviewCountValue.Size = new System.Drawing.Size(347, 22);
-            this.ReviewCountValue.TabIndex = 27;
             // 
             // YelpGUI
             // 
@@ -919,28 +898,26 @@
         private System.Windows.Forms.TextBox UserNameEntryTextBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel11;
         private System.Windows.Forms.TextBox textBox13;
-        private System.Windows.Forms.TextBox FansValue;
+        private System.Windows.Forms.TextBox textBox12;
         private System.Windows.Forms.TextBox textBox10;
-        private System.Windows.Forms.TextBox YelpingSinceValue;
+        private System.Windows.Forms.TextBox textBox9;
         private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox StarsValue;
+        private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox NameValue;
+        private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox LongitudeValue;
-        private System.Windows.Forms.TextBox LatitudeValue;
+        private System.Windows.Forms.TextBox textBox16;
+        private System.Windows.Forms.TextBox textBox15;
         private System.Windows.Forms.TextBox textBox14;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel14;
         private System.Windows.Forms.TextBox textBox11;
-        private System.Windows.Forms.TextBox FunnyValue;
+        private System.Windows.Forms.TextBox textBox17;
         private System.Windows.Forms.TextBox textBox18;
-        private System.Windows.Forms.TextBox CoolValue;
+        private System.Windows.Forms.TextBox textBox19;
         private System.Windows.Forms.TextBox textBox20;
-        private System.Windows.Forms.TextBox UsefulValue;
+        private System.Windows.Forms.TextBox textBox21;
         private System.Windows.Forms.TextBox textBox22;
-        private System.Windows.Forms.TextBox ReviewCount;
-        private System.Windows.Forms.TextBox ReviewCountValue;
     }
 }
 
