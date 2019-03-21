@@ -191,6 +191,11 @@ namespace Milestone2App
             if (PlayerIDListBox.Items.Count > 0) //removes all the data previously in the grid.
                 PlayerIDListBox.Items.Clear();
 
+            if (name == string.Empty)
+            {
+                return;
+            }
+
             // fill PlayerIDListBox with ids that match the name
             // run query
             using (var connection = new NpgsqlConnection(LOGININFO))
@@ -210,6 +215,35 @@ namespace Milestone2App
                 }
                 connection.Close();
             }
+
+        }
+
+        private void PlayerIDListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Fill all of the user's info textboxes
+            string user_id = PlayerIDListBox.SelectedItem.ToString();
+
+            using (var connection = new NpgsqlConnection(LOGININFO))
+            {
+                connection.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = connection;
+                    // SELECT * from yelpuser WHERE yelpuser.user_id = 'QGauzwshJlwHyMqT--CGiQ';
+                    cmd.CommandText = "SELECT * from yelpuser WHERE yelpuser.user_id = '" + user_id + "' ORDER BY user_id;";
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Console.WriteLine("test");
+                            //PlayerIDListBox.Items.Add(reader.GetString(0));
+                        }
+                    }
+                }
+                connection.Close();
+            }
+
+
 
         }
     }

@@ -795,6 +795,7 @@
             this.PlayerIDListBox.Name = "PlayerIDListBox";
             this.PlayerIDListBox.Size = new System.Drawing.Size(1059, 89);
             this.PlayerIDListBox.TabIndex = 10;
+            this.PlayerIDListBox.SelectedIndexChanged += new System.EventHandler(this.PlayerIDListBox_SelectedIndexChanged);
             // 
             // textBox3
             // 
