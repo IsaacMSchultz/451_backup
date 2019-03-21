@@ -67,25 +67,29 @@ namespace QueryEngine
             return returnList;
         }
 
+        public string[,] Search()
+        {
+            return Search(searchParameters);
+        }
 
         /// <summary>
         /// Runs a query to return the results based on the current search parameters as a 2 dimensional array of strings
         /// If there are no search parameters, returns an empty string array.
         /// </summary>
-        public string[,] Search()
+        private string[,] Search(Dictionary<string, List<string>> searchParams)
         {
-            if (searchParameters.Count != 0)
+            if (searchParams.Count != 0)
             {
                 int currIndex = 0; //keeps track of what key we are looking at from the dictionary
                 string CommandText; // the final Query that will be run
                 string orList = ""; //building subquery to find all the cities in the listbox
 
                 //iterate through all the Keys and values and build all the necesary subqueries
-                foreach (KeyValuePair<string, List<string>> key in searchParameters) //each keyValuePar
+                foreach (KeyValuePair<string, List<string>> key in searchParams) //each keyValuePar
                 {
                     // Build the subquery to find all tuples with the value from that keyPair
-                    if (searchParameters.Keys.Last() != searchParameters.Keys.ElementAt(currIndex)) //if this key is not the last one in the Dictionary, add the start of the next subquery
-                        orList += ") AND " + searchParameters.Keys.ElementAt(++currIndex) + " IN ( SELECT  FROM business WHERE "; // ") AND <nextKey> IN ( SELECT  FROM business WHERE " (also increments the currIndex)
+                    if (searchParams.Keys.Last() != searchParams.Keys.ElementAt(currIndex)) //if this key is not the last one in the Dictionary, add the start of the next subquery
+                        orList += ") AND " + searchParams.Keys.ElementAt(++currIndex) + " IN ( SELECT  FROM business WHERE "; // ") AND <nextKey> IN ( SELECT  FROM business WHERE " (also increments the currIndex)
 
                     foreach (string item in key.Value) //Each item in the list for each key
                     {
@@ -130,32 +134,12 @@ namespace QueryEngine
         }
 
         /// <summary>
-        /// Executes the query on the database and returns the results as a 2 dimensional array of strings.       
+        /// Executes the query on the database and returns the results as a 2 dimensional list of Businesses   
         /// </summary>
         /// <remarks>
         /// TODO: build the actual function!
         /// TODO: maybe return a list of tuples instead??? this might make it easier to add them?
         /// </remarks>
-        private List<List<string>> ExecuteQuery(string query)
-        {
-            List<List<string>> list = new List<List<string>>();
-            using (var connection = new NpgsqlConnection(LOGININFO))
-            {
-                connection.Open();
-                using (var cmd = new NpgsqlCommand())
-                {
-                    cmd.Connection = connection;
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                            list.Rows.Add(reader["name"], reader["zipcode"], reader["city"], reader["state"]);
-                    }
-                }
-                connection.Close();
-            }
-            return; 
-        }
-
         private List<Business> ExecuteBusinessQuery(string query){
 
             List<Business> businesses = new List<Business>();
@@ -169,11 +153,14 @@ namespace QueryEngine
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
-                            businesses.Add(new Business(reader["name"], reader["zipcode"], reader["city"], reader["state"]));
+                            businesses.Add(new Business((string) reader["name"], (string) reader["business_id"], new Location((double) reader["latitude"],
+                                (double) reader["longitude"], (string) reader["city"], (string) reader["state"], (string) reader["address"], 
+                                (string) reader["zipcode"]), (int) reader["review_count"], (double) reader["stars"]));
                     }
                 }
                 connection.Close();
             }
+            return businesses;
         }
 
         private void YelpPropertyChanged(object sender, PropertyChangedEventArgs e)
