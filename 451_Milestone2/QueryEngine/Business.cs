@@ -20,12 +20,12 @@ namespace QueryEngine
 
         public event PropertyChangedEventHandler BusinessPropertyChanged; // event for notifying that there was a property changed. 
 
-        Business(string name, string id, Location local, int revCount, double avgStars)
+        public Business(string name, string businessId, Location businessLocation, int reviewCount, double avgStars)
         {
             this.name = name;
-            this.businessId = id;
-            this.businessLocation = local;        
-            this.reviewCount = revCount;
+            this.businessId = businessId;
+            this.businessLocation = businessLocation;        
+            this.reviewCount = reviewCount;
             this.avgStars = avgStars;
         }
 
