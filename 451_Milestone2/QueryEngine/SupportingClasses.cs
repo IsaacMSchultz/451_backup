@@ -15,6 +15,22 @@ namespace QueryEngine
         private string address;
         private string zipcode;
 
+        public Location(double latitude, double longitude, string city, string state, string address, string zipcode)
+        {
+            this.latitude = latitude;
+            this.longitude = longitude;
+            this.city = city;
+            this.state = state;
+            this.address = address;
+            this.zipcode = zipcode;
+        }
+
+        public Location(double latitude, double longitude)
+        {
+            this.latitude = latitude;
+            this.longitude = longitude;
+        }
+
         public int compareDistance(Location secondLocation) // gets the distance between two locations???
         {
             return 0;
