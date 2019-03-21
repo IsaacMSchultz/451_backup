@@ -15,3 +15,5 @@ SELECT COUNT(*) FROM attributes: 97117
 SELECT COUNT(*) FROM checkins: 481360
 
 SELECT COUNT(*) FROM friend: 0
+
+SELECT
