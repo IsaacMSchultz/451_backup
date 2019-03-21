@@ -8,6 +8,9 @@ namespace Milestone2App
 {
     public partial class YelpGUI : Form
     {
+        private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone2db"; // Defines our connection to local databus
+        //private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone2db"; // Defines our connection to cloud hosted databus
+
         public YelpGUI()
         {
             InitializeComponent();
@@ -178,6 +181,35 @@ namespace Milestone2App
 
         private void tableLayoutPanel12_Paint(object sender, PaintEventArgs e)
         {
+
+        }
+
+        private void UserNameEntryTextBox_TextChanged(object sender, EventArgs e)
+        {
+            string name = UserNameEntryTextBox.Text;
+
+            if (PlayerIDListBox.Items.Count > 0) //removes all the data previously in the grid.
+                PlayerIDListBox.Items.Clear();
+
+            // fill PlayerIDListBox with ids that match the name
+            // run query
+            using (var connection = new NpgsqlConnection(LOGININFO))
+            {
+                connection.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = connection;
+                    cmd.CommandText = "SELECT distinct user_id FROM yelpuser WHERE yelpuser.name like '%" + name + "%' ORDER BY user_id;";
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            PlayerIDListBox.Items.Add(reader.GetString(0));
+                        }
+                    }
+                }
+                connection.Close();
+            }
 
         }
     }
