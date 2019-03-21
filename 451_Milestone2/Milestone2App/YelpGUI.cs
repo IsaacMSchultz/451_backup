@@ -215,7 +215,6 @@ namespace Milestone2App
                 }
                 connection.Close();
             }
-
         }
 
         private void PlayerIDListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -235,8 +234,39 @@ namespace Milestone2App
                     {
                         while (reader.Read())
                         {
-                            Console.WriteLine("test");
-                            //PlayerIDListBox.Items.Add(reader.GetString(0));
+                            NameValue.Text = reader.GetString(1);
+                            StarsValue.Text = reader.GetDouble(2).ToString();
+                            CoolValue.Text = reader.GetValue(3).ToString();
+                            FunnyValue.Text = reader.GetValue(4).ToString();
+                            UsefulValue.Text = reader.GetValue(5).ToString();
+                            FansValue.Text = reader.GetValue(6).ToString();
+                            ReviewCountValue.Text = reader.GetValue(7).ToString();
+                            YelpingSinceValue.Text = reader.GetDate(8).ToString();
+
+                            try
+                            {
+                                LatitudeValue.Text = reader.GetDouble(9).ToString();
+                            }
+                            catch (InvalidCastException ex)
+                            {
+                                LatitudeValue.Text = "empty";
+                            }
+
+                            try
+                            {
+                                LongitudeValue.Text = reader.GetDouble(10).ToString();
+                            }
+                            catch (InvalidCastException ex)
+                            {
+                                LongitudeValue.Text = "empty";
+                            }
+                            
+                            
+                            
+
+                            //if reader.GetDouble(7)
+
+
                         }
                     }
                 }
