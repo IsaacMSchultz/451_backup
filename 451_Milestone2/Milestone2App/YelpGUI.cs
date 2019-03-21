@@ -170,5 +170,15 @@ namespace Milestone2App
             //    connection.Close();
             //}
         }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel12_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
