@@ -313,7 +313,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1067, 554);
             this.Controls.Add(this.tableLayoutPanel5);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Milestone 2";
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).EndInit();
@@ -348,9 +348,15 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
         private System.Windows.Forms.CheckedListBox categoriesCheckBox;
         private System.Windows.Forms.TextBox categoriesTextBox;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage Business;
-        private System.Windows.Forms.TabPage tabPage2;
+
+        
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
+        private System.Windows.Forms.RichTextBox businessNameTextBox_Review;
+        private System.Windows.Forms.TextBox WriteReviewTextBox_Review;
+        private System.Windows.Forms.Button ShowReviewsButton;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 
