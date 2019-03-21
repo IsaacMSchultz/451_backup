@@ -44,6 +44,12 @@
             this.ZipText = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+            this.businessNameTextBox_Review = new System.Windows.Forms.RichTextBox();
+            this.WriteReviewTextBox_Review = new System.Windows.Forms.TextBox();
+            this.ShowReviewsButton = new System.Windows.Forms.Button();
+            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -51,6 +57,8 @@
             this.tableLayoutPanel6.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
+            this.tableLayoutPanel7.SuspendLayout();
+            this.tableLayoutPanel8.SuspendLayout();
             this.SuspendLayout();
             // 
             // businessGrid
@@ -277,17 +285,85 @@
             // tableLayoutPanel7
             // 
             this.tableLayoutPanel7.ColumnCount = 2;
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel7.Controls.Add(this.businessNameTextBox_Review, 0, 0);
+            this.tableLayoutPanel7.Controls.Add(this.WriteReviewTextBox_Review, 0, 1);
+            this.tableLayoutPanel7.Controls.Add(this.ShowReviewsButton, 1, 0);
+            this.tableLayoutPanel7.Controls.Add(this.tableLayoutPanel8, 1, 1);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel7.Location = new System.Drawing.Point(200, 270);
             this.tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 2;
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75F));
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel7.Size = new System.Drawing.Size(600, 180);
             this.tableLayoutPanel7.TabIndex = 9;
+            // 
+            // businessNameTextBox_Review
+            // 
+            this.businessNameTextBox_Review.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.businessNameTextBox_Review.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.businessNameTextBox_Review.Location = new System.Drawing.Point(0, 0);
+            this.businessNameTextBox_Review.Margin = new System.Windows.Forms.Padding(0);
+            this.businessNameTextBox_Review.Name = "businessNameTextBox_Review";
+            this.businessNameTextBox_Review.Size = new System.Drawing.Size(500, 38);
+            this.businessNameTextBox_Review.TabIndex = 0;
+            this.businessNameTextBox_Review.Text = "Business name (click on one)";
+            // 
+            // WriteReviewTextBox_Review
+            // 
+            this.WriteReviewTextBox_Review.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.WriteReviewTextBox_Review.Location = new System.Drawing.Point(0, 38);
+            this.WriteReviewTextBox_Review.Margin = new System.Windows.Forms.Padding(0);
+            this.WriteReviewTextBox_Review.Multiline = true;
+            this.WriteReviewTextBox_Review.Name = "WriteReviewTextBox_Review";
+            this.WriteReviewTextBox_Review.Size = new System.Drawing.Size(500, 142);
+            this.WriteReviewTextBox_Review.TabIndex = 1;
+            // 
+            // ShowReviewsButton
+            // 
+            this.ShowReviewsButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ShowReviewsButton.Location = new System.Drawing.Point(503, 3);
+            this.ShowReviewsButton.Name = "ShowReviewsButton";
+            this.ShowReviewsButton.Size = new System.Drawing.Size(94, 32);
+            this.ShowReviewsButton.TabIndex = 2;
+            this.ShowReviewsButton.Text = "Show Reviews";
+            this.ShowReviewsButton.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel8
+            // 
+            this.tableLayoutPanel8.ColumnCount = 1;
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel8.Controls.Add(this.button1, 0, 1);
+            this.tableLayoutPanel8.Controls.Add(this.comboBox1, 0, 0);
+            this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel8.Location = new System.Drawing.Point(500, 38);
+            this.tableLayoutPanel8.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
+            this.tableLayoutPanel8.RowCount = 2;
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(100, 142);
+            this.tableLayoutPanel8.TabIndex = 3;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(3, 74);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(3, 3);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(94, 21);
+            this.comboBox1.TabIndex = 1;
             // 
             // Form1
             // 
@@ -308,6 +384,9 @@
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel7.ResumeLayout(false);
+            this.tableLayoutPanel7.PerformLayout();
+            this.tableLayoutPanel8.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -329,6 +408,12 @@
         private System.Windows.Forms.CheckedListBox categoriesCheckBox;
         private System.Windows.Forms.TextBox categoriesTextBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
+        private System.Windows.Forms.RichTextBox businessNameTextBox_Review;
+        private System.Windows.Forms.TextBox WriteReviewTextBox_Review;
+        private System.Windows.Forms.Button ShowReviewsButton;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 
