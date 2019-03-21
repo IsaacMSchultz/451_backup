@@ -153,7 +153,7 @@ namespace QueryEngine
                 }
                 connection.Close();
             }
-            return 
+            return; 
         }
 
         private List<Business> ExecuteBusinessQuery(string query){
@@ -169,7 +169,7 @@ namespace QueryEngine
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
-                            businesses.Add(new Business(reader["name"], reader["zipcode"], reader["city"], reader["state"]);
+                            businesses.Add(new Business(reader["name"], reader["zipcode"], reader["city"], reader["state"]));
                     }
                 }
                 connection.Close();
