@@ -1,6 +1,6 @@
 ﻿namespace Milestone2App
 {
-    partial class Form1
+    partial class YelpGUI
     {
         /// <summary>
         /// Required designer variable.
@@ -48,8 +48,11 @@
             this.WriteReviewTextBox_Review = new System.Windows.Forms.TextBox();
             this.ShowReviewsButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.SubmitReviewButton = new System.Windows.Forms.Button();
+            this.ReviewStarsDropDown = new System.Windows.Forms.ComboBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.BusinessTabPage = new System.Windows.Forms.TabPage();
+            this.UsersTabPage = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -59,6 +62,8 @@
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.BusinessTabPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // businessGrid
@@ -70,7 +75,7 @@
             this.businessGrid.Margin = new System.Windows.Forms.Padding(0);
             this.businessGrid.Name = "businessGrid";
             this.businessGrid.ReadOnly = true;
-            this.businessGrid.Size = new System.Drawing.Size(600, 270);
+            this.businessGrid.Size = new System.Drawing.Size(592, 254);
             this.businessGrid.TabIndex = 2;
             // 
             // CityHeader
@@ -102,7 +107,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(200, 138);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(200, 130);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // cityCheckBox
@@ -113,7 +118,7 @@
             this.cityCheckBox.Margin = new System.Windows.Forms.Padding(0);
             this.cityCheckBox.MultiColumn = true;
             this.cityCheckBox.Name = "cityCheckBox";
-            this.cityCheckBox.Size = new System.Drawing.Size(200, 125);
+            this.cityCheckBox.Size = new System.Drawing.Size(200, 117);
             this.cityCheckBox.TabIndex = 0;
             this.cityCheckBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.cityCheckBox_ItemCheck);
             // 
@@ -178,7 +183,7 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(200, 450);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(200, 424);
             this.tableLayoutPanel3.TabIndex = 8;
             // 
             // tableLayoutPanel6
@@ -188,13 +193,13 @@
             this.tableLayoutPanel6.Controls.Add(this.categoriesCheckBox, 1, 1);
             this.tableLayoutPanel6.Controls.Add(this.categoriesTextBox, 1, 0);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 310);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 294);
             this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 2;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(200, 140);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(200, 130);
             this.tableLayoutPanel6.TabIndex = 9;
             // 
             // categoriesCheckBox
@@ -205,7 +210,7 @@
             this.categoriesCheckBox.Margin = new System.Windows.Forms.Padding(0);
             this.categoriesCheckBox.MultiColumn = true;
             this.categoriesCheckBox.Name = "categoriesCheckBox";
-            this.categoriesCheckBox.Size = new System.Drawing.Size(200, 127);
+            this.categoriesCheckBox.Size = new System.Drawing.Size(200, 117);
             this.categoriesCheckBox.TabIndex = 0;
             // 
             // categoriesTextBox
@@ -229,13 +234,13 @@
             this.tableLayoutPanel4.Controls.Add(this.zipCheckBox, 1, 1);
             this.tableLayoutPanel4.Controls.Add(this.ZipText, 1, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 172);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 164);
             this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 2;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(200, 138);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(200, 130);
             this.tableLayoutPanel4.TabIndex = 8;
             // 
             // zipCheckBox
@@ -246,7 +251,7 @@
             this.zipCheckBox.Margin = new System.Windows.Forms.Padding(0);
             this.zipCheckBox.MultiColumn = true;
             this.zipCheckBox.Name = "zipCheckBox";
-            this.zipCheckBox.Size = new System.Drawing.Size(200, 125);
+            this.zipCheckBox.Size = new System.Drawing.Size(200, 117);
             this.zipCheckBox.TabIndex = 0;
             this.zipCheckBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.zipCheckBox_ItemCheck);
             // 
@@ -279,7 +284,7 @@
             this.tableLayoutPanel5.RowCount = 2;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(800, 450);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(792, 424);
             this.tableLayoutPanel5.TabIndex = 8;
             // 
             // tableLayoutPanel7
@@ -292,13 +297,13 @@
             this.tableLayoutPanel7.Controls.Add(this.ShowReviewsButton, 1, 0);
             this.tableLayoutPanel7.Controls.Add(this.tableLayoutPanel8, 1, 1);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(200, 270);
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(200, 254);
             this.tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 2;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(600, 180);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(592, 170);
             this.tableLayoutPanel7.TabIndex = 9;
             // 
             // businessNameTextBox_Review
@@ -308,7 +313,7 @@
             this.businessNameTextBox_Review.Location = new System.Drawing.Point(0, 0);
             this.businessNameTextBox_Review.Margin = new System.Windows.Forms.Padding(0);
             this.businessNameTextBox_Review.Name = "businessNameTextBox_Review";
-            this.businessNameTextBox_Review.Size = new System.Drawing.Size(500, 38);
+            this.businessNameTextBox_Review.Size = new System.Drawing.Size(492, 38);
             this.businessNameTextBox_Review.TabIndex = 0;
             this.businessNameTextBox_Review.Text = "Business name (click on one)";
             // 
@@ -319,15 +324,16 @@
             this.WriteReviewTextBox_Review.Margin = new System.Windows.Forms.Padding(0);
             this.WriteReviewTextBox_Review.Multiline = true;
             this.WriteReviewTextBox_Review.Name = "WriteReviewTextBox_Review";
-            this.WriteReviewTextBox_Review.Size = new System.Drawing.Size(500, 142);
+            this.WriteReviewTextBox_Review.Size = new System.Drawing.Size(492, 132);
             this.WriteReviewTextBox_Review.TabIndex = 1;
             // 
             // ShowReviewsButton
             // 
             this.ShowReviewsButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ShowReviewsButton.Location = new System.Drawing.Point(503, 3);
+            this.ShowReviewsButton.Location = new System.Drawing.Point(492, 0);
+            this.ShowReviewsButton.Margin = new System.Windows.Forms.Padding(0);
             this.ShowReviewsButton.Name = "ShowReviewsButton";
-            this.ShowReviewsButton.Size = new System.Drawing.Size(94, 32);
+            this.ShowReviewsButton.Size = new System.Drawing.Size(100, 38);
             this.ShowReviewsButton.TabIndex = 2;
             this.ShowReviewsButton.Text = "Show Reviews";
             this.ShowReviewsButton.UseVisualStyleBackColor = true;
@@ -335,43 +341,81 @@
             // tableLayoutPanel8
             // 
             this.tableLayoutPanel8.ColumnCount = 1;
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel8.Controls.Add(this.button1, 0, 1);
-            this.tableLayoutPanel8.Controls.Add(this.comboBox1, 0, 0);
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel8.Controls.Add(this.SubmitReviewButton, 0, 1);
+            this.tableLayoutPanel8.Controls.Add(this.ReviewStarsDropDown, 0, 0);
             this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel8.Location = new System.Drawing.Point(500, 38);
+            this.tableLayoutPanel8.Location = new System.Drawing.Point(492, 38);
             this.tableLayoutPanel8.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
             this.tableLayoutPanel8.RowCount = 2;
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(100, 142);
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(100, 132);
             this.tableLayoutPanel8.TabIndex = 3;
             // 
-            // button1
+            // SubmitReviewButton
             // 
-            this.button1.Location = new System.Drawing.Point(3, 74);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.SubmitReviewButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SubmitReviewButton.Location = new System.Drawing.Point(0, 21);
+            this.SubmitReviewButton.Margin = new System.Windows.Forms.Padding(0);
+            this.SubmitReviewButton.Name = "SubmitReviewButton";
+            this.SubmitReviewButton.Size = new System.Drawing.Size(100, 111);
+            this.SubmitReviewButton.TabIndex = 0;
+            this.SubmitReviewButton.Text = "Submit Review";
+            this.SubmitReviewButton.UseVisualStyleBackColor = true;
             // 
-            // comboBox1
+            // ReviewStarsDropDown
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(3, 3);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(94, 21);
-            this.comboBox1.TabIndex = 1;
+            this.ReviewStarsDropDown.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ReviewStarsDropDown.FormattingEnabled = true;
+            this.ReviewStarsDropDown.Location = new System.Drawing.Point(0, 0);
+            this.ReviewStarsDropDown.Margin = new System.Windows.Forms.Padding(0);
+            this.ReviewStarsDropDown.Name = "ReviewStarsDropDown";
+            this.ReviewStarsDropDown.Size = new System.Drawing.Size(100, 21);
+            this.ReviewStarsDropDown.TabIndex = 1;
+            this.ReviewStarsDropDown.Text = "Review Stars";
             // 
-            // Form1
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.BusinessTabPage);
+            this.tabControl1.Controls.Add(this.UsersTabPage);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(0);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(800, 450);
+            this.tabControl1.TabIndex = 9;
+            // 
+            // BusinessTabPage
+            // 
+            this.BusinessTabPage.Controls.Add(this.tableLayoutPanel5);
+            this.BusinessTabPage.Location = new System.Drawing.Point(4, 22);
+            this.BusinessTabPage.Margin = new System.Windows.Forms.Padding(0);
+            this.BusinessTabPage.Name = "BusinessTabPage";
+            this.BusinessTabPage.Size = new System.Drawing.Size(792, 424);
+            this.BusinessTabPage.TabIndex = 0;
+            this.BusinessTabPage.Text = "Business";
+            this.BusinessTabPage.UseVisualStyleBackColor = true;
+            // 
+            // UsersTabPage
+            // 
+            this.UsersTabPage.Location = new System.Drawing.Point(4, 22);
+            this.UsersTabPage.Name = "UsersTabPage";
+            this.UsersTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.UsersTabPage.Size = new System.Drawing.Size(792, 424);
+            this.UsersTabPage.TabIndex = 1;
+            this.UsersTabPage.Text = "Users";
+            this.UsersTabPage.UseVisualStyleBackColor = true;
+            // 
+            // YelpGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.tableLayoutPanel5);
-            this.Name = "Form1";
+            this.Controls.Add(this.tabControl1);
+            this.Name = "YelpGUI";
             this.Text = "Milestone 2";
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -387,6 +431,8 @@
             this.tableLayoutPanel7.ResumeLayout(false);
             this.tableLayoutPanel7.PerformLayout();
             this.tableLayoutPanel8.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.BusinessTabPage.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -412,8 +458,11 @@
         private System.Windows.Forms.TextBox WriteReviewTextBox_Review;
         private System.Windows.Forms.Button ShowReviewsButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button SubmitReviewButton;
+        private System.Windows.Forms.ComboBox ReviewStarsDropDown;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage BusinessTabPage;
+        private System.Windows.Forms.TabPage UsersTabPage;
     }
 }
 
