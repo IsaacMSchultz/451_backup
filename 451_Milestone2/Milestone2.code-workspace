@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"sqltools.connections": [
+			{
+				"askForPassword": false,
+				"connectionTimeout": 30,
+				"database": "milestone2db",
+				"dialect": "PostgreSQL",
+				"name": "451-Database",
+				"password": "oiAv4Kmdup8Pd4vd",
+				"port": 5432,
+				"server": "35.230.13.126",
+				"username": "postgres"
+			}
+		]
+	}
+}
