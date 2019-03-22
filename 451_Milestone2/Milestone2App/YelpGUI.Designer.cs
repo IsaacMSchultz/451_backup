@@ -380,10 +380,12 @@
             this.WriteReviewTextBox_Review.Name = "WriteReviewTextBox_Review";
             this.WriteReviewTextBox_Review.Size = new System.Drawing.Size(492, 132);
             this.WriteReviewTextBox_Review.TabIndex = 1;
+            this.WriteReviewTextBox_Review.TextChanged += new System.EventHandler(this.WriteReviewTextBox_Review_TextChanged);
             // 
             // ShowReviewsButton
             // 
             this.ShowReviewsButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ShowReviewsButton.Enabled = false;
             this.ShowReviewsButton.Location = new System.Drawing.Point(492, 0);
             this.ShowReviewsButton.Margin = new System.Windows.Forms.Padding(0);
             this.ShowReviewsButton.Name = "ShowReviewsButton";
@@ -411,6 +413,7 @@
             // SubmitReviewButton
             // 
             this.SubmitReviewButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SubmitReviewButton.Enabled = false;
             this.SubmitReviewButton.Location = new System.Drawing.Point(0, 21);
             this.SubmitReviewButton.Margin = new System.Windows.Forms.Padding(0);
             this.SubmitReviewButton.Name = "SubmitReviewButton";
@@ -436,6 +439,7 @@
             this.ReviewStarsDropDown.Size = new System.Drawing.Size(100, 21);
             this.ReviewStarsDropDown.TabIndex = 1;
             this.ReviewStarsDropDown.Text = "Review Stars";
+            this.ReviewStarsDropDown.SelectedIndexChanged += new System.EventHandler(this.ReviewStarsDropDown_SelectedIndexChanged);
             // 
             // tabControl1
             // 
