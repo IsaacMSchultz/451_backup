@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using static System.Windows.Forms.CheckedListBox;
 using QueryEngine1;
+using System.Linq;
 
 namespace Milestone2App
 {
@@ -13,6 +14,13 @@ namespace Milestone2App
     {
         QueryEngine queryEngine;
         List<Business> dataGridBusinesses;
+
+        string currBusId;
+        string currUserId;
+
+        private static Random random = new Random();
+        const string chars = "abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_- ";
+
         //private BindingSource businessBindingSource; //allows the datagridview to automatically update itself from the dataGridBusinesses.
 
         private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone2db"; // Defines our connection to local databus
@@ -21,13 +29,14 @@ namespace Milestone2App
         public YelpGUI()
         {
             queryEngine = new QueryEngine();
+            List<string> businessIds = new List<string>();
             InitializeComponent();
             initializeDropDowns();
             //businessBindingSource = new BindingSource(dataGridBusinesses);
             //businessGrid.DataSource = businessBindingSource; //tell the businessGrid to read the data from the list of businesses.
 
 
-            string[] cols = { "name", "address", "city", "state", "stars", "review_count", "num_checkins", "reviewRating", "is_open" };
+            string[] cols = { "name", "address", "city", "state", "stars", "review_count", "num_checkins", "reviewRating", "is_open", "business_id" };
 
             foreach (var column in cols)
             {
@@ -257,7 +266,7 @@ namespace Milestone2App
                 using (var cmd = new NpgsqlCommand())
                 {
                     cmd.Connection = connection;
-                    cmd.CommandText = "SELECT name, address, city, state, stars, review_count, num_checkins, reviewRating, is_open FROM business WHERE state = '" + stateDropDown.SelectedItem + "' " + orList + " ORDER BY reviewRating;";
+                    cmd.CommandText = "SELECT name, address, city, state, stars, review_count, num_checkins, reviewRating, is_open, business_id FROM business WHERE state = '" + stateDropDown.SelectedItem + "' " + orList + " ORDER BY reviewRating;";
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -318,7 +327,7 @@ namespace Milestone2App
         private void PlayerIDListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Fill all of the user's info textboxes
-            string user_id = PlayerIDListBox.SelectedItem.ToString();
+            currUserId = PlayerIDListBox.SelectedItem.ToString();
 
             using (var connection = new NpgsqlConnection(LOGININFO))
             {
@@ -327,7 +336,7 @@ namespace Milestone2App
                 {
                     cmd.Connection = connection;
                     // SELECT * from yelpuser WHERE yelpuser.user_id = 'QGauzwshJlwHyMqT--CGiQ';
-                    cmd.CommandText = "SELECT * from yelpuser WHERE yelpuser.user_id = '" + user_id + "' ORDER BY user_id;";
+                    cmd.CommandText = "SELECT * from yelpuser WHERE yelpuser.user_id = '" + currUserId + "' ORDER BY user_id;";
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -373,6 +382,42 @@ namespace Milestone2App
 
 
 
+        }
+
+        private void businessGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
+            {
+                businessNameTextBox_Review.Text = (string)businessGrid[0, e.RowIndex].Value;
+                currBusId = (string)businessGrid[9, e.RowIndex].Value;
+            }
+        }
+
+        private void SubmitReviewButton_Click(object sender, EventArgs e)
+        {
+            if (currBusId != "")
+            {
+                string reviewID = new string(Enumerable.Repeat(chars, 22).Select(s => s[random.Next(s.Length)]).ToArray()); //makes a random 22 charachter string
+
+                using (var connection = new NpgsqlConnection(LOGININFO))
+                {
+                    connection.Open();
+                    using (var cmd = new NpgsqlCommand())
+                    {
+                        cmd.Connection = connection;
+                        cmd.CommandText = "INSERT INTO review ('" + reviewID + "'" ) WHERE business_id = '" + currBusId + "';";
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                PlayerIDListBox.Items.Add(reader.GetString(0));
+                            }
+                        }
+                    }
+                    connection.Close();
+                }
+                //WriteReviewTextBox_Review
+            }
         }
     }
 }
