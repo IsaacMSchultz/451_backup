@@ -42,6 +42,7 @@
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.zipCheckBox = new System.Windows.Forms.CheckedListBox();
             this.ZipText = new System.Windows.Forms.TextBox();
+            this.SearchButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.businessNameTextBox_Review = new System.Windows.Forms.RichTextBox();
@@ -85,7 +86,6 @@
             this.PlayerIDListBox = new System.Windows.Forms.ListBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.UserNameEntryTextBox = new System.Windows.Forms.TextBox();
-            this.SearchButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -117,6 +117,7 @@
             this.businessGrid.ReadOnly = true;
             this.businessGrid.Size = new System.Drawing.Size(592, 254);
             this.businessGrid.TabIndex = 2;
+            this.businessGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.businessGrid_CellContentClick);
             // 
             // CityHeader
             // 
@@ -309,6 +310,18 @@
             this.ZipText.Text = "Zip";
             this.ZipText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // SearchButton
+            // 
+            this.SearchButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SearchButton.Location = new System.Drawing.Point(0, 403);
+            this.SearchButton.Margin = new System.Windows.Forms.Padding(0);
+            this.SearchButton.Name = "SearchButton";
+            this.SearchButton.Size = new System.Drawing.Size(200, 21);
+            this.SearchButton.TabIndex = 10;
+            this.SearchButton.Text = "Search";
+            this.SearchButton.UseVisualStyleBackColor = true;
+            this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
+            // 
             // tableLayoutPanel5
             // 
             this.tableLayoutPanel5.ColumnCount = 2;
@@ -353,6 +366,7 @@
             this.businessNameTextBox_Review.Location = new System.Drawing.Point(0, 0);
             this.businessNameTextBox_Review.Margin = new System.Windows.Forms.Padding(0);
             this.businessNameTextBox_Review.Name = "businessNameTextBox_Review";
+            this.businessNameTextBox_Review.ReadOnly = true;
             this.businessNameTextBox_Review.Size = new System.Drawing.Size(492, 38);
             this.businessNameTextBox_Review.TabIndex = 0;
             this.businessNameTextBox_Review.Text = "Business name (click on one)";
@@ -404,11 +418,18 @@
             this.SubmitReviewButton.TabIndex = 0;
             this.SubmitReviewButton.Text = "Submit Review";
             this.SubmitReviewButton.UseVisualStyleBackColor = true;
+            this.SubmitReviewButton.Click += new System.EventHandler(this.SubmitReviewButton_Click);
             // 
             // ReviewStarsDropDown
             // 
             this.ReviewStarsDropDown.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ReviewStarsDropDown.FormattingEnabled = true;
+            this.ReviewStarsDropDown.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"});
             this.ReviewStarsDropDown.Location = new System.Drawing.Point(0, 0);
             this.ReviewStarsDropDown.Margin = new System.Windows.Forms.Padding(0);
             this.ReviewStarsDropDown.Name = "ReviewStarsDropDown";
@@ -842,18 +863,6 @@
             this.UserNameEntryTextBox.TabIndex = 11;
             this.UserNameEntryTextBox.Text = "Enter name...";
             this.UserNameEntryTextBox.TextChanged += new System.EventHandler(this.UserNameEntryTextBox_TextChanged);
-            // 
-            // SearchButton
-            // 
-            this.SearchButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SearchButton.Location = new System.Drawing.Point(0, 403);
-            this.SearchButton.Margin = new System.Windows.Forms.Padding(0);
-            this.SearchButton.Name = "SearchButton";
-            this.SearchButton.Size = new System.Drawing.Size(200, 21);
-            this.SearchButton.TabIndex = 10;
-            this.SearchButton.Text = "Search";
-            this.SearchButton.UseVisualStyleBackColor = true;
-            this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
             // 
             // YelpGUI
             // 
