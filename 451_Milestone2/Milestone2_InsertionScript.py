@@ -120,7 +120,11 @@ def insert2AttributesTable(conn, cur): #Has 97117
                     categories = v
 
                     for item in categories:
-                        cur.execute("INSERT INTO Category (business_id, category_name) VALUES ('" + business_id + "','" + cleanStr4SQL(item) + "');")
+                        try:
+                            cur.execute("INSERT INTO Category (business_id, category_name) VALUES ('" + business_id + "','" + cleanStr4SQL(item) + "');")
+                        except Exception as e:
+                            print("Insert failed! " + str(e) + "On line: " + str(count_line))
+                        
                      
             conn.commit()
 
@@ -199,7 +203,10 @@ def insert2CheckinTable(conn, cur): #Has 481360
                             # parse through list
                             inner = value
                             for innerName, innerValue in inner.items():
-                                cur.execute("INSERT INTO Checkins (business_id, day, time, count) VALUES ('" + business_id + "','" + name + "','" + innerName + "','" + str(innerValue) + "');")
+                                try:
+                                    cur.execute("INSERT INTO Checkins (business_id, day, time, count) VALUES ('" + business_id + "','" + name + "','" + innerName + "','" + str(innerValue) + "');")
+                                except Exception as e:
+                                    print("Error inserting on line " +str(count_line) + ": " + str(e))
 
             conn.commit()
 
@@ -256,7 +263,7 @@ insert2UserTable(conn, cur)
 insert2ReviewTable(conn, cur)
 insert2CheckinTable(conn, cur)
 insert2FriendsTable(conn, cur)
-insert2CategoriesTable(conn, cur)
+######insert2CategoriesTable(conn, cur) #done inside the attributes function
 insert2AttributesTable(conn, cur)
 insert2HoursTable(conn, cur)
 
