@@ -26,6 +26,8 @@ namespace Milestone2App
         private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone2db"; // Defines our connection to local databus
         //private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone2db"; // Defines our connection to cloud hosted databus
 
+        
+
         public YelpGUI()
         {
             queryEngine = new QueryEngine();
@@ -409,8 +411,12 @@ namespace Milestone2App
                     using (var cmd = new NpgsqlCommand())
                     {
                         cmd.Connection = connection;
+<<<<<<< Updated upstream
                         cmd.CommandText = "INSERT INTO review VALUES ('" + reviewID + "', '" + currBusId + "', '" + currUserId + "', '" + ReviewStarsDropDown.SelectedItem +
                             "', NOW(), '" + WriteReviewTextBox_Review.Text + "', 0, 0, 0);";
+=======
+                        //cmd.CommandText = "INSERT INTO review ('" + reviewID + "'" ) WHERE business_id = '" + currBusId + "';";
+>>>>>>> Stashed changes
                         using (var reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
@@ -442,6 +448,12 @@ namespace Milestone2App
             {
                 SubmitReviewButton.Enabled = true;
             }
+        }
+
+        private void ShowReviewsButton_Click(object sender, EventArgs e)
+        {
+            ReviewForm reviewWindow = new ReviewForm();
+            reviewWindow.Show();
         }
     }
 }
