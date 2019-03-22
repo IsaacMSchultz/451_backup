@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 //using System.Text.RegularExpressions;
 
-namespace QueryEngine
+namespace QueryEngine1
 {
-    class User
+    public class User
     {
         private string name;
         private Location location;

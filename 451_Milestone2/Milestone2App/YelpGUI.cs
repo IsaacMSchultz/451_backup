@@ -3,71 +3,48 @@ using System;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using static System.Windows.Forms.CheckedListBox;
+using QueryEngine1;
 
 namespace Milestone2App
 {
     public partial class YelpGUI : Form
     {
+        QueryEngine queryEngine;
+        List<Business> dataGridBusinesses;
+        //private BindingSource businessBindingSource; //allows the datagridview to automatically update itself from the dataGridBusinesses.
+
         private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone2db"; // Defines our connection to local databus
         //private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone2db"; // Defines our connection to cloud hosted databus
 
         public YelpGUI()
         {
+            queryEngine = new QueryEngine();
             InitializeComponent();
             initializeDropDowns();
+            //businessBindingSource = new BindingSource(dataGridBusinesses);
+            //businessGrid.DataSource = businessBindingSource; //tell the businessGrid to read the data from the list of businesses.
         }
 
         private void initializeDropDowns()
         {
-
-
-            // Create the column headers for the data grid view.
-            DataGridViewTextBoxColumn nameColumn = new DataGridViewTextBoxColumn();
-            nameColumn.HeaderText = "Business name";
-            nameColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            businessGrid.Columns.Add(nameColumn);
-
-            DataGridViewTextBoxColumn zipColumn = new DataGridViewTextBoxColumn();
-            zipColumn.HeaderText = "Zip";
-            zipColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            businessGrid.Columns.Add(zipColumn);
-
-            DataGridViewTextBoxColumn cityColumn = new DataGridViewTextBoxColumn();
-            cityColumn.HeaderText = "City";
-            cityColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            businessGrid.Columns.Add(cityColumn);
-
-            DataGridViewTextBoxColumn stateColumn = new DataGridViewTextBoxColumn();
-            stateColumn.HeaderText = "State";
-            stateColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            businessGrid.Columns.Add(stateColumn);
+            List<string> states = queryEngine.getStates();
+            foreach (var state in states)
+                stateDropDown.Items.Add(state); //populates the state drop down with all the states returned by the queryEngine         
         }
 
         private void stateDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //ComboBox box = (ComboBox)sender; //casts sender as a ComboBox
+            ComboBox box = (ComboBox)sender; //casts sender as a ComboBox
 
-            //if (cityCheckBox.Items.Count > 0) //removes all the data previously in the grid.
-            //    cityCheckBox.Items.Clear();
+            if (cityCheckBox.Items.Count > 0) //removes all the data previously in the grid.
+                cityCheckBox.Items.Clear();
 
-            //// query database to get list of cities in the selected state
-            //// update city dropdown with list
-            //using (var connection = new NpgsqlConnection(LOGININFO))
-            //{
-            //    connection.Open();
-            //    using (var cmd = new NpgsqlCommand())
-            //    {
-            //        cmd.Connection = connection;
-            //        cmd.CommandText = "SELECT distinct city FROM business WHERE business.state = '" + box.SelectedItem + "' ORDER BY city;";
-            //        using (var reader = cmd.ExecuteReader())
-            //        {
-            //            while (reader.Read())
-            //                //cityDropDown.Items.Add(reader.GetString(0));
-            //                cityCheckBox.Items.Add(reader.GetString(0));
-            //        }
-            //    }
-            //    connection.Close();
-            //}
+            queryEngine.addSearchParameter("state", (string) box.SelectedItem);
+
+            List<string> cities = (List<string>) queryEngine.Search("city");
+
+            foreach (var city in cities)
+                cityCheckBox.Items.Add(city);
         }
 
         private void cityCheckBox_ItemCheck(object sender, ItemCheckEventArgs e)
