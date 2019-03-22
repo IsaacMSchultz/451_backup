@@ -155,7 +155,6 @@
             this.cityCheckBox.FormattingEnabled = true;
             this.cityCheckBox.Location = new System.Drawing.Point(0, 13);
             this.cityCheckBox.Margin = new System.Windows.Forms.Padding(0);
-            this.cityCheckBox.MultiColumn = true;
             this.cityCheckBox.Name = "cityCheckBox";
             this.cityCheckBox.Size = new System.Drawing.Size(200, 117);
             this.cityCheckBox.TabIndex = 0;
@@ -247,10 +246,10 @@
             this.categoriesCheckBox.FormattingEnabled = true;
             this.categoriesCheckBox.Location = new System.Drawing.Point(0, 13);
             this.categoriesCheckBox.Margin = new System.Windows.Forms.Padding(0);
-            this.categoriesCheckBox.MultiColumn = true;
             this.categoriesCheckBox.Name = "categoriesCheckBox";
             this.categoriesCheckBox.Size = new System.Drawing.Size(201, 117);
             this.categoriesCheckBox.TabIndex = 0;
+            this.categoriesCheckBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.categoriesCheckBox_ItemCheck);
             // 
             // categoriesTextBox
             // 
@@ -288,7 +287,6 @@
             this.zipCheckBox.FormattingEnabled = true;
             this.zipCheckBox.Location = new System.Drawing.Point(0, 13);
             this.zipCheckBox.Margin = new System.Windows.Forms.Padding(0);
-            this.zipCheckBox.MultiColumn = true;
             this.zipCheckBox.Name = "zipCheckBox";
             this.zipCheckBox.Size = new System.Drawing.Size(201, 117);
             this.zipCheckBox.TabIndex = 0;
@@ -496,7 +494,6 @@
             this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this.tableLayoutPanel12.Size = new System.Drawing.Size(792, 133);
             this.tableLayoutPanel12.TabIndex = 2;
-            this.tableLayoutPanel12.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel12_Paint);
             // 
             // textBox2
             // 
@@ -748,7 +745,6 @@
             this.textBox1.Size = new System.Drawing.Size(132, 20);
             this.textBox1.TabIndex = 20;
             this.textBox1.Text = "Latitude";
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // textBox22
             // 
