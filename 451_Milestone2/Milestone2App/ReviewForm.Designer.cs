@@ -48,50 +48,64 @@
             this.Useful,
             this.Funny,
             this.Cool});
-            this.ReviewGrid.Location = new System.Drawing.Point(12, 12);
+            this.ReviewGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ReviewGrid.Location = new System.Drawing.Point(0, 0);
+            this.ReviewGrid.Margin = new System.Windows.Forms.Padding(0);
             this.ReviewGrid.Name = "ReviewGrid";
+            this.ReviewGrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.ReviewGrid.RowTemplate.Height = 24;
-            this.ReviewGrid.Size = new System.Drawing.Size(776, 426);
+            this.ReviewGrid.Size = new System.Drawing.Size(706, 357);
             this.ReviewGrid.TabIndex = 0;
             // 
             // Stars
             // 
+            this.Stars.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.Stars.HeaderText = "Stars";
             this.Stars.Name = "Stars";
+            this.Stars.Width = 56;
             // 
             // Date
             // 
+            this.Date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.Date.HeaderText = "Date";
             this.Date.Name = "Date";
+            this.Date.Width = 55;
             // 
             // Text
             // 
+            this.Text.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Text.HeaderText = "Text";
             this.Text.Name = "Text";
             // 
             // Useful
             // 
+            this.Useful.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.Useful.HeaderText = "Useful";
             this.Useful.Name = "Useful";
+            this.Useful.Width = 62;
             // 
             // Funny
             // 
+            this.Funny.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.Funny.HeaderText = "Funny";
             this.Funny.Name = "Funny";
+            this.Funny.Width = 61;
             // 
             // Cool
             // 
+            this.Cool.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.Cool.HeaderText = "Cool";
             this.Cool.Name = "Cool";
+            this.Cool.Width = 53;
             // 
             // ReviewForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(706, 357);
             this.Controls.Add(this.ReviewGrid);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ReviewForm";
-            //this.Text = "ReviewForm";
             ((System.ComponentModel.ISupportInitialize)(this.ReviewGrid)).EndInit();
             this.ResumeLayout(false);
 
