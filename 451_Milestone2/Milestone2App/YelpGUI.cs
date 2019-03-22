@@ -448,8 +448,10 @@ namespace Milestone2App
 
         private void ShowReviewsButton_Click(object sender, EventArgs e)
         {
+
             ReviewForm reviewWindow = new ReviewForm();
             reviewWindow.Show();
+
         }
     }
 }
