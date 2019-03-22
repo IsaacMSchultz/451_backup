@@ -158,6 +158,43 @@ def insert2UserTable(conn, cur): #Should have 192999
     print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")
     f.close()
 
+def insert2CategoriesTable(): #
+    startingTime = time.process_time()
+    with open('./yelp_business.JSON','r') as f:
+        line = f.readline()
+        count_line = 0
+        try:
+            conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='localhost' password='greatPassword'")
+            #conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
+        except:
+            print('Unable to connect to the database!')
+        cur = conn.cursor()
+
+        while line:
+            data = json.loads(line)
+
+            business_id = str(cleanStr4SQL(data['business_id'])) 
+
+            for k, v in data.items():
+                if k == "categories":
+                    categories = v
+
+                    for item in categories:
+                        cur.execute("INSERT INTO Category (business_id, category_name) VALUES ('" + business_id + "','" + cleanStr4SQL(item) + "');")
+                       
+            try:
+                print("Insert success\n") #get rid of try/ except
+            except Exception as e:
+                print("Insert failed! " + str(e) + "\nOn line: " + str(count_line))
+            conn.commit()
+
+            line = f.readline()
+            count_line +=1
+
+        cur.close()
+        conn.close()
+
+
 def insert2ReviewTable(conn, cur): #Should have 416479
     startingTime = time.process_time()
     with open('./yelp_review.JSON','r') as f:    #TODO: update path for the input file
@@ -258,14 +295,14 @@ except:
     print('Unable to connect to the database!')
 cur = conn.cursor()
     
-insert2BusinessTable(conn, cur)
-insert2UserTable(conn, cur)
-insert2ReviewTable(conn, cur)
-insert2CheckinTable(conn, cur)
-insert2FriendsTable(conn, cur)
+#insert2BusinessTable(conn, cur)
+#insert2UserTable(conn, cur)
+#insert2ReviewTable(conn, cur)
+#insert2CheckinTable(conn, cur)
+#insert2FriendsTable(conn, cur)
 ######insert2CategoriesTable(conn, cur) #done inside the attributes function
 insert2AttributesTable(conn, cur)
-insert2HoursTable(conn, cur)
+#insert2HoursTable(conn, cur)
 
 cur.close()
 conn.close()
