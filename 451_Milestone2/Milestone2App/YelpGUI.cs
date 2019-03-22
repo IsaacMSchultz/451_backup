@@ -411,12 +411,8 @@ namespace Milestone2App
                     using (var cmd = new NpgsqlCommand())
                     {
                         cmd.Connection = connection;
-<<<<<<< Updated upstream
                         cmd.CommandText = "INSERT INTO review VALUES ('" + reviewID + "', '" + currBusId + "', '" + currUserId + "', '" + ReviewStarsDropDown.SelectedItem +
                             "', NOW(), '" + WriteReviewTextBox_Review.Text + "', 0, 0, 0);";
-=======
-                        //cmd.CommandText = "INSERT INTO review ('" + reviewID + "'" ) WHERE business_id = '" + currBusId + "';";
->>>>>>> Stashed changes
                         using (var reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())

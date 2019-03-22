@@ -385,12 +385,8 @@
             // ShowReviewsButton
             // 
             this.ShowReviewsButton.Dock = System.Windows.Forms.DockStyle.Fill;
-<<<<<<< Updated upstream
             this.ShowReviewsButton.Enabled = false;
             this.ShowReviewsButton.Location = new System.Drawing.Point(492, 0);
-=======
-            this.ShowReviewsButton.Location = new System.Drawing.Point(659, 0);
->>>>>>> Stashed changes
             this.ShowReviewsButton.Margin = new System.Windows.Forms.Padding(0);
             this.ShowReviewsButton.Name = "ShowReviewsButton";
             this.ShowReviewsButton.Size = new System.Drawing.Size(133, 47);
@@ -418,12 +414,8 @@
             // SubmitReviewButton
             // 
             this.SubmitReviewButton.Dock = System.Windows.Forms.DockStyle.Fill;
-<<<<<<< Updated upstream
             this.SubmitReviewButton.Enabled = false;
             this.SubmitReviewButton.Location = new System.Drawing.Point(0, 21);
-=======
-            this.SubmitReviewButton.Location = new System.Drawing.Point(0, 24);
->>>>>>> Stashed changes
             this.SubmitReviewButton.Margin = new System.Windows.Forms.Padding(0);
             this.SubmitReviewButton.Name = "SubmitReviewButton";
             this.SubmitReviewButton.Size = new System.Drawing.Size(133, 139);
