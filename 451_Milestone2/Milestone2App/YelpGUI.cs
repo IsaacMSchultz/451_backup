@@ -30,6 +30,10 @@ namespace Milestone2App
         {
             queryEngine = new QueryEngine();
             List<string> businessIds = new List<string>();
+
+            currBusId = "";
+            currUserId = "";
+
             InitializeComponent();
             initializeDropDowns();
             //businessBindingSource = new BindingSource(dataGridBusinesses);
@@ -379,23 +383,23 @@ namespace Milestone2App
                 }
                 connection.Close();
             }
-
-
-
         }
 
         private void businessGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            //SubmitReviewButton
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
                 businessNameTextBox_Review.Text = (string)businessGrid[0, e.RowIndex].Value;
                 currBusId = (string)businessGrid[9, e.RowIndex].Value;
+
+                ShowReviewsButton.Enabled = true; //enable the button to show reviews after we click one
             }
         }
 
         private void SubmitReviewButton_Click(object sender, EventArgs e)
         {
-            if (currBusId != "")
+            if (currBusId != "" && currUserId != "" && ReviewStarsDropDown.SelectedItem as string != "Review Stars")
             {
                 string reviewID = new string(Enumerable.Repeat(chars, 22).Select(s => s[random.Next(s.Length)]).ToArray()); //makes a random 22 charachter string
 
@@ -405,7 +409,8 @@ namespace Milestone2App
                     using (var cmd = new NpgsqlCommand())
                     {
                         cmd.Connection = connection;
-                        cmd.CommandText = "INSERT INTO review ('" + reviewID + "'" ) WHERE business_id = '" + currBusId + "';";
+                        cmd.CommandText = "INSERT INTO review VALUES ('" + reviewID + "', '" + currBusId + "', '" + currUserId + "', '" + ReviewStarsDropDown.SelectedItem +
+                            "', NOW(), '" + WriteReviewTextBox_Review.Text + "', 0, 0, 0);";
                         using (var reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
@@ -416,7 +421,26 @@ namespace Milestone2App
                     }
                     connection.Close();
                 }
-                //WriteReviewTextBox_Review
+            }
+        }
+
+        private void WriteReviewTextBox_Review_TextChanged(object sender, EventArgs e)
+        {
+            if (WriteReviewTextBox_Review.Text != "" && ReviewStarsDropDown.SelectedItem as string != "Review Stars")
+            {
+                SubmitReviewButton.Enabled = true;
+            }
+            else if (SubmitReviewButton.Enabled == true)
+            {
+                SubmitReviewButton.Enabled = false;
+            }
+        }
+
+        private void ReviewStarsDropDown_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (WriteReviewTextBox_Review.Text != "")
+            {
+                SubmitReviewButton.Enabled = true;
             }
         }
     }
