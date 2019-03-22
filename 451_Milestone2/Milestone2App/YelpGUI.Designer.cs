@@ -85,6 +85,7 @@
             this.PlayerIDListBox = new System.Windows.Forms.ListBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.UserNameEntryTextBox = new System.Windows.Forms.TextBox();
+            this.SearchButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -146,7 +147,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(200, 130);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(200, 123);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // cityCheckBox
@@ -156,7 +157,7 @@
             this.cityCheckBox.Location = new System.Drawing.Point(0, 13);
             this.cityCheckBox.Margin = new System.Windows.Forms.Padding(0);
             this.cityCheckBox.Name = "cityCheckBox";
-            this.cityCheckBox.Size = new System.Drawing.Size(200, 117);
+            this.cityCheckBox.Size = new System.Drawing.Size(200, 110);
             this.cityCheckBox.TabIndex = 0;
             this.cityCheckBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.cityCheckBox_ItemCheck);
             // 
@@ -211,16 +212,18 @@
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel1, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel2, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel4, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.SearchButton, 0, 4);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 4;
+            this.tableLayoutPanel3.RowCount = 5;
             this.tableLayoutPanel5.SetRowSpan(this.tableLayoutPanel3, 2);
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(200, 424);
             this.tableLayoutPanel3.TabIndex = 8;
             // 
@@ -231,13 +234,13 @@
             this.tableLayoutPanel6.Controls.Add(this.categoriesCheckBox, 1, 1);
             this.tableLayoutPanel6.Controls.Add(this.categoriesTextBox, 1, 0);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 294);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 280);
             this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 2;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(200, 130);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(200, 123);
             this.tableLayoutPanel6.TabIndex = 9;
             // 
             // categoriesCheckBox
@@ -247,7 +250,7 @@
             this.categoriesCheckBox.Location = new System.Drawing.Point(0, 13);
             this.categoriesCheckBox.Margin = new System.Windows.Forms.Padding(0);
             this.categoriesCheckBox.Name = "categoriesCheckBox";
-            this.categoriesCheckBox.Size = new System.Drawing.Size(201, 117);
+            this.categoriesCheckBox.Size = new System.Drawing.Size(201, 110);
             this.categoriesCheckBox.TabIndex = 0;
             this.categoriesCheckBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.categoriesCheckBox_ItemCheck);
             // 
@@ -272,13 +275,13 @@
             this.tableLayoutPanel4.Controls.Add(this.zipCheckBox, 1, 1);
             this.tableLayoutPanel4.Controls.Add(this.ZipText, 1, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 164);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 157);
             this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 2;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(200, 130);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(200, 123);
             this.tableLayoutPanel4.TabIndex = 8;
             // 
             // zipCheckBox
@@ -288,7 +291,7 @@
             this.zipCheckBox.Location = new System.Drawing.Point(0, 13);
             this.zipCheckBox.Margin = new System.Windows.Forms.Padding(0);
             this.zipCheckBox.Name = "zipCheckBox";
-            this.zipCheckBox.Size = new System.Drawing.Size(201, 117);
+            this.zipCheckBox.Size = new System.Drawing.Size(201, 110);
             this.zipCheckBox.TabIndex = 0;
             this.zipCheckBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.zipCheckBox_ItemCheck);
             // 
@@ -840,6 +843,18 @@
             this.UserNameEntryTextBox.Text = "Enter name...";
             this.UserNameEntryTextBox.TextChanged += new System.EventHandler(this.UserNameEntryTextBox_TextChanged);
             // 
+            // SearchButton
+            // 
+            this.SearchButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SearchButton.Location = new System.Drawing.Point(0, 403);
+            this.SearchButton.Margin = new System.Windows.Forms.Padding(0);
+            this.SearchButton.Name = "SearchButton";
+            this.SearchButton.Size = new System.Drawing.Size(200, 21);
+            this.SearchButton.TabIndex = 10;
+            this.SearchButton.Text = "Search";
+            this.SearchButton.UseVisualStyleBackColor = true;
+            this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
+            // 
             // YelpGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -937,6 +952,7 @@
         private System.Windows.Forms.TextBox textBox22;
         private System.Windows.Forms.TextBox ReviewCount;
         private System.Windows.Forms.TextBox ReviewCountValue;
+        private System.Windows.Forms.Button SearchButton;
     }
 }
 
