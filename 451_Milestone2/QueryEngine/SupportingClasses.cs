@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QueryEngine
+namespace QueryEngine1
 {
-    class Location
+    public class Location
     {
         private double latitude;
         private double longitude;
