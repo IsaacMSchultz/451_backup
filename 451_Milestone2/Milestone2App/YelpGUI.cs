@@ -34,9 +34,12 @@ namespace Milestone2App
                 // Create the column headers for the data grid view.
                 DataGridViewTextBoxColumn newColumn = new DataGridViewTextBoxColumn();
                 newColumn.HeaderText = column;
-                newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                //if (column == "name")
+                //    newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                //else
+                    newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
                 businessGrid.Columns.Add(newColumn);
-            }                                       
+            }
         }
 
         private void initializeDropDowns()
@@ -111,7 +114,7 @@ namespace Milestone2App
                 foreach (string item in zipCheckBox.CheckedItems)
                     newZipBoxItems.Add(item);
 
-                updateGrid(newZipBoxItems); //we need to update the datagrid to remove all the elements that are no longer selectable in the zipcode box
+                //updateGrid(newZipBoxItems); //we need to update the datagrid to remove all the elements that are no longer selectable in the zipcode box
             }
         }
 
@@ -120,73 +123,114 @@ namespace Milestone2App
             CheckedListBox senderCheckBox = (CheckedListBox)sender; //casts the sending object as a checkedbox
             List<string> zipItems = new List<string>();
 
-            foreach (string item in senderCheckBox.CheckedItems) // add all the checked Items into our list that holds their string names.            
-                zipItems.Add(item);
-
-            if (e != null) //if the function is called without an argument, which is when its being called from within another event.
+            // need to remove the zipcodes from that city from the zipBox
+            using (var connection = new NpgsqlConnection(LOGININFO))
             {
-                if (e.NewValue == CheckState.Checked) //add or remove the check box item that just changed to the list
-                    zipItems.Add(senderCheckBox.Items[e.Index].ToString());
-                else
-                    zipItems.Remove(senderCheckBox.Items[e.Index].ToString());
+                connection.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = connection;
+                    cmd.CommandText = "SELECT DISTINCT category_name FROM category WHERE business_id IN (SELECT business_id FROM business WHERE state = '" + stateDropDown.SelectedItem + "')";
+
+                    string orList = " AND business_id IN (SELECT business_id FROM business WHERE "; //building subquery to find all the cities in the listbox
+                    foreach (string item in cityCheckBox.CheckedItems)
+                    {
+                        Console.WriteLine(item);
+                        orList += "city = '" + item + "' OR "; // city = 'string' OR 
+                    }
+                    orList = orList.Substring(0, orList.Length - 3); // Cuts off the final "OR "
+                    orList += ")";
+
+                    cmd.CommandText += orList + " AND business_id IN (SELECT business_id FROM business WHERE zipcode = '" + zipCheckBox.Items[e.Index].ToString() + "') ORDER BY category_name;";
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                            zipItems.Add(reader.GetString(0));
+                    }
+                }
+                connection.Close();
             }
 
-            
+            if (e.NewValue == CheckState.Checked) //add or remove the check box item that just changed to the list
+            {
+                foreach (string item in zipItems)
+                    categoriesCheckBox.Items.Add(item);
+            }
+            else
+            {
+                foreach (string item in zipItems)
+                    categoriesCheckBox.Items.Remove(item);
+
+                List<string> newCategoriesBoxItems = new List<string>(); //a list that holds all the data we will pass to the grid updater function
+                foreach (string item in zipCheckBox.CheckedItems)
+                    newCategoriesBoxItems.Add(item);
+
+                //updateGrid(newCategoriesBoxItems); //we need to update the datagrid to remove all the elements that are no longer selectable in the zipcode box
+            }
         }
 
 
         private void categoriesCheckBox_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             CheckedListBox senderCheckBox = (CheckedListBox)sender; //casts the sending object as a checkedbox
-            List<string> zipItems = new List<string>();
+            List<string> categoryItems = new List<string>();
 
             foreach (string item in senderCheckBox.CheckedItems) // add all the checked Items into our list that holds their string names.            
-                zipItems.Add(item);
+                categoryItems.Add(item);
 
             if (e != null) //if the function is called without an argument, which is when its being called from within another event.
             {
                 if (e.NewValue == CheckState.Checked) //add or remove the check box item that just changed to the list
-                    zipItems.Add(senderCheckBox.Items[e.Index].ToString());
+                    categoryItems.Add(senderCheckBox.Items[e.Index].ToString());
                 else
-                    zipItems.Remove(senderCheckBox.Items[e.Index].ToString());
-            }
-
-            updateGrid(zipItems);
+                    categoryItems.Remove(senderCheckBox.Items[e.Index].ToString());
+            }            
         }
 
-        private void updateGrid(List<string> categoryContents)
+        private void updateGrid(/*List<string> categoryContents*/) //way to call before the ItemCheck function completes (old ghetto way)
         {
             businessGrid.Rows.Clear(); //removes all the data previously in the grid.
 
-            if (categoryContents.Count == 0) //if there are no items that are checked.
-                return; //end the call
+            if (categoriesCheckBox.CheckedItems.Count == 0 && cityCheckBox.CheckedItems.Count == 0 && zipCheckBox.CheckedItems.Count == 0) //if there is nothing in any checkboxes
+                return;
 
-            string orList = "AND city IN (SELECT city FROM business WHERE "; //building subquery to find all the cities in the listbox
-            foreach (string item in cityCheckBox.CheckedItems)
+            string orList = "";
+            if (categoriesCheckBox.CheckedItems.Count > 0)
             {
-                Console.WriteLine(item);
-                orList += "city = '" + item + "' OR "; // city = 'string' OR 
+                orList += "AND business_id IN (SELECT business_id FROM category WHERE "; // need to make a new IN each time
+                foreach (string item in categoriesCheckBox.CheckedItems)
+                {
+                    Console.WriteLine(item);
+                    orList += "category_name = '" + item + "' AND "; //for categories, if we are searching we only want ones with both!
+                }
+                orList = orList.Substring(0, orList.Length - 4); //get rid of the extra and
+                orList += ") ";
             }
-            orList = orList.Substring(0, orList.Length - 3); // Cuts off the final "OR "
-            orList += ") ";
 
-            orList += "AND zipcode IN (SELECT zipcode FROM business WHERE "; //building subquery to find all the zipcodes in the listbox
-            foreach (string item in categoriesCheckBox.CheckedItems)
+            if (cityCheckBox.CheckedItems.Count > 0)
             {
-                Console.WriteLine(item);
-                orList += "zipcode = '" + item + "' OR ";
+                orList += "AND business_id IN (SELECT business_id FROM business WHERE "; //building subquery to find all the cities in the listbox
+                foreach (string item in cityCheckBox.CheckedItems)
+                {
+                    Console.WriteLine(item);
+                    orList += "city = '" + item + "' OR "; // city = 'string' OR 
+                }
+                orList = orList.Substring(0, orList.Length - 3); // Cuts off the final "OR "
+                orList += ") ";
             }
-            orList = orList.Substring(0, orList.Length - 3);
-            orList += ") ";
 
-            orList += "AND zipcode IN (SELECT category FROM category WHERE "; //building subquery to find all the zipcodes in the listbox
-            foreach (string item in categoriesCheckBox.CheckedItems)
+            if (zipCheckBox.CheckedItems.Count > 0)
             {
-                Console.WriteLine(item);
-                orList += "zipcode = '" + item + "' OR ";
+                orList += "AND business_id IN (SELECT business_id FROM business WHERE "; //building subquery to find all the zipcodes in the listbox
+                foreach (string item in zipCheckBox.CheckedItems)
+                {
+                    Console.WriteLine(item);
+                    orList += "zipcode = '" + item + "' OR ";
+                }
+                orList = orList.Substring(0, orList.Length - 3);// Cuts off the final "OR "
+                orList += ") ";
             }
-            orList = orList.Substring(0, orList.Length - 3);
-            orList += ") ";
 
             // populate data into businessGrid from database with the city and state from each check box
             using (var connection = new NpgsqlConnection(LOGININFO))
@@ -196,7 +240,7 @@ namespace Milestone2App
                 using (var cmd = new NpgsqlCommand())
                 {
                     cmd.Connection = connection;
-                    cmd.CommandText = "SELECT name, address, city, state, stars, review_count, num_checkins, reviewRating, is_open FROM business WHERE state = '" + stateDropDown.SelectedItem + "'" + orList + " ORDER BY state;";
+                    cmd.CommandText = "SELECT name, address, city, state, stars, review_count, num_checkins, reviewRating, is_open FROM business WHERE state = '" + stateDropDown.SelectedItem + "' " + orList + " ORDER BY reviewRating;";
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -228,6 +272,11 @@ namespace Milestone2App
                 }
                 connection.Close();
             }
+        }
+
+        private void SearchButton_Click(object sender, EventArgs e)
+        {
+            updateGrid();
         }
 
         private void UserNameEntryTextBox_TextChanged(object sender, EventArgs e)
@@ -322,6 +371,5 @@ namespace Milestone2App
 
 
         }
-
     }
 }
