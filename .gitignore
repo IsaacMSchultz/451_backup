@@ -509,7 +509,3 @@ healthchecksdb
 
 # End of https://www.gitignore.io/api/csharp,visualstudio
 /CS_322.zip
-451_Milestone2/yelp_business.JSON
-451_Milestone2/yelp_checkin.JSON
-451_Milestone2/yelp_review.JSON
-451_Milestone2/yelp_user.JSON
