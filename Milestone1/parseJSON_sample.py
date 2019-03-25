@@ -24,7 +24,7 @@ def parseBusinessData():
             outfile.write(str(data['stars'])+'\t') #stars
             outfile.write(str(data['review_count'])+'\t') #reviewcount
             outfile.write(str(data['open'])+'\t') 
-            outfile.write(str([item for item in data['categories']])+'\t') #category list
+            outfile.write(str([item for item in  data['categories']])+'\t') #category list
             outfile.write(str([item for item in data['attributes']])+'\t') #want to get more data from attributes such as price and ambiance
             outfile.write(str([item for item in data['hours']])+'\t') #need more data from this- each day's hours of operation
             outfile.write('\n'); #all of the data for each business is on a single line
