@@ -27,7 +27,6 @@ CREATE TABLE YelpUser (
     yelping_since DATE NOT NULL,
     user_latitude FLOAT, -- Doesn't exist in the json files
     user_longitude FLOAT,
-    friends_List TEXT, -- Added to test inserting friends
     PRIMARY KEY (user_id)
 );
 
@@ -72,7 +71,7 @@ CREATE TABLE Attributes (
     business_id CHAR(22),
     attribute_name VARCHAR(40),
     attribute_value VARCHAR(40),
-    PRIMARY KEY (Business_id, attribute_name),
+    PRIMARY KEY (Business_id, attribute_value, attribute_name),
     FOREIGN KEY (business_id) REFERENCES Business(Business_id)
 );
 
