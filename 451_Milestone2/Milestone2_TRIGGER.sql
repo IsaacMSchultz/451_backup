@@ -20,10 +20,10 @@ WHEN (NEW.review_id IS NOT NULL)
 EXECUTE PROCEDURE defineCountReview();
 
 -- test
-INSERT INTO Review VALUES ('1111111111111111111111', '2eJEUJIP54tex7T9YOcLSw','1111111111111111111112', 5,'1996-10-07','it was bland',1,2,3);
-SELECT * FROM Business WHERE business_id = '2eJEUJIP54tex7T9YOcLSw';
+-- INSERT INTO Review VALUES ('1111111111111111111111', '2eJEUJIP54tex7T9YOcLSw','1111111111111111111112', 5,'1996-10-07','it was bland',1,2,3);
+-- SELECT * FROM Business WHERE business_id = '2eJEUJIP54tex7T9YOcLSw';
 
-DROP TRIGGER countReview ON review;
+-- DROP TRIGGER countReview ON review;
 
 --INSERT INTO yelp_user VALUES ('1111111111111111111112', 'bob', 0, 0, 0, 0, 0, 0, 1996-10-07, 1.1, 1.2);
 
@@ -46,15 +46,15 @@ FOR EACH ROW
 WHEN (NEW.review_id IS NOT NULL)
 EXECUTE PROCEDURE defineCalcReviewRating();
 
--- test
-INSERT INTO Business Values ('0000000000000000000001', 'Wendys', 'Alpaca', 'WA', '98296', 0, 0, 'Robinson Road', 0, 0, 0, True);
-INSERT INTO yelpuser VALUES ('1111111111111111111112', 'bob', 0, 0, 0, 0, 0, 0, '1996-10-07', 1.1, 1.2);
-INSERT INTO Review VALUES ('1111111111111111115555', '0000000000000000000001','1111111111111111111112', 2,'1996-10-07','it was bland',1,2,3);
-INSERT INTO Review VALUES ('1111111111111111115556', '0000000000000000000001','1111111111111111111112', 1,'1996-10-07','ew',1,2,3);
-INSERT INTO Review VALUES ('1111111111111111115557', '0000000000000000000001','1111111111111111111112', 5,'1996-10-07','Nice 4 for 4 deal!',1,2,3);
-SELECT * FROM Business WHERE business_id = '0000000000000000000001'; --reviewrating should be 2.7
+-- -- test
+-- INSERT INTO Business Values ('0000000000000000000001', 'Wendys', 'Alpaca', 'WA', '98296', 0, 0, 'Robinson Road', 0, 0, 0, True);
+-- INSERT INTO yelpuser VALUES ('1111111111111111111112', 'bob', 0, 0, 0, 0, 0, 0, '1996-10-07', 1.1, 1.2);
+-- INSERT INTO Review VALUES ('1111111111111111115555', '0000000000000000000001','1111111111111111111112', 2,'1996-10-07','it was bland',1,2,3);
+-- INSERT INTO Review VALUES ('1111111111111111115556', '0000000000000000000001','1111111111111111111112', 1,'1996-10-07','ew',1,2,3);
+-- INSERT INTO Review VALUES ('1111111111111111115557', '0000000000000000000001','1111111111111111111112', 5,'1996-10-07','Nice 4 for 4 deal!',1,2,3);
+-- SELECT * FROM Business WHERE business_id = '0000000000000000000001'; --reviewrating should be 2.7
 
-DROP TRIGGER zCalcReviewRating ON review;
+-- DROP TRIGGER zCalcReviewRating ON review;
 -----------------------------------------------------------------------------------------------------------------------------------------------
 -- Update on a checkin, handles counting the num_checkins for the business.
 -----------------------------------------------------------------------------------------------------------------------------------------------
@@ -78,12 +78,12 @@ EXECUTE PROCEDURE defineCountCheckin();
 --INSERT INTO checkins VALUES ('QpRfQtlbwlmqUsq4DKjqqw', 'Monday', '01:00:00',  1);
 --INSERT INTO checkins VALUES ('QpRfQtlbwlmqUsq4DKjqqw', 'Monday', '04:00:00',  6);
 
-UPDATE checkins 
-SET count = count + 1
-WHERE business_id = 'QpRfQtlbwlmqUsq4DKjqqw' AND time = '01:00:00' AND day = 'Monday';
-SELECT * FROM Business WHERE business_id = 'QpRfQtlbwlmqUsq4DKjqqw';
+-- UPDATE checkins 
+-- SET count = count + 1
+-- WHERE business_id = 'QpRfQtlbwlmqUsq4DKjqqw' AND time = '01:00:00' AND day = 'Monday';
+-- SELECT * FROM Business WHERE business_id = 'QpRfQtlbwlmqUsq4DKjqqw';
 
-DROP TRIGGER countCheckin ON checkins;
+-- DROP TRIGGER countCheckin ON checkins;
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 -- Increment checkin count for proper hour and time
@@ -105,10 +105,10 @@ AFTER INSERT ON Checkins
 FOR EACH ROW
 EXECUTE PROCEDURE defineIncrementCountCheckin();
 
-INSERT INTO Checkins VALUES ('2eJEUJIP54tex7T9YOcLSw','Friday', '20:00"');
-SELECT * FROM Business WHERE business_id = '2eJEUJIP54tex7T9YOcLSw';
+-- INSERT INTO Checkins VALUES ('2eJEUJIP54tex7T9YOcLSw','Friday', '20:00"');
+-- SELECT * FROM Business WHERE business_id = '2eJEUJIP54tex7T9YOcLSw';
 
-DROP TRIGGER countReview ON review;
+-- DROP TRIGGER countReview ON review;
 
 --INSERT INTO yelp_user VALUES ('1111111111111111111112', 'bob', 0, 0, 0, 0, 0, 0, 1996-10-07, 1.1, 1.2);
 
