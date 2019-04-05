@@ -70,7 +70,7 @@ END
 $countCheckin$ LANGUAGE plpgsql;
 
 CREATE TRIGGER countCheckin
-AFTER UPDATE ON checkins
+AFTER UPDATE OR INSERT ON checkins
 FOR EACH ROW
 EXECUTE PROCEDURE defineCountCheckin();
 
@@ -89,21 +89,21 @@ EXECUTE PROCEDURE defineCountCheckin();
 -- Increment checkin count for proper hour and time
 ---------------------------------------------------------------------------------------------------------------------------------------
 
-CREATE OR REPLACE FUNCTION defineIncrementCountCheckin() RETURNS trigger AS '
-BEGIN
-    UPDATE CHECKINS
-    SET count = count + 1
-    WHERE checkins.business_id = NEW.business_id
-    AND checkins.day = NEW.day
-    AND checkins.time = NEW.time;
-    RETURN NEW;
-END
-' LANGUAGE plpgsql;
+-- CREATE OR REPLACE FUNCTION defineIncrementCountCheckin() RETURNS trigger AS '
+-- BEGIN
+--     UPDATE CHECKINS
+--     SET count = count + 1
+--     WHERE checkins.business_id = NEW.business_id
+--     AND checkins.day = NEW.day
+--     AND checkins.time = NEW.time;
+--     RETURN NEW;
+-- END
+-- ' LANGUAGE plpgsql;
 
-CREATE TRIGGER countCheckinInsert
-AFTER INSERT ON Checkins
-FOR EACH ROW
-EXECUTE PROCEDURE defineIncrementCountCheckin();
+-- CREATE TRIGGER countCheckinInsert
+-- AFTER INSERT ON Checkins
+-- FOR EACH ROW
+-- EXECUTE PROCEDURE defineIncrementCountCheckin();
 
 -- INSERT INTO Checkins VALUES ('2eJEUJIP54tex7T9YOcLSw','Friday', '20:00"');
 -- SELECT * FROM Business WHERE business_id = '2eJEUJIP54tex7T9YOcLSw';
