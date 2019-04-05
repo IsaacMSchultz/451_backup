@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 
-namespace QueryEngine
+namespace QueryEngine1
 {
     public abstract class Post
     {
