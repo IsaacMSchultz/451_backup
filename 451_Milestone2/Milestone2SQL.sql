@@ -7,9 +7,9 @@ CREATE TABLE Business (
     latitude FLOAT NOT NULL,
     longitude FLOAT NOT NULL,
     address VARCHAR(150) NOT NULL,
-    review_count INTEGER,
+    review_count FLOAT,
     num_checkins INTEGER,
-    reviewRating FLOAT, -- I dont know exactly what this is??? but its in the schema so I'm keeping it
+    reviewRating NUMERIC(3,2),
     is_open BOOLEAN NOT NULL,
     stars FLOAT,
     PRIMARY KEY (business_id)
