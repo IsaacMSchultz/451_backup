@@ -38,32 +38,6 @@ def insert2BusinessTable(conn, cur): #Should have 11481
     print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")
     f.close()
 
-def insert2CategoriesTable(conn, cur): #Has 33619
-    startingTime = time.process_time()
-    with open('./yelp_business.JSON','r') as f:
-        line = f.readline()
-        count_line = 0
-
-        while line:
-            data = json.loads(line)
-
-            business_id = str(cleanStr4SQL(data['business_id'])) 
-
-            for k, v in data.items():
-                if k == "categories":
-                    categories = v
-
-                    for item in categories:
-                        cur.execute("INSERT INTO Category (business_id, category_name) VALUES ('" + business_id + "','" + cleanStr4SQL(item) + "');")
-                       
-            conn.commit() #what does this do?
-
-            line = f.readline()
-            count_line +=1        
-
-    print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")
-    f.close()
-
 def insert2HoursTable(conn, cur): #Has 55502
     startingTime = time.process_time()
     with open('./yelp_business.JSON','r') as f:
@@ -92,6 +66,15 @@ def insert2HoursTable(conn, cur): #Has 55502
     f.close()
 
 def insert2AttributesTable(conn, cur): #Has 97117
+
+    def myprint(d):
+        for k, v in d.items():
+            if isinstance(v, dict):
+                myprint(v)
+            else:
+                #print "{0} : {1}".format(k, v)
+                cur.execute("INSERT INTO Attributes (business_id, attribute_name, attribute_value) VALUES ('" + business_id + "','" + k + "','" + str(v) + "');")
+
     startingTime = time.process_time()
     with open('./yelp_business.JSON','r') as f:
         line = f.readline()
@@ -104,23 +87,17 @@ def insert2AttributesTable(conn, cur): #Has 97117
 
             for k, v in data.items():
                 if k == "attributes":
-                    attributes = v
-
-                    for name, value in attributes.items():
-                        if isinstance(value, dict):
-                            inner = value
-                            for innerName, innerValue in inner.items():
-                                if innerValue != False:
-                                    cur.execute("INSERT INTO Attributes (business_id, attribute_name, attribute_value) VALUES ('" + business_id + "','" + innerName + "','" + str(innerValue) + "');")
-
-                        elif value != False: 
-                            cur.execute("INSERT INTO Attributes (business_id, attribute_name, attribute_value) VALUES ('" + business_id + "','" + name + "','" + str(value) + "');")
-
+                    myprint(v)
+                    
                 elif k == "categories":
                     categories = v
 
                     for item in categories:
-                        cur.execute("INSERT INTO Category (business_id, category_name) VALUES ('" + business_id + "','" + cleanStr4SQL(item) + "');")
+                        try:
+                            cur.execute("INSERT INTO Category (business_id, category_name) VALUES ('" + business_id + "','" + cleanStr4SQL(item) + "');")
+                        except Exception as e:
+                            print("Insert failed! " + str(e) + "On line: " + str(count_line))
+                        
                      
             conn.commit()
 
@@ -152,61 +129,6 @@ def insert2UserTable(conn, cur): #Should have 192999
             count_line +=1
 
     print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")
-    f.close()
-
-def insert2ReviewTable(conn, cur): #Should have 416479
-    startingTime = time.process_time()
-    with open('./yelp_review.JSON','r') as f:    #TODO: update path for the input file
-        line = f.readline()
-        count_line = 0
-
-        while line:
-            data = json.loads(line)
-            sql_str = "INSERT INTO Review (review_id, business_id, user_id, review_stars, date, text, useful_vote, funny_vote, cool_vote) " \
-                    "VALUES ('" + cleanStr4SQL(data["review_id"]) + "','" + cleanStr4SQL(data["business_id"]) + "','" + cleanStr4SQL(data["user_id"]) + "','" + \
-                    str(data["stars"]) + "','" + str(data["date"]) + "','" + cleanStr4SQL(data["text"]) + "','" + str(data["useful"]) + "'," + str(data["funny"]) + ",'" + \
-                    str(data["cool"]) + "');"
-            
-            try:
-                cur.execute(sql_str)
-            except Exception as e:
-                print("Insert failed! " + str(e) + "\nOn line: " + str(count_line))
-            conn.commit()
-
-            line = f.readline()
-            count_line +=1
-
-    print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")
-    f.close()
-
-def insert2CheckinTable(conn, cur): #Has 481360
-    startingTime = time.process_time()
-    with open('./yelp_checkin.JSON','r') as f:
-        line = f.readline()
-        count_line = 0
-
-        while line:
-            data = json.loads(line)
-
-            business_id = str(cleanStr4SQL(data['business_id'])) 
-
-            for k, v in data.items():
-                if k == "time":
-                    week = v
-
-                    for name, value in week.items():
-                        if isinstance(value, dict): 
-                            # parse through list
-                            inner = value
-                            for innerName, innerValue in inner.items():
-                                cur.execute("INSERT INTO Checkins (business_id, day, time, count) VALUES ('" + business_id + "','" + name + "','" + innerName + "','" + str(innerValue) + "');")
-
-            conn.commit()
-
-            line = f.readline()
-            count_line +=1
-
-    print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")    
     f.close()
 
 def insert2FriendsTable(conn, cur): #Has 1052706
@@ -244,18 +166,77 @@ def insert2FriendsTable(conn, cur): #Has 1052706
     print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")
     f.close()
 
+def insert2CheckinTable(conn, cur): #Has 481360
+    startingTime = time.process_time()
+    with open('./yelp_checkin.JSON','r') as f:
+        line = f.readline()
+        count_line = 0
+
+        while line:
+            data = json.loads(line)
+
+            business_id = str(cleanStr4SQL(data['business_id'])) 
+
+            for k, v in data.items():
+                if k == "time":
+                    week = v
+
+                    for name, value in week.items():
+                        if isinstance(value, dict): 
+                            # parse through list
+                            inner = value
+                            for innerName, innerValue in inner.items():
+                                try:
+                                    cur.execute("INSERT INTO Checkins (business_id, day, time, count) VALUES ('" + business_id + "','" + name + "','" + innerName + "','" + str(innerValue) + "');")
+                                except Exception as e:
+                                    print("Error inserting on line " +str(count_line) + ": " + str(e))
+
+            conn.commit()
+
+            line = f.readline()
+            count_line +=1
+
+    print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")    
+    f.close()
+
+def insert2ReviewTable(conn, cur): #Should have 416479
+    startingTime = time.process_time()
+    with open('./yelp_review.JSON','r') as f:    #TODO: update path for the input file
+        line = f.readline()
+        count_line = 0
+
+        while line:
+            data = json.loads(line)
+            sql_str = "INSERT INTO Review (review_id, business_id, user_id, review_stars, date, text, useful_vote, funny_vote, cool_vote) " \
+                    "VALUES ('" + cleanStr4SQL(data["review_id"]) + "','" + cleanStr4SQL(data["business_id"]) + "','" + cleanStr4SQL(data["user_id"]) + "','" + \
+                    str(data["stars"]) + "','" + str(data["date"]) + "','" + cleanStr4SQL(data["text"]) + "','" + str(data["useful"]) + "'," + str(data["funny"]) + ",'" + \
+                    str(data["cool"]) + "');"
+            
+            try:
+                cur.execute(sql_str)
+            except Exception as e:
+                print("Insert failed! " + str(e) + "\nOn line: " + str(count_line))
+            conn.commit()
+
+            line = f.readline()
+            count_line +=1
+
+    print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")
+    f.close()
+
 try:
-    conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='localhost' password='Xsandy9189'")
+    conn = psycopg2.connect("dbname='test1' user='postgres' host='localhost' password='greatPassword'")
     #conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
 except:
     print('Unable to connect to the database!')
 cur = conn.cursor()
     
-insert2BusinessTable(conn, cur)
-insert2UserTable(conn, cur)
+#insert2BusinessTable(conn, cur)
+#insert2UserTable(conn, cur)
 insert2ReviewTable(conn, cur)
 insert2CheckinTable(conn, cur)
 insert2FriendsTable(conn, cur)
+######insert2CategoriesTable(conn, cur) #done inside the attributes function
 insert2AttributesTable(conn, cur)
 insert2HoursTable(conn, cur)
 

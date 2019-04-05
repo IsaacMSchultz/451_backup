@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using Npgsql;
 
-namespace QueryEngine
+namespace QueryEngine1
 {
     /// <summary>
     /// 
     /// </summary>
-    class QueryEngine 
+    public class QueryEngine 
     {
         private Dictionary<string, List<string>> searchParameters;
         public event PropertyChangedEventHandler yelpDataChanged; // event for notifying that there was a property changed. 
-        private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone2db";
-        //private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone2db";
+        //private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone2db";
+        private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone2db";
 
-        QueryEngine()
+        public QueryEngine()
         {
             searchParameters = new Dictionary<string, List<string>>();
         }
@@ -67,16 +67,23 @@ namespace QueryEngine
             return returnList;
         }
 
-        public string[,] Search()
+        public object Search(string parameters = "")
         {
-            return Search(searchParameters);
+            if (parameters == "city")
+            {
+                var cities = new Dictionary<string, List<string>>();
+                cities.Add("state", searchParameters["state"]); //get only the cities from the search parameters
+                return Search(cities);
+            }
+            else //nothing specified, search for businesses to update grid.
+                return Search(searchParameters);
         }
 
         /// <summary>
         /// Runs a query to return the results based on the current search parameters as a 2 dimensional array of strings
         /// If there are no search parameters, returns an empty string array.
         /// </summary>
-        private string[,] Search(Dictionary<string, List<string>> searchParams)
+        private object Search(Dictionary<string, List<string>> searchParams, string projection = "")
         {
             if (searchParams.Count != 0)
             {
@@ -103,9 +110,9 @@ namespace QueryEngine
                 orList = orList.Substring(6, orList.Length); // Cuts off the first ") AND "
 
                 CommandText = "SELECT * FROM business WHERE " + orList + " ORDER BY state;";
-                return new string[1, 1];
+                return ExecuteListQuery(CommandText);
             }
-            return new string[0, 0]; //return empty array because there are no search parameters.
+            return new List<Business>(); //return empty array because there are no search parameters.
         }
 
         /// <summary>
@@ -136,10 +143,6 @@ namespace QueryEngine
         /// <summary>
         /// Executes the query on the database and returns the results as a 2 dimensional list of Businesses   
         /// </summary>
-        /// <remarks>
-        /// TODO: build the actual function!
-        /// TODO: maybe return a list of tuples instead??? this might make it easier to add them?
-        /// </remarks>
         private List<Business> ExecuteBusinessQuery(string query){
 
             List<Business> businesses = new List<Business>();
@@ -161,6 +164,27 @@ namespace QueryEngine
                 connection.Close();
             }
             return businesses;
+        }
+
+        public List<string> ExecuteListQuery(string query)
+        {
+            List<string> strings = new List<string>();
+
+            using (var connection = new NpgsqlConnection(LOGININFO))
+            {
+                connection.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = connection;
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                            strings.Add(reader.GetString(0));
+                    }
+                }
+                connection.Close();
+            }
+            return strings;
         }
 
         private void YelpPropertyChanged(object sender, PropertyChangedEventArgs e)
