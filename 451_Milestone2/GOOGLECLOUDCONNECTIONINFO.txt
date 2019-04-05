@@ -1,0 +1,4 @@
+IP: 35.230.13.126
+Port: 5432
+User: postgres
+Password: oiAv4Kmdup8Pd4vd
