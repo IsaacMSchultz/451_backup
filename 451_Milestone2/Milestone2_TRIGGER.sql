@@ -7,7 +7,7 @@
 CREATE OR REPLACE FUNCTION defineCountReview() RETURNS trigger AS '
 BEGIN
     UPDATE Business
-    SET review_count = review_count + 1
+    SET review_count = review_count + 1.0
     WHERE Business.business_id = NEW.business_id;
     RETURN NEW;
 END
