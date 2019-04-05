@@ -166,8 +166,66 @@ def insert2FriendsTable(conn, cur): #Has 1052706
     print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")
     f.close()
 
+def insert2CheckinTable(conn, cur): #Has 481360
+    startingTime = time.process_time()
+    with open('./yelp_checkin.JSON','r') as f:
+        line = f.readline()
+        count_line = 0
+
+        while line:
+            data = json.loads(line)
+
+            business_id = str(cleanStr4SQL(data['business_id'])) 
+
+            for k, v in data.items():
+                if k == "time":
+                    week = v
+
+                    for name, value in week.items():
+                        if isinstance(value, dict): 
+                            # parse through list
+                            inner = value
+                            for innerName, innerValue in inner.items():
+                                try:
+                                    cur.execute("INSERT INTO Checkins (business_id, day, time, count) VALUES ('" + business_id + "','" + name + "','" + innerName + "','" + str(innerValue) + "');")
+                                except Exception as e:
+                                    print("Error inserting on line " +str(count_line) + ": " + str(e))
+
+            conn.commit()
+
+            line = f.readline()
+            count_line +=1
+
+    print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")    
+    f.close()
+
+def insert2ReviewTable(conn, cur): #Should have 416479
+    startingTime = time.process_time()
+    with open('./yelp_review.JSON','r') as f:    #TODO: update path for the input file
+        line = f.readline()
+        count_line = 0
+
+        while line:
+            data = json.loads(line)
+            sql_str = "INSERT INTO Review (review_id, business_id, user_id, review_stars, date, text, useful_vote, funny_vote, cool_vote) " \
+                    "VALUES ('" + cleanStr4SQL(data["review_id"]) + "','" + cleanStr4SQL(data["business_id"]) + "','" + cleanStr4SQL(data["user_id"]) + "','" + \
+                    str(data["stars"]) + "','" + str(data["date"]) + "','" + cleanStr4SQL(data["text"]) + "','" + str(data["useful"]) + "'," + str(data["funny"]) + ",'" + \
+                    str(data["cool"]) + "');"
+            
+            try:
+                cur.execute(sql_str)
+            except Exception as e:
+                print("Insert failed! " + str(e) + "\nOn line: " + str(count_line))
+            conn.commit()
+
+            line = f.readline()
+            count_line +=1
+
+    print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")
+    f.close()
+
 try:
-    conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='localhost' password='greatPassword'")
+    conn = psycopg2.connect("dbname='test1' user='postgres' host='localhost' password='greatPassword'")
     #conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
 except:
     print('Unable to connect to the database!')
@@ -175,12 +233,12 @@ cur = conn.cursor()
     
 #insert2BusinessTable(conn, cur)
 #insert2UserTable(conn, cur)
-#insert2ReviewTable(conn, cur)
-#insert2CheckinTable(conn, cur)
-#insert2FriendsTable(conn, cur)
+insert2ReviewTable(conn, cur)
+insert2CheckinTable(conn, cur)
+insert2FriendsTable(conn, cur)
 ######insert2CategoriesTable(conn, cur) #done inside the attributes function
 insert2AttributesTable(conn, cur)
-#insert2HoursTable(conn, cur)
+insert2HoursTable(conn, cur)
 
 cur.close()
 conn.close()
