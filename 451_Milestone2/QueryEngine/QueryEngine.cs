@@ -110,6 +110,7 @@ namespace QueryEngine1
                 orList = orList.Substring(6, orList.Length); // Cuts off the first ") AND "
 
                 CommandText = "SELECT * FROM business WHERE " + orList + " ORDER BY state;";
+                Console.WriteLine(CommandText);
                 return ExecuteListQuery(CommandText);
             }
             return new List<Business>(); //return empty array because there are no search parameters.
