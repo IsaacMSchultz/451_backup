@@ -61,7 +61,10 @@ namespace Milestone2App
         {
             List<string> states = queryEngine.getStates();
             foreach (var state in states)
-                stateDropDown.Items.Add(state); //populates the state drop down with all the states returned by the queryEngine         
+            {
+                stateDropDown.Items.Add(state); //populates the state drop down with all the states returned by the queryEngine
+                queryEngine.addSearchParameter("state", state);
+            }
         }
 
         private void stateDropDown_SelectedIndexChanged(object sender, EventArgs e)
@@ -373,13 +376,6 @@ namespace Milestone2App
                             {
                                 LongitudeValue.Text = "empty";
                             }
-                            
-                            
-                            
-
-                            //if reader.GetDouble(7)
-
-
                         }
                     }
                 }
