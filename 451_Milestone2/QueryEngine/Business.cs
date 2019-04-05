@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 
-namespace QueryEngine
+namespace QueryEngine1
 {
-    class Business
+    public class Business
     {
         private string name;
         private string businessId;

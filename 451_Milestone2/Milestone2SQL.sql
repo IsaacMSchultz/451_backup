@@ -7,9 +7,9 @@ CREATE TABLE Business (
     latitude FLOAT NOT NULL,
     longitude FLOAT NOT NULL,
     address VARCHAR(150) NOT NULL,
-    review_count INTEGER,
+    review_count FLOAT,
     num_checkins INTEGER,
-    reviewRating FLOAT, -- I dont know exactly what this is??? but its in the schema so I'm keeping it
+    reviewRating NUMERIC(3,2),
     is_open BOOLEAN NOT NULL,
     stars FLOAT,
     PRIMARY KEY (business_id)
@@ -27,7 +27,6 @@ CREATE TABLE YelpUser (
     yelping_since DATE NOT NULL,
     user_latitude FLOAT, -- Doesn't exist in the json files
     user_longitude FLOAT,
-    friends_List TEXT, -- Added to test inserting friends
     PRIMARY KEY (user_id)
 );
 
@@ -72,7 +71,7 @@ CREATE TABLE Attributes (
     business_id CHAR(22),
     attribute_name VARCHAR(40),
     attribute_value VARCHAR(40),
-    PRIMARY KEY (Business_id, attribute_name),
+    PRIMARY KEY (Business_id, attribute_value, attribute_name),
     FOREIGN KEY (business_id) REFERENCES Business(Business_id)
 );
 
