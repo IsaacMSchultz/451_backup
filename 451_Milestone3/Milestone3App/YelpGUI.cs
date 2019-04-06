@@ -14,6 +14,8 @@ namespace Milestone2App
     {
         QueryEngine queryEngine;
         List<Business> dataGridBusinesses;
+        string[] cols = { "name", "address", "city", "state", "stars", "review_count", "num_checkins", "reviewRating", "is_open", "business_id" };
+        string projection;
 
         string currBusId;
         string currUserId;
@@ -24,25 +26,23 @@ namespace Milestone2App
         //private BindingSource businessBindingSource; //allows the datagridview to automatically update itself from the dataGridBusinesses.
 
         private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone2db"; // Defines our connection to local databus
-        //private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone2db"; // Defines our connection to cloud hosted databus
+                                                                                                                              //private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone2db"; // Defines our connection to cloud hosted databus
 
-        
 
-        public YelpGUI()
+
+        public YelpGUI(string proj = "name, address, city, state, stars, review_count, num_checkins, reviewRating, is_open, business_id")
         {
             queryEngine = new QueryEngine();
             List<string> businessIds = new List<string>();
 
             currBusId = "";
             currUserId = "";
+            projection = proj;
 
             InitializeComponent();
             initializeDropDowns();
             //businessBindingSource = new BindingSource(dataGridBusinesses);
-            //businessGrid.DataSource = businessBindingSource; //tell the businessGrid to read the data from the list of businesses.
-
-
-            string[] cols = { "name", "address", "city", "state", "stars", "review_count", "num_checkins", "reviewRating", "is_open", "business_id" };
+            //businessGrid.DataSource = businessBindingSource; //tell the businessGrid to read the data from the list of businesses.            
 
             foreach (var column in cols)
             {
@@ -52,7 +52,7 @@ namespace Milestone2App
                 //if (column == "name")
                 //    newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 //else
-                    newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
                 businessGrid.Columns.Add(newColumn);
             }
         }
@@ -70,7 +70,7 @@ namespace Milestone2App
         private void stateDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBox box = (ComboBox)sender; //casts sender as a ComboBox
-            
+
             cityCheckBox.Items.Clear();
             zipCheckBox.Items.Clear();
             categoriesCheckBox.Items.Clear();
@@ -108,17 +108,17 @@ namespace Milestone2App
         private void zipCheckBox_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             CheckedListBox senderCheckBox = (CheckedListBox)sender; //casts the sending object as a checkedbox
-            string newItem = zipCheckBox.Items[e.Index].ToString();            
+            string newItem = zipCheckBox.Items[e.Index].ToString();
 
             categoriesCheckBox.Items.Clear(); //since attributes likely have a ton of overlap, it is simpler to just clear the list and re-populate each time a new item is checked.
 
             if (e.NewValue == CheckState.Checked) //add or remove the check box item that just changed to the list            
                 queryEngine.addSearchParameter("zipcode", newItem); //add the new item to the list if it is checked            
-            else            
+            else
                 queryEngine.removeSearchParameter("zipcode", newItem);//remove the new item to the list if its unchecked              
 
             List<string> attributes = queryEngine.GetCategories();
-            
+
             foreach (string item in attributes) // add returned categories
             {
                 if (!categoriesCheckBox.Items.Contains(item)) // if the category is not already in the listbox
@@ -130,86 +130,32 @@ namespace Milestone2App
         private void categoriesCheckBox_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             CheckedListBox senderCheckBox = (CheckedListBox)sender; //casts the sending object as a checkedbox
-            string newItem = categoriesCheckBox.Items[e.Index].ToString();            
+            string newItem = categoriesCheckBox.Items[e.Index].ToString();
 
             if (e.NewValue == CheckState.Checked) //add or remove the check box item that just changed to the list            
                 queryEngine.addSearchParameter("category_name", newItem); //add the new item to the list if it is checked            
-            else            
+            else
                 queryEngine.removeSearchParameter("category_name", newItem);//remove the new item to the list if its unchecked               
         }
 
         private void updateGrid(/*List<string> categoryContents*/) //way to call before the ItemCheck function completes (old ghetto way)
         {
+            int row = 0, col = 0;
             businessGrid.Rows.Clear(); //removes all the data previously in the grid.
+            var search = queryEngine.Search(projection);
 
-            if (categoriesCheckBox.CheckedItems.Count == 0 && cityCheckBox.CheckedItems.Count == 0 && zipCheckBox.CheckedItems.Count == 0) //if there is nothing in any checkboxes
-                return;
-
-            queryEngine.Search();
-
-            string orList = "";
-            if (categoriesCheckBox.CheckedItems.Count > 0)
+            foreach (List<string> listRow in search)
             {
-                
-                foreach (string item in categoriesCheckBox.CheckedItems)
+                if (row > 0)
                 {
-                    Console.WriteLine(item);
-                    orList += "AND business_id IN (SELECT business_id FROM category WHERE "; // need to make a new IN each time
-                    orList += "category_name = '" + item + "')"; //for categories, if we are searching we only want ones with both!
+                    businessGrid.Rows.Add(); //the index of the new row
+                    foreach (string item in listRow)
+                        businessGrid.Rows[row - 1].Cells[col++].Value = item;
+                    col = 0;
                 }
-                //orList = orList.Substring(0, orList.Length - 4); //get rid of the extra and
-                //orList += ") ";
+                row++;                
             }
-
-            if (cityCheckBox.CheckedItems.Count > 0)
-            {
-                orList += "AND business_id IN (SELECT business_id FROM business WHERE "; //building subquery to find all the cities in the listbox
-                foreach (string item in cityCheckBox.CheckedItems)
-                {
-                    Console.WriteLine(item);
-                    orList += "city = '" + item + "' OR "; // city = 'string' OR 
-                }
-                orList = orList.Substring(0, orList.Length - 3); // Cuts off the final "OR "
-                orList += ") ";
-            }
-
-            if (zipCheckBox.CheckedItems.Count > 0)
-            {
-                orList += "AND business_id IN (SELECT business_id FROM business WHERE "; //building subquery to find all the zipcodes in the listbox
-                foreach (string item in zipCheckBox.CheckedItems)
-                {
-                    Console.WriteLine(item);
-                    orList += "zipcode = '" + item + "' OR ";
-                }
-                orList = orList.Substring(0, orList.Length - 3);// Cuts off the final "OR "
-                orList += ") ";
-            }
-
-            // populate data into businessGrid from database with the city and state from each check box
-            using (var connection = new NpgsqlConnection(LOGININFO))
-            {
-                connection.Open(); 
-                using (var cmd = new NpgsqlCommand())
-                {
-                    cmd.Connection = connection;
-                    cmd.CommandText = "SELECT name, address, city, state, stars, review_count, num_checkins, reviewRating, is_open, business_id FROM business WHERE state = '" + stateDropDown.SelectedItem + "' " + orList + " ORDER BY reviewRating;";
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {                            
-                            ReadOnlyCollection<NpgsqlDbColumn> columns = reader.GetColumnSchema();
-                            int col = 0;
-                            var row = businessGrid.Rows.Add(); //the index of the new row
-                            foreach (NpgsqlDbColumn column in columns)
-                            {
-                                businessGrid.Rows[row].Cells[col].Value = reader[column.ColumnName].ToString();
-                                col++;
-                            }
-                        }
-                    }
-                }
-                connection.Close();
-            }
+            Console.WriteLine(search[0][0]);
         }
 
         private void SearchButton_Click(object sender, EventArgs e)
