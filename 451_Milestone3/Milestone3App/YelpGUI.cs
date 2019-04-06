@@ -253,26 +253,7 @@ namespace Milestone2App
         {
             if (currBusId != "" && currUserId != "" && ReviewStarsDropDown.SelectedItem as string != "Review Stars")
             {
-                string reviewID = new string(Enumerable.Repeat(chars, 22).Select(s => s[random.Next(s.Length)]).ToArray()); //makes a random 22 charachter string
-
-                using (var connection = new NpgsqlConnection(LOGININFO))
-                {
-                    connection.Open();
-                    using (var cmd = new NpgsqlCommand())
-                    {
-                        cmd.Connection = connection;
-                        cmd.CommandText = "INSERT INTO review VALUES ('" + reviewID + "', '" + currBusId + "', '" + currUserId + "', '" + ReviewStarsDropDown.SelectedItem +
-                            "', NOW(), '" + WriteReviewTextBox_Review.Text + "', 0, 0, 0);";
-                        using (var reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                PlayerIDListBox.Items.Add(reader.GetString(0));
-                            }
-                        }
-                    }
-                    connection.Close();
-                }
+                queryEngine.PostReview(WriteReviewTextBox_Review.Text, int.Parse(ReviewStarsDropDown.SelectedItem as string), currBusId, currUserId);
             }
         }
 

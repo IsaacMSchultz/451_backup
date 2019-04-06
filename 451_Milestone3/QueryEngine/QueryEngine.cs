@@ -16,6 +16,12 @@ namespace QueryEngine1
     public class QueryEngine
     {
         private Dictionary<string, List<string>> searchParameters;
+        List<List<string>> lastQuery;
+        string currBusId;
+
+        private static Random random = new Random();
+        const string chars = "abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_- ";
+
         public event PropertyChangedEventHandler yelpDataChanged; // event for notifying that there was a property changed. 
         //private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone2db";
         private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone2db";
@@ -23,6 +29,8 @@ namespace QueryEngine1
         public QueryEngine()
         {
             searchParameters = new Dictionary<string, List<string>>();
+            lastQuery = new List<List<string>>();
+            currBusId = "";
         }
 
         private void DataChanged(object sender, PropertyChangedEventArgs e) // Event handler for when user data changes.
@@ -121,8 +129,7 @@ namespace QueryEngine1
         {
             if (searchParams.Count != 0)
             {
-                int currIndex = 0; //keeps track of what key we are looking at from the dictionary
-                int endCut = 4;
+                int currIndex = 0; //keeps track of what key we are looking at from the dictionary                
                 string orList = ""; //building subquery to find all the cities in the listbox
 
                 //iterate through all the Keys and values and build all the necesary subqueries
@@ -133,7 +140,7 @@ namespace QueryEngine1
                         orList += " business_id IN ( SELECT business_id FROM category WHERE ";
                     else
                         if (searchParams.Keys.Last() != searchParams.Keys.ElementAt(currIndex)) //if this key is not the last one in the Dictionary, add the start of the next subquery
-                            orList += key.Key + " IN ( SELECT " + key.Key + " FROM business WHERE "; // ") AND <nextKey> IN ( SELECT  FROM business WHERE " (also increments the currIndex)
+                        orList += key.Key + " IN ( SELECT " + key.Key + " FROM business WHERE "; // ") AND <nextKey> IN ( SELECT  FROM business WHERE " (also increments the currIndex)
 
                     foreach (string item in key.Value) //Each item in the list for each key                  
                         orList += key.Key + " = '" + item + "' OR "; // "<key> = '<each item in the list with that key>' OR "                    
@@ -147,9 +154,11 @@ namespace QueryEngine1
                 else
                     orList = orList.Substring(0, orList.Length - 4); // Cuts off the last ") AND "
 
-                return ExecuteCategorizedQuery("SELECT " + projection + " FROM business WHERE " + orList + " ORDER BY state;");
+                lastQuery = ExecuteCategorizedQuery("SELECT " + projection + " FROM business WHERE " + orList + " ORDER BY state;");
+                return lastQuery;
             }
-            return new List<List<string>>(); //return empty array because there are no search parameters.
+            lastQuery = new List<List<string>>();
+            return lastQuery; //return empty array because there are no search parameters.
         }
 
         /// <summary>
@@ -177,9 +186,9 @@ namespace QueryEngine1
 
                             List<string> row = new List<string>();
 
-                            foreach (NpgsqlDbColumn column in columns)                            
+                            foreach (NpgsqlDbColumn column in columns)
                                 row.Add(reader[column.ColumnName].ToString());
-                            
+
                             returnList.Add(row);
                         }
                     }
@@ -193,6 +202,7 @@ namespace QueryEngine1
                 header.Add(column.ColumnName);
             returnList.Insert(0, header);
 
+            lastQuery = returnList;
             return returnList;
         }
 
@@ -240,5 +250,36 @@ namespace QueryEngine1
         {
             yelpDataChanged?.Invoke(sender, e);
         }
+
+        // way for the queryengine to know what business a user has selected based off the rows.
+        // THIS WONT WORK ALL THE TIME BECAUSE THE USERS CAN SORT THE LIST OF BUSINESSES BASED ON NAME, STARS, ETC
+        private void SelectBusiness(int row)
+        {
+            if (lastQuery[0].Contains("business_id"))
+                currBusId = lastQuery[row + 1][lastQuery[0].IndexOf("business_id")];
+        }
+
+
+        public bool PostReview(string reviewText, int reviewStars, string busID, string UserID)
+        {
+            int rows = 0;
+            string reviewID = new string(Enumerable.Repeat(chars, 22).Select(s => s[random.Next(s.Length)]).ToArray()); //makes a random 22 charachter string
+            using (var connection = new NpgsqlConnection(LOGININFO))
+            {
+                connection.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = connection;
+                    cmd.CommandText = "INSERT INTO review VALUES ('" + reviewID + "', '" + busID + "', '" + UserID + "', '" + reviewStars +
+                        "', NOW(), '" + reviewText + "', 0, 0, 0);";
+                    rows = cmd.ExecuteNonQuery();
+                }
+                connection.Close();
+            }
+            if (rows > 0)
+                return true;
+            return false;
+        }
+
     }
 }
