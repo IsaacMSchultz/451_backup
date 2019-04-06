@@ -63,36 +63,43 @@ namespace Milestone2App
             foreach (var state in states)
             {
                 stateDropDown.Items.Add(state); //populates the state drop down with all the states returned by the queryEngine
-                queryEngine.addSearchParameter("state", state);
+                //queryEngine.addSearchParameter("state", state); //we dont want to add all these states to the search paraemeter!
             }
         }
 
         private void stateDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBox box = (ComboBox)sender; //casts sender as a ComboBox
-
             
             cityCheckBox.Items.Clear();
             zipCheckBox.Items.Clear();
 
-            // query database to get list of cities in the selected state
-            // update city dropdown with list
-            using (var connection = new NpgsqlConnection(LOGININFO))
+            queryEngine.setSearchParameter("state", (string)box.SelectedItem); //by using setSearchParameter, we ensure that there is only ever one state parameter.
+            List<string> cities = queryEngine.getCities(); //get the list of cities 
+
+            foreach (string city in queryEngine.getCities())
             {
-                connection.Open();
-                using (var cmd = new NpgsqlCommand())
-                {
-                    cmd.Connection = connection;
-                    cmd.CommandText = "SELECT distinct city FROM business WHERE business.state = '" + box.SelectedItem + "' ORDER BY city;";
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                            //cityDropDown.Items.Add(reader.GetString(0));
-                            cityCheckBox.Items.Add(reader.GetString(0));
-                    }
-                }
-                connection.Close();
+                cityCheckBox.Items.Add(city);
             }
+
+            //// query database to get list of cities in the selected state
+            //// update city dropdown with list
+            //using (var connection = new NpgsqlConnection(LOGININFO))
+            //{
+            //    connection.Open();
+            //    using (var cmd = new NpgsqlCommand())
+            //    {
+            //        cmd.Connection = connection;
+            //        cmd.CommandText = "SELECT distinct city FROM business WHERE business.state = '" + box.SelectedItem + "' ORDER BY city;";
+            //        using (var reader = cmd.ExecuteReader())
+            //        {
+            //            while (reader.Read())
+            //                //cityDropDown.Items.Add(reader.GetString(0));
+            //                cityCheckBox.Items.Add(reader.GetString(0));
+            //        }
+            //    }
+            //    connection.Close();
+            //}
 
         }
 
