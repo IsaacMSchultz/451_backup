@@ -225,20 +225,21 @@ def insert2ReviewTable(conn, cur): #Should have 416479
     f.close()
 
 try:
-    conn = psycopg2.connect("dbname='test1' user='postgres' host='localhost' password='greatPassword'")
-    #conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
+    #conn = psycopg2.connect("dbname='test1' user='postgres' host='localhost' password='greatPassword'")
+    conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
 except:
     print('Unable to connect to the database!')
+
 cur = conn.cursor()
     
-#insert2BusinessTable(conn, cur)
+insert2BusinessTable(conn, cur)
 #insert2UserTable(conn, cur)
-insert2ReviewTable(conn, cur)
-insert2CheckinTable(conn, cur)
-insert2FriendsTable(conn, cur)
+#insert2ReviewTable(conn, cur)
+#insert2CheckinTable(conn, cur)
+#insert2FriendsTable(conn, cur)
 ######insert2CategoriesTable(conn, cur) #done inside the attributes function
-insert2AttributesTable(conn, cur)
-insert2HoursTable(conn, cur)
+#insert2AttributesTable(conn, cur)
+#insert2HoursTable(conn, cur)
 
 cur.close()
 conn.close()
