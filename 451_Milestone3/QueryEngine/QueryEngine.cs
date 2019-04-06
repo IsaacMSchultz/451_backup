@@ -11,7 +11,7 @@ namespace QueryEngine1
     /// <summary>
     /// 
     /// </summary>
-    public class QueryEngine 
+    public class QueryEngine
     {
         private Dictionary<string, List<string>> searchParameters;
         public event PropertyChangedEventHandler yelpDataChanged; // event for notifying that there was a property changed. 
@@ -38,6 +38,27 @@ namespace QueryEngine1
             YelpPropertyChanged(sender, e);
         }
 
+        public List<string> ExecuteListQuery(string query)
+        {
+            List<string> strings = new List<string>();
+
+            using (var connection = new NpgsqlConnection(LOGININFO))
+            {
+                connection.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = connection;
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                            strings.Add(reader.GetString(0));
+                    }
+                }
+                connection.Close();
+            }
+            return strings;
+        }
+
         /// <summary>
         /// interact with database to query the list of states contained within.  
         /// </summary>
@@ -48,24 +69,37 @@ namespace QueryEngine1
         // 'using' keyword to auto call dispose when we are done.
         public List<string> getStates()
         {
-            List<string> returnList = new List<string>();
-            using (var connection = new NpgsqlConnection(LOGININFO))
-            {
-                connection.Open();               
-                using (var cmd = new NpgsqlCommand())
-                {
-                    cmd.Connection = connection;
-                    cmd.CommandText = "SELECT distinct state FROM business ORDER BY state;";
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                            returnList.Add(reader.GetString(0));
-                    }
-                }
-                connection.Close();
-            }
-            return returnList;
+            return ExecuteListQuery("SELECT distinct state FROM business ORDER BY state;");
         }
+
+        public List<string> getCities()
+        {
+            return ExecuteListQuery("SELECT distinct city FROM business WHERE business.state = '" + searchParameters["state"][0] + "' ORDER BY city;");
+        }
+
+        public List<string> getNewZips(string city)
+        {
+            return ExecuteListQuery("SELECT DISTINCT zipcode FROM business WHERE state = '" + searchParameters["state"][0] + "' AND city = '" + city + "' ORDER BY zipcode;");
+        }
+
+        public List<string> getNewAttributes(string zip)
+        {
+            string cmd = "SELECT DISTINCT category_name FROM category WHERE business_id IN (SELECT business_id FROM business WHERE state = '" + searchParameters["state"][0] + "')";
+
+            cmd += " AND business_id IN (SELECT business_id FROM business WHERE "; //building subquery to find all the cities in the listbox
+            foreach (string zipcode in searchParameters["zip"])
+            {
+                Console.WriteLine(zipcode);
+                cmd += "zipcode = '" + zipcode + "' OR "; // city = 'string' OR 
+            }
+            cmd = cmd.Substring(0, cmd.Length - 3); // Cuts off the final "OR "
+            cmd += ")";
+
+            cmd += " AND business_id IN (SELECT business_id FROM business WHERE zipcode = '" + zip + "') ORDER BY category_name;";
+
+            return ExecuteListQuery(cmd);
+        }
+
 
         public object Search(string parameters = "")
         {
@@ -142,12 +176,25 @@ namespace QueryEngine1
         }
 
         /// <summary>
+        /// sets a search parameter to contain only one value 
+        /// </summary>
+        public void setSearchParameter(string key, string value)
+        {
+            if (searchParameters.ContainsKey(key))
+                searchParameters.Remove(key); //remove data in the old key by deleting it.
+
+            List<string> newList = new List<string>(); //insert new key-value pair with the single value.
+            newList.Add(value);
+            searchParameters.Add(key, newList);
+        }
+
+        /// <summary>
         /// Executes the query on the database and returns the results as a 2 dimensional list of Businesses   
         /// </summary>
-        private List<Business> ExecuteBusinessQuery(string query){
-
+        private List<Business> ExecuteBusinessQuery(string query)
+        {
             List<Business> businesses = new List<Business>();
-            
+
             using (var connection = new NpgsqlConnection(LOGININFO))
             {
                 connection.Open();
@@ -157,36 +204,15 @@ namespace QueryEngine1
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
-                            businesses.Add(new Business((string) reader["name"], (string) reader["business_id"], new Location((double) reader["latitude"],
-                                (double) reader["longitude"], (string) reader["city"], (string) reader["state"], (string) reader["address"], 
-                                (string) reader["zipcode"]), (int) reader["review_count"], (double) reader["stars"]));
+                            businesses.Add(new Business((string)reader["name"], (string)reader["business_id"], new Location((double)reader["latitude"],
+                                (double)reader["longitude"], (string)reader["city"], (string)reader["state"], (string)reader["address"],
+                                (string)reader["zipcode"]), (int)reader["review_count"], (double)reader["stars"]));
                     }
                 }
                 connection.Close();
             }
             return businesses;
-        }
-
-        public List<string> ExecuteListQuery(string query)
-        {
-            List<string> strings = new List<string>();
-
-            using (var connection = new NpgsqlConnection(LOGININFO))
-            {
-                connection.Open();
-                using (var cmd = new NpgsqlCommand())
-                {
-                    cmd.Connection = connection;
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                            strings.Add(reader.GetString(0));
-                    }
-                }
-                connection.Close();
-            }
-            return strings;
-        }
+        }        
 
         private void YelpPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
