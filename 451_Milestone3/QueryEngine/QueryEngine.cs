@@ -48,6 +48,7 @@ namespace QueryEngine1
                 using (var cmd = new NpgsqlCommand())
                 {
                     cmd.Connection = connection;
+                    cmd.CommandText = query;
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())

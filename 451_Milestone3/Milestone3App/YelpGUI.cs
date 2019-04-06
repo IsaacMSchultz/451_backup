@@ -81,26 +81,6 @@ namespace Milestone2App
             {
                 cityCheckBox.Items.Add(city);
             }
-
-            //// query database to get list of cities in the selected state
-            //// update city dropdown with list
-            //using (var connection = new NpgsqlConnection(LOGININFO))
-            //{
-            //    connection.Open();
-            //    using (var cmd = new NpgsqlCommand())
-            //    {
-            //        cmd.Connection = connection;
-            //        cmd.CommandText = "SELECT distinct city FROM business WHERE business.state = '" + box.SelectedItem + "' ORDER BY city;";
-            //        using (var reader = cmd.ExecuteReader())
-            //        {
-            //            while (reader.Read())
-            //                //cityDropDown.Items.Add(reader.GetString(0));
-            //                cityCheckBox.Items.Add(reader.GetString(0));
-            //        }
-            //    }
-            //    connection.Close();
-            //}
-
         }
 
         private void cityCheckBox_ItemCheck(object sender, ItemCheckEventArgs e)
@@ -134,12 +114,6 @@ namespace Milestone2App
             {
                 foreach (string item in checkedItems)
                     zipCheckBox.Items.Remove(item);
-
-                //List<string> newZipBoxItems = new List<string>(); //a list that holds all the data we will pass to the grid updater function
-                //foreach (string item in zipCheckBox.CheckedItems)
-                //    newZipBoxItems.Add(item);
-
-                //updateGrid(newZipBoxItems); //we need to update the datagrid to remove all the elements that are no longer selectable in the zipcode box
             }
         }
 
