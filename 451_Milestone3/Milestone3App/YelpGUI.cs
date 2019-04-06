@@ -86,33 +86,19 @@ namespace Milestone2App
         private void cityCheckBox_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             CheckedListBox CheckBox = (CheckedListBox)sender; //casts the sending object as a checkedbox
-            List<string> checkedItems = new List<string>();
-
-            // need to remove the zipcodes from that city from the zipBox
-            using (var connection = new NpgsqlConnection(LOGININFO))
-            {
-                connection.Open();
-                using (var cmd = new NpgsqlCommand())
-                {
-                    cmd.Connection = connection;
-                    cmd.CommandText = "SELECT DISTINCT zipcode FROM business WHERE state = '" + stateDropDown.SelectedItem + "' AND city = '" + cityCheckBox.Items[e.Index].ToString() + "' ORDER BY zipcode;";
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                            checkedItems.Add(reader.GetString(0));
-                    }
-                }
-                connection.Close();
-            }
+            string newItem = cityCheckBox.Items[e.Index].ToString();
+            List<string> newZips = queryEngine.getNewZips(newItem);
 
             if (e.NewValue == CheckState.Checked) //add or remove the check box item that just changed to the list
             {
-                foreach (string item in checkedItems)
+                queryEngine.addSearchParameter("city", newItem);
+                foreach (string item in newZips)
                     zipCheckBox.Items.Add(item);
             }
             else
             {
-                foreach (string item in checkedItems)
+                queryEngine.removeSearchParameter("city", newItem);
+                foreach (string item in newZips)
                     zipCheckBox.Items.Remove(item);
             }
         }
