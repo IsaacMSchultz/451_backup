@@ -68,22 +68,22 @@ namespace QueryEngine1
         /// </returns>
         // update states dropdown menu with the list of distinct states
         // 'using' keyword to auto call dispose when we are done.
-        public List<string> getStates()
+        public List<string> GetStates()
         {
             return ExecuteListQuery("SELECT distinct state FROM business ORDER BY state;");
         }
 
-        public List<string> getCities()
+        public List<string> GetCities()
         {
             return ExecuteListQuery("SELECT distinct city FROM business WHERE business.state = '" + searchParameters["state"][0] + "' ORDER BY city;");
         }
 
-        public List<string> getNewZips(string city)
+        public List<string> GetNewZips(string city)
         {
             return ExecuteListQuery("SELECT DISTINCT zipcode FROM business WHERE state = '" + searchParameters["state"][0] + "' AND city = '" + city + "' ORDER BY zipcode;");
         }
 
-        public List<string> getNewAttributes(string zip)
+        public List<string> GetCategories()
         {
             string cmd = "SELECT DISTINCT category_name FROM category WHERE business_id IN (SELECT business_id FROM business WHERE state = '" + searchParameters["state"][0] + "')";
 
@@ -96,22 +96,14 @@ namespace QueryEngine1
             cmd = cmd.Substring(0, cmd.Length - 3); // Cuts off the final "OR "
             cmd += ")";
 
-            cmd += " AND business_id IN (SELECT business_id FROM business WHERE zipcode = '" + zip + "') ORDER BY category_name;";
+            cmd += " ORDER BY category_name;";
 
             return ExecuteListQuery(cmd);
         }
 
-
-        public object Search(string parameters = "")
+        public object Search()
         {
-            if (parameters == "city")
-            {
-                var cities = new Dictionary<string, List<string>>();
-                cities.Add("state", searchParameters["state"]); //get only the cities from the search parameters
-                return Search(cities);
-            }
-            else //nothing specified, search for businesses to update grid.
-                return Search(searchParameters);
+            return Search(searchParameters);
         }
 
         /// <summary>
