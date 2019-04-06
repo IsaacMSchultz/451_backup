@@ -59,7 +59,7 @@ namespace Milestone2App
 
         private void initializeDropDowns()
         {
-            List<string> states = queryEngine.getStates();
+            List<string> states = queryEngine.GetStates();
             foreach (var state in states)
             {
                 stateDropDown.Items.Add(state); //populates the state drop down with all the states returned by the queryEngine
@@ -75,9 +75,9 @@ namespace Milestone2App
             zipCheckBox.Items.Clear();
 
             queryEngine.setSearchParameter("state", (string)box.SelectedItem); //by using setSearchParameter, we ensure that there is only ever one state parameter.
-            List<string> cities = queryEngine.getCities(); //get the list of cities 
+            List<string> cities = queryEngine.GetCities(); //get the list of cities 
 
-            foreach (string city in queryEngine.getCities())
+            foreach (string city in queryEngine.GetCities())
             {
                 cityCheckBox.Items.Add(city);
             }
@@ -87,8 +87,9 @@ namespace Milestone2App
         {
             CheckedListBox CheckBox = (CheckedListBox)sender; //casts the sending object as a checkedbox
             string newItem = cityCheckBox.Items[e.Index].ToString();
-            List<string> newZips = queryEngine.getNewZips(newItem);
+            List<string> newZips = queryEngine.GetNewZips(newItem);
 
+            //since zipcodes are always mutually exclusive, we can add and remove them based soley on the contetn of the city checkbox changing.
             if (e.NewValue == CheckState.Checked) //add or remove the check box item that just changed to the list
             {
                 queryEngine.addSearchParameter("city", newItem);
@@ -106,88 +107,34 @@ namespace Milestone2App
         private void zipCheckBox_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             CheckedListBox senderCheckBox = (CheckedListBox)sender; //casts the sending object as a checkedbox
-            List<string> categoryItems = new List<string>();
-            List<string> zipItems = new List<string>();
+            string newItem = zipCheckBox.Items[e.Index].ToString();            
 
-            foreach (string item in zipCheckBox.CheckedItems)
-            {
-                zipItems.Add(item);
-            }
+            categoriesCheckBox.Items.Clear(); //since attributes likely have a ton of overlap, it is simpler to just clear the list and re-populate each time a new item is checked.
 
-            if (e.NewValue == CheckState.Checked) //add or remove the check box item that just changed to the list
-            {
-                zipItems.Add(zipCheckBox.Items[e.Index].ToString()); //add the new item to the list if its checked
-            }
-            else
-            {
-                zipItems.Remove(zipCheckBox.Items[e.Index].ToString()); //remove the new item to the list if its unchecked
-            }
+            if (e.NewValue == CheckState.Checked) //add or remove the check box item that just changed to the list            
+                queryEngine.addSearchParameter("zip", newItem); //add the new item to the list if it is checked            
+            else            
+                queryEngine.removeSearchParameter("zip", newItem);//remove the new item to the list if its unchecked              
 
-            if (zipItems.Count > 0)
-            {
-                // need to remove the zipcodes from that city from the zipBox
-                using (var connection = new NpgsqlConnection(LOGININFO))
-                {
-                    connection.Open();
-                    using (var cmd = new NpgsqlCommand())
-                    {
-                        cmd.Connection = connection;
-                        cmd.CommandText = "SELECT DISTINCT category_name FROM category WHERE business_id IN (SELECT business_id FROM business WHERE state = '" + stateDropDown.SelectedItem + "')";
-
-                        string orList = " AND business_id IN (SELECT business_id FROM business WHERE "; //building subquery to find all the cities in the listbox
-                        foreach (string item in zipItems)
-                        {
-                            Console.WriteLine(item);
-                            orList += "zipcode = '" + item + "' OR "; // city = 'string' OR 
-                        }
-                        orList = orList.Substring(0, orList.Length - 3); // Cuts off the final "OR "
-                        orList += ")";
-
-                        cmd.CommandText += orList + " AND business_id IN (SELECT business_id FROM business WHERE zipcode = '" + zipCheckBox.Items[e.Index].ToString() + "') ORDER BY category_name;";
-
-                        using (var reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                                categoryItems.Add(reader.GetString(0));
-                        }
-                    }
-                    connection.Close();
-                }
-            }
-
-            categoriesCheckBox.Items.Clear(); //empty the categories
-            foreach (string item in categoryItems) // add returned categories
+            List<string> attributes = queryEngine.GetCategories();
+            
+            foreach (string item in attributes) // add returned categories
             {
                 if (!categoriesCheckBox.Items.Contains(item)) // if the category is not already in the listbox
                     categoriesCheckBox.Items.Add(item);
             }
-
-
-            //List<string> newCategoriesBoxItems = new List<string>(); //a list that holds all the data we will pass to the grid updater function
-            //foreach (string item in zipCheckBox.CheckedItems)
-            //{
-            //    if (!categoriesCheckBox.Items.Contains(item)) // if the category is not already in the listbox
-            //        newCategoriesBoxItems.Add(item);
-            //}
-
         }
 
 
         private void categoriesCheckBox_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             CheckedListBox senderCheckBox = (CheckedListBox)sender; //casts the sending object as a checkedbox
-            List<string> categoryItems = new List<string>();
+            string newItem = categoriesCheckBox.Items[e.Index].ToString();            
 
-            //foreach (string item in senderCheckBox.CheckedItems) // add all the checked Items into our list that holds their string names.            
-            //    categoryItems.Add(item);
-
-            ////if (e != null) //if the function is called without an argument, which is when its being called from within another event.
-            ////{
-            ////    if (e.NewValue == CheckState.Checked) //add or remove the check box item that just changed to the list
-            ////        categoryItems.Add(senderCheckBox.Items[e.Index].ToString());
-            ////    else
-            ////        categoryItems.Remove(senderCheckBox.Items[e.Index].ToString());
-            ////}            
+            if (e.NewValue == CheckState.Checked) //add or remove the check box item that just changed to the list            
+                queryEngine.addSearchParameter("category", newItem); //add the new item to the list if it is checked            
+            else            
+                queryEngine.removeSearchParameter("category", newItem);//remove the new item to the list if its unchecked               
         }
 
         private void updateGrid(/*List<string> categoryContents*/) //way to call before the ItemCheck function completes (old ghetto way)
