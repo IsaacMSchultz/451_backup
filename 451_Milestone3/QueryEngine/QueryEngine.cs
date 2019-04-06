@@ -91,8 +91,7 @@ namespace QueryEngine1
 
             cmd += " AND business_id IN (SELECT business_id FROM business WHERE "; //building subquery to find all the cities in the listbox
             foreach (string zipcode in searchParameters["zipcode"])
-            {
-                Console.WriteLine(zipcode);
+            {                
                 cmd += "zipcode = '" + zipcode + "' OR "; // city = 'string' OR 
             }
             cmd = cmd.Substring(0, cmd.Length - 3); // Cuts off the final "OR "
@@ -103,7 +102,7 @@ namespace QueryEngine1
             return ExecuteListQuery(cmd);
         }
 
-        public object Search(string projection = "*")
+        public List<List<string>> Search(string projection = "*")
         {
             return Search(searchParameters, projection);
         }
@@ -137,8 +136,7 @@ namespace QueryEngine1
                             orList += key.Key + " IN ( SELECT " + key.Key + " FROM business WHERE "; // ") AND <nextKey> IN ( SELECT  FROM business WHERE " (also increments the currIndex)
 
                     foreach (string item in key.Value) //Each item in the list for each key
-                    {
-                        Console.WriteLine(item);
+                    {                        
                         orList += key.Key + " = '" + item + "' OR "; // "<key> = '<each item in the list with that key>' OR "
                     }
 
@@ -148,8 +146,7 @@ namespace QueryEngine1
 
                 orList = orList.Substring(0, orList.Length - 4); // Cuts off the last ") AND "
 
-                CommandText = "SELECT " + projection + " FROM business WHERE " + orList + " ORDER BY state;";
-                Console.WriteLine(CommandText);
+                CommandText = "SELECT " + projection + " FROM business WHERE " + orList + " ORDER BY state;";                
                 return ExecuteCategorizedQuery(CommandText);
             }
             return new List<List<string>>(); //return empty array because there are no search parameters.
