@@ -13,7 +13,6 @@ namespace Milestone2App
     public partial class YelpGUI : Form
     {
         QueryEngine queryEngine;
-        List<Business> dataGridBusinesses;
         string[] cols = { "name", "address", "city", "state", "stars", "review_count", "num_checkins", "reviewRating", "is_open", "business_id" };
         string projection;
 
@@ -101,7 +100,11 @@ namespace Milestone2App
             {
                 queryEngine.removeSearchParameter("city", newItem);
                 foreach (string item in newZips)
+                {
+                    queryEngine.removeSearchParameter("zipcode", item);                    
                     zipCheckBox.Items.Remove(item);
+                }
+                updateCategories();
             }
         }
 
@@ -110,16 +113,18 @@ namespace Milestone2App
             CheckedListBox senderCheckBox = (CheckedListBox)sender; //casts the sending object as a checkedbox
             string newItem = zipCheckBox.Items[e.Index].ToString();
 
-            categoriesCheckBox.Items.Clear(); //since attributes likely have a ton of overlap, it is simpler to just clear the list and re-populate each time a new item is checked.
-
             if (e.NewValue == CheckState.Checked) //add or remove the check box item that just changed to the list            
                 queryEngine.addSearchParameter("zipcode", newItem); //add the new item to the list if it is checked            
             else
                 queryEngine.removeSearchParameter("zipcode", newItem);//remove the new item to the list if its unchecked              
 
-            List<string> attributes = queryEngine.GetCategories();
+            updateCategories();
+        }
 
-            foreach (string item in attributes) // add returned categories
+        private void updateCategories()
+        {
+            categoriesCheckBox.Items.Clear(); //since attributes likely have a ton of overlap, it is simpler to just clear the list and re-populate each time a new item is checked.
+            foreach (string item in queryEngine.GetCategories()) // add returned categories
             {
                 if (!categoriesCheckBox.Items.Contains(item)) // if the category is not already in the listbox
                     categoriesCheckBox.Items.Add(item);
@@ -141,10 +146,9 @@ namespace Milestone2App
         private void updateGrid(/*List<string> categoryContents*/) //way to call before the ItemCheck function completes (old ghetto way)
         {
             int row = 0, col = 0;
-            businessGrid.Rows.Clear(); //removes all the data previously in the grid.
-            var search = queryEngine.Search(projection);
+            businessGrid.Rows.Clear(); //removes all the data previously in the grid.            
 
-            foreach (List<string> listRow in search)
+            foreach (List<string> listRow in queryEngine.Search(projection))
             {
                 if (row > 0)
                 {
@@ -155,7 +159,6 @@ namespace Milestone2App
                 }
                 row++;                
             }
-            Console.WriteLine(search[0][0]);
         }
 
         private void SearchButton_Click(object sender, EventArgs e)
