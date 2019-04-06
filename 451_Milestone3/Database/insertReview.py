@@ -41,7 +41,6 @@ with open('./yelp_review.JSON','r') as f:    #TODO: update path for the input fi
         count_line +=1
 
 print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")
-    f.close()
 
 f.close()
 cur.close()

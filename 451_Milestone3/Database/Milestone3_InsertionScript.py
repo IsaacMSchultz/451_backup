@@ -232,11 +232,11 @@ except:
 
 cur = conn.cursor()
     
-insert2BusinessTable(conn, cur)
+#insert2BusinessTable(conn, cur)
 #insert2UserTable(conn, cur)
 #insert2ReviewTable(conn, cur)
 #insert2CheckinTable(conn, cur)
-#insert2FriendsTable(conn, cur)
+insert2FriendsTable(conn, cur)
 ######insert2CategoriesTable(conn, cur) #done inside the attributes function
 #insert2AttributesTable(conn, cur)
 #insert2HoursTable(conn, cur)

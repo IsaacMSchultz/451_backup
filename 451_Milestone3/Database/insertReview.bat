@@ -1,1 +1,2 @@
 python insertReview.py
+pause
