@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using Npgsql;
+using Npgsql.Schema;
 
 namespace QueryEngine1
 {
@@ -88,7 +90,7 @@ namespace QueryEngine1
             string cmd = "SELECT DISTINCT category_name FROM category WHERE business_id IN (SELECT business_id FROM business WHERE state = '" + searchParameters["state"][0] + "')";
 
             cmd += " AND business_id IN (SELECT business_id FROM business WHERE "; //building subquery to find all the cities in the listbox
-            foreach (string zipcode in searchParameters["zip"])
+            foreach (string zipcode in searchParameters["zipcode"])
             {
                 Console.WriteLine(zipcode);
                 cmd += "zipcode = '" + zipcode + "' OR "; // city = 'string' OR 
@@ -101,16 +103,16 @@ namespace QueryEngine1
             return ExecuteListQuery(cmd);
         }
 
-        public object Search()
+        public object Search(string projection = "*")
         {
-            return Search(searchParameters);
+            return Search(searchParameters, projection);
         }
 
         /// <summary>
         /// Runs a query to return the results based on the current search parameters as a 2 dimensional array of strings
         /// If there are no search parameters, returns an empty string array.
         /// </summary>
-        private object Search(Dictionary<string, List<string>> searchParams, string projection = "")
+        private List<List<string>> Search(Dictionary<string, List<string>> searchParams, string projection)
         {
             if (searchParams.Count != 0)
             {
@@ -118,12 +120,21 @@ namespace QueryEngine1
                 string CommandText; // the final Query that will be run
                 string orList = ""; //building subquery to find all the cities in the listbox
 
+                List<string> t = new List<string>();
+
+                foreach (KeyValuePair<string, List<string>> key in searchParams)
+                    t.Add(searchParams.Keys.ElementAt(currIndex++));
+
+                currIndex = 0;
                 //iterate through all the Keys and values and build all the necesary subqueries
                 foreach (KeyValuePair<string, List<string>> key in searchParams) //each keyValuePar
                 {
                     // Build the subquery to find all tuples with the value from that keyPair
-                    if (searchParams.Keys.Last() != searchParams.Keys.ElementAt(currIndex)) //if this key is not the last one in the Dictionary, add the start of the next subquery
-                        orList += ") AND " + searchParams.Keys.ElementAt(++currIndex) + " IN ( SELECT  FROM business WHERE "; // ") AND <nextKey> IN ( SELECT  FROM business WHERE " (also increments the currIndex)
+                    if (key.Key == "category_name")
+                        orList += " business_id IN ( SELECT business_id FROM category WHERE ";
+                    else
+                        if (searchParams.Keys.Last() != searchParams.Keys.ElementAt(currIndex)) //if this key is not the last one in the Dictionary, add the start of the next subquery
+                            orList += key.Key + " IN ( SELECT " + key.Key + " FROM business WHERE "; // ") AND <nextKey> IN ( SELECT  FROM business WHERE " (also increments the currIndex)
 
                     foreach (string item in key.Value) //Each item in the list for each key
                     {
@@ -131,16 +142,62 @@ namespace QueryEngine1
                         orList += key.Key + " = '" + item + "' OR "; // "<key> = '<each item in the list with that key>' OR "
                     }
 
-                    orList = orList.Substring(0, orList.Length - 3); // Cuts off the final "OR "
+                    orList = orList.Substring(0, orList.Length - 3); // Cuts off the final "OR "orList       
+                    orList += ") AND ";
                 }
 
-                orList = orList.Substring(6, orList.Length); // Cuts off the first ") AND "
+                orList = orList.Substring(0, orList.Length - 4); // Cuts off the last ") AND "
 
-                CommandText = "SELECT * FROM business WHERE " + orList + " ORDER BY state;";
+                CommandText = "SELECT " + projection + " FROM business WHERE " + orList + " ORDER BY state;";
                 Console.WriteLine(CommandText);
-                return ExecuteListQuery(CommandText);
+                return ExecuteCategorizedQuery(CommandText);
             }
-            return new List<Business>(); //return empty array because there are no search parameters.
+            return new List<List<string>>(); //return empty array because there are no search parameters.
+        }
+
+        /// <summary>
+        /// Executes the query on the database and returns the results as a 2 dimensional list of Businesses   
+        /// the first row of the first list will contain the column names.
+        /// </summary>
+        private List<List<string>> ExecuteCategorizedQuery(string query)
+        {
+            List<List<string>> returnList = new List<List<string>>();
+            List<string> header = new List<string>();
+            ReadOnlyCollection<NpgsqlDbColumn> columns = new ReadOnlyCollection<NpgsqlDbColumn>(new List<NpgsqlDbColumn>());
+
+            using (var connection = new NpgsqlConnection(LOGININFO))
+            {
+                connection.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = connection;
+                    cmd.CommandText = query;
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            if (columns.Count == 0)
+                                columns = reader.GetColumnSchema();
+
+                            List<string> row = new List<string>();
+
+                            foreach (NpgsqlDbColumn column in columns)
+                            {
+                                row.Add(reader[column.ColumnName].ToString());
+                            }
+                            returnList.Add(row);
+                        }
+                    }
+                }
+                connection.Close();
+            }
+
+            foreach (NpgsqlDbColumn column in columns)
+                header.Add(column.ColumnName);
+
+            returnList.Insert(0, header);
+
+            return returnList;
         }
 
         /// <summary>
@@ -171,41 +228,14 @@ namespace QueryEngine1
         /// <summary>
         /// sets a search parameter to contain only one value 
         /// </summary>
-        public void setSearchParameter(string key, string value)
+        public void resetSearchParameter(string key, string value)
         {
-            if (searchParameters.ContainsKey(key))
-                searchParameters.Remove(key); //remove data in the old key by deleting it.
+            searchParameters = new Dictionary<string, List<string>>();
 
             List<string> newList = new List<string>(); //insert new key-value pair with the single value.
             newList.Add(value);
             searchParameters.Add(key, newList);
         }
-
-        /// <summary>
-        /// Executes the query on the database and returns the results as a 2 dimensional list of Businesses   
-        /// </summary>
-        private List<Business> ExecuteBusinessQuery(string query)
-        {
-            List<Business> businesses = new List<Business>();
-
-            using (var connection = new NpgsqlConnection(LOGININFO))
-            {
-                connection.Open();
-                using (var cmd = new NpgsqlCommand())
-                {
-                    cmd.Connection = connection;
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                            businesses.Add(new Business((string)reader["name"], (string)reader["business_id"], new Location((double)reader["latitude"],
-                                (double)reader["longitude"], (string)reader["city"], (string)reader["state"], (string)reader["address"],
-                                (string)reader["zipcode"]), (int)reader["review_count"], (double)reader["stars"]));
-                    }
-                }
-                connection.Close();
-            }
-            return businesses;
-        }        
 
         private void YelpPropertyChanged(object sender, PropertyChangedEventArgs e)
         {

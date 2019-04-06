@@ -73,8 +73,9 @@ namespace Milestone2App
             
             cityCheckBox.Items.Clear();
             zipCheckBox.Items.Clear();
+            categoriesCheckBox.Items.Clear();
 
-            queryEngine.setSearchParameter("state", (string)box.SelectedItem); //by using setSearchParameter, we ensure that there is only ever one state parameter.
+            queryEngine.resetSearchParameter("state", (string)box.SelectedItem); //by using setSearchParameter, we ensure that there is only ever one state parameter.
             List<string> cities = queryEngine.GetCities(); //get the list of cities 
 
             foreach (string city in queryEngine.GetCities())
@@ -112,9 +113,9 @@ namespace Milestone2App
             categoriesCheckBox.Items.Clear(); //since attributes likely have a ton of overlap, it is simpler to just clear the list and re-populate each time a new item is checked.
 
             if (e.NewValue == CheckState.Checked) //add or remove the check box item that just changed to the list            
-                queryEngine.addSearchParameter("zip", newItem); //add the new item to the list if it is checked            
+                queryEngine.addSearchParameter("zipcode", newItem); //add the new item to the list if it is checked            
             else            
-                queryEngine.removeSearchParameter("zip", newItem);//remove the new item to the list if its unchecked              
+                queryEngine.removeSearchParameter("zipcode", newItem);//remove the new item to the list if its unchecked              
 
             List<string> attributes = queryEngine.GetCategories();
             
@@ -132,9 +133,9 @@ namespace Milestone2App
             string newItem = categoriesCheckBox.Items[e.Index].ToString();            
 
             if (e.NewValue == CheckState.Checked) //add or remove the check box item that just changed to the list            
-                queryEngine.addSearchParameter("category", newItem); //add the new item to the list if it is checked            
+                queryEngine.addSearchParameter("category_name", newItem); //add the new item to the list if it is checked            
             else            
-                queryEngine.removeSearchParameter("category", newItem);//remove the new item to the list if its unchecked               
+                queryEngine.removeSearchParameter("category_name", newItem);//remove the new item to the list if its unchecked               
         }
 
         private void updateGrid(/*List<string> categoryContents*/) //way to call before the ItemCheck function completes (old ghetto way)
@@ -143,6 +144,8 @@ namespace Milestone2App
 
             if (categoriesCheckBox.CheckedItems.Count == 0 && cityCheckBox.CheckedItems.Count == 0 && zipCheckBox.CheckedItems.Count == 0) //if there is nothing in any checkboxes
                 return;
+
+            queryEngine.Search();
 
             string orList = "";
             if (categoriesCheckBox.CheckedItems.Count > 0)
