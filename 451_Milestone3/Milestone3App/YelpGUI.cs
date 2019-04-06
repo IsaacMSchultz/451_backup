@@ -39,18 +39,13 @@ namespace Milestone2App
             projection = proj;
 
             InitializeComponent();
-            initializeDropDowns();
-            //businessBindingSource = new BindingSource(dataGridBusinesses);
-            //businessGrid.DataSource = businessBindingSource; //tell the businessGrid to read the data from the list of businesses.            
+            initializeDropDowns();         
 
             foreach (var column in cols)
             {
                 // Create the column headers for the data grid view.
                 DataGridViewTextBoxColumn newColumn = new DataGridViewTextBoxColumn();
                 newColumn.HeaderText = column;
-                //if (column == "name")
-                //    newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                //else
                 newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
                 businessGrid.Columns.Add(newColumn);
             }
@@ -59,11 +54,8 @@ namespace Milestone2App
         private void initializeDropDowns()
         {
             List<string> states = queryEngine.GetStates();
-            foreach (var state in states)
-            {
-                stateDropDown.Items.Add(state); //populates the state drop down with all the states returned by the queryEngine
-                //queryEngine.addSearchParameter("state", state); //we dont want to add all these states to the search paraemeter!
-            }
+            foreach (var state in states)            
+                stateDropDown.Items.Add(state); //populates the state drop down with all the states returned by the queryEngine            
         }
 
         private void stateDropDown_SelectedIndexChanged(object sender, EventArgs e)
@@ -77,10 +69,8 @@ namespace Milestone2App
             queryEngine.resetSearchParameter("state", (string)box.SelectedItem); //by using setSearchParameter, we ensure that there is only ever one state parameter.
             List<string> cities = queryEngine.GetCities(); //get the list of cities 
 
-            foreach (string city in queryEngine.GetCities())
-            {
-                cityCheckBox.Items.Add(city);
-            }
+            foreach (string city in queryEngine.GetCities())            
+                cityCheckBox.Items.Add(city);            
         }
 
         private void cityCheckBox_ItemCheck(object sender, ItemCheckEventArgs e)
@@ -124,11 +114,9 @@ namespace Milestone2App
         private void updateCategories()
         {
             categoriesCheckBox.Items.Clear(); //since attributes likely have a ton of overlap, it is simpler to just clear the list and re-populate each time a new item is checked.
-            foreach (string item in queryEngine.GetCategories()) // add returned categories
-            {
+            foreach (string item in queryEngine.GetCategories()) // add returned categories            
                 if (!categoriesCheckBox.Items.Contains(item)) // if the category is not already in the listbox
-                    categoriesCheckBox.Items.Add(item);
-            }
+                    categoriesCheckBox.Items.Add(item);            
         }
 
 
