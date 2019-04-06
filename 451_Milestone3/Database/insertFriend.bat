@@ -1,1 +1,2 @@
 python insertFriend.py
+pause
