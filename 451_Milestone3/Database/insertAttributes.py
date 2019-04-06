@@ -1,6 +1,7 @@
 import json
 import psycopg2
 import time
+import os
 
 def cleanStr4SQL(s):
     return s.replace("'","`").replace("\n"," ")
@@ -25,9 +26,13 @@ def myprint(d):
             myprint(v)
         else:
             #print "{0} : {1}".format(k, v)
-            cur.execute("INSERT INTO Attributes (business_id, attribute_name, attribute_value) VALUES ('" + business_id + "','" + k + "','" + str(v) + "');")
+            try:
+                cur.execute("INSERT INTO Attributes (business_id, attribute_name, attribute_value) VALUES ('" + business_id + "','" + k + "','" + str(v) + "');")
+            except Exception as e:
+                print("Insert failed! " + str(e) + "On line: " + str(count_line))
 
 startingTime = time.process_time()
+print (os.getcwd())
 with open('./yelp_business.JSON','r') as f:
     line = f.readline()
     count_line = 0

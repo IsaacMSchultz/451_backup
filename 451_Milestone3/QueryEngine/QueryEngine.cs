@@ -62,6 +62,8 @@ namespace QueryEngine1
             return strings;
         }
 
+        //TODO: make a single GET function that takes the parameter we are looking for instead of many for each.
+
         /// <summary>
         /// interact with database to query the list of states contained within.  
         /// </summary>
@@ -87,19 +89,23 @@ namespace QueryEngine1
 
         public List<string> GetCategories()
         {
-            string cmd = "SELECT DISTINCT category_name FROM category WHERE business_id IN (SELECT business_id FROM business WHERE state = '" + searchParameters["state"][0] + "')";
+            if (searchParameters.ContainsKey("zipcode"))
+            {
+                string cmd = "SELECT DISTINCT category_name FROM category WHERE business_id IN (SELECT business_id FROM business WHERE state = '" + searchParameters["state"][0] + "')";
 
-            cmd += " AND business_id IN (SELECT business_id FROM business WHERE "; //building subquery to find all the cities in the listbox
-            foreach (string zipcode in searchParameters["zipcode"])
-            {                
-                cmd += "zipcode = '" + zipcode + "' OR "; // city = 'string' OR 
+                cmd += " AND business_id IN (SELECT business_id FROM business WHERE "; //building subquery to find all the cities in the listbox
+                foreach (string zipcode in searchParameters["zipcode"])
+                {
+                    cmd += "zipcode = '" + zipcode + "' OR "; // city = 'string' OR 
+                }
+                cmd = cmd.Substring(0, cmd.Length - 3); // Cuts off the final "OR "
+                cmd += ")";
+
+                cmd += " ORDER BY category_name;";
+
+                return ExecuteListQuery(cmd);
             }
-            cmd = cmd.Substring(0, cmd.Length - 3); // Cuts off the final "OR "
-            cmd += ")";
-
-            cmd += " ORDER BY category_name;";
-
-            return ExecuteListQuery(cmd);
+            return new List<string>();
         }
 
         public List<List<string>> Search(string projection = "*")
@@ -116,15 +122,9 @@ namespace QueryEngine1
             if (searchParams.Count != 0)
             {
                 int currIndex = 0; //keeps track of what key we are looking at from the dictionary
-                string CommandText; // the final Query that will be run
+                int endCut = 4;
                 string orList = ""; //building subquery to find all the cities in the listbox
 
-                List<string> t = new List<string>();
-
-                foreach (KeyValuePair<string, List<string>> key in searchParams)
-                    t.Add(searchParams.Keys.ElementAt(currIndex++));
-
-                currIndex = 0;
                 //iterate through all the Keys and values and build all the necesary subqueries
                 foreach (KeyValuePair<string, List<string>> key in searchParams) //each keyValuePar
                 {
@@ -135,19 +135,19 @@ namespace QueryEngine1
                         if (searchParams.Keys.Last() != searchParams.Keys.ElementAt(currIndex)) //if this key is not the last one in the Dictionary, add the start of the next subquery
                             orList += key.Key + " IN ( SELECT " + key.Key + " FROM business WHERE "; // ") AND <nextKey> IN ( SELECT  FROM business WHERE " (also increments the currIndex)
 
-                    foreach (string item in key.Value) //Each item in the list for each key
-                    {                        
-                        orList += key.Key + " = '" + item + "' OR "; // "<key> = '<each item in the list with that key>' OR "
-                    }
+                    foreach (string item in key.Value) //Each item in the list for each key                  
+                        orList += key.Key + " = '" + item + "' OR "; // "<key> = '<each item in the list with that key>' OR "                    
 
                     orList = orList.Substring(0, orList.Length - 3); // Cuts off the final "OR "orList       
                     orList += ") AND ";
                 }
 
-                orList = orList.Substring(0, orList.Length - 4); // Cuts off the last ") AND "
+                if (searchParams.Count == 1)
+                    orList = orList.Substring(0, orList.Length - 6);
+                else
+                    orList = orList.Substring(0, orList.Length - 4); // Cuts off the last ") AND "
 
-                CommandText = "SELECT " + projection + " FROM business WHERE " + orList + " ORDER BY state;";                
-                return ExecuteCategorizedQuery(CommandText);
+                return ExecuteCategorizedQuery("SELECT " + projection + " FROM business WHERE " + orList + " ORDER BY state;");
             }
             return new List<List<string>>(); //return empty array because there are no search parameters.
         }
@@ -159,7 +159,6 @@ namespace QueryEngine1
         private List<List<string>> ExecuteCategorizedQuery(string query)
         {
             List<List<string>> returnList = new List<List<string>>();
-            List<string> header = new List<string>();
             ReadOnlyCollection<NpgsqlDbColumn> columns = new ReadOnlyCollection<NpgsqlDbColumn>(new List<NpgsqlDbColumn>());
 
             using (var connection = new NpgsqlConnection(LOGININFO))
@@ -178,10 +177,9 @@ namespace QueryEngine1
 
                             List<string> row = new List<string>();
 
-                            foreach (NpgsqlDbColumn column in columns)
-                            {
+                            foreach (NpgsqlDbColumn column in columns)                            
                                 row.Add(reader[column.ColumnName].ToString());
-                            }
+                            
                             returnList.Add(row);
                         }
                     }
@@ -189,9 +187,10 @@ namespace QueryEngine1
                 connection.Close();
             }
 
+            // Returns the list of column names as the first row.
+            List<string> header = new List<string>();
             foreach (NpgsqlDbColumn column in columns)
                 header.Add(column.ColumnName);
-
             returnList.Insert(0, header);
 
             return returnList;
@@ -217,9 +216,12 @@ namespace QueryEngine1
         /// </summary>
         public void removeSearchParameter(string key, string value)
         {
-            searchParameters[key].Remove(value);
-            if (searchParameters[key].Count == 0) // if that was the last value in that keyValue pair, remove the key
-                searchParameters.Remove(key);
+            if (searchParameters.ContainsKey(key) && searchParameters[key].Contains(value)) // can only remove something if its actually there.
+            {
+                searchParameters[key].Remove(value);
+                if (searchParameters[key].Count == 0) // if that was the last value in that keyValue pair, remove the key
+                    searchParameters.Remove(key);
+            }
         }
 
         /// <summary>
