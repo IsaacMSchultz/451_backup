@@ -39,7 +39,7 @@ namespace Milestone2App
             projection = proj;
 
             InitializeComponent();
-            initializeDropDowns();         
+            initializeDropDowns();
 
             foreach (var column in cols)
             {
@@ -47,6 +47,8 @@ namespace Milestone2App
                 DataGridViewTextBoxColumn newColumn = new DataGridViewTextBoxColumn();
                 newColumn.HeaderText = column;
                 newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                if (column == "business_id")
+                    newColumn.Visible = false;
                 businessGrid.Columns.Add(newColumn);
             }
         }
@@ -54,7 +56,7 @@ namespace Milestone2App
         private void initializeDropDowns()
         {
             List<string> states = queryEngine.GetStates();
-            foreach (var state in states)            
+            foreach (var state in states)
                 stateDropDown.Items.Add(state); //populates the state drop down with all the states returned by the queryEngine            
         }
 
@@ -69,8 +71,8 @@ namespace Milestone2App
             queryEngine.resetSearchParameter("state", (string)box.SelectedItem); //by using setSearchParameter, we ensure that there is only ever one state parameter.
             List<string> cities = queryEngine.GetCities(); //get the list of cities 
 
-            foreach (string city in queryEngine.GetCities())            
-                cityCheckBox.Items.Add(city);            
+            foreach (string city in queryEngine.GetCities())
+                cityCheckBox.Items.Add(city);
         }
 
         private void cityCheckBox_ItemCheck(object sender, ItemCheckEventArgs e)
@@ -91,7 +93,7 @@ namespace Milestone2App
                 queryEngine.removeSearchParameter("city", newItem);
                 foreach (string item in newZips)
                 {
-                    queryEngine.removeSearchParameter("zipcode", item);                    
+                    queryEngine.removeSearchParameter("zipcode", item);
                     zipCheckBox.Items.Remove(item);
                 }
                 updateCategories();
@@ -116,7 +118,7 @@ namespace Milestone2App
             categoriesCheckBox.Items.Clear(); //since attributes likely have a ton of overlap, it is simpler to just clear the list and re-populate each time a new item is checked.
             foreach (string item in queryEngine.GetCategories()) // add returned categories            
                 if (!categoriesCheckBox.Items.Contains(item)) // if the category is not already in the listbox
-                    categoriesCheckBox.Items.Add(item);            
+                    categoriesCheckBox.Items.Add(item);
         }
 
 
@@ -145,7 +147,7 @@ namespace Milestone2App
                         businessGrid.Rows[row - 1].Cells[col++].Value = item;
                     col = 0;
                 }
-                row++;                
+                row++;
             }
         }
 
@@ -154,87 +156,27 @@ namespace Milestone2App
             updateGrid();
         }
 
-        private void UserNameEntryTextBox_TextChanged(object sender, EventArgs e)
-        {
-            string name = UserNameEntryTextBox.Text;
-
-            if (PlayerIDListBox.Items.Count > 0) //removes all the data previously in the grid.
-                PlayerIDListBox.Items.Clear();
-
-            if (name == string.Empty)
-            {
-                return;
-            }
-
-            // fill PlayerIDListBox with ids that match the name
-            // run query
-            using (var connection = new NpgsqlConnection(LOGININFO))
-            {
-                connection.Open();
-                using (var cmd = new NpgsqlCommand())
-                {
-                    cmd.Connection = connection;
-                    cmd.CommandText = "SELECT distinct user_id FROM yelpuser WHERE yelpuser.name like '%" + name + "%' ORDER BY user_id;";
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            PlayerIDListBox.Items.Add(reader.GetString(0));
-                        }
-                    }
-                }
-                connection.Close();
-            }
-        }
-
         private void PlayerIDListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Fill all of the user's info textboxes
-            currUserId = PlayerIDListBox.SelectedItem.ToString();
+            List<List<string>> userData = queryEngine.GetUser(PlayerIDListBox.SelectedItem.ToString(), "name, average_stars, cool, funny, useful, fans, review_count, yelping_since, user_latitude, user_longitude");
 
-            using (var connection = new NpgsqlConnection(LOGININFO))
-            {
-                connection.Open();
-                using (var cmd = new NpgsqlCommand())
-                {
-                    cmd.Connection = connection;
-                    // SELECT * from yelpuser WHERE yelpuser.user_id = 'QGauzwshJlwHyMqT--CGiQ';
-                    cmd.CommandText = "SELECT * from yelpuser WHERE yelpuser.user_id = '" + currUserId + "' ORDER BY user_id;";
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            NameValue.Text = reader.GetString(1);
-                            StarsValue.Text = reader.GetDouble(2).ToString();
-                            CoolValue.Text = reader.GetValue(3).ToString();
-                            FunnyValue.Text = reader.GetValue(4).ToString();
-                            UsefulValue.Text = reader.GetValue(5).ToString();
-                            FansValue.Text = reader.GetValue(6).ToString();
-                            ReviewCountValue.Text = reader.GetValue(7).ToString();
-                            YelpingSinceValue.Text = reader.GetDate(8).ToString();
+            NameValue.Text = userData[1][0];
+            StarsValue.Text = userData[1][1];
+            CoolValue.Text = userData[1][2];
+            FunnyValue.Text = userData[1][3];
+            UsefulValue.Text = userData[1][4];
+            FansValue.Text = userData[1][5];
+            ReviewCountValue.Text = userData[1][6];
+            YelpingSinceValue.Text = userData[1][7];
+            LatitudeValue.Text = userData[1][8];
+            LongitudeValue.Text = userData[1][9];
 
-                            try
-                            {
-                                LatitudeValue.Text = reader.GetDouble(9).ToString();
-                            }
-                            catch (InvalidCastException ex)
-                            {
-                                LatitudeValue.Text = "empty";
-                            }
+            if (LatitudeValue.Text == string.Empty)
+                LatitudeValue.Text = "empty";
 
-                            try
-                            {
-                                LongitudeValue.Text = reader.GetDouble(10).ToString();
-                            }
-                            catch (InvalidCastException ex)
-                            {
-                                LongitudeValue.Text = "empty";
-                            }
-                        }
-                    }
-                }
-                connection.Close();
-            }
+            if (LongitudeValue.Text == string.Empty)
+                LongitudeValue.Text = "empty";
         }
 
         private void businessGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -279,10 +221,24 @@ namespace Milestone2App
 
         private void ShowReviewsButton_Click(object sender, EventArgs e)
         {
-
             ReviewForm reviewWindow = new ReviewForm(currBusId);
             reviewWindow.Show();
+        }
 
+        private void UserNameEntryTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                List<string> userIds = queryEngine.GetUsers(UserNameEntryTextBox.Text);
+
+                PlayerIDListBox.Items.Clear();
+
+                foreach (string id in userIds)
+                    PlayerIDListBox.Items.Add(id);
+
+
+                e.Handled = true;
+            }
         }
     }
 }
