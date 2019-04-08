@@ -115,6 +115,7 @@
             this.businessGrid.Margin = new System.Windows.Forms.Padding(0);
             this.businessGrid.Name = "businessGrid";
             this.businessGrid.ReadOnly = true;
+            this.businessGrid.RowHeadersVisible = false;
             this.businessGrid.Size = new System.Drawing.Size(592, 254);
             this.businessGrid.TabIndex = 2;
             this.businessGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.businessGrid_CellContentClick);
