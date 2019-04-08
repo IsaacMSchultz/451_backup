@@ -14,6 +14,7 @@ namespace Milestone2App
     {
         QueryEngine queryEngine;
         string[] cols = { "name", "address", "city", "state", "stars", "review_count", "num_checkins", "reviewRating", "is_open", "business_id" };
+        string[] reviewCols = { "stars", "date", "text", "useful votes", "funny votes", "cool votes" };
         string projection;
 
         string currBusId;
@@ -25,8 +26,7 @@ namespace Milestone2App
         //private BindingSource businessBindingSource; //allows the datagridview to automatically update itself from the dataGridBusinesses.
 
         private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone2db"; // Defines our connection to local databus
-                                                                                                                              //private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone2db"; // Defines our connection to cloud hosted databus
-
+        //private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone2db"; // Defines our connection to cloud hosted databus
 
 
         public YelpGUI(string proj = "name, address, city, state, stars, review_count, num_checkins, reviewRating, is_open, business_id")
@@ -221,7 +221,27 @@ namespace Milestone2App
 
         private void ShowReviewsButton_Click(object sender, EventArgs e)
         {
-            ReviewForm reviewWindow = new ReviewForm(currBusId);
+            DataGridView ReviewGrid = new DataGridView();
+            foreach (var column in reviewCols)
+            {
+                // Create the column headers for the data grid view.
+                DataGridViewTextBoxColumn newColumn = new DataGridViewTextBoxColumn();
+                newColumn.HeaderText = column;
+
+                if (column == "text")
+                    newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                else
+                    newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+
+                ReviewGrid.Columns.Add(newColumn);
+            }
+            List<List<string>> reviews = queryEngine.GetReviews(currBusId, "review_stars, date, text, useful_vote, funny_vote, cool_vote");
+            reviews.RemoveAt(0); //we dont need the headers so we can remove them.
+
+            foreach (List<string> review in reviews)
+                ReviewGrid.Rows.Add(review[0], review[1], review[2], review[3], review[4], review[5]);
+
+            ReviewForm reviewWindow = new ReviewForm(ReviewGrid);
             reviewWindow.Show();
         }
 
