@@ -122,6 +122,11 @@ namespace QueryEngine1
             return ExecuteCategorizedQuery("SELECT " + projection + " from yelpuser WHERE yelpuser.user_id = '" + id + "';");
         }
 
+        public List<List<string>> GetReviews(string id, string projection = "*")
+        {            
+            return ExecuteCategorizedQuery("SELECT " + projection + " from review WHERE business_id = '" + id + "' ORDER BY review_stars;");
+        }       
+
         /// <summary>
         /// Runs a query to return the results based on the current search parameters as a 2 dimensional array of strings
         /// If there are no search parameters, returns an empty string array.
