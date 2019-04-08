@@ -13,34 +13,34 @@ namespace Milestone2App
 {
     public partial class ReviewForm : Form
     {
-        private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone2db"; // Defines our connection to local databus
-        public ReviewForm(string bid)
+        public ReviewForm(DataGridView grid)
         {
-            InitializeComponent();
-
-            using (var connection = new NpgsqlConnection(LOGININFO))
-            {
-                connection.Open();
-                using (var cmd = new NpgsqlCommand())
-                {
-                    cmd.Connection = connection;
-                    cmd.CommandText = "SELECT * FROM review WHERE business_id = '" + bid + "' ORDER BY review_stars;";
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            Console.WriteLine(reader["review_stars"]);
-                            Console.WriteLine(reader["date"]);
-                            Console.WriteLine(reader["text"]);
-                            Console.WriteLine(reader["useful_vote"]);
-                            Console.WriteLine(reader["funny_vote"]);
-                            Console.WriteLine(reader["cool_vote"]);
-                            ReviewGrid.Rows.Add(reader["review_stars"], reader["date"], reader["text"], reader["useful_vote"], reader["funny_vote"], reader["cool_vote"]);
-                        }
-                    }
-                }
-                connection.Close();
-            }
+            this.ReviewGrid = grid;
+            ((System.ComponentModel.ISupportInitialize)(this.ReviewGrid)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // ReviewGrid
+            // 
+            this.ReviewGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ReviewGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ReviewGrid.Location = new System.Drawing.Point(0, 0);
+            this.ReviewGrid.Margin = new System.Windows.Forms.Padding(0);
+            this.ReviewGrid.Name = "ReviewGrid";
+            this.ReviewGrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.ReviewGrid.RowTemplate.Height = 24;
+            this.ReviewGrid.Size = new System.Drawing.Size(706, 357);
+            this.ReviewGrid.TabIndex = 0;
+            // 
+            // ReviewForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(706, 357);
+            this.Controls.Add(this.ReviewGrid);
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Name = "ReviewForm";
+            ((System.ComponentModel.ISupportInitialize)(this.ReviewGrid)).EndInit();
+            this.ResumeLayout(false);            
         }
     }
 }
