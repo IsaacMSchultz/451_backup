@@ -18,6 +18,7 @@ namespace QueryEngine1
         private Dictionary<string, List<string>> searchParameters;
         List<List<string>> lastQuery;
         string currBusId;
+        string currUserId;
 
         private static Random random = new Random();
         const string chars = "abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_- ";
@@ -46,28 +47,6 @@ namespace QueryEngine1
                 // "UPDATE review WHERE review.reviewId = " AND reviewChanged.reviewId AND " 
             }
             YelpPropertyChanged(sender, e);
-        }
-
-        public List<string> ExecuteListQuery(string query)
-        {
-            List<string> strings = new List<string>();
-
-            using (var connection = new NpgsqlConnection(LOGININFO))
-            {
-                connection.Open();
-                using (var cmd = new NpgsqlCommand())
-                {
-                    cmd.Connection = connection;
-                    cmd.CommandText = query;
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                            strings.Add(reader.GetString(0));
-                    }
-                }
-                connection.Close();
-            }
-            return strings;
         }
 
         //TODO: make a single GET function that takes the parameter we are looking for instead of many for each.
@@ -122,6 +101,33 @@ namespace QueryEngine1
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="projection"></param>
+        /// <returns></returns>
+        public List<string> GetUsers(string name, string projection = "user_id")
+        {
+            List<string> returnList = new List<string>();
+            if (name == string.Empty)
+                return returnList;
+
+            returnList = ExecuteListQuery("SELECT distinct " + projection + " FROM yelpuser WHERE yelpuser.name like '%" + name + "%' ORDER BY user_id;");                    
+
+            return returnList;
+        }
+
+        public List<List<string>> GetUser(string id, string projection = "*")
+        {
+            return ExecuteCategorizedQuery("SELECT " + projection + " from yelpuser WHERE yelpuser.user_id = '" + id + "';");
+        }
+
+        public List<List<string>> GetReviews(string id, string projection = "*")
+        {            
+            return ExecuteCategorizedQuery("SELECT " + projection + " from review WHERE business_id = '" + id + "' ORDER BY review_stars;");
+        }       
+
+        /// <summary>
         /// Runs a query to return the results based on the current search parameters as a 2 dimensional array of strings
         /// If there are no search parameters, returns an empty string array.
         /// </summary>
@@ -150,7 +156,7 @@ namespace QueryEngine1
                 }
 
                 if (searchParams.Count == 1)
-                    orList = orList.Substring(0, orList.Length - 6);
+                    orList = orList.Substring(0, orList.Length - 6); // if there is just one parameter, we wont need parenthesis or and AND.
                 else
                     orList = orList.Substring(0, orList.Length - 4); // Cuts off the last ") AND "
 
@@ -204,6 +210,28 @@ namespace QueryEngine1
 
             lastQuery = returnList;
             return returnList;
+        }
+
+        public List<string> ExecuteListQuery(string query)
+        {
+            List<string> strings = new List<string>();
+
+            using (var connection = new NpgsqlConnection(LOGININFO))
+            {
+                connection.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = connection;
+                    cmd.CommandText = query;
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                            strings.Add(reader.GetString(0));
+                    }
+                }
+                connection.Close();
+            }
+            return strings;
         }
 
         /// <summary>
