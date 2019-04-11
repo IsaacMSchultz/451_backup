@@ -86,6 +86,7 @@
             this.PlayerIDListBox = new System.Windows.Forms.ListBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.UserNameEntryTextBox = new System.Windows.Forms.TextBox();
+            this.MapButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -344,18 +345,20 @@
             // 
             this.tableLayoutPanel7.ColumnCount = 2;
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 133F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
             this.tableLayoutPanel7.Controls.Add(this.businessNameTextBox_Review, 0, 0);
             this.tableLayoutPanel7.Controls.Add(this.WriteReviewTextBox_Review, 0, 1);
             this.tableLayoutPanel7.Controls.Add(this.ShowReviewsButton, 1, 0);
             this.tableLayoutPanel7.Controls.Add(this.tableLayoutPanel8, 1, 1);
+            this.tableLayoutPanel7.Controls.Add(this.MapButton, 1, 2);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel7.Location = new System.Drawing.Point(267, 315);
             this.tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
-            this.tableLayoutPanel7.RowCount = 2;
+            this.tableLayoutPanel7.RowCount = 3;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 47F));
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 47F));
             this.tableLayoutPanel7.Size = new System.Drawing.Size(792, 210);
             this.tableLayoutPanel7.TabIndex = 9;
             // 
@@ -367,7 +370,7 @@
             this.businessNameTextBox_Review.Margin = new System.Windows.Forms.Padding(0);
             this.businessNameTextBox_Review.Name = "businessNameTextBox_Review";
             this.businessNameTextBox_Review.ReadOnly = true;
-            this.businessNameTextBox_Review.Size = new System.Drawing.Size(659, 47);
+            this.businessNameTextBox_Review.Size = new System.Drawing.Size(592, 47);
             this.businessNameTextBox_Review.TabIndex = 0;
             this.businessNameTextBox_Review.Text = "Business name (click on one)";
             // 
@@ -378,7 +381,8 @@
             this.WriteReviewTextBox_Review.Margin = new System.Windows.Forms.Padding(0);
             this.WriteReviewTextBox_Review.Multiline = true;
             this.WriteReviewTextBox_Review.Name = "WriteReviewTextBox_Review";
-            this.WriteReviewTextBox_Review.Size = new System.Drawing.Size(659, 163);
+            this.tableLayoutPanel7.SetRowSpan(this.WriteReviewTextBox_Review, 2);
+            this.WriteReviewTextBox_Review.Size = new System.Drawing.Size(592, 163);
             this.WriteReviewTextBox_Review.TabIndex = 1;
             this.WriteReviewTextBox_Review.TextChanged += new System.EventHandler(this.WriteReviewTextBox_Review_TextChanged);
             // 
@@ -386,10 +390,10 @@
             // 
             this.ShowReviewsButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ShowReviewsButton.Enabled = false;
-            this.ShowReviewsButton.Location = new System.Drawing.Point(492, 0);
+            this.ShowReviewsButton.Location = new System.Drawing.Point(592, 0);
             this.ShowReviewsButton.Margin = new System.Windows.Forms.Padding(0);
             this.ShowReviewsButton.Name = "ShowReviewsButton";
-            this.ShowReviewsButton.Size = new System.Drawing.Size(133, 47);
+            this.ShowReviewsButton.Size = new System.Drawing.Size(200, 47);
             this.ShowReviewsButton.TabIndex = 2;
             this.ShowReviewsButton.Text = "Show Reviews";
             this.ShowReviewsButton.UseVisualStyleBackColor = true;
@@ -402,23 +406,23 @@
             this.tableLayoutPanel8.Controls.Add(this.SubmitReviewButton, 0, 1);
             this.tableLayoutPanel8.Controls.Add(this.ReviewStarsDropDown, 0, 0);
             this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel8.Location = new System.Drawing.Point(659, 47);
+            this.tableLayoutPanel8.Location = new System.Drawing.Point(592, 47);
             this.tableLayoutPanel8.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
             this.tableLayoutPanel8.RowCount = 2;
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(133, 163);
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(200, 116);
             this.tableLayoutPanel8.TabIndex = 3;
             // 
             // SubmitReviewButton
             // 
             this.SubmitReviewButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SubmitReviewButton.Enabled = false;
-            this.SubmitReviewButton.Location = new System.Drawing.Point(0, 21);
+            this.SubmitReviewButton.Location = new System.Drawing.Point(0, 24);
             this.SubmitReviewButton.Margin = new System.Windows.Forms.Padding(0);
             this.SubmitReviewButton.Name = "SubmitReviewButton";
-            this.SubmitReviewButton.Size = new System.Drawing.Size(133, 139);
+            this.SubmitReviewButton.Size = new System.Drawing.Size(200, 92);
             this.SubmitReviewButton.TabIndex = 0;
             this.SubmitReviewButton.Text = "Submit Review";
             this.SubmitReviewButton.UseVisualStyleBackColor = true;
@@ -437,7 +441,7 @@
             this.ReviewStarsDropDown.Location = new System.Drawing.Point(0, 0);
             this.ReviewStarsDropDown.Margin = new System.Windows.Forms.Padding(0);
             this.ReviewStarsDropDown.Name = "ReviewStarsDropDown";
-            this.ReviewStarsDropDown.Size = new System.Drawing.Size(133, 24);
+            this.ReviewStarsDropDown.Size = new System.Drawing.Size(200, 24);
             this.ReviewStarsDropDown.TabIndex = 1;
             this.ReviewStarsDropDown.Text = "Review Stars";
             this.ReviewStarsDropDown.SelectedIndexChanged += new System.EventHandler(this.ReviewStarsDropDown_SelectedIndexChanged);
@@ -870,6 +874,18 @@
             this.UserNameEntryTextBox.Text = "Enter name...";
             this.UserNameEntryTextBox.TextChanged += new System.EventHandler(this.UserNameEntryTextBox_TextChanged);
             // 
+            // MapButton
+            // 
+            this.MapButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MapButton.Enabled = false;
+            this.MapButton.Location = new System.Drawing.Point(595, 166);
+            this.MapButton.Name = "MapButton";
+            this.MapButton.Size = new System.Drawing.Size(194, 41);
+            this.MapButton.TabIndex = 4;
+            this.MapButton.Text = "View Business on Map";
+            this.MapButton.UseVisualStyleBackColor = true;
+            this.MapButton.Click += new System.EventHandler(this.MapButton_Click);
+            // 
             // YelpGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -969,6 +985,7 @@
         private System.Windows.Forms.TextBox ReviewCount;
         private System.Windows.Forms.TextBox ReviewCountValue;
         private System.Windows.Forms.Button SearchButton;
+        private System.Windows.Forms.Button MapButton;
     }
 }
 

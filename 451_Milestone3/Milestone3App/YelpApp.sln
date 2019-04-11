@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YelpApp", "YelpApp.csproj",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueryEngine", "..\QueryEngine\QueryEngine.csproj", "{76BA320A-32DD-414B-BEB8-E6B86080C5C7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapControlLibrary", "..\MapControlLibrary\MapControlLibrary.csproj", "{43B06CA4-E433-4E88-95B2-CD0FFDA9133F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{76BA320A-32DD-414B-BEB8-E6B86080C5C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76BA320A-32DD-414B-BEB8-E6B86080C5C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76BA320A-32DD-414B-BEB8-E6B86080C5C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43B06CA4-E433-4E88-95B2-CD0FFDA9133F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43B06CA4-E433-4E88-95B2-CD0FFDA9133F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43B06CA4-E433-4E88-95B2-CD0FFDA9133F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43B06CA4-E433-4E88-95B2-CD0FFDA9133F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

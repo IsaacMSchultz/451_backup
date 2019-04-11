@@ -246,6 +246,8 @@ namespace Milestone2App
                 currBusId = (string)businessGrid[9, e.RowIndex].Value;
 
                 ShowReviewsButton.Enabled = true; //enable the button to show reviews after we click one
+
+                MapButton.Enabled = true;
             }
         }
 
@@ -283,6 +285,15 @@ namespace Milestone2App
             ReviewForm reviewWindow = new ReviewForm(currBusId);
             reviewWindow.Show();
 
+        }
+
+        private void MapButton_Click(object sender, EventArgs e)
+        {
+            //Form mapWindow = new Form();
+            //MapForm mapWindow = new MapForm(currBusId);
+            //mapWindow.Show();
+            MapForm mapTest = new MapForm(currBusId);
+            mapTest.Show();
         }
     }
 }
