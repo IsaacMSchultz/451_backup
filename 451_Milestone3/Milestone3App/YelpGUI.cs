@@ -13,22 +13,25 @@ namespace Milestone2App
     public partial class YelpGUI : Form
     {
         QueryEngine queryEngine;
-        string[] cols = { "name", "address", "city", "state", "stars", "review_count", "num_checkins", "reviewRating", "is_open", "business_id" };
-        string projection;
+        string[] cols = { "Name", "Address", "City", "State", "Stars Shown", "Reviews", "Checkins", "Stars", "Open?", "business_id" }; //column titles for the main datagridview
+        string[] reviewCols = { "Stars", "Date", "Text", "Useful", "Funny", "Cool" }; //Column headers for the review form that can be opened from the GUI
+        string projection; //selected columns to show in the database. Need to implement column constructors based on the projection instead of the cols[] array.
 
-        string currBusId;
+        //TODO: change to functions so that debugging global variables is less ambiguous.
+        string currBusId; //global variable for the currend businessId
         string currUserId;
 
+        // private variables used to generate a random ID.
         private static Random random = new Random();
-        const string chars = "abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_- ";
-
-        //private BindingSource businessBindingSource; //allows the datagridview to automatically update itself from the dataGridBusinesses.
+        const string chars = "abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_- ";        
 
         private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone2db"; // Defines our connection to local databus
-                                                                                                                              //private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone2db"; // Defines our connection to cloud hosted databus
+        //private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone2db"; // Defines our connection to cloud hosted databus
 
-
-
+        /// <summary>
+        /// Constructor for a yelpGUI.
+        /// </summary>
+        /// <param name="proj">A projection selector for a query to only return certain columns.</param>
         public YelpGUI(string proj = "name, address, city, state, stars, review_count, num_checkins, reviewRating, is_open, business_id")
         {
             queryEngine = new QueryEngine();
@@ -39,25 +42,40 @@ namespace Milestone2App
             projection = proj;
 
             InitializeComponent();
-            initializeDropDowns();         
+            initializeDropDowns();
 
             foreach (var column in cols)
             {
                 // Create the column headers for the data grid view.
                 DataGridViewTextBoxColumn newColumn = new DataGridViewTextBoxColumn();
                 newColumn.HeaderText = column;
-                newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                
+                if (column == "Name")
+                    newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                else
+                    newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+
+                if (column == "business_id" || column == "Stars Shown")
+                    newColumn.Visible = false;
                 businessGrid.Columns.Add(newColumn);
             }
         }
 
+        /// <summary>
+        /// Initializes the state dropdown with a list of states from the database.
+        /// </summary>
         private void initializeDropDowns()
         {
             List<string> states = queryEngine.GetStates();
-            foreach (var state in states)            
+            foreach (var state in states)
                 stateDropDown.Items.Add(state); //populates the state drop down with all the states returned by the queryEngine            
         }
 
+        /// <summary>
+        /// When a state is selected, all checkboxes are cleared and then the city checkbox is updated with a list of cities.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void stateDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBox box = (ComboBox)sender; //casts sender as a ComboBox
@@ -69,10 +87,18 @@ namespace Milestone2App
             queryEngine.resetSearchParameter("state", (string)box.SelectedItem); //by using setSearchParameter, we ensure that there is only ever one state parameter.
             List<string> cities = queryEngine.GetCities(); //get the list of cities 
 
-            foreach (string city in queryEngine.GetCities())            
-                cityCheckBox.Items.Add(city);            
+            foreach (string city in queryEngine.GetCities())
+                cityCheckBox.Items.Add(city);
+            updateGrid();
         }
 
+        /// <summary>
+        /// When an item in the city checkbox is checked, this fulnction will update the contents of the zipcode checkbox as well as
+        /// update the contents of the categories checkbox, as there may be some cascading changes if an item that was included in the categories
+        /// was dependent on a check from the cities checkbox that was chanaged.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cityCheckBox_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             CheckedListBox CheckBox = (CheckedListBox)sender; //casts the sending object as a checkedbox
@@ -91,13 +117,20 @@ namespace Milestone2App
                 queryEngine.removeSearchParameter("city", newItem);
                 foreach (string item in newZips)
                 {
-                    queryEngine.removeSearchParameter("zipcode", item);                    
+                    queryEngine.removeSearchParameter("zipcode", item);
                     zipCheckBox.Items.Remove(item);
                 }
                 updateCategories();
             }
+            updateGrid();
         }
 
+        /// <summary>
+        /// When an item in the zipcode checkbox is checked, this function will update the contents of the categories checkbox and add the checked item to
+        /// the search parameters in the query engine.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void zipCheckBox_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             CheckedListBox senderCheckBox = (CheckedListBox)sender; //casts the sending object as a checkedbox
@@ -109,17 +142,25 @@ namespace Milestone2App
                 queryEngine.removeSearchParameter("zipcode", newItem);//remove the new item to the list if its unchecked              
 
             updateCategories();
+            updateGrid();
         }
 
+        /// <summary>
+        /// Updates the checkboxes in the categories list based on the queryEngine
+        /// </summary>
         private void updateCategories()
         {
             categoriesCheckBox.Items.Clear(); //since attributes likely have a ton of overlap, it is simpler to just clear the list and re-populate each time a new item is checked.
             foreach (string item in queryEngine.GetCategories()) // add returned categories            
                 if (!categoriesCheckBox.Items.Contains(item)) // if the category is not already in the listbox
-                    categoriesCheckBox.Items.Add(item);            
+                    categoriesCheckBox.Items.Add(item);
         }
 
-
+        /// <summary>
+        /// When an item in the categories checkbox is checked, update its value in the queryEngine and update the datagrid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void categoriesCheckBox_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             CheckedListBox senderCheckBox = (CheckedListBox)sender; //casts the sending object as a checkedbox
@@ -128,9 +169,14 @@ namespace Milestone2App
             if (e.NewValue == CheckState.Checked) //add or remove the check box item that just changed to the list            
                 queryEngine.addSearchParameter("category_name", newItem); //add the new item to the list if it is checked            
             else
-                queryEngine.removeSearchParameter("category_name", newItem);//remove the new item to the list if its unchecked               
+                queryEngine.removeSearchParameter("category_name", newItem);//remove the new item to the list if its unchecked
+            updateGrid();
         }
 
+        /// <summary>
+        /// Runs a search with the current query parameters that were built for the queryEngine.
+        /// Updates the datagridview with the data returned from the queryEngine.
+        /// </summary>
         private void updateGrid(/*List<string> categoryContents*/) //way to call before the ItemCheck function completes (old ghetto way)
         {
             int row = 0, col = 0;
@@ -145,101 +191,57 @@ namespace Milestone2App
                         businessGrid.Rows[row - 1].Cells[col++].Value = item;
                     col = 0;
                 }
-                row++;                
+                row++;
             }
         }
 
+        /// <summary>
+        /// Update the datagrid when the search button is clicked!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SearchButton_Click(object sender, EventArgs e)
         {
             updateGrid();
         }
 
-        private void UserNameEntryTextBox_TextChanged(object sender, EventArgs e)
-        {
-            string name = UserNameEntryTextBox.Text;
-
-            if (PlayerIDListBox.Items.Count > 0) //removes all the data previously in the grid.
-                PlayerIDListBox.Items.Clear();
-
-            if (name == string.Empty)
-            {
-                return;
-            }
-
-            // fill PlayerIDListBox with ids that match the name
-            // run query
-            using (var connection = new NpgsqlConnection(LOGININFO))
-            {
-                connection.Open();
-                using (var cmd = new NpgsqlCommand())
-                {
-                    cmd.Connection = connection;
-                    cmd.CommandText = "SELECT distinct user_id FROM yelpuser WHERE yelpuser.name like '%" + name + "%' ORDER BY user_id;";
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            PlayerIDListBox.Items.Add(reader.GetString(0));
-                        }
-                    }
-                }
-                connection.Close();
-            }
-        }
-
+        /// <summary>
+        /// When the user selects an ID from the list it should populate the user data section with that user's data.   
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PlayerIDListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Fill all of the user's info textboxes
-            currUserId = PlayerIDListBox.SelectedItem.ToString();
+            List<List<string>> userData = queryEngine.GetUser(PlayerIDListBox.SelectedItem.ToString(), "name, average_stars, cool, funny, useful, fans, review_count, yelping_since, user_latitude, user_longitude, user_id");
 
-            using (var connection = new NpgsqlConnection(LOGININFO))
-            {
-                connection.Open();
-                using (var cmd = new NpgsqlCommand())
-                {
-                    cmd.Connection = connection;
-                    // SELECT * from yelpuser WHERE yelpuser.user_id = 'QGauzwshJlwHyMqT--CGiQ';
-                    cmd.CommandText = "SELECT * from yelpuser WHERE yelpuser.user_id = '" + currUserId + "' ORDER BY user_id;";
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            NameValue.Text = reader.GetString(1);
-                            StarsValue.Text = reader.GetDouble(2).ToString();
-                            CoolValue.Text = reader.GetValue(3).ToString();
-                            FunnyValue.Text = reader.GetValue(4).ToString();
-                            UsefulValue.Text = reader.GetValue(5).ToString();
-                            FansValue.Text = reader.GetValue(6).ToString();
-                            ReviewCountValue.Text = reader.GetValue(7).ToString();
-                            YelpingSinceValue.Text = reader.GetDate(8).ToString();
+            NameValue.Text = userData[1][0];
+            StarsValue.Text = userData[1][1];
+            CoolValue.Text = userData[1][2];
+            FunnyValue.Text = userData[1][3];
+            UsefulValue.Text = userData[1][4];
+            FansValue.Text = userData[1][5];
+            ReviewCountValue.Text = userData[1][6];
+            YelpingSinceValue.Text = userData[1][7];
+            LatitudeValue.Text = userData[1][8];
+            LongitudeValue.Text = userData[1][9];
 
-                            try
-                            {
-                                LatitudeValue.Text = reader.GetDouble(9).ToString();
-                            }
-                            catch (InvalidCastException ex)
-                            {
-                                LatitudeValue.Text = "empty";
-                            }
+            if (LatitudeValue.Text == string.Empty)
+                LatitudeValue.Text = "empty";
 
-                            try
-                            {
-                                LongitudeValue.Text = reader.GetDouble(10).ToString();
-                            }
-                            catch (InvalidCastException ex)
-                            {
-                                LongitudeValue.Text = "empty";
-                            }
-                        }
-                    }
-                }
-                connection.Close();
-            }
+            if (LongitudeValue.Text == string.Empty)
+                LongitudeValue.Text = "empty";
+
+            currUserId = userData[1][10]; //set the current user id to what was returned by the query.
         }
 
+        /// <summary>
+        /// When the user clicks on a cell in the datagridview, the business they clicked should become the currently selected business.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void businessGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //SubmitReviewButton
+        {            
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
                 businessNameTextBox_Review.Text = (string)businessGrid[0, e.RowIndex].Value;
@@ -251,6 +253,11 @@ namespace Milestone2App
             }
         }
 
+        /// <summary>
+        /// When the user clicks the submit review button, it uses the queryEngine to post the review.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SubmitReviewButton_Click(object sender, EventArgs e)
         {
             if (currBusId != "" && currUserId != "" && ReviewStarsDropDown.SelectedItem as string != "Review Stars")
@@ -259,6 +266,11 @@ namespace Milestone2App
             }
         }
 
+        /// <summary>
+        /// When the user starts typing in the write review box, the submit review button should be enabled.       
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void WriteReviewTextBox_Review_TextChanged(object sender, EventArgs e)
         {
             if (WriteReviewTextBox_Review.Text != "" && ReviewStarsDropDown.SelectedItem as string != "Review Stars")
@@ -271,6 +283,11 @@ namespace Milestone2App
             }
         }
 
+        /// <summary>
+        /// When the user selects a rating to give a review, we should enable the submit review button.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ReviewStarsDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (WriteReviewTextBox_Review.Text != "")
@@ -278,13 +295,58 @@ namespace Milestone2App
                 SubmitReviewButton.Enabled = true;
             }
         }
-
+        /// <summary>
+        /// When the user clicks the "Show Reviews" Button, it will open a new form displaying all the reviews for the selected business.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ShowReviewsButton_Click(object sender, EventArgs e)
         {
+            // create a new datagridview to pass to the new form that will open to show the reviews.
+            DataGridView ReviewGrid = new DataGridView();
+            ReviewGrid.RowHeadersVisible = false;
 
-            ReviewForm reviewWindow = new ReviewForm(currBusId);
+            // Build the columns and headers for the new form
+            foreach (var column in reviewCols)
+            {
+                // Create the column headers for the data grid view.
+                DataGridViewTextBoxColumn newColumn = new DataGridViewTextBoxColumn();
+                newColumn.HeaderText = column;
+
+                if (column == "text")
+                    newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                else
+                    newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+
+                ReviewGrid.Columns.Add(newColumn);
+            }
+
+            //Query the database for the reviews of the current business
+            List<List<string>> reviews = queryEngine.GetReviews(currBusId, "review_stars, date, text, useful_vote, funny_vote, cool_vote");
+            reviews.RemoveAt(0); //we dont need the headers so we can remove them.
+
+            // Add all the returned reviews to the new datagrid
+            foreach (List<string> review in reviews)
+                ReviewGrid.Rows.Add(review[0], review[1], review[2], review[3], review[4], review[5]);
+
+            // Make the new form open up and show it to the user.
+            ReviewForm reviewWindow = new ReviewForm(ReviewGrid);
             reviewWindow.Show();
+        }
 
+        private void UserNameEntryTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                List<string> userIds = queryEngine.GetUsers(UserNameEntryTextBox.Text);
+
+                PlayerIDListBox.Items.Clear();
+
+                foreach (string id in userIds)
+                    PlayerIDListBox.Items.Add(id);
+
+                e.Handled = true;
+            }
         }
 
         private void MapButton_Click(object sender, EventArgs e)
