@@ -309,5 +309,45 @@ namespace QueryEngine1
             return false;
         }
 
+        // Beginning friend query, will need more detail
+        public List<List<string>> GetFriends(string userId)
+        {
+            List<List<string>> results = new List<List<string>>();
+            ReadOnlyCollection<NpgsqlDbColumn> columns = new ReadOnlyCollection<NpgsqlDbColumn>(new List<NpgsqlDbColumn>());
+
+            using (var connection = new NpgsqlConnection(LOGININFO))
+            {
+                connection.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = connection;
+                    cmd.CommandText = "Select name, average_stars, yelping_since from yelpuser where user_id in (Select friend_id from friend where user_id = '" + userId + "')";
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            if (columns.Count == 0)
+                                columns = reader.GetColumnSchema();
+
+                            List<string> row = new List<string>();
+
+                            foreach (NpgsqlDbColumn column in columns)
+                                row.Add(reader[column.ColumnName].ToString());
+
+                            results.Add(row);
+                        }
+                    }
+                }
+                connection.Close();
+            }
+            // Returns the list of column names as the first row.
+            List<string> header = new List<string>();
+            foreach (NpgsqlDbColumn column in columns)
+                header.Add(column.ColumnName);
+            results.Insert(0, header);
+
+            lastQuery = results;
+            return results;
+        }
     }
 }
