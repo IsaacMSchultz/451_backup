@@ -221,7 +221,6 @@ namespace Milestone2App
             FunnyValue.Text = userData[1][3];
             UsefulValue.Text = userData[1][4];
             FansValue.Text = userData[1][5];
-            ReviewCountValue.Text = userData[1][6];
             YelpingSinceValue.Text = userData[1][7];
             LatitudeValue.Text = userData[1][8];
             LongitudeValue.Text = userData[1][9];
@@ -233,6 +232,11 @@ namespace Milestone2App
                 LongitudeValue.Text = "empty";
 
             currUserId = userData[1][10]; //set the current user id to what was returned by the query.
+
+            updateFriendsGrid();
+
+            //updateFriendsReviewsListBox();
+            //updateFavBusinessesListBox();
         }
 
         /// <summary>
@@ -346,6 +350,28 @@ namespace Milestone2App
                     PlayerIDListBox.Items.Add(id);
 
                 e.Handled = true;
+
+                //updateFriendsGrid();
+            }
+        }
+        
+
+        // Should consider *Templatizing* this to work for multiple DataGrids
+        private void updateFriendsGrid()
+        {
+            int row = 0, col = 0;
+            FriendsGrid.Rows.Clear(); //removes all the data previously in the grid.            
+
+            foreach (List<string> listRow in queryEngine.GetFriends(currUserId))
+            {
+                if (row > 0)
+                {
+                    FriendsGrid.Rows.Add(); //the index of the new row
+                    foreach (string item in listRow)
+                        FriendsGrid.Rows[row - 1].Cells[col++].Value = item;
+                    col = 0;
+                }
+                row++;
             }
         }
 
