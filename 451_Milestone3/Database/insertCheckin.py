@@ -12,8 +12,8 @@ def int2BoolStr (value):
         return 'True'
 
 try:
-    #conn = psycopg2.connect("dbname='test1' user='postgres' host='localhost' password='greatPassword'")
-    conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
+    conn = psycopg2.connect("dbname='milestone3db' user='postgres' host='localhost' password='greatPassword'")
+    #conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
 except:
     print('Unable to connect to the database!')
 
@@ -37,13 +37,19 @@ with open('./yelp_checkin.JSON','r') as f:
                     if isinstance(value, dict): 
                         # parse through list
                         inner = value
+                        sql_str = "INSERT INTO Checkins (business_id, day, time, count) VALUES "
                         for innerName, innerValue in inner.items():
-                            try:
-                                cur.execute("INSERT INTO Checkins (business_id, day, time, count) VALUES ('" + business_id + "','" + name + "','" + innerName + "','" + str(innerValue) + "');")
-                            except Exception as e:
-                                print("Error inserting on line " +str(count_line) + ": " + str(e))
+                            sql_str += "('" + business_id + "','" + name + "','" + innerName + "','" + str(innerValue) + "'),"
 
-        conn.commit()
+                        sql_str = sql_str[:-1] #Remove the last , from the end of the string.
+                        sql_str += ";" #add the semicolon to the end of the query
+
+                        try:
+                            cur.execute(sql_str)
+                        except Exception as e:
+                            print("Error inserting on line " +str(count_line) + ": " + str(e))
+
+                        conn.commit()
 
         line = f.readline()
         count_line +=1
