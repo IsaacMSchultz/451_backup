@@ -12,8 +12,8 @@ def int2BoolStr (value):
         return 'True'
 
 try:
-    #conn = psycopg2.connect("dbname='test1' user='postgres' host='localhost' password='greatPassword'")
-    conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
+    conn = psycopg2.connect("dbname='milestone3db' user='postgres' host='localhost' password='greatPassword'")
+    #conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
 except:
     print('Unable to connect to the database!')
 
@@ -29,14 +29,26 @@ with open('./yelp_business.JSON','r') as f:
 
         business_id = str(cleanStr4SQL(data['business_id'])) 
 
+        sql_str = "INSERT INTO Hours (business_id, day, open, close) VALUES "
+
         for k, v in data.items():
             if k == "hours":
                 hours = v
 
                 for day, combinedTimes in hours.items():
                     times = combinedTimes.split('-')
-                    cur.execute("INSERT INTO Hours (business_id, day, open, close) VALUES ('" + business_id + "','" + cleanStr4SQL(day) + "','" + cleanStr4SQL(times[0]) + "','" + cleanStr4SQL(times[1]) + "');")
-                    
+                    sql_str += "('" + business_id + "','" + cleanStr4SQL(day) + "','" + cleanStr4SQL(times[0]) + "','" + cleanStr4SQL(times[1]) + "'),"
+
+        sql_str = sql_str[:-1] #Remove the last , from the end of the string.
+        sql_str += ";" #add the semicolon to the end of the query
+
+        if sql_str != "INSERT INTO Hours (business_id, day, open, close) VALUES;":
+            try:
+                cur.execute(sql_str)
+            except Exception as e:
+                print("Insert failed! " + str(e) + "\nOn line: " + str(count_line))
+            conn.commit()
+
         conn.commit()
         line = f.readline()
         count_line +=1
