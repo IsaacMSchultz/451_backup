@@ -1,0 +1,1 @@
+psql -U postgres -d milestone3db < Milestone3SQL.sql
