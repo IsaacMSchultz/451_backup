@@ -13,23 +13,19 @@ def int2BoolStr (value):
         return 'True'
 
 try:
-    #conn = psycopg2.connect("dbname='test1' user='postgres' host='localhost' password='greatPassword'")
-    conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
+    conn = psycopg2.connect("dbname='milestone3db' user='postgres' host='localhost' password='greatPassword'")
+    #conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
 except:
     print('Unable to connect to the database!')
 
 cur = conn.cursor()
 
-def myprint(d):
+def recurseAttr(d, attrList, business_id):    
     for k, v in d.items():
         if isinstance(v, dict):
-            myprint(v)
-        else:
-            #print "{0} : {1}".format(k, v)
-            try:
-                cur.execute("INSERT INTO Attributes (business_id, attribute_name, attribute_value) VALUES ('" + business_id + "','" + k + "','" + str(v) + "');")
-            except Exception as e:
-                print("Insert failed! " + str(e) + "On line: " + str(count_line))
+            recurseAttr(v, attrList, business_id)
+        else:            
+            attrList.append("('" + business_id + "','" + k + "','" + str(v) + "'),")    
 
 startingTime = time.process_time()
 print (os.getcwd())
@@ -42,21 +38,39 @@ with open('./yelp_business.JSON','r') as f:
 
         business_id = str(cleanStr4SQL(data['business_id'])) 
 
+        attr_sql = "INSERT INTO Attributes (business_id, attribute_name, attribute_value) VALUES "
+        cat_sql = "INSERT INTO Category (business_id, category_name) VALUES "
+
         for k, v in data.items():
             if k == "attributes":
-                myprint(v)
+                attrList = []
+                recurseAttr(v, attrList, business_id)
+                for attr in attrList:                    
+                    attr_sql += attr
                 
             elif k == "categories":
                 categories = v
 
-                for item in categories:
-                    try:
-                        cur.execute("INSERT INTO Category (business_id, category_name) VALUES ('" + business_id + "','" + cleanStr4SQL(item) + "');")
-                    except Exception as e:
-                        print("Insert failed! " + str(e) + "On line: " + str(count_line))
-                    
-                    
-        conn.commit()
+                for item in categories:                    
+                    cat_sql += "('" + business_id + "','" + cleanStr4SQL(item) + "'),"                    
+        
+        attr_sql = attr_sql[:-1] #Remove the last , from the end of the string.
+        attr_sql += ";" #add the semicolon to the end of the query
+        cat_sql = cat_sql[:-1] #Remove the last , from the end of the string.
+        cat_sql += ";" #add the semicolon to the end of the query
+
+        if attr_sql != "INSERT INTO Attributes (business_id, attribute_name, attribute_value) VALUES;":
+            try:
+                cur.execute(attr_sql)            
+            except Exception as e:
+                print("Attribute insert failed! " + str(e) + "On line: " + str(count_line))
+            conn.commit()
+        if cat_sql != "INSERT INTO Category (business_id, category_name) VALUES;":         
+            try:
+                cur.execute(cat_sql)            
+            except Exception as e:
+                print("Category insert failed! " + str(e) + "On line: " + str(count_line)) 
+            conn.commit()                        
 
         line = f.readline()
         count_line +=1
