@@ -33,23 +33,25 @@ with open('./yelp_checkin.JSON','r') as f:
             if k == "time":
                 week = v
 
+                sql_str = "INSERT INTO Checkins (business_id, day, time, count) VALUES "
+
                 for name, value in week.items():
                     if isinstance(value, dict): 
                         # parse through list
                         inner = value
-                        sql_str = "INSERT INTO Checkins (business_id, day, time, count) VALUES "
+                        
                         for innerName, innerValue in inner.items():
                             sql_str += "('" + business_id + "','" + name + "','" + innerName + "','" + str(innerValue) + "'),"
 
-                        sql_str = sql_str[:-1] #Remove the last , from the end of the string.
-                        sql_str += ";" #add the semicolon to the end of the query
+                sql_str = sql_str[:-1] #Remove the last , from the end of the string.
+                sql_str += ";" #add the semicolon to the end of the query
 
-                        try:
-                            cur.execute(sql_str)
-                        except Exception as e:
-                            print("Error inserting on line " +str(count_line) + ": " + str(e))
+                try:
+                    cur.execute(sql_str)
+                except Exception as e:
+                    print("Error inserting on line " +str(count_line) + ": " + str(e))
 
-                        conn.commit()
+                conn.commit()
 
         line = f.readline()
         count_line +=1
