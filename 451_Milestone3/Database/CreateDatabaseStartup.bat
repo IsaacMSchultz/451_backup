@@ -1,4 +1,4 @@
-psql -U postgres -d milestone2db < Milestone2SQL.sql
+psql -U postgres -d milestone3db < Milestone3SQL.sql
 python insertBusiness.py
 start insertAttributes.bat
 start insertCheckin.bat
