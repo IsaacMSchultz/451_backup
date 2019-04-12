@@ -32,7 +32,7 @@ with open('./yelp_user.JSON','r') as f:
                     str(data["cool"]) + "','" + str(data["funny"]) + "','" + str(data["useful"]) + "'," + str(data["fans"]) + ",'" + \
                     str(data["review_count"]) + "','" + str(data["yelping_since"]) + "'),"
 
-        if count_line % 100 == 99:
+        if count_line % 500 == 499:
             sql_str = sql_str[:-1] #Remove the last , from the end of the string.
             sql_str += ";" #add the semicolon to the end of the query
 
