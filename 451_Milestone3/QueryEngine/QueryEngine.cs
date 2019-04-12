@@ -24,8 +24,8 @@ namespace QueryEngine1
         const string chars = "abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_- ";
 
         public event PropertyChangedEventHandler yelpDataChanged; // event for notifying that there was a property changed. 
-        private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone2db";
-        //private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone2db";
+        //private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone2db";
+        private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone2db";
 
         public QueryEngine()
         {
