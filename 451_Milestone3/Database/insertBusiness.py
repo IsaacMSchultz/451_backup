@@ -12,8 +12,8 @@ def int2BoolStr (value):
         return 'True'
 
 try:
-    conn = psycopg2.connect("dbname='milestone3db' user='postgres' host='localhost' password='greatPassword'")
-    #conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
+    #conn = psycopg2.connect("dbname='milestone3db' user='postgres' host='localhost' password='greatPassword'")
+    conn = psycopg2.connect("dbname='milestone3db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
 except:
     print('Unable to connect to the database!')
 
@@ -25,26 +25,34 @@ with open('./yelp_business.JSON','r') as f:
     line = f.readline()
     count_line = 0
 
-    
+    sql_str = ""
 
     while line:
         data = json.loads(line)
         
-        sql_str = "INSERT INTO Business (business_id, name, city, state, zipcode, latitude, longitude, address, review_count, is_open, stars, num_checkins, reviewRating) " \
+        sql_str += "INSERT INTO Business (business_id, name, city, state, zipcode, latitude, longitude, address, review_count, is_open, stars, num_checkins, reviewRating) " \
                     "VALUES ('" + cleanStr4SQL(data['business_id']) + "','" + cleanStr4SQL(data["name"]) + "','" + cleanStr4SQL(data["city"]) + "','" + \
                     cleanStr4SQL(data["state"]) + "','" + cleanStr4SQL(data["postal_code"]) + "','" + str(data["latitude"]) + "'," + str(data["longitude"]) + ",'" + \
                     cleanStr4SQL(data["address"]) + "'," + "0" + "," + int2BoolStr(data["is_open"]) + "," + str(data["stars"]) + "," + "0" + "," "0.0" + ");" 
 
-        try:
-            cur.execute(sql_str)
-        except Exception as e:
-            print("Insert failed! " + str(e) + "\nOn line: " + str(count_line))
+        if count_line % 300 == 299:
 
-        conn.commit()
+            try:
+                cur.execute(sql_str)
+            except Exception as e:
+                print("Insert failed! " + str(e) + "\nOn line: " + str(count_line))
+            sql_str = ""
+            conn.commit()
+
         line = f.readline()
         count_line +=1
 
-
+    if sql_str != "":
+        try:
+            cur.execute(sql_str)
+        except Exception as e:
+            print("Insert failed! " + str(e) + "\nOn line: " + str(count_line))            
+        conn.commit()
 
 print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")
 

@@ -14,7 +14,7 @@ def int2BoolStr (value):
 
 try:
     conn = psycopg2.connect("dbname='milestone3db' user='postgres' host='localhost' password='greatPassword'")
-    #conn = psycopg2.connect("dbname='milestone2db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
+    #conn = psycopg2.connect("dbname='milestone3db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
 except:
     print('Unable to connect to the database!')
 
@@ -32,48 +32,70 @@ print (os.getcwd())
 with open('./yelp_business.JSON','r') as f:
     line = f.readline()
     count_line = 0
+
+    attr_sql = ""
+    cat_sql = ""
     
     while line:
         data = json.loads(line)
 
-        business_id = str(cleanStr4SQL(data['business_id'])) 
+        business_id = str(cleanStr4SQL(data['business_id']))         
 
-        attr_sql = "INSERT INTO Attributes (business_id, attribute_name, attribute_value) VALUES "
-        cat_sql = "INSERT INTO Category (business_id, category_name) VALUES "
-
-        for k, v in data.items():
-            if k == "attributes":
+        for k, v in data.items():            
+            if k == "attributes" and (isinstance(v, dict) or (isinstance(v, str) and v != "")):
+                attr_sql_temp = "INSERT INTO Attributes (business_id, attribute_name, attribute_value) VALUES "
                 attrList = []
                 recurseAttr(v, attrList, business_id)
                 for attr in attrList:                    
-                    attr_sql += attr
+                    attr_sql_temp += attr
+
+                attr_sql_temp = attr_sql_temp[:-1] #Remove the last , from the end of the string.
+                attr_sql_temp += ";" #add the semicolon to the end of the query
+
+                if attr_sql_temp != "INSERT INTO Attributes (business_id, attribute_name, attribute_value) VALUES;":
+                    attr_sql += attr_sql_temp                
                 
-            elif k == "categories":
+            elif k == "categories" and (isinstance(v, list) or (isinstance(v, str) and v != "")):
+                cat_sql += "INSERT INTO Category (business_id, category_name) VALUES "
                 categories = v
 
                 for item in categories:                    
-                    cat_sql += "('" + business_id + "','" + cleanStr4SQL(item) + "'),"                    
+                    cat_sql += "('" + business_id + "','" + cleanStr4SQL(item) + "'),"     
         
-        attr_sql = attr_sql[:-1] #Remove the last , from the end of the string.
-        attr_sql += ";" #add the semicolon to the end of the query
-        cat_sql = cat_sql[:-1] #Remove the last , from the end of the string.
-        cat_sql += ";" #add the semicolon to the end of the query
-
-        if attr_sql != "INSERT INTO Attributes (business_id, attribute_name, attribute_value) VALUES;":
-            try:
-                cur.execute(attr_sql)            
-            except Exception as e:
-                print("Attribute insert failed! " + str(e) + "On line: " + str(count_line))
-            conn.commit()
-        if cat_sql != "INSERT INTO Category (business_id, category_name) VALUES;":         
-            try:
-                cur.execute(cat_sql)            
-            except Exception as e:
-                print("Category insert failed! " + str(e) + "On line: " + str(count_line)) 
-            conn.commit()                        
-
+                cat_sql = cat_sql[:-1] #Remove the last , from the end of the string.
+                cat_sql += ";" #add the semicolon to the end of the query
+        
+        if count_line % 100 == 99:            
+            if attr_sql != "":                     
+                try:
+                    cur.execute(attr_sql)            
+                except Exception as e:
+                    print("Attribute insert failed! " + str(e) + "On line: " + str(count_line))
+                attr_sql = ""
+                conn.commit()
+            if cat_sql != "":                       
+                try:
+                    cur.execute(cat_sql)            
+                except Exception as e:
+                    print("Category insert failed! " + str(e) + "On line: " + str(count_line)) 
+                cat_sql = ""
+                conn.commit()                        
+        
         line = f.readline()
         count_line +=1
+
+    if attr_sql != "":        
+        try:
+            cur.execute(attr_sql)            
+        except Exception as e:
+            print("Attribute insert failed! " + str(e) + "On line: " + str(count_line))
+        conn.commit()
+    if cat_sql != "":         
+        try:
+            cur.execute(cat_sql)            
+        except Exception as e:
+            print("Category insert failed! " + str(e) + "On line: " + str(count_line)) 
+        conn.commit()  
 
 print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")
 
