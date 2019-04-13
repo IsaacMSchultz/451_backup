@@ -25,12 +25,12 @@ with open('./yelp_user.JSON','r') as f:
     line = f.readline()
     count_line = 0    
 
+    sql_str = "INSERT INTO Friend (user_id, friend_id) VALUES "
+
     while line:
         data = json.loads(line)                                                           
 
         user_id = str(data['user_id'])
-
-        sql_str = "INSERT INTO Friend (user_id, friend_id) VALUES "
 
         for k, v in data.items():
             if k == "friends":
@@ -40,18 +40,29 @@ with open('./yelp_user.JSON','r') as f:
                 for friend in temp_friends:
                     sql_str += "('" + cleanStr4SQL(user_id) + "','" + cleanStr4SQL(friend) + "'),"
 
-        sql_str = sql_str[:-1] #Remove the last , from the end of the string.
-        sql_str += ";" #add the semicolon to the end of the query
+        if count_line % 500 == 499:
+            sql_str = sql_str[:-1] #Remove the last , from the end of the string.
+            sql_str += ";" #add the semicolon to the end of the query
 
-        if sql_str != "INSERT INTO Friend (user_id, friend_id) VALUES;":
-            try:
-                cur.execute(sql_str)
-            except Exception as e:
-                print("Insert failed! " + str(e) + "\nOn line: " + str(count_line))
-            conn.commit()
+            if sql_str != "INSERT INTO Friend (user_id, friend_id) VALUES;":
+                try:
+                    cur.execute(sql_str)
+                except Exception as e:
+                    print("Insert failed! " + str(e) + "\nOn line: " + str(count_line))
+                sql_str = "INSERT INTO Friend (user_id, friend_id) VALUES "
+                conn.commit()
             
         line = f.readline()
         count_line +=1
+
+    if sql_str != "INSERT INTO Friend (user_id, friend_id) VALUES;":
+        sql_str = sql_str[:-1] #Remove the last , from the end of the string.
+        sql_str += ";" #add the semicolon to the end of the query
+        try:
+            cur.execute(sql_str)
+        except Exception as e:
+            print("Insert failed! " + str(e) + "\nOn line: " + str(count_line))
+        conn.commit()
 
 print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")
 
