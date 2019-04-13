@@ -65,7 +65,7 @@ with open('./yelp_business.JSON','r') as f:
                 cat_sql = cat_sql[:-1] #Remove the last , from the end of the string.
                 cat_sql += ";" #add the semicolon to the end of the query
         
-        if count_line % 100 == 99:            
+        if count_line % 1000 == 999:            
             if attr_sql != "":                     
                 try:
                     cur.execute(attr_sql)            

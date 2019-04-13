@@ -12,8 +12,8 @@ def int2BoolStr (value):
         return 'True'
 
 try:
-    #conn = psycopg2.connect("dbname='milestone3db' user='postgres' host='localhost' password='greatPassword'")
-    conn = psycopg2.connect("dbname='milestone3db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
+    conn = psycopg2.connect("dbname='milestone3db' user='postgres' host='localhost' password='greatPassword'")
+    #conn = psycopg2.connect("dbname='milestone3db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
 except:
     print('Unable to connect to the database!')
 
@@ -32,7 +32,7 @@ with open('./yelp_user.JSON','r') as f:
                     str(data["cool"]) + "','" + str(data["funny"]) + "','" + str(data["useful"]) + "'," + str(data["fans"]) + ",'" + \
                     str(data["review_count"]) + "','" + str(data["yelping_since"]) + "'),"
 
-        if count_line % 500 == 499:
+        if count_line % 10000 == 9999:
             sql_str = sql_str[:-1] #Remove the last , from the end of the string.
             sql_str += ";" #add the semicolon to the end of the query
 
