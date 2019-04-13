@@ -12,8 +12,8 @@ def int2BoolStr (value):
         return 'True'
 
 try:
-    #conn = psycopg2.connect("dbname='milestone3db' user='postgres' host='localhost' password='greatPassword'")
-    conn = psycopg2.connect("dbname='milestone3db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
+    conn = psycopg2.connect("dbname='milestone3db' user='postgres' host='localhost' password='greatPassword'")
+    #conn = psycopg2.connect("dbname='milestone3db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
 except:
     print('Unable to connect to the database!')
 
@@ -24,12 +24,12 @@ with open('./yelp_business.JSON','r') as f:
     line = f.readline()
     count_line = 0
 
+    sql_str = "INSERT INTO Hours (business_id, day, open, close) VALUES "
+
     while line:
         data = json.loads(line)
 
-        business_id = str(cleanStr4SQL(data['business_id'])) 
-
-        sql_str = "INSERT INTO Hours (business_id, day, open, close) VALUES "
+        business_id = str(cleanStr4SQL(data['business_id']))        
 
         for k, v in data.items():
             if k == "hours":
@@ -39,19 +39,29 @@ with open('./yelp_business.JSON','r') as f:
                     times = combinedTimes.split('-')
                     sql_str += "('" + business_id + "','" + cleanStr4SQL(day) + "','" + cleanStr4SQL(times[0]) + "','" + cleanStr4SQL(times[1]) + "'),"
 
-        sql_str = sql_str[:-1] #Remove the last , from the end of the string.
-        sql_str += ";" #add the semicolon to the end of the query
+        if count_line % 1000 == 999:
+            sql_str = sql_str[:-1] #Remove the last , from the end of the string.
+            sql_str += ";" #add the semicolon to the end of the query
 
-        if sql_str != "INSERT INTO Hours (business_id, day, open, close) VALUES;":
             try:
                 cur.execute(sql_str)
             except Exception as e:
                 print("Insert failed! " + str(e) + "\nOn line: " + str(count_line))
+            sql_str = "INSERT INTO Hours (business_id, day, open, close) VALUES "
             conn.commit()
 
-        conn.commit()
         line = f.readline()
         count_line +=1
+
+    if sql_str != "INSERT INTO Hours (business_id, day, open, close) VALUES;":
+        sql_str = sql_str[:-1] #Remove the last , from the end of the string.
+        sql_str += ";" #add the semicolon to the end of the query
+
+        try:
+            cur.execute(sql_str)
+        except Exception as e:
+            print("Insert failed! " + str(e) + "\nOn line: " + str(count_line))            
+        conn.commit()
 
 print("Processed " + str(count_line) + " Entries in " + str(time.process_time() - startingTime) + " seconds")
 

@@ -12,8 +12,8 @@ def int2BoolStr (value):
         return 'True'
 
 try:
-    #conn = psycopg2.connect("dbname='milestone3db' user='postgres' host='localhost' password='greatPassword'")
-    conn = psycopg2.connect("dbname='milestone3db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
+    conn = psycopg2.connect("dbname='milestone3db' user='postgres' host='localhost' password='greatPassword'")
+    #conn = psycopg2.connect("dbname='milestone3db' user='postgres' host='35.230.13.126' password='oiAv4Kmdup8Pd4vd'")
 except:
     print('Unable to connect to the database!')
 
@@ -35,7 +35,7 @@ with open('./yelp_business.JSON','r') as f:
                     cleanStr4SQL(data["state"]) + "','" + cleanStr4SQL(data["postal_code"]) + "','" + str(data["latitude"]) + "'," + str(data["longitude"]) + ",'" + \
                     cleanStr4SQL(data["address"]) + "'," + "0" + "," + int2BoolStr(data["is_open"]) + "," + str(data["stars"]) + "," + "0" + "," "0.0" + ");" 
 
-        if count_line % 300 == 299:
+        if count_line % 1000 == 999:
 
             try:
                 cur.execute(sql_str)
