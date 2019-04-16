@@ -349,5 +349,71 @@ namespace QueryEngine1
             lastQuery = results;
             return results;
         }
+
+        public List<List<string>> GetFavBusinesses(string userId)
+        {
+            List<List<string>> results = new List<List<string>>();
+            ReadOnlyCollection<NpgsqlDbColumn> columns = new ReadOnlyCollection<NpgsqlDbColumn>(new List<NpgsqlDbColumn>());
+
+            using (var connection = new NpgsqlConnection(LOGININFO))
+            {
+                connection.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = connection;
+                    cmd.CommandText = "Select name, stars, city, zipcode, address from business where business_id in (Select favorited_business from favorite where user_id = '" + userId + "')";
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            if (columns.Count == 0)
+                                columns = reader.GetColumnSchema();
+
+                            List<string> row = new List<string>();
+
+                            foreach (NpgsqlDbColumn column in columns)
+                                row.Add(reader[column.ColumnName].ToString());
+
+                            results.Add(row);
+                        }
+                    }
+                }
+                connection.Close();
+            }
+            // Returns the list of column names as the first row.
+            List<string> header = new List<string>();
+            foreach (NpgsqlDbColumn column in columns)
+                header.Add(column.ColumnName);
+            results.Insert(0, header);
+
+            lastQuery = results;
+            return results;
+        }
+
+
+        /// <summary>
+        /// Update the selected user's latitude and longitude
+        /// </summary>
+        /// <param name="user_id">selected user's id</param>
+        /// <param name="lat">entered latitude</param>
+        /// <param name="lon">entered lonitude</param>
+        public void updateUserLocation(string user_id, double lat, double lon)
+        {
+            string query = "Update yelpuser set user_latitude = " + lat.ToString() +
+                ", user_longitude = " + lon.ToString() + " where user_id = '" +
+                user_id + "'";
+
+            using (var connection = new NpgsqlConnection(LOGININFO))
+            {
+                connection.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = connection;
+                    cmd.CommandText = query;
+                    cmd.ExecuteNonQuery();
+                }
+                connection.Close();
+            }
+        }
     }
 }
