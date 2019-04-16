@@ -96,9 +96,6 @@
             this.PlayerIDListBox = new System.Windows.Forms.ListBox();
             this.UserNameEntryTextBox = new System.Windows.Forms.TextBox();
             this.FriendsGrid = new System.Windows.Forms.DataGridView();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.avg_stars = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.yelping_since = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FavoriteBusinessGrid = new System.Windows.Forms.DataGridView();
             this.FriendsReviewsGrid = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).BeginInit();
@@ -1088,36 +1085,16 @@
             // 
             // FriendsGrid
             // 
+            this.FriendsGrid.AllowUserToAddRows = false;
             this.FriendsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.FriendsGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.name,
-            this.avg_stars,
-            this.yelping_since});
             this.FriendsGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FriendsGrid.Location = new System.Drawing.Point(306, 20);
             this.FriendsGrid.Margin = new System.Windows.Forms.Padding(20, 20, 0, 20);
             this.FriendsGrid.Name = "FriendsGrid";
+            this.FriendsGrid.RowHeadersVisible = false;
             this.FriendsGrid.RowTemplate.Height = 24;
             this.FriendsGrid.Size = new System.Drawing.Size(223, 352);
             this.FriendsGrid.TabIndex = 10;
-            // 
-            // name
-            // 
-            this.name.HeaderText = "Name";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            // 
-            // avg_stars
-            // 
-            this.avg_stars.HeaderText = "Avg Stars";
-            this.avg_stars.Name = "avg_stars";
-            this.avg_stars.ReadOnly = true;
-            // 
-            // yelping_since
-            // 
-            this.yelping_since.HeaderText = "Yelping Since";
-            this.yelping_since.Name = "yelping_since";
-            this.yelping_since.ReadOnly = true;
             // 
             // FavoriteBusinessGrid
             // 
@@ -1268,9 +1245,6 @@
         private System.Windows.Forms.ListBox PlayerIDListBox;
         private System.Windows.Forms.TextBox UserNameEntryTextBox;
         private System.Windows.Forms.DataGridView FriendsGrid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn avg_stars;
-        private System.Windows.Forms.DataGridViewTextBoxColumn yelping_since;
         private System.Windows.Forms.DataGridView FavoriteBusinessGrid;
         private System.Windows.Forms.DataGridView FriendsReviewsGrid;
     }
