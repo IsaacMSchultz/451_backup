@@ -15,6 +15,7 @@ namespace Milestone2App
         QueryEngine queryEngine;
         string[] cols = { "Name", "Address", "City", "State", "Stars Shown", "Reviews", "Checkins", "Stars", "Open?", "business_id" }; //column titles for the main datagridview
         string[] friendsCol = { "Name", "Average Stars", "Yelping Since" };
+        string[] favBusCol = { "Name", "Stars", "City", "Zipcode", "Address" };
         string[] reviewCols = { "Stars", "Date", "Text", "Useful", "Funny", "Cool" }; //Column headers for the review form that can be opened from the GUI
         string projection; //selected columns to show in the database. Need to implement column constructors based on the projection instead of the cols[] array.
 
@@ -65,13 +66,16 @@ namespace Milestone2App
             {
                 DataGridViewTextBoxColumn newColumn = new DataGridViewTextBoxColumn();
                 newColumn.HeaderText = column;
-
-                //if (column == "Name")
-                //    newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                //else
-                //    newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-
+                
                 FriendsGrid.Columns.Add(newColumn);
+            }
+
+            foreach (var column in favBusCol)
+            {
+                DataGridViewTextBoxColumn newColumn = new DataGridViewTextBoxColumn();
+                newColumn.HeaderText = column;
+
+                FavoriteBusinessGrid.Columns.Add(newColumn);
             }
 
             //FriendsGrid.Columns[0].Visible = false;
@@ -250,9 +254,7 @@ namespace Milestone2App
             currUserId = userData[1][10]; //set the current user id to what was returned by the query.
 
             updateFriendsGrid();
-
-            //updateFriendsReviewsListBox();
-            //updateFavBusinessesListBox();
+            updateFavBusinessGrid();
         }
 
         /// <summary>
@@ -391,6 +393,25 @@ namespace Milestone2App
             }
         }
 
+        // Should consider *Templatizing* this to work for multiple DataGrids
+        private void updateFavBusinessGrid()
+        {
+            int row = 0, col = 0;
+            FavoriteBusinessGrid.Rows.Clear(); //removes all the data previously in the grid.            
+
+            foreach (List<string> listRow in queryEngine.GetFavBusinesses(currUserId))
+            {
+                if (row > 0)
+                {
+                    FavoriteBusinessGrid.Rows.Add(); //the index of the new row
+                    foreach (string item in listRow)
+                        FavoriteBusinessGrid.Rows[row - 1].Cells[col++].Value = item;
+                    col = 0;
+                }
+                row++;
+            }
+        }
+
         private void MapButton_Click(object sender, EventArgs e)
         {
             //Form mapWindow = new Form();
@@ -398,6 +419,33 @@ namespace Milestone2App
             //mapWindow.Show();
             MapForm mapTest = new MapForm(currBusId);
             mapTest.Show();
+        }
+
+        private void EditBtn_Click(object sender, EventArgs e)
+        {
+            EditBtn.Enabled = false;
+            UpdateBtn.Enabled = true;
+            LongitudeValue.Enabled = true;
+            LatitudeValue.Enabled = true;
+        }
+
+        private void UpdateBtn_Click(object sender, EventArgs e)
+        {
+            double lat, lon;
+            if (double.TryParse(LatitudeValue.Text, out lat) && double.TryParse(LongitudeValue.Text, out lon))
+            {
+                // Update the User's location values
+                queryEngine.updateUserLocation(currUserId, lat, lon);
+
+                UpdateBtn.Enabled = false;
+                EditBtn.Enabled = true;
+                LatitudeValue.Enabled = false;
+                LongitudeValue.Enabled = false;
+            }
+            else
+            {
+                MessageBox.Show("Please enter valid Latitude and Longitude values.");
+            }
         }
     }
 }

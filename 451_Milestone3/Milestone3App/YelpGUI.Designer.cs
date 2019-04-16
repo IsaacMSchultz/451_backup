@@ -1002,6 +1002,7 @@
             this.EditBtn.TabIndex = 0;
             this.EditBtn.Text = "Edit";
             this.EditBtn.UseVisualStyleBackColor = true;
+            this.EditBtn.Click += new System.EventHandler(this.EditBtn_Click);
             // 
             // UpdateBtn
             // 
@@ -1013,6 +1014,7 @@
             this.UpdateBtn.TabIndex = 1;
             this.UpdateBtn.Text = "Update";
             this.UpdateBtn.UseVisualStyleBackColor = true;
+            this.UpdateBtn.Click += new System.EventHandler(this.UpdateBtn_Click);
             // 
             // UserInfoHeader
             // 
@@ -1098,12 +1100,14 @@
             // 
             // FavoriteBusinessGrid
             // 
+            this.FavoriteBusinessGrid.AllowUserToAddRows = false;
             this.FavoriteBusinessGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tableLayoutPanel9.SetColumnSpan(this.FavoriteBusinessGrid, 2);
             this.FavoriteBusinessGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FavoriteBusinessGrid.Location = new System.Drawing.Point(10, 402);
             this.FavoriteBusinessGrid.Margin = new System.Windows.Forms.Padding(10);
             this.FavoriteBusinessGrid.Name = "FavoriteBusinessGrid";
+            this.FavoriteBusinessGrid.RowHeadersVisible = false;
             this.FavoriteBusinessGrid.RowTemplate.Height = 24;
             this.FavoriteBusinessGrid.Size = new System.Drawing.Size(509, 107);
             this.FavoriteBusinessGrid.TabIndex = 11;
