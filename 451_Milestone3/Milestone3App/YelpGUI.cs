@@ -14,6 +14,7 @@ namespace Milestone2App
     {
         QueryEngine queryEngine;
         string[] cols = { "Name", "Address", "City", "State", "Stars Shown", "Reviews", "Checkins", "Stars", "Open?", "business_id" }; //column titles for the main datagridview
+        string[] friendsCol = { "Name", "Average Stars", "Yelping Since" };
         string[] reviewCols = { "Stars", "Date", "Text", "Useful", "Funny", "Cool" }; //Column headers for the review form that can be opened from the GUI
         string projection; //selected columns to show in the database. Need to implement column constructors based on the projection instead of the cols[] array.
 
@@ -59,6 +60,21 @@ namespace Milestone2App
                     newColumn.Visible = false;
                 businessGrid.Columns.Add(newColumn);
             }
+
+            foreach (var column in friendsCol)
+            {
+                DataGridViewTextBoxColumn newColumn = new DataGridViewTextBoxColumn();
+                newColumn.HeaderText = column;
+
+                //if (column == "Name")
+                //    newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                //else
+                //    newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+
+                FriendsGrid.Columns.Add(newColumn);
+            }
+
+            //FriendsGrid.Columns[0].Visible = false;
         }
 
         /// <summary>
