@@ -56,8 +56,12 @@
             this.BusinessTabPage = new System.Windows.Forms.TabPage();
             this.UsersTabPage = new System.Windows.Forms.TabPage();
             this.UserLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
-            this.LeftUserPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.LeftUserLP = new System.Windows.Forms.TableLayoutPanel();
+            this.UserInfoTitleTB = new System.Windows.Forms.TextBox();
+            this.FriendsReviewsGrid = new System.Windows.Forms.DataGridView();
+            this.FriendsTitleTB = new System.Windows.Forms.TextBox();
+            this.FriendsGrid = new System.Windows.Forms.DataGridView();
+            this.UserInfoLP = new System.Windows.Forms.TableLayoutPanel();
             this.userInfoPanel = new System.Windows.Forms.TableLayoutPanel();
             this.LongLP = new System.Windows.Forms.TableLayoutPanel();
             this.LongitudeValue = new System.Windows.Forms.TextBox();
@@ -95,9 +99,10 @@
             this.NameHeaderTB = new System.Windows.Forms.TextBox();
             this.PlayerIDListBox = new System.Windows.Forms.ListBox();
             this.UserNameEntryTextBox = new System.Windows.Forms.TextBox();
-            this.FriendsGrid = new System.Windows.Forms.DataGridView();
             this.FavoriteBusinessGrid = new System.Windows.Forms.DataGridView();
-            this.FriendsReviewsGrid = new System.Windows.Forms.DataGridView();
+            this.FavoriteBusTitleTB = new System.Windows.Forms.TextBox();
+            this.RightUserLP = new System.Windows.Forms.TableLayoutPanel();
+            this.ReviewsByFriendsTitleTB = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -111,8 +116,10 @@
             this.BusinessTabPage.SuspendLayout();
             this.UsersTabPage.SuspendLayout();
             this.UserLayoutPanel.SuspendLayout();
-            this.tableLayoutPanel9.SuspendLayout();
-            this.LeftUserPanel.SuspendLayout();
+            this.LeftUserLP.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.FriendsReviewsGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FriendsGrid)).BeginInit();
+            this.UserInfoLP.SuspendLayout();
             this.userInfoPanel.SuspendLayout();
             this.LongLP.SuspendLayout();
             this.VotesValuesLP.SuspendLayout();
@@ -124,9 +131,8 @@
             this.LatLP.SuspendLayout();
             this.UserBtnsLP.SuspendLayout();
             this.UserNamePanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.FriendsGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FavoriteBusinessGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.FriendsReviewsGrid)).BeginInit();
+            this.RightUserLP.SuspendLayout();
             this.SuspendLayout();
             // 
             // businessGrid
@@ -139,7 +145,7 @@
             this.businessGrid.Name = "businessGrid";
             this.businessGrid.ReadOnly = true;
             this.businessGrid.RowHeadersVisible = false;
-            this.businessGrid.Size = new System.Drawing.Size(792, 315);
+            this.businessGrid.Size = new System.Drawing.Size(1007, 434);
             this.businessGrid.TabIndex = 2;
             this.businessGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.businessGrid_CellContentClick);
             // 
@@ -172,7 +178,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(267, 152);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(267, 219);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // cityCheckBox
@@ -182,7 +188,7 @@
             this.cityCheckBox.Location = new System.Drawing.Point(0, 15);
             this.cityCheckBox.Margin = new System.Windows.Forms.Padding(0);
             this.cityCheckBox.Name = "cityCheckBox";
-            this.cityCheckBox.Size = new System.Drawing.Size(267, 137);
+            this.cityCheckBox.Size = new System.Drawing.Size(267, 204);
             this.cityCheckBox.TabIndex = 0;
             this.cityCheckBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.cityCheckBox_ItemCheck);
             // 
@@ -249,7 +255,7 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(267, 525);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(267, 724);
             this.tableLayoutPanel3.TabIndex = 8;
             // 
             // tableLayoutPanel6
@@ -259,13 +265,13 @@
             this.tableLayoutPanel6.Controls.Add(this.categoriesCheckBox, 1, 1);
             this.tableLayoutPanel6.Controls.Add(this.categoriesTextBox, 1, 0);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 346);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 480);
             this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 2;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(267, 152);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(267, 219);
             this.tableLayoutPanel6.TabIndex = 9;
             // 
             // categoriesCheckBox
@@ -275,7 +281,7 @@
             this.categoriesCheckBox.Location = new System.Drawing.Point(0, 15);
             this.categoriesCheckBox.Margin = new System.Windows.Forms.Padding(0);
             this.categoriesCheckBox.Name = "categoriesCheckBox";
-            this.categoriesCheckBox.Size = new System.Drawing.Size(269, 137);
+            this.categoriesCheckBox.Size = new System.Drawing.Size(269, 204);
             this.categoriesCheckBox.TabIndex = 0;
             this.categoriesCheckBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.categoriesCheckBox_ItemCheck);
             // 
@@ -300,13 +306,13 @@
             this.tableLayoutPanel4.Controls.Add(this.zipCheckBox, 1, 1);
             this.tableLayoutPanel4.Controls.Add(this.ZipText, 1, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 194);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 261);
             this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 2;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(267, 152);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(267, 219);
             this.tableLayoutPanel4.TabIndex = 8;
             // 
             // zipCheckBox
@@ -316,7 +322,7 @@
             this.zipCheckBox.Location = new System.Drawing.Point(0, 15);
             this.zipCheckBox.Margin = new System.Windows.Forms.Padding(0);
             this.zipCheckBox.Name = "zipCheckBox";
-            this.zipCheckBox.Size = new System.Drawing.Size(269, 137);
+            this.zipCheckBox.Size = new System.Drawing.Size(269, 204);
             this.zipCheckBox.TabIndex = 0;
             this.zipCheckBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.zipCheckBox_ItemCheck);
             // 
@@ -337,10 +343,10 @@
             // SearchButton
             // 
             this.SearchButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SearchButton.Location = new System.Drawing.Point(0, 498);
+            this.SearchButton.Location = new System.Drawing.Point(0, 699);
             this.SearchButton.Margin = new System.Windows.Forms.Padding(0);
             this.SearchButton.Name = "SearchButton";
-            this.SearchButton.Size = new System.Drawing.Size(267, 27);
+            this.SearchButton.Size = new System.Drawing.Size(267, 25);
             this.SearchButton.TabIndex = 10;
             this.SearchButton.Text = "Search";
             this.SearchButton.UseVisualStyleBackColor = true;
@@ -361,7 +367,7 @@
             this.tableLayoutPanel5.RowCount = 2;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(1059, 525);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(1274, 724);
             this.tableLayoutPanel5.TabIndex = 8;
             // 
             // tableLayoutPanel7
@@ -375,14 +381,14 @@
             this.tableLayoutPanel7.Controls.Add(this.tableLayoutPanel8, 1, 1);
             this.tableLayoutPanel7.Controls.Add(this.MapButton, 1, 2);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(267, 315);
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(267, 434);
             this.tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 3;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 58F));
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 58F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(792, 210);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(1007, 290);
             this.tableLayoutPanel7.TabIndex = 9;
             // 
             // businessNameTextBox_Review
@@ -393,7 +399,7 @@
             this.businessNameTextBox_Review.Margin = new System.Windows.Forms.Padding(0);
             this.businessNameTextBox_Review.Name = "businessNameTextBox_Review";
             this.businessNameTextBox_Review.ReadOnly = true;
-            this.businessNameTextBox_Review.Size = new System.Drawing.Size(659, 58);
+            this.businessNameTextBox_Review.Size = new System.Drawing.Size(874, 58);
             this.businessNameTextBox_Review.TabIndex = 0;
             this.businessNameTextBox_Review.Text = "Business name (click on one)";
             // 
@@ -405,7 +411,7 @@
             this.WriteReviewTextBox_Review.Multiline = true;
             this.WriteReviewTextBox_Review.Name = "WriteReviewTextBox_Review";
             this.tableLayoutPanel7.SetRowSpan(this.WriteReviewTextBox_Review, 2);
-            this.WriteReviewTextBox_Review.Size = new System.Drawing.Size(659, 152);
+            this.WriteReviewTextBox_Review.Size = new System.Drawing.Size(874, 232);
             this.WriteReviewTextBox_Review.TabIndex = 1;
             this.WriteReviewTextBox_Review.TextChanged += new System.EventHandler(this.WriteReviewTextBox_Review_TextChanged);
             // 
@@ -413,7 +419,7 @@
             // 
             this.ShowReviewsButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ShowReviewsButton.Enabled = false;
-            this.ShowReviewsButton.Location = new System.Drawing.Point(659, 0);
+            this.ShowReviewsButton.Location = new System.Drawing.Point(874, 0);
             this.ShowReviewsButton.Margin = new System.Windows.Forms.Padding(0);
             this.ShowReviewsButton.Name = "ShowReviewsButton";
             this.ShowReviewsButton.Size = new System.Drawing.Size(133, 58);
@@ -429,13 +435,13 @@
             this.tableLayoutPanel8.Controls.Add(this.SubmitReviewButton, 0, 1);
             this.tableLayoutPanel8.Controls.Add(this.ReviewStarsDropDown, 0, 0);
             this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel8.Location = new System.Drawing.Point(659, 58);
+            this.tableLayoutPanel8.Location = new System.Drawing.Point(874, 58);
             this.tableLayoutPanel8.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
             this.tableLayoutPanel8.RowCount = 2;
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(133, 94);
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(133, 174);
             this.tableLayoutPanel8.TabIndex = 3;
             // 
             // SubmitReviewButton
@@ -445,7 +451,7 @@
             this.SubmitReviewButton.Location = new System.Drawing.Point(0, 24);
             this.SubmitReviewButton.Margin = new System.Windows.Forms.Padding(0);
             this.SubmitReviewButton.Name = "SubmitReviewButton";
-            this.SubmitReviewButton.Size = new System.Drawing.Size(133, 70);
+            this.SubmitReviewButton.Size = new System.Drawing.Size(133, 150);
             this.SubmitReviewButton.TabIndex = 0;
             this.SubmitReviewButton.Text = "Submit Review";
             this.SubmitReviewButton.UseVisualStyleBackColor = true;
@@ -473,7 +479,7 @@
             // 
             this.MapButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MapButton.Enabled = false;
-            this.MapButton.Location = new System.Drawing.Point(663, 156);
+            this.MapButton.Location = new System.Drawing.Point(878, 236);
             this.MapButton.Margin = new System.Windows.Forms.Padding(4);
             this.MapButton.Name = "MapButton";
             this.MapButton.Size = new System.Drawing.Size(125, 50);
@@ -491,7 +497,7 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1067, 554);
+            this.tabControl1.Size = new System.Drawing.Size(1282, 753);
             this.tabControl1.TabIndex = 9;
             // 
             // BusinessTabPage
@@ -500,7 +506,7 @@
             this.BusinessTabPage.Location = new System.Drawing.Point(4, 25);
             this.BusinessTabPage.Margin = new System.Windows.Forms.Padding(0);
             this.BusinessTabPage.Name = "BusinessTabPage";
-            this.BusinessTabPage.Size = new System.Drawing.Size(1059, 525);
+            this.BusinessTabPage.Size = new System.Drawing.Size(1274, 724);
             this.BusinessTabPage.TabIndex = 0;
             this.BusinessTabPage.Text = "Business";
             this.BusinessTabPage.UseVisualStyleBackColor = true;
@@ -511,7 +517,7 @@
             this.UsersTabPage.Location = new System.Drawing.Point(4, 25);
             this.UsersTabPage.Margin = new System.Windows.Forms.Padding(0);
             this.UsersTabPage.Name = "UsersTabPage";
-            this.UsersTabPage.Size = new System.Drawing.Size(1059, 525);
+            this.UsersTabPage.Size = new System.Drawing.Size(1274, 724);
             this.UsersTabPage.TabIndex = 1;
             this.UsersTabPage.Text = "Users";
             this.UsersTabPage.UseVisualStyleBackColor = true;
@@ -523,52 +529,105 @@
             this.UserLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.61378F));
             this.UserLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.38622F));
             this.UserLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.UserLayoutPanel.Controls.Add(this.tableLayoutPanel9, 0, 0);
-            this.UserLayoutPanel.Controls.Add(this.FriendsReviewsGrid, 1, 0);
+            this.UserLayoutPanel.Controls.Add(this.LeftUserLP, 0, 0);
+            this.UserLayoutPanel.Controls.Add(this.RightUserLP, 1, 0);
             this.UserLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.UserLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.UserLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
             this.UserLayoutPanel.Name = "UserLayoutPanel";
             this.UserLayoutPanel.RowCount = 1;
             this.UserLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.UserLayoutPanel.Size = new System.Drawing.Size(1059, 525);
+            this.UserLayoutPanel.Size = new System.Drawing.Size(1274, 724);
             this.UserLayoutPanel.TabIndex = 9;
             // 
-            // tableLayoutPanel9
+            // LeftUserLP
             // 
-            this.tableLayoutPanel9.ColumnCount = 2;
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.1109F));
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.8891F));
-            this.tableLayoutPanel9.Controls.Add(this.LeftUserPanel, 0, 0);
-            this.tableLayoutPanel9.Controls.Add(this.FriendsGrid, 1, 0);
-            this.tableLayoutPanel9.Controls.Add(this.FavoriteBusinessGrid, 0, 1);
-            this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel9.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel9.Name = "tableLayoutPanel9";
-            this.tableLayoutPanel9.RowCount = 2;
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75.72254F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.27746F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(529, 519);
-            this.tableLayoutPanel9.TabIndex = 9;
+            this.LeftUserLP.ColumnCount = 2;
+            this.LeftUserLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.1109F));
+            this.LeftUserLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.8891F));
+            this.LeftUserLP.Controls.Add(this.UserInfoTitleTB, 0, 0);
+            this.LeftUserLP.Controls.Add(this.FriendsTitleTB, 1, 0);
+            this.LeftUserLP.Controls.Add(this.FriendsGrid, 1, 1);
+            this.LeftUserLP.Controls.Add(this.UserInfoLP, 0, 1);
+            this.LeftUserLP.Controls.Add(this.FavoriteBusinessGrid, 0, 3);
+            this.LeftUserLP.Controls.Add(this.FavoriteBusTitleTB, 0, 2);
+            this.LeftUserLP.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LeftUserLP.Location = new System.Drawing.Point(3, 3);
+            this.LeftUserLP.Name = "LeftUserLP";
+            this.LeftUserLP.RowCount = 4;
+            this.LeftUserLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.LeftUserLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60.22989F));
+            this.LeftUserLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.LeftUserLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 39.77011F));
+            this.LeftUserLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.LeftUserLP.Size = new System.Drawing.Size(638, 718);
+            this.LeftUserLP.TabIndex = 9;
             // 
-            // LeftUserPanel
+            // UserInfoTitleTB
             // 
-            this.LeftUserPanel.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.LeftUserPanel.ColumnCount = 1;
-            this.LeftUserPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.LeftUserPanel.Controls.Add(this.userInfoPanel, 0, 1);
-            this.LeftUserPanel.Controls.Add(this.UserNamePanel, 0, 0);
-            this.LeftUserPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LeftUserPanel.Location = new System.Drawing.Point(5, 5);
-            this.LeftUserPanel.Margin = new System.Windows.Forms.Padding(5);
-            this.LeftUserPanel.Name = "LeftUserPanel";
-            this.LeftUserPanel.RowCount = 2;
-            this.LeftUserPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 28.57143F));
-            this.LeftUserPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 71.42857F));
-            this.LeftUserPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.LeftUserPanel.Size = new System.Drawing.Size(276, 382);
-            this.LeftUserPanel.TabIndex = 8;
+            this.UserInfoTitleTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.UserInfoTitleTB.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.UserInfoTitleTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UserInfoTitleTB.Location = new System.Drawing.Point(20, 12);
+            this.UserInfoTitleTB.Margin = new System.Windows.Forms.Padding(20, 3, 3, 3);
+            this.UserInfoTitleTB.Name = "UserInfoTitleTB";
+            this.UserInfoTitleTB.Size = new System.Drawing.Size(322, 20);
+            this.UserInfoTitleTB.TabIndex = 15;
+            this.UserInfoTitleTB.Text = "User Information";
+            // 
+            // FriendsReviewsGrid
+            // 
+            this.FriendsReviewsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.FriendsReviewsGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FriendsReviewsGrid.Location = new System.Drawing.Point(20, 40);
+            this.FriendsReviewsGrid.Margin = new System.Windows.Forms.Padding(20, 5, 20, 30);
+            this.FriendsReviewsGrid.Name = "FriendsReviewsGrid";
+            this.FriendsReviewsGrid.RowTemplate.Height = 24;
+            this.FriendsReviewsGrid.Size = new System.Drawing.Size(584, 648);
+            this.FriendsReviewsGrid.TabIndex = 10;
+            // 
+            // FriendsTitleTB
+            // 
+            this.FriendsTitleTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.FriendsTitleTB.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.FriendsTitleTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FriendsTitleTB.Location = new System.Drawing.Point(365, 12);
+            this.FriendsTitleTB.Margin = new System.Windows.Forms.Padding(20, 3, 3, 3);
+            this.FriendsTitleTB.Name = "FriendsTitleTB";
+            this.FriendsTitleTB.Size = new System.Drawing.Size(270, 20);
+            this.FriendsTitleTB.TabIndex = 14;
+            this.FriendsTitleTB.Text = "Friends";
+            // 
+            // FriendsGrid
+            // 
+            this.FriendsGrid.AllowUserToAddRows = false;
+            this.FriendsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.FriendsGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FriendsGrid.Location = new System.Drawing.Point(365, 40);
+            this.FriendsGrid.Margin = new System.Windows.Forms.Padding(20, 5, 0, 20);
+            this.FriendsGrid.Name = "FriendsGrid";
+            this.FriendsGrid.RowHeadersVisible = false;
+            this.FriendsGrid.RowTemplate.Height = 24;
+            this.FriendsGrid.Size = new System.Drawing.Size(273, 365);
+            this.FriendsGrid.TabIndex = 10;
+            // 
+            // UserInfoLP
+            // 
+            this.UserInfoLP.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.UserInfoLP.ColumnCount = 1;
+            this.UserInfoLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.UserInfoLP.Controls.Add(this.userInfoPanel, 0, 1);
+            this.UserInfoLP.Controls.Add(this.UserNamePanel, 0, 0);
+            this.UserInfoLP.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.UserInfoLP.Location = new System.Drawing.Point(20, 40);
+            this.UserInfoLP.Margin = new System.Windows.Forms.Padding(20, 5, 20, 8);
+            this.UserInfoLP.Name = "UserInfoLP";
+            this.UserInfoLP.RowCount = 2;
+            this.UserInfoLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 28.57143F));
+            this.UserInfoLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 71.42857F));
+            this.UserInfoLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.UserInfoLP.Size = new System.Drawing.Size(305, 377);
+            this.UserInfoLP.TabIndex = 8;
             // 
             // userInfoPanel
             // 
@@ -585,7 +644,7 @@
             this.userInfoPanel.Controls.Add(this.UserBtnsLP, 0, 9);
             this.userInfoPanel.Controls.Add(this.UserInfoHeader, 0, 0);
             this.userInfoPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.userInfoPanel.Location = new System.Drawing.Point(3, 112);
+            this.userInfoPanel.Location = new System.Drawing.Point(3, 110);
             this.userInfoPanel.Margin = new System.Windows.Forms.Padding(2);
             this.userInfoPanel.Name = "userInfoPanel";
             this.userInfoPanel.RowCount = 10;
@@ -599,7 +658,7 @@
             this.userInfoPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
             this.userInfoPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
             this.userInfoPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
-            this.userInfoPanel.Size = new System.Drawing.Size(270, 267);
+            this.userInfoPanel.Size = new System.Drawing.Size(299, 264);
             this.userInfoPanel.TabIndex = 5;
             // 
             // LongLP
@@ -616,17 +675,17 @@
             this.LongLP.Name = "LongLP";
             this.LongLP.RowCount = 1;
             this.LongLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.LongLP.Size = new System.Drawing.Size(266, 23);
+            this.LongLP.Size = new System.Drawing.Size(295, 23);
             this.LongLP.TabIndex = 13;
             // 
             // LongitudeValue
             // 
             this.LongitudeValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LongitudeValue.Enabled = false;
-            this.LongitudeValue.Location = new System.Drawing.Point(134, 1);
+            this.LongitudeValue.Location = new System.Drawing.Point(148, 1);
             this.LongitudeValue.Margin = new System.Windows.Forms.Padding(1);
             this.LongitudeValue.Name = "LongitudeValue";
-            this.LongitudeValue.Size = new System.Drawing.Size(131, 22);
+            this.LongitudeValue.Size = new System.Drawing.Size(146, 22);
             this.LongitudeValue.TabIndex = 37;
             // 
             // LongHeaderTB
@@ -635,7 +694,7 @@
             this.LongHeaderTB.BackColor = System.Drawing.Color.White;
             this.LongHeaderTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.LongHeaderTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LongHeaderTB.Location = new System.Drawing.Point(93, 2);
+            this.LongHeaderTB.Location = new System.Drawing.Point(107, 2);
             this.LongHeaderTB.Margin = new System.Windows.Forms.Padding(2);
             this.LongHeaderTB.Multiline = true;
             this.LongHeaderTB.Name = "LongHeaderTB";
@@ -659,38 +718,38 @@
             this.VotesValuesLP.Name = "VotesValuesLP";
             this.VotesValuesLP.RowCount = 1;
             this.VotesValuesLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.VotesValuesLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 21F));
-            this.VotesValuesLP.Size = new System.Drawing.Size(264, 21);
+            this.VotesValuesLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 18F));
+            this.VotesValuesLP.Size = new System.Drawing.Size(293, 21);
             this.VotesValuesLP.TabIndex = 10;
             // 
             // CoolValue
             // 
             this.CoolValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CoolValue.Enabled = false;
-            this.CoolValue.Location = new System.Drawing.Point(199, 1);
+            this.CoolValue.Location = new System.Drawing.Point(220, 1);
             this.CoolValue.Margin = new System.Windows.Forms.Padding(1);
             this.CoolValue.Name = "CoolValue";
-            this.CoolValue.Size = new System.Drawing.Size(64, 22);
+            this.CoolValue.Size = new System.Drawing.Size(72, 22);
             this.CoolValue.TabIndex = 35;
             // 
             // UsefulValue
             // 
             this.UsefulValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.UsefulValue.Enabled = false;
-            this.UsefulValue.Location = new System.Drawing.Point(133, 1);
+            this.UsefulValue.Location = new System.Drawing.Point(147, 1);
             this.UsefulValue.Margin = new System.Windows.Forms.Padding(1);
             this.UsefulValue.Name = "UsefulValue";
-            this.UsefulValue.Size = new System.Drawing.Size(64, 22);
+            this.UsefulValue.Size = new System.Drawing.Size(71, 22);
             this.UsefulValue.TabIndex = 34;
             // 
             // FunnyValue
             // 
             this.FunnyValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FunnyValue.Enabled = false;
-            this.FunnyValue.Location = new System.Drawing.Point(67, 1);
+            this.FunnyValue.Location = new System.Drawing.Point(74, 1);
             this.FunnyValue.Margin = new System.Windows.Forms.Padding(1);
             this.FunnyValue.Name = "FunnyValue";
-            this.FunnyValue.Size = new System.Drawing.Size(64, 22);
+            this.FunnyValue.Size = new System.Drawing.Size(71, 22);
             this.FunnyValue.TabIndex = 33;
             // 
             // NameLP
@@ -706,7 +765,8 @@
             this.NameLP.Name = "NameLP";
             this.NameLP.RowCount = 1;
             this.NameLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.NameLP.Size = new System.Drawing.Size(266, 23);
+            this.NameLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.NameLP.Size = new System.Drawing.Size(295, 23);
             this.NameLP.TabIndex = 6;
             // 
             // nameTitleTB
@@ -726,10 +786,10 @@
             // 
             this.NameValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NameValue.Enabled = false;
-            this.NameValue.Location = new System.Drawing.Point(110, 1);
+            this.NameValue.Location = new System.Drawing.Point(121, 1);
             this.NameValue.Margin = new System.Windows.Forms.Padding(1);
             this.NameValue.Name = "NameValue";
-            this.NameValue.Size = new System.Drawing.Size(155, 22);
+            this.NameValue.Size = new System.Drawing.Size(173, 22);
             this.NameValue.TabIndex = 28;
             // 
             // StarsLP
@@ -749,17 +809,17 @@
             this.StarsLP.Name = "StarsLP";
             this.StarsLP.RowCount = 1;
             this.StarsLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.StarsLP.Size = new System.Drawing.Size(266, 23);
+            this.StarsLP.Size = new System.Drawing.Size(295, 23);
             this.StarsLP.TabIndex = 7;
             // 
             // FansValue
             // 
             this.FansValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FansValue.Enabled = false;
-            this.FansValue.Location = new System.Drawing.Point(199, 1);
+            this.FansValue.Location = new System.Drawing.Point(220, 1);
             this.FansValue.Margin = new System.Windows.Forms.Padding(1);
             this.FansValue.Name = "FansValue";
-            this.FansValue.Size = new System.Drawing.Size(66, 22);
+            this.FansValue.Size = new System.Drawing.Size(74, 22);
             this.FansValue.TabIndex = 31;
             // 
             // FansTitleTB
@@ -768,10 +828,10 @@
             this.FansTitleTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.FansTitleTB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FansTitleTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FansTitleTB.Location = new System.Drawing.Point(135, 3);
+            this.FansTitleTB.Location = new System.Drawing.Point(149, 3);
             this.FansTitleTB.Name = "FansTitleTB";
             this.FansTitleTB.ReadOnly = true;
-            this.FansTitleTB.Size = new System.Drawing.Size(60, 15);
+            this.FansTitleTB.Size = new System.Drawing.Size(67, 15);
             this.FansTitleTB.TabIndex = 30;
             this.FansTitleTB.Text = "Fans:";
             // 
@@ -779,10 +839,10 @@
             // 
             this.StarsValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.StarsValue.Enabled = false;
-            this.StarsValue.Location = new System.Drawing.Point(67, 1);
+            this.StarsValue.Location = new System.Drawing.Point(74, 1);
             this.StarsValue.Margin = new System.Windows.Forms.Padding(1);
             this.StarsValue.Name = "StarsValue";
-            this.StarsValue.Size = new System.Drawing.Size(64, 22);
+            this.StarsValue.Size = new System.Drawing.Size(71, 22);
             this.StarsValue.TabIndex = 32;
             // 
             // StarsTitleTB
@@ -794,7 +854,7 @@
             this.StarsTitleTB.Location = new System.Drawing.Point(3, 3);
             this.StarsTitleTB.Name = "StarsTitleTB";
             this.StarsTitleTB.ReadOnly = true;
-            this.StarsTitleTB.Size = new System.Drawing.Size(60, 15);
+            this.StarsTitleTB.Size = new System.Drawing.Size(67, 15);
             this.StarsTitleTB.TabIndex = 29;
             this.StarsTitleTB.Text = "Stars:";
             // 
@@ -811,17 +871,17 @@
             this.YelpingSinceLP.Name = "YelpingSinceLP";
             this.YelpingSinceLP.RowCount = 1;
             this.YelpingSinceLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.YelpingSinceLP.Size = new System.Drawing.Size(266, 23);
+            this.YelpingSinceLP.Size = new System.Drawing.Size(295, 23);
             this.YelpingSinceLP.TabIndex = 8;
             // 
             // YelpingSinceValue
             // 
             this.YelpingSinceValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.YelpingSinceValue.Enabled = false;
-            this.YelpingSinceValue.Location = new System.Drawing.Point(134, 1);
+            this.YelpingSinceValue.Location = new System.Drawing.Point(148, 1);
             this.YelpingSinceValue.Margin = new System.Windows.Forms.Padding(1);
             this.YelpingSinceValue.Name = "YelpingSinceValue";
-            this.YelpingSinceValue.Size = new System.Drawing.Size(131, 22);
+            this.YelpingSinceValue.Size = new System.Drawing.Size(146, 22);
             this.YelpingSinceValue.TabIndex = 35;
             // 
             // YelpingSinceTitleTB
@@ -834,7 +894,7 @@
             this.YelpingSinceTitleTB.Multiline = true;
             this.YelpingSinceTitleTB.Name = "YelpingSinceTitleTB";
             this.YelpingSinceTitleTB.ReadOnly = true;
-            this.YelpingSinceTitleTB.Size = new System.Drawing.Size(127, 17);
+            this.YelpingSinceTitleTB.Size = new System.Drawing.Size(141, 17);
             this.YelpingSinceTitleTB.TabIndex = 34;
             this.YelpingSinceTitleTB.Text = "Yelping Since:";
             // 
@@ -854,7 +914,7 @@
             this.VotesHeadersLP.Name = "VotesHeadersLP";
             this.VotesHeadersLP.RowCount = 1;
             this.VotesHeadersLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.VotesHeadersLP.Size = new System.Drawing.Size(264, 21);
+            this.VotesHeadersLP.Size = new System.Drawing.Size(293, 21);
             this.VotesHeadersLP.TabIndex = 9;
             // 
             // UsefulHeaderTB
@@ -863,10 +923,10 @@
             this.UsefulHeaderTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.UsefulHeaderTB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.UsefulHeaderTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UsefulHeaderTB.Location = new System.Drawing.Point(135, 3);
+            this.UsefulHeaderTB.Location = new System.Drawing.Point(149, 3);
             this.UsefulHeaderTB.Name = "UsefulHeaderTB";
             this.UsefulHeaderTB.ReadOnly = true;
-            this.UsefulHeaderTB.Size = new System.Drawing.Size(60, 15);
+            this.UsefulHeaderTB.Size = new System.Drawing.Size(67, 15);
             this.UsefulHeaderTB.TabIndex = 38;
             this.UsefulHeaderTB.Text = "Useful:";
             // 
@@ -876,10 +936,10 @@
             this.CoolHeaderTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.CoolHeaderTB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CoolHeaderTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CoolHeaderTB.Location = new System.Drawing.Point(201, 3);
+            this.CoolHeaderTB.Location = new System.Drawing.Point(222, 3);
             this.CoolHeaderTB.Name = "CoolHeaderTB";
             this.CoolHeaderTB.ReadOnly = true;
-            this.CoolHeaderTB.Size = new System.Drawing.Size(60, 15);
+            this.CoolHeaderTB.Size = new System.Drawing.Size(68, 15);
             this.CoolHeaderTB.TabIndex = 37;
             this.CoolHeaderTB.Text = "Cool:";
             // 
@@ -892,7 +952,7 @@
             this.VotesHeaderTB.Location = new System.Drawing.Point(3, 3);
             this.VotesHeaderTB.Name = "VotesHeaderTB";
             this.VotesHeaderTB.ReadOnly = true;
-            this.VotesHeaderTB.Size = new System.Drawing.Size(60, 15);
+            this.VotesHeaderTB.Size = new System.Drawing.Size(67, 15);
             this.VotesHeaderTB.TabIndex = 36;
             this.VotesHeaderTB.Text = "Votes:";
             // 
@@ -902,10 +962,10 @@
             this.FunnyHeaderTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.FunnyHeaderTB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FunnyHeaderTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FunnyHeaderTB.Location = new System.Drawing.Point(69, 3);
+            this.FunnyHeaderTB.Location = new System.Drawing.Point(76, 3);
             this.FunnyHeaderTB.Name = "FunnyHeaderTB";
             this.FunnyHeaderTB.ReadOnly = true;
-            this.FunnyHeaderTB.Size = new System.Drawing.Size(60, 15);
+            this.FunnyHeaderTB.Size = new System.Drawing.Size(67, 15);
             this.FunnyHeaderTB.TabIndex = 35;
             this.FunnyHeaderTB.Text = "Funny:";
             // 
@@ -920,7 +980,7 @@
             this.LocationHeaderLP.Name = "LocationHeaderLP";
             this.LocationHeaderLP.RowCount = 1;
             this.LocationHeaderLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.LocationHeaderLP.Size = new System.Drawing.Size(266, 23);
+            this.LocationHeaderLP.Size = new System.Drawing.Size(295, 23);
             this.LocationHeaderLP.TabIndex = 11;
             // 
             // LocationHeaderTB
@@ -932,7 +992,7 @@
             this.LocationHeaderTB.Location = new System.Drawing.Point(3, 3);
             this.LocationHeaderTB.Name = "LocationHeaderTB";
             this.LocationHeaderTB.ReadOnly = true;
-            this.LocationHeaderTB.Size = new System.Drawing.Size(260, 15);
+            this.LocationHeaderTB.Size = new System.Drawing.Size(289, 15);
             this.LocationHeaderTB.TabIndex = 35;
             this.LocationHeaderTB.Text = "Location:";
             // 
@@ -950,17 +1010,17 @@
             this.LatLP.Name = "LatLP";
             this.LatLP.RowCount = 1;
             this.LatLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.LatLP.Size = new System.Drawing.Size(266, 23);
+            this.LatLP.Size = new System.Drawing.Size(295, 23);
             this.LatLP.TabIndex = 12;
             // 
             // LatitudeValue
             // 
             this.LatitudeValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LatitudeValue.Enabled = false;
-            this.LatitudeValue.Location = new System.Drawing.Point(134, 1);
+            this.LatitudeValue.Location = new System.Drawing.Point(148, 1);
             this.LatitudeValue.Margin = new System.Windows.Forms.Padding(1);
             this.LatitudeValue.Name = "LatitudeValue";
-            this.LatitudeValue.Size = new System.Drawing.Size(131, 22);
+            this.LatitudeValue.Size = new System.Drawing.Size(146, 22);
             this.LatitudeValue.TabIndex = 37;
             // 
             // LatHeaderTB
@@ -969,7 +1029,7 @@
             this.LatHeaderTB.BackColor = System.Drawing.Color.White;
             this.LatHeaderTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.LatHeaderTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LatHeaderTB.Location = new System.Drawing.Point(93, 2);
+            this.LatHeaderTB.Location = new System.Drawing.Point(107, 2);
             this.LatHeaderTB.Margin = new System.Windows.Forms.Padding(2);
             this.LatHeaderTB.Name = "LatHeaderTB";
             this.LatHeaderTB.ReadOnly = true;
@@ -990,7 +1050,7 @@
             this.UserBtnsLP.Name = "UserBtnsLP";
             this.UserBtnsLP.RowCount = 1;
             this.UserBtnsLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.UserBtnsLP.Size = new System.Drawing.Size(270, 31);
+            this.UserBtnsLP.Size = new System.Drawing.Size(299, 28);
             this.UserBtnsLP.TabIndex = 14;
             // 
             // EditBtn
@@ -998,7 +1058,7 @@
             this.EditBtn.Dock = System.Windows.Forms.DockStyle.Fill;
             this.EditBtn.Location = new System.Drawing.Point(3, 3);
             this.EditBtn.Name = "EditBtn";
-            this.EditBtn.Size = new System.Drawing.Size(129, 25);
+            this.EditBtn.Size = new System.Drawing.Size(143, 22);
             this.EditBtn.TabIndex = 0;
             this.EditBtn.Text = "Edit";
             this.EditBtn.UseVisualStyleBackColor = true;
@@ -1008,9 +1068,9 @@
             // 
             this.UpdateBtn.Dock = System.Windows.Forms.DockStyle.Fill;
             this.UpdateBtn.Enabled = false;
-            this.UpdateBtn.Location = new System.Drawing.Point(138, 3);
+            this.UpdateBtn.Location = new System.Drawing.Point(152, 3);
             this.UpdateBtn.Name = "UpdateBtn";
-            this.UpdateBtn.Size = new System.Drawing.Size(129, 25);
+            this.UpdateBtn.Size = new System.Drawing.Size(144, 22);
             this.UpdateBtn.TabIndex = 1;
             this.UpdateBtn.Text = "Update";
             this.UpdateBtn.UseVisualStyleBackColor = true;
@@ -1025,7 +1085,7 @@
             this.UserInfoHeader.Margin = new System.Windows.Forms.Padding(0);
             this.UserInfoHeader.Name = "UserInfoHeader";
             this.UserInfoHeader.ReadOnly = true;
-            this.UserInfoHeader.Size = new System.Drawing.Size(270, 15);
+            this.UserInfoHeader.Size = new System.Drawing.Size(299, 15);
             this.UserInfoHeader.TabIndex = 5;
             this.UserInfoHeader.Text = "User Information";
             this.UserInfoHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1045,7 +1105,7 @@
             this.UserNamePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.UserNamePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.UserNamePanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.UserNamePanel.Size = new System.Drawing.Size(274, 108);
+            this.UserNamePanel.Size = new System.Drawing.Size(303, 106);
             this.UserNamePanel.TabIndex = 7;
             // 
             // NameHeaderTB
@@ -1057,7 +1117,7 @@
             this.NameHeaderTB.Margin = new System.Windows.Forms.Padding(0);
             this.NameHeaderTB.Name = "NameHeaderTB";
             this.NameHeaderTB.ReadOnly = true;
-            this.NameHeaderTB.Size = new System.Drawing.Size(274, 15);
+            this.NameHeaderTB.Size = new System.Drawing.Size(303, 15);
             this.NameHeaderTB.TabIndex = 3;
             this.NameHeaderTB.Text = "Name";
             this.NameHeaderTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1070,7 +1130,7 @@
             this.PlayerIDListBox.Location = new System.Drawing.Point(0, 40);
             this.PlayerIDListBox.Margin = new System.Windows.Forms.Padding(0);
             this.PlayerIDListBox.Name = "PlayerIDListBox";
-            this.PlayerIDListBox.Size = new System.Drawing.Size(274, 68);
+            this.PlayerIDListBox.Size = new System.Drawing.Size(303, 68);
             this.PlayerIDListBox.TabIndex = 10;
             this.PlayerIDListBox.SelectedIndexChanged += new System.EventHandler(this.PlayerIDListBox_SelectedIndexChanged);
             // 
@@ -1080,56 +1140,72 @@
             this.UserNameEntryTextBox.Location = new System.Drawing.Point(0, 20);
             this.UserNameEntryTextBox.Margin = new System.Windows.Forms.Padding(0);
             this.UserNameEntryTextBox.Name = "UserNameEntryTextBox";
-            this.UserNameEntryTextBox.Size = new System.Drawing.Size(274, 22);
+            this.UserNameEntryTextBox.Size = new System.Drawing.Size(303, 22);
             this.UserNameEntryTextBox.TabIndex = 11;
             this.UserNameEntryTextBox.Text = "Enter name...";
             this.UserNameEntryTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.UserNameEntryTextBox_KeyPress);
-            // 
-            // FriendsGrid
-            // 
-            this.FriendsGrid.AllowUserToAddRows = false;
-            this.FriendsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.FriendsGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FriendsGrid.Location = new System.Drawing.Point(306, 20);
-            this.FriendsGrid.Margin = new System.Windows.Forms.Padding(20, 20, 0, 20);
-            this.FriendsGrid.Name = "FriendsGrid";
-            this.FriendsGrid.RowHeadersVisible = false;
-            this.FriendsGrid.RowTemplate.Height = 24;
-            this.FriendsGrid.Size = new System.Drawing.Size(223, 352);
-            this.FriendsGrid.TabIndex = 10;
             // 
             // FavoriteBusinessGrid
             // 
             this.FavoriteBusinessGrid.AllowUserToAddRows = false;
             this.FavoriteBusinessGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tableLayoutPanel9.SetColumnSpan(this.FavoriteBusinessGrid, 2);
+            this.LeftUserLP.SetColumnSpan(this.FavoriteBusinessGrid, 2);
             this.FavoriteBusinessGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FavoriteBusinessGrid.Location = new System.Drawing.Point(10, 402);
-            this.FavoriteBusinessGrid.Margin = new System.Windows.Forms.Padding(10);
+            this.FavoriteBusinessGrid.Location = new System.Drawing.Point(20, 465);
+            this.FavoriteBusinessGrid.Margin = new System.Windows.Forms.Padding(20, 5, 20, 20);
             this.FavoriteBusinessGrid.Name = "FavoriteBusinessGrid";
             this.FavoriteBusinessGrid.RowHeadersVisible = false;
             this.FavoriteBusinessGrid.RowTemplate.Height = 24;
-            this.FavoriteBusinessGrid.Size = new System.Drawing.Size(509, 107);
+            this.FavoriteBusinessGrid.Size = new System.Drawing.Size(598, 233);
             this.FavoriteBusinessGrid.TabIndex = 11;
             // 
-            // FriendsReviewsGrid
+            // FavoriteBusTitleTB
             // 
-            this.FriendsReviewsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.FriendsReviewsGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FriendsReviewsGrid.Location = new System.Drawing.Point(565, 30);
-            this.FriendsReviewsGrid.Margin = new System.Windows.Forms.Padding(30, 30, 20, 30);
-            this.FriendsReviewsGrid.Name = "FriendsReviewsGrid";
-            this.FriendsReviewsGrid.RowTemplate.Height = 24;
-            this.FriendsReviewsGrid.Size = new System.Drawing.Size(474, 465);
-            this.FriendsReviewsGrid.TabIndex = 10;
+            this.FavoriteBusTitleTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.FavoriteBusTitleTB.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.FavoriteBusTitleTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FavoriteBusTitleTB.Location = new System.Drawing.Point(20, 437);
+            this.FavoriteBusTitleTB.Margin = new System.Windows.Forms.Padding(20, 3, 3, 3);
+            this.FavoriteBusTitleTB.Name = "FavoriteBusTitleTB";
+            this.FavoriteBusTitleTB.Size = new System.Drawing.Size(322, 20);
+            this.FavoriteBusTitleTB.TabIndex = 12;
+            this.FavoriteBusTitleTB.Text = "Favorite Businesses";
+            // 
+            // RightUserLP
+            // 
+            this.RightUserLP.ColumnCount = 1;
+            this.RightUserLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.RightUserLP.Controls.Add(this.ReviewsByFriendsTitleTB, 0, 0);
+            this.RightUserLP.Controls.Add(this.FriendsReviewsGrid, 0, 1);
+            this.RightUserLP.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.RightUserLP.Location = new System.Drawing.Point(647, 3);
+            this.RightUserLP.Name = "RightUserLP";
+            this.RightUserLP.RowCount = 2;
+            this.RightUserLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.RightUserLP.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.RightUserLP.Size = new System.Drawing.Size(624, 718);
+            this.RightUserLP.TabIndex = 10;
+            // 
+            // ReviewsByFriendsTitleTB
+            // 
+            this.ReviewsByFriendsTitleTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ReviewsByFriendsTitleTB.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.ReviewsByFriendsTitleTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ReviewsByFriendsTitleTB.Location = new System.Drawing.Point(20, 12);
+            this.ReviewsByFriendsTitleTB.Margin = new System.Windows.Forms.Padding(20, 3, 3, 3);
+            this.ReviewsByFriendsTitleTB.Name = "ReviewsByFriendsTitleTB";
+            this.ReviewsByFriendsTitleTB.Size = new System.Drawing.Size(601, 20);
+            this.ReviewsByFriendsTitleTB.TabIndex = 15;
+            this.ReviewsByFriendsTitleTB.Text = "Reviews by Friends";
             // 
             // YelpGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.ClientSize = new System.Drawing.Size(1282, 753);
             this.Controls.Add(this.tabControl1);
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MinimumSize = new System.Drawing.Size(1300, 800);
             this.Name = "YelpGUI";
             this.Text = "Yelp Application";
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).EndInit();
@@ -1150,8 +1226,11 @@
             this.BusinessTabPage.ResumeLayout(false);
             this.UsersTabPage.ResumeLayout(false);
             this.UserLayoutPanel.ResumeLayout(false);
-            this.tableLayoutPanel9.ResumeLayout(false);
-            this.LeftUserPanel.ResumeLayout(false);
+            this.LeftUserLP.ResumeLayout(false);
+            this.LeftUserLP.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.FriendsReviewsGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FriendsGrid)).EndInit();
+            this.UserInfoLP.ResumeLayout(false);
             this.userInfoPanel.ResumeLayout(false);
             this.userInfoPanel.PerformLayout();
             this.LongLP.ResumeLayout(false);
@@ -1173,9 +1252,9 @@
             this.UserBtnsLP.ResumeLayout(false);
             this.UserNamePanel.ResumeLayout(false);
             this.UserNamePanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.FriendsGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.FavoriteBusinessGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.FriendsReviewsGrid)).EndInit();
+            this.RightUserLP.ResumeLayout(false);
+            this.RightUserLP.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1209,8 +1288,8 @@
         private System.Windows.Forms.TableLayoutPanel UserLayoutPanel;
         private System.Windows.Forms.Button SearchButton;
         private System.Windows.Forms.Button MapButton;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
-        private System.Windows.Forms.TableLayoutPanel LeftUserPanel;
+        private System.Windows.Forms.TableLayoutPanel LeftUserLP;
+        private System.Windows.Forms.TableLayoutPanel UserInfoLP;
         private System.Windows.Forms.TableLayoutPanel userInfoPanel;
         private System.Windows.Forms.TableLayoutPanel LongLP;
         private System.Windows.Forms.TextBox LongitudeValue;
@@ -1251,6 +1330,11 @@
         private System.Windows.Forms.DataGridView FriendsGrid;
         private System.Windows.Forms.DataGridView FavoriteBusinessGrid;
         private System.Windows.Forms.DataGridView FriendsReviewsGrid;
+        private System.Windows.Forms.TextBox FavoriteBusTitleTB;
+        private System.Windows.Forms.TextBox UserInfoTitleTB;
+        private System.Windows.Forms.TextBox FriendsTitleTB;
+        private System.Windows.Forms.TableLayoutPanel RightUserLP;
+        private System.Windows.Forms.TextBox ReviewsByFriendsTitleTB;
     }
 }
 
