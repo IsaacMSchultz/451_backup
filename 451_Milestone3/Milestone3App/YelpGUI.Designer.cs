@@ -58,7 +58,6 @@
             this.UserLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.LeftUserLP = new System.Windows.Forms.TableLayoutPanel();
             this.UserInfoTitleTB = new System.Windows.Forms.TextBox();
-            this.FriendsReviewsGrid = new System.Windows.Forms.DataGridView();
             this.FriendsTitleTB = new System.Windows.Forms.TextBox();
             this.FriendsGrid = new System.Windows.Forms.DataGridView();
             this.UserInfoLP = new System.Windows.Forms.TableLayoutPanel();
@@ -103,6 +102,7 @@
             this.FavoriteBusTitleTB = new System.Windows.Forms.TextBox();
             this.RightUserLP = new System.Windows.Forms.TableLayoutPanel();
             this.ReviewsByFriendsTitleTB = new System.Windows.Forms.TextBox();
+            this.FriendsReviewsGrid = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -117,7 +117,6 @@
             this.UsersTabPage.SuspendLayout();
             this.UserLayoutPanel.SuspendLayout();
             this.LeftUserLP.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.FriendsReviewsGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FriendsGrid)).BeginInit();
             this.UserInfoLP.SuspendLayout();
             this.userInfoPanel.SuspendLayout();
@@ -133,6 +132,7 @@
             this.UserNamePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FavoriteBusinessGrid)).BeginInit();
             this.RightUserLP.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.FriendsReviewsGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // businessGrid
@@ -575,17 +575,6 @@
             this.UserInfoTitleTB.TabIndex = 15;
             this.UserInfoTitleTB.Text = "User Information";
             // 
-            // FriendsReviewsGrid
-            // 
-            this.FriendsReviewsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.FriendsReviewsGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FriendsReviewsGrid.Location = new System.Drawing.Point(20, 40);
-            this.FriendsReviewsGrid.Margin = new System.Windows.Forms.Padding(20, 5, 20, 30);
-            this.FriendsReviewsGrid.Name = "FriendsReviewsGrid";
-            this.FriendsReviewsGrid.RowTemplate.Height = 24;
-            this.FriendsReviewsGrid.Size = new System.Drawing.Size(584, 648);
-            this.FriendsReviewsGrid.TabIndex = 10;
-            // 
             // FriendsTitleTB
             // 
             this.FriendsTitleTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -718,7 +707,7 @@
             this.VotesValuesLP.Name = "VotesValuesLP";
             this.VotesValuesLP.RowCount = 1;
             this.VotesValuesLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.VotesValuesLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 18F));
+            this.VotesValuesLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 21F));
             this.VotesValuesLP.Size = new System.Drawing.Size(293, 21);
             this.VotesValuesLP.TabIndex = 10;
             // 
@@ -765,7 +754,7 @@
             this.NameLP.Name = "NameLP";
             this.NameLP.RowCount = 1;
             this.NameLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.NameLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.NameLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
             this.NameLP.Size = new System.Drawing.Size(295, 23);
             this.NameLP.TabIndex = 6;
             // 
@@ -1198,6 +1187,18 @@
             this.ReviewsByFriendsTitleTB.TabIndex = 15;
             this.ReviewsByFriendsTitleTB.Text = "Reviews by Friends";
             // 
+            // FriendsReviewsGrid
+            // 
+            this.FriendsReviewsGrid.AllowUserToAddRows = false;
+            this.FriendsReviewsGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FriendsReviewsGrid.Location = new System.Drawing.Point(20, 40);
+            this.FriendsReviewsGrid.Margin = new System.Windows.Forms.Padding(20, 5, 20, 30);
+            this.FriendsReviewsGrid.Name = "FriendsReviewsGrid";
+            this.FriendsReviewsGrid.RowHeadersVisible = false;
+            this.FriendsReviewsGrid.RowTemplate.Height = 24;
+            this.FriendsReviewsGrid.Size = new System.Drawing.Size(584, 648);
+            this.FriendsReviewsGrid.TabIndex = 10;
+            // 
             // YelpGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1228,7 +1229,6 @@
             this.UserLayoutPanel.ResumeLayout(false);
             this.LeftUserLP.ResumeLayout(false);
             this.LeftUserLP.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.FriendsReviewsGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.FriendsGrid)).EndInit();
             this.UserInfoLP.ResumeLayout(false);
             this.userInfoPanel.ResumeLayout(false);
@@ -1255,6 +1255,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.FavoriteBusinessGrid)).EndInit();
             this.RightUserLP.ResumeLayout(false);
             this.RightUserLP.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.FriendsReviewsGrid)).EndInit();
             this.ResumeLayout(false);
 
         }

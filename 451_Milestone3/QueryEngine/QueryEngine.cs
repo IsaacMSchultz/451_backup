@@ -411,6 +411,46 @@ namespace QueryEngine1
             return results;
         }
 
+        public List<List<string>> GetFriendsReview(string userId)
+        {
+            List<List<string>> results = new List<List<string>>();
+            ReadOnlyCollection<NpgsqlDbColumn> columns = new ReadOnlyCollection<NpgsqlDbColumn>(new List<NpgsqlDbColumn>());
+
+            using (var connection = new NpgsqlConnection(LOGININFO))
+            {
+                connection.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = connection;
+                    cmd.CommandText = "select n2.name, b.name, b.city, n2.text from business as b inner join(select yu.name, n.text, n.business_id from yelpuser as yu inner join(select distinct on (user_id) user_id, text, business_id from review " + 
+                        "order by user_id, date desc) n on(yu.user_id = n.user_id and yu.user_id in (Select friend_id from friend where user_id = '" + userId + "'))) n2 on(n2.business_id = b.business_id)";
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            if (columns.Count == 0)
+                                columns = reader.GetColumnSchema();
+
+                            List<string> row = new List<string>();
+
+                            foreach (NpgsqlDbColumn column in columns)
+                                row.Add(reader[column.ColumnName].ToString());
+
+                            results.Add(row);
+                        }
+                    }
+                }
+                connection.Close();
+            }
+            // Returns the list of column names as the first row.
+            List<string> header = new List<string>();
+            foreach (NpgsqlDbColumn column in columns)
+                header.Add(column.ColumnName);
+            results.Insert(0, header);
+
+            lastQuery = results;
+            return results;
+        }
 
         /// <summary>
         /// Update the selected user's latitude and longitude
