@@ -16,6 +16,7 @@ namespace Milestone2App
         string[] cols = { "Name", "Address", "City", "State", "Stars Shown", "Reviews", "Checkins", "Stars", "Open?", "business_id", "Distance" }; //column titles for the main datagridview
         string[] friendsCol = { "Name", "Average Stars", "Yelping Since" };
         string[] favBusCol = { "Name", "Stars", "City", "Zipcode", "Address" };
+        string[] friendsRevCol = { "Name", "Business", "City", "Review" };
         string[] reviewCols = { "Stars", "Date", "Text", "Useful", "Funny", "Cool" }; //Column headers for the review form that can be opened from the GUI
         string projection; //selected columns to show in the database. Need to implement column constructors based on the projection instead of the cols[] array.
 
@@ -78,7 +79,16 @@ namespace Milestone2App
                 FavoriteBusinessGrid.Columns.Add(newColumn);
             }
 
-            //FriendsGrid.Columns[0].Visible = false;
+            foreach (var column in friendsRevCol)
+            {
+                //dataGridView1.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                
+                DataGridViewTextBoxColumn newColumn = new DataGridViewTextBoxColumn();
+                newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                newColumn.HeaderText = column;
+
+                FriendsReviewsGrid.Columns.Add(newColumn);
+            }
         }
 
         /// <summary>
@@ -255,6 +265,7 @@ namespace Milestone2App
 
             updateFriendsGrid();
             updateFavBusinessGrid();
+            updateFriendsRevGrid();
 
             queryEngine.SelectUser(currUserId);
         }
@@ -398,6 +409,9 @@ namespace Milestone2App
         // Should consider *Templatizing* this to work for multiple DataGrids
         private void updateFavBusinessGrid()
         {
+            //FavoriteBusinessGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            
+
             int row = 0, col = 0;
             FavoriteBusinessGrid.Rows.Clear(); //removes all the data previously in the grid.            
 
@@ -408,6 +422,24 @@ namespace Milestone2App
                     FavoriteBusinessGrid.Rows.Add(); //the index of the new row
                     foreach (string item in listRow)
                         FavoriteBusinessGrid.Rows[row - 1].Cells[col++].Value = item;
+                    col = 0;
+                }
+                row++;
+            }
+        }
+
+        private void updateFriendsRevGrid()
+        {
+            int row = 0, col = 0;  
+            FriendsReviewsGrid.Rows.Clear();
+
+            foreach (List<string> listRow in queryEngine.GetFriendsReview(currUserId))
+            {
+                if (row > 0)
+                {
+                    FriendsReviewsGrid.Rows.Add(); //the index of the new row
+                    foreach (string item in listRow)
+                        FriendsReviewsGrid.Rows[row - 1].Cells[col++].Value = item;
                     col = 0;
                 }
                 row++;
