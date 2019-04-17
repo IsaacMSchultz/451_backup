@@ -13,7 +13,7 @@ namespace Milestone2App
     public partial class YelpGUI : Form
     {
         QueryEngine queryEngine;
-        string[] cols = { "Name", "Address", "City", "State", "Stars Shown", "Reviews", "Checkins", "Stars", "Open?", "business_id" }; //column titles for the main datagridview
+        string[] cols = { "Name", "Address", "City", "State", "Stars Shown", "Reviews", "Checkins", "Stars", "Open?", "business_id", "Distance" }; //column titles for the main datagridview
         string[] friendsCol = { "Name", "Average Stars", "Yelping Since" };
         string[] favBusCol = { "Name", "Stars", "City", "Zipcode", "Address" };
         string[] reviewCols = { "Stars", "Date", "Text", "Useful", "Funny", "Cool" }; //Column headers for the review form that can be opened from the GUI
@@ -34,7 +34,7 @@ namespace Milestone2App
         /// Constructor for a yelpGUI.
         /// </summary>
         /// <param name="proj">A projection selector for a query to only return certain columns.</param>
-        public YelpGUI(string proj = "name, address, city, state, stars, review_count, num_checkins, reviewRating, is_open, business_id")
+        public YelpGUI(string proj = "name, address, city, state, stars, review_count, num_checkins, reviewRating, is_open, business_id, distance")
         {
             queryEngine = new QueryEngine();
             List<string> businessIds = new List<string>();
@@ -255,6 +255,8 @@ namespace Milestone2App
 
             updateFriendsGrid();
             updateFavBusinessGrid();
+
+            queryEngine.SelectUser(currUserId);
         }
 
         /// <summary>
