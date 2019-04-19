@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using Npgsql;
 using Npgsql.Schema;
+using System.Text.RegularExpressions;
 
 namespace QueryEngine1
 {
@@ -24,8 +25,8 @@ namespace QueryEngine1
         const string chars = "abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_- ";
 
         public event PropertyChangedEventHandler yelpDataChanged; // event for notifying that there was a property changed. 
-        //private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone2db";
-        private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone2db";
+        private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone3db";
+        //private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone2db";
 
         public QueryEngine()
         {
@@ -97,7 +98,22 @@ namespace QueryEngine1
 
         public List<List<string>> Search(string projection = "*")
         {
-            return Search(searchParameters, projection);
+            if (projection.Contains(", distance")) //assuming distance will always be at the end. Can change this later.
+            {
+                if (currUserId != null)
+                {
+                    //Regex reg = new Regex(@"(?:\w+\,)");                    
+                    projection = "business." + projection; //add business. to the first column of the projection
+                    projection = projection.Replace(", ", ", business.");
+                    projection = projection.Replace("business.distance", "distance(business.latitude, business.longitude, yelpuser.user_latitude, yelpuser.user_longitude)");
+                    return Search(searchParameters, projection, "yelpuser, business", " AND yelpuser.user_id = '" + currUserId + "' ");
+                }
+                else
+                {
+                    projection = projection.Replace(", distance", "");
+                }
+            }
+            return Search(searchParameters, projection, "business");
         }
 
         /// <summary>
@@ -112,7 +128,7 @@ namespace QueryEngine1
             if (name == string.Empty)
                 return returnList;
 
-            returnList = ExecuteListQuery("SELECT distinct " + projection + " FROM yelpuser WHERE yelpuser.name like '%" + name + "%' ORDER BY user_id;");                    
+            returnList = ExecuteListQuery("SELECT distinct " + projection + " FROM yelpuser WHERE yelpuser.name like '%" + name + "%' ORDER BY user_id;");
 
             return returnList;
         }
@@ -123,15 +139,15 @@ namespace QueryEngine1
         }
 
         public List<List<string>> GetReviews(string id, string projection = "*")
-        {            
+        {
             return ExecuteCategorizedQuery("SELECT " + projection + " from review WHERE business_id = '" + id + "' ORDER BY review_stars;");
-        }       
+        }
 
         /// <summary>
         /// Runs a query to return the results based on the current search parameters as a 2 dimensional array of strings
         /// If there are no search parameters, returns an empty string array.
         /// </summary>
-        private List<List<string>> Search(Dictionary<string, List<string>> searchParams, string projection)
+        private List<List<string>> Search(Dictionary<string, List<string>> searchParams, string projection, string tables, string endQuery = "")
         {
             if (searchParams.Count != 0)
             {
@@ -160,7 +176,7 @@ namespace QueryEngine1
                 else
                     orList = orList.Substring(0, orList.Length - 4); // Cuts off the last ") AND "
 
-                lastQuery = ExecuteCategorizedQuery("SELECT " + projection + " FROM business WHERE " + orList + " ORDER BY state;");
+                lastQuery = ExecuteCategorizedQuery("SELECT " + projection + " FROM " + tables + " WHERE " + orList + endQuery +" ORDER BY state;");
                 return lastQuery;
             }
             lastQuery = new List<List<string>>();
@@ -287,6 +303,11 @@ namespace QueryEngine1
                 currBusId = lastQuery[row + 1][lastQuery[0].IndexOf("business_id")];
         }
 
+        public void SelectUser(string userId)
+        {
+            currUserId = userId;
+        }
+
 
         public bool PostReview(string reviewText, int reviewStars, string busID, string UserID)
         {
@@ -348,6 +369,112 @@ namespace QueryEngine1
 
             lastQuery = results;
             return results;
+        }
+
+        public List<List<string>> GetFavBusinesses(string userId)
+        {
+            List<List<string>> results = new List<List<string>>();
+            ReadOnlyCollection<NpgsqlDbColumn> columns = new ReadOnlyCollection<NpgsqlDbColumn>(new List<NpgsqlDbColumn>());
+
+            using (var connection = new NpgsqlConnection(LOGININFO))
+            {
+                connection.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = connection;
+                    cmd.CommandText = "Select name, stars, city, zipcode, address from business where business_id in (Select favorited_business from favorite where user_id = '" + userId + "')";
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            if (columns.Count == 0)
+                                columns = reader.GetColumnSchema();
+
+                            List<string> row = new List<string>();
+
+                            foreach (NpgsqlDbColumn column in columns)
+                                row.Add(reader[column.ColumnName].ToString());
+
+                            results.Add(row);
+                        }
+                    }
+                }
+                connection.Close();
+            }
+            // Returns the list of column names as the first row.
+            List<string> header = new List<string>();
+            foreach (NpgsqlDbColumn column in columns)
+                header.Add(column.ColumnName);
+            results.Insert(0, header);
+
+            lastQuery = results;
+            return results;
+        }
+
+        public List<List<string>> GetFriendsReview(string userId)
+        {
+            List<List<string>> results = new List<List<string>>();
+            ReadOnlyCollection<NpgsqlDbColumn> columns = new ReadOnlyCollection<NpgsqlDbColumn>(new List<NpgsqlDbColumn>());
+
+            using (var connection = new NpgsqlConnection(LOGININFO))
+            {
+                connection.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = connection;
+                    cmd.CommandText = "select n2.name, b.name, b.city, n2.text from business as b inner join(select yu.name, n.text, n.business_id from yelpuser as yu inner join(select distinct on (user_id) user_id, text, business_id from review " + 
+                        "order by user_id, date desc) n on(yu.user_id = n.user_id and yu.user_id in (Select friend_id from friend where user_id = '" + userId + "'))) n2 on(n2.business_id = b.business_id)";
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            if (columns.Count == 0)
+                                columns = reader.GetColumnSchema();
+
+                            List<string> row = new List<string>();
+
+                            foreach (NpgsqlDbColumn column in columns)
+                                row.Add(reader[column.ColumnName].ToString());
+
+                            results.Add(row);
+                        }
+                    }
+                }
+                connection.Close();
+            }
+            // Returns the list of column names as the first row.
+            List<string> header = new List<string>();
+            foreach (NpgsqlDbColumn column in columns)
+                header.Add(column.ColumnName);
+            results.Insert(0, header);
+
+            lastQuery = results;
+            return results;
+        }
+
+        /// <summary>
+        /// Update the selected user's latitude and longitude
+        /// </summary>
+        /// <param name="user_id">selected user's id</param>
+        /// <param name="lat">entered latitude</param>
+        /// <param name="lon">entered lonitude</param>
+        public void updateUserLocation(string user_id, double lat, double lon)
+        {
+            string query = "Update yelpuser set user_latitude = " + lat.ToString() +
+                ", user_longitude = " + lon.ToString() + " where user_id = '" +
+                user_id + "'";
+
+            using (var connection = new NpgsqlConnection(LOGININFO))
+            {
+                connection.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = connection;
+                    cmd.CommandText = query;
+                    cmd.ExecuteNonQuery();
+                }
+                connection.Close();
+            }
         }
     }
 }
