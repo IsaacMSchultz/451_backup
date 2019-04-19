@@ -54,7 +54,7 @@ namespace Milestone2App
                 newColumn.HeaderText = column;
                 
                 if (column == "Name")
-                    newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells; //Can change this to fill depending on if we want to make our app window larger
                 else
                     newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 

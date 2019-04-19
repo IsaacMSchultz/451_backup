@@ -52,22 +52,23 @@
             this.ReviewStarsDropDown = new System.Windows.Forms.ComboBox();
             this.MapButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
-            this.DayOfTheWeek_Textbox = new System.Windows.Forms.TextBox();
             this.AddressLabel = new System.Windows.Forms.Label();
-            this.CategoriesList_Label = new System.Windows.Forms.Label();
-            this.Categories_Textbox = new System.Windows.Forms.TextBox();
             this.Address_Textbox = new System.Windows.Forms.TextBox();
+            this.WriteReview_Label = new System.Windows.Forms.Label();
+            this.WriteReviewTextBox_Review = new System.Windows.Forms.TextBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.FriendsReviews_Label = new System.Windows.Forms.Label();
+            this.Attributes_Label = new System.Windows.Forms.Label();
+            this.Attributes_Textbox = new System.Windows.Forms.TextBox();
+            this.Hours_Label = new System.Windows.Forms.Label();
+            this.DayOfTheWeek_Textbox = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.Closes_Textbox = new System.Windows.Forms.TextBox();
             this.Opens_Textbox = new System.Windows.Forms.TextBox();
             this.Opens_Label = new System.Windows.Forms.Label();
             this.Closes_Label = new System.Windows.Forms.Label();
-            this.Hours_Label = new System.Windows.Forms.Label();
-            this.Attributes_Label = new System.Windows.Forms.Label();
-            this.Attributes_Textbox = new System.Windows.Forms.TextBox();
-            this.FriendsReviews_Label = new System.Windows.Forms.Label();
-            this.WriteReview_Label = new System.Windows.Forms.Label();
-            this.WriteReviewTextBox_Review = new System.Windows.Forms.TextBox();
+            this.CategoriesList_Label = new System.Windows.Forms.Label();
+            this.Categories_Textbox = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.BusinessTabPage = new System.Windows.Forms.TabPage();
             this.UsersTabPage = new System.Windows.Forms.TabPage();
@@ -119,7 +120,6 @@
             this.RightUserLP = new System.Windows.Forms.TableLayoutPanel();
             this.ReviewsByFriendsTitleTB = new System.Windows.Forms.TextBox();
             this.FriendsReviewsGrid = new System.Windows.Forms.DataGridView();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -130,6 +130,7 @@
             this.tableLayoutPanel7.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel10.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.BusinessTabPage.SuspendLayout();
@@ -152,7 +153,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.FavoriteBusinessGrid)).BeginInit();
             this.RightUserLP.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FriendsReviewsGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // businessGrid
@@ -456,7 +456,6 @@
             // 
             // SubmitReviewButton
             // 
-            this.SubmitReviewButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SubmitReviewButton.Enabled = false;
             this.SubmitReviewButton.Location = new System.Drawing.Point(0, 21);
             this.SubmitReviewButton.Margin = new System.Windows.Forms.Padding(0);
@@ -532,18 +531,6 @@
             this.tableLayoutPanel9.Size = new System.Drawing.Size(655, 288);
             this.tableLayoutPanel9.TabIndex = 5;
             // 
-            // DayOfTheWeek_Textbox
-            // 
-            this.DayOfTheWeek_Textbox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DayOfTheWeek_Textbox.Location = new System.Drawing.Point(392, 0);
-            this.DayOfTheWeek_Textbox.Margin = new System.Windows.Forms.Padding(0);
-            this.DayOfTheWeek_Textbox.Multiline = true;
-            this.DayOfTheWeek_Textbox.Name = "DayOfTheWeek_Textbox";
-            this.DayOfTheWeek_Textbox.ReadOnly = true;
-            this.DayOfTheWeek_Textbox.Size = new System.Drawing.Size(263, 16);
-            this.DayOfTheWeek_Textbox.TabIndex = 13;
-            this.DayOfTheWeek_Textbox.Text = "Day of the week";
-            // 
             // AddressLabel
             // 
             this.AddressLabel.AutoSize = true;
@@ -557,30 +544,6 @@
             this.AddressLabel.Text = "Address";
             this.AddressLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // CategoriesList_Label
-            // 
-            this.CategoriesList_Label.AutoSize = true;
-            this.CategoriesList_Label.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CategoriesList_Label.Location = new System.Drawing.Point(0, 32);
-            this.CategoriesList_Label.Margin = new System.Windows.Forms.Padding(0);
-            this.CategoriesList_Label.Name = "CategoriesList_Label";
-            this.CategoriesList_Label.Size = new System.Drawing.Size(65, 64);
-            this.CategoriesList_Label.TabIndex = 9;
-            this.CategoriesList_Label.Text = "Categories";
-            this.CategoriesList_Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // Categories_Textbox
-            // 
-            this.Categories_Textbox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Categories_Textbox.Location = new System.Drawing.Point(65, 32);
-            this.Categories_Textbox.Margin = new System.Windows.Forms.Padding(0);
-            this.Categories_Textbox.Multiline = true;
-            this.Categories_Textbox.Name = "Categories_Textbox";
-            this.Categories_Textbox.ReadOnly = true;
-            this.Categories_Textbox.Size = new System.Drawing.Size(262, 64);
-            this.Categories_Textbox.TabIndex = 10;
-            this.Categories_Textbox.Text = "Click Business to show Categories";
-            // 
             // Address_Textbox
             // 
             this.Address_Textbox.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -593,6 +556,101 @@
             this.Address_Textbox.Size = new System.Drawing.Size(262, 32);
             this.Address_Textbox.TabIndex = 11;
             this.Address_Textbox.Text = "Click Business to show Address";
+            // 
+            // WriteReview_Label
+            // 
+            this.WriteReview_Label.AutoSize = true;
+            this.WriteReview_Label.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.WriteReview_Label.Location = new System.Drawing.Point(0, 96);
+            this.WriteReview_Label.Margin = new System.Windows.Forms.Padding(0);
+            this.WriteReview_Label.Name = "WriteReview_Label";
+            this.WriteReview_Label.Size = new System.Drawing.Size(65, 64);
+            this.WriteReview_Label.TabIndex = 8;
+            this.WriteReview_Label.Text = "Write Review";
+            this.WriteReview_Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // WriteReviewTextBox_Review
+            // 
+            this.tableLayoutPanel9.SetColumnSpan(this.WriteReviewTextBox_Review, 3);
+            this.WriteReviewTextBox_Review.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.WriteReviewTextBox_Review.Location = new System.Drawing.Point(65, 96);
+            this.WriteReviewTextBox_Review.Margin = new System.Windows.Forms.Padding(0);
+            this.WriteReviewTextBox_Review.Multiline = true;
+            this.WriteReviewTextBox_Review.Name = "WriteReviewTextBox_Review";
+            this.WriteReviewTextBox_Review.Size = new System.Drawing.Size(590, 64);
+            this.WriteReviewTextBox_Review.TabIndex = 1;
+            this.WriteReviewTextBox_Review.TextChanged += new System.EventHandler(this.WriteReviewTextBox_Review_TextChanged);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tableLayoutPanel9.SetColumnSpan(this.dataGridView1, 3);
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(65, 160);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(0);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(590, 128);
+            this.dataGridView1.TabIndex = 18;
+            // 
+            // FriendsReviews_Label
+            // 
+            this.FriendsReviews_Label.AutoSize = true;
+            this.FriendsReviews_Label.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FriendsReviews_Label.Location = new System.Drawing.Point(0, 160);
+            this.FriendsReviews_Label.Margin = new System.Windows.Forms.Padding(0);
+            this.FriendsReviews_Label.Name = "FriendsReviews_Label";
+            this.FriendsReviews_Label.Size = new System.Drawing.Size(65, 128);
+            this.FriendsReviews_Label.TabIndex = 15;
+            this.FriendsReviews_Label.Text = "Friends who reviewed this business";
+            this.FriendsReviews_Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Attributes_Label
+            // 
+            this.Attributes_Label.AutoSize = true;
+            this.Attributes_Label.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Attributes_Label.Location = new System.Drawing.Point(327, 32);
+            this.Attributes_Label.Margin = new System.Windows.Forms.Padding(0);
+            this.Attributes_Label.Name = "Attributes_Label";
+            this.Attributes_Label.Size = new System.Drawing.Size(65, 64);
+            this.Attributes_Label.TabIndex = 14;
+            this.Attributes_Label.Text = "Attributes";
+            this.Attributes_Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Attributes_Textbox
+            // 
+            this.Attributes_Textbox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Attributes_Textbox.Location = new System.Drawing.Point(392, 32);
+            this.Attributes_Textbox.Margin = new System.Windows.Forms.Padding(0);
+            this.Attributes_Textbox.Multiline = true;
+            this.Attributes_Textbox.Name = "Attributes_Textbox";
+            this.Attributes_Textbox.ReadOnly = true;
+            this.Attributes_Textbox.Size = new System.Drawing.Size(263, 64);
+            this.Attributes_Textbox.TabIndex = 17;
+            this.Attributes_Textbox.Text = "Click Business to show Attributes";
+            // 
+            // Hours_Label
+            // 
+            this.Hours_Label.AutoSize = true;
+            this.Hours_Label.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Hours_Label.Location = new System.Drawing.Point(327, 0);
+            this.Hours_Label.Margin = new System.Windows.Forms.Padding(0);
+            this.Hours_Label.Name = "Hours_Label";
+            this.Hours_Label.Size = new System.Drawing.Size(65, 16);
+            this.Hours_Label.TabIndex = 7;
+            this.Hours_Label.Text = "Hours:";
+            this.Hours_Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // DayOfTheWeek_Textbox
+            // 
+            this.DayOfTheWeek_Textbox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DayOfTheWeek_Textbox.Location = new System.Drawing.Point(392, 0);
+            this.DayOfTheWeek_Textbox.Margin = new System.Windows.Forms.Padding(0);
+            this.DayOfTheWeek_Textbox.Multiline = true;
+            this.DayOfTheWeek_Textbox.Name = "DayOfTheWeek_Textbox";
+            this.DayOfTheWeek_Textbox.ReadOnly = true;
+            this.DayOfTheWeek_Textbox.Size = new System.Drawing.Size(263, 16);
+            this.DayOfTheWeek_Textbox.TabIndex = 13;
+            this.DayOfTheWeek_Textbox.Text = "Day of the week";
             // 
             // tableLayoutPanel10
             // 
@@ -663,77 +721,29 @@
             this.Closes_Label.Text = "Closes";
             this.Closes_Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // Hours_Label
+            // CategoriesList_Label
             // 
-            this.Hours_Label.AutoSize = true;
-            this.Hours_Label.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Hours_Label.Location = new System.Drawing.Point(327, 0);
-            this.Hours_Label.Margin = new System.Windows.Forms.Padding(0);
-            this.Hours_Label.Name = "Hours_Label";
-            this.Hours_Label.Size = new System.Drawing.Size(65, 16);
-            this.Hours_Label.TabIndex = 7;
-            this.Hours_Label.Text = "Hours:";
-            this.Hours_Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.CategoriesList_Label.AutoSize = true;
+            this.CategoriesList_Label.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CategoriesList_Label.Location = new System.Drawing.Point(0, 32);
+            this.CategoriesList_Label.Margin = new System.Windows.Forms.Padding(0);
+            this.CategoriesList_Label.Name = "CategoriesList_Label";
+            this.CategoriesList_Label.Size = new System.Drawing.Size(65, 64);
+            this.CategoriesList_Label.TabIndex = 9;
+            this.CategoriesList_Label.Text = "Categories";
+            this.CategoriesList_Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // Attributes_Label
+            // Categories_Textbox
             // 
-            this.Attributes_Label.AutoSize = true;
-            this.Attributes_Label.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Attributes_Label.Location = new System.Drawing.Point(327, 32);
-            this.Attributes_Label.Margin = new System.Windows.Forms.Padding(0);
-            this.Attributes_Label.Name = "Attributes_Label";
-            this.Attributes_Label.Size = new System.Drawing.Size(65, 64);
-            this.Attributes_Label.TabIndex = 14;
-            this.Attributes_Label.Text = "Attributes";
-            this.Attributes_Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // Attributes_Textbox
-            // 
-            this.Attributes_Textbox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Attributes_Textbox.Location = new System.Drawing.Point(392, 32);
-            this.Attributes_Textbox.Margin = new System.Windows.Forms.Padding(0);
-            this.Attributes_Textbox.Multiline = true;
-            this.Attributes_Textbox.Name = "Attributes_Textbox";
-            this.Attributes_Textbox.ReadOnly = true;
-            this.Attributes_Textbox.Size = new System.Drawing.Size(263, 64);
-            this.Attributes_Textbox.TabIndex = 17;
-            this.Attributes_Textbox.Text = "Click Business to show Attributes";
-            // 
-            // FriendsReviews_Label
-            // 
-            this.FriendsReviews_Label.AutoSize = true;
-            this.FriendsReviews_Label.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FriendsReviews_Label.Location = new System.Drawing.Point(0, 160);
-            this.FriendsReviews_Label.Margin = new System.Windows.Forms.Padding(0);
-            this.FriendsReviews_Label.Name = "FriendsReviews_Label";
-            this.FriendsReviews_Label.Size = new System.Drawing.Size(65, 128);
-            this.FriendsReviews_Label.TabIndex = 15;
-            this.FriendsReviews_Label.Text = "Friends who reviewed this business";
-            this.FriendsReviews_Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // WriteReview_Label
-            // 
-            this.WriteReview_Label.AutoSize = true;
-            this.WriteReview_Label.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.WriteReview_Label.Location = new System.Drawing.Point(0, 96);
-            this.WriteReview_Label.Margin = new System.Windows.Forms.Padding(0);
-            this.WriteReview_Label.Name = "WriteReview_Label";
-            this.WriteReview_Label.Size = new System.Drawing.Size(65, 64);
-            this.WriteReview_Label.TabIndex = 8;
-            this.WriteReview_Label.Text = "Write Review";
-            this.WriteReview_Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // WriteReviewTextBox_Review
-            // 
-            this.tableLayoutPanel9.SetColumnSpan(this.WriteReviewTextBox_Review, 3);
-            this.WriteReviewTextBox_Review.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.WriteReviewTextBox_Review.Location = new System.Drawing.Point(65, 96);
-            this.WriteReviewTextBox_Review.Margin = new System.Windows.Forms.Padding(0);
-            this.WriteReviewTextBox_Review.Multiline = true;
-            this.WriteReviewTextBox_Review.Name = "WriteReviewTextBox_Review";
-            this.WriteReviewTextBox_Review.Size = new System.Drawing.Size(590, 64);
-            this.WriteReviewTextBox_Review.TabIndex = 1;
-            this.WriteReviewTextBox_Review.TextChanged += new System.EventHandler(this.WriteReviewTextBox_Review_TextChanged);
+            this.Categories_Textbox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Categories_Textbox.Location = new System.Drawing.Point(65, 32);
+            this.Categories_Textbox.Margin = new System.Windows.Forms.Padding(0);
+            this.Categories_Textbox.Multiline = true;
+            this.Categories_Textbox.Name = "Categories_Textbox";
+            this.Categories_Textbox.ReadOnly = true;
+            this.Categories_Textbox.Size = new System.Drawing.Size(262, 64);
+            this.Categories_Textbox.TabIndex = 10;
+            this.Categories_Textbox.Text = "Click Business to show Categories";
             // 
             // tabControl1
             // 
@@ -956,7 +966,7 @@
             this.VotesValuesLP.Name = "VotesValuesLP";
             this.VotesValuesLP.RowCount = 1;
             this.VotesValuesLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.VotesValuesLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 12F));
+            this.VotesValuesLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 18F));
             this.VotesValuesLP.Size = new System.Drawing.Size(219, 18);
             this.VotesValuesLP.TabIndex = 10;
             // 
@@ -1003,7 +1013,7 @@
             this.NameLP.Name = "NameLP";
             this.NameLP.RowCount = 1;
             this.NameLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.NameLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 12F));
+            this.NameLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 18F));
             this.NameLP.Size = new System.Drawing.Size(219, 18);
             this.NameLP.TabIndex = 6;
             // 
@@ -1460,17 +1470,6 @@
             this.FriendsReviewsGrid.Size = new System.Drawing.Size(438, 532);
             this.FriendsReviewsGrid.TabIndex = 10;
             // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tableLayoutPanel9.SetColumnSpan(this.dataGridView1, 3);
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(65, 160);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(0);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(590, 128);
-            this.dataGridView1.TabIndex = 18;
-            // 
             // YelpGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1495,6 +1494,7 @@
             this.tableLayoutPanel8.ResumeLayout(false);
             this.tableLayoutPanel9.ResumeLayout(false);
             this.tableLayoutPanel9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tableLayoutPanel10.ResumeLayout(false);
             this.tableLayoutPanel10.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -1530,7 +1530,6 @@
             this.RightUserLP.ResumeLayout(false);
             this.RightUserLP.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FriendsReviewsGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
