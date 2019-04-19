@@ -55,7 +55,6 @@
             this.AddressLabel = new System.Windows.Forms.Label();
             this.Address_Textbox = new System.Windows.Forms.TextBox();
             this.WriteReview_Label = new System.Windows.Forms.Label();
-            this.WriteReviewTextBox_Review = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.FriendsReviews_Label = new System.Windows.Forms.Label();
             this.Attributes_Label = new System.Windows.Forms.Label();
@@ -120,6 +119,9 @@
             this.RightUserLP = new System.Windows.Forms.TableLayoutPanel();
             this.ReviewsByFriendsTitleTB = new System.Windows.Forms.TextBox();
             this.FriendsReviewsGrid = new System.Windows.Forms.DataGridView();
+            this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
+            this.WriteReviewTextBox_Review = new System.Windows.Forms.TextBox();
+            this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -153,6 +155,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.FavoriteBusinessGrid)).BeginInit();
             this.RightUserLP.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FriendsReviewsGrid)).BeginInit();
+            this.tableLayoutPanel11.SuspendLayout();
+            this.tableLayoutPanel12.SuspendLayout();
             this.SuspendLayout();
             // 
             // businessGrid
@@ -398,10 +402,8 @@
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel7.Controls.Add(this.businessNameTextBox_Review, 0, 0);
-            this.tableLayoutPanel7.Controls.Add(this.ShowReviewsButton, 1, 0);
-            this.tableLayoutPanel7.Controls.Add(this.tableLayoutPanel8, 1, 1);
-            this.tableLayoutPanel7.Controls.Add(this.MapButton, 1, 2);
             this.tableLayoutPanel7.Controls.Add(this.tableLayoutPanel9, 0, 1);
+            this.tableLayoutPanel7.Controls.Add(this.tableLayoutPanel12, 1, 1);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel7.Location = new System.Drawing.Point(200, 266);
             this.tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(0);
@@ -415,21 +417,21 @@
             // 
             // businessNameTextBox_Review
             // 
+            this.tableLayoutPanel7.SetColumnSpan(this.businessNameTextBox_Review, 2);
             this.businessNameTextBox_Review.Dock = System.Windows.Forms.DockStyle.Fill;
             this.businessNameTextBox_Review.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.businessNameTextBox_Review.Location = new System.Drawing.Point(0, 0);
             this.businessNameTextBox_Review.Margin = new System.Windows.Forms.Padding(0);
             this.businessNameTextBox_Review.Name = "businessNameTextBox_Review";
             this.businessNameTextBox_Review.ReadOnly = true;
-            this.businessNameTextBox_Review.Size = new System.Drawing.Size(655, 38);
+            this.businessNameTextBox_Review.Size = new System.Drawing.Size(755, 38);
             this.businessNameTextBox_Review.TabIndex = 0;
             this.businessNameTextBox_Review.Text = "Business name (click on one)";
             // 
             // ShowReviewsButton
             // 
-            this.ShowReviewsButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ShowReviewsButton.Enabled = false;
-            this.ShowReviewsButton.Location = new System.Drawing.Point(655, 0);
+            this.ShowReviewsButton.Location = new System.Drawing.Point(0, 0);
             this.ShowReviewsButton.Margin = new System.Windows.Forms.Padding(0);
             this.ShowReviewsButton.Name = "ShowReviewsButton";
             this.ShowReviewsButton.Size = new System.Drawing.Size(100, 38);
@@ -444,14 +446,15 @@
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel8.Controls.Add(this.SubmitReviewButton, 0, 1);
             this.tableLayoutPanel8.Controls.Add(this.ReviewStarsDropDown, 0, 0);
-            this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel8.Location = new System.Drawing.Point(655, 38);
+            this.tableLayoutPanel8.Location = new System.Drawing.Point(490, 0);
             this.tableLayoutPanel8.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
             this.tableLayoutPanel8.RowCount = 2;
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(100, 250);
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(100, 64);
             this.tableLayoutPanel8.TabIndex = 3;
             // 
             // SubmitReviewButton
@@ -460,7 +463,7 @@
             this.SubmitReviewButton.Location = new System.Drawing.Point(0, 21);
             this.SubmitReviewButton.Margin = new System.Windows.Forms.Padding(0);
             this.SubmitReviewButton.Name = "SubmitReviewButton";
-            this.SubmitReviewButton.Size = new System.Drawing.Size(100, 229);
+            this.SubmitReviewButton.Size = new System.Drawing.Size(100, 43);
             this.SubmitReviewButton.TabIndex = 0;
             this.SubmitReviewButton.Text = "Submit Review";
             this.SubmitReviewButton.UseVisualStyleBackColor = true;
@@ -486,9 +489,8 @@
             // 
             // MapButton
             // 
-            this.MapButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MapButton.Enabled = false;
-            this.MapButton.Location = new System.Drawing.Point(655, 288);
+            this.MapButton.Location = new System.Drawing.Point(0, 72);
             this.MapButton.Margin = new System.Windows.Forms.Padding(0);
             this.MapButton.Name = "MapButton";
             this.MapButton.Size = new System.Drawing.Size(100, 38);
@@ -507,7 +509,6 @@
             this.tableLayoutPanel9.Controls.Add(this.AddressLabel, 0, 0);
             this.tableLayoutPanel9.Controls.Add(this.Address_Textbox, 1, 0);
             this.tableLayoutPanel9.Controls.Add(this.WriteReview_Label, 0, 3);
-            this.tableLayoutPanel9.Controls.Add(this.WriteReviewTextBox_Review, 1, 3);
             this.tableLayoutPanel9.Controls.Add(this.dataGridView1, 1, 4);
             this.tableLayoutPanel9.Controls.Add(this.FriendsReviews_Label, 0, 4);
             this.tableLayoutPanel9.Controls.Add(this.Attributes_Label, 2, 2);
@@ -517,6 +518,7 @@
             this.tableLayoutPanel9.Controls.Add(this.tableLayoutPanel10, 2, 1);
             this.tableLayoutPanel9.Controls.Add(this.CategoriesList_Label, 0, 2);
             this.tableLayoutPanel9.Controls.Add(this.Categories_Textbox, 1, 2);
+            this.tableLayoutPanel9.Controls.Add(this.tableLayoutPanel11, 1, 3);
             this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel9.Location = new System.Drawing.Point(0, 38);
             this.tableLayoutPanel9.Margin = new System.Windows.Forms.Padding(0);
@@ -528,6 +530,7 @@
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel9.Size = new System.Drawing.Size(655, 288);
             this.tableLayoutPanel9.TabIndex = 5;
             // 
@@ -568,18 +571,6 @@
             this.WriteReview_Label.TabIndex = 8;
             this.WriteReview_Label.Text = "Write Review";
             this.WriteReview_Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // WriteReviewTextBox_Review
-            // 
-            this.tableLayoutPanel9.SetColumnSpan(this.WriteReviewTextBox_Review, 3);
-            this.WriteReviewTextBox_Review.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.WriteReviewTextBox_Review.Location = new System.Drawing.Point(65, 96);
-            this.WriteReviewTextBox_Review.Margin = new System.Windows.Forms.Padding(0);
-            this.WriteReviewTextBox_Review.Multiline = true;
-            this.WriteReviewTextBox_Review.Name = "WriteReviewTextBox_Review";
-            this.WriteReviewTextBox_Review.Size = new System.Drawing.Size(590, 64);
-            this.WriteReviewTextBox_Review.TabIndex = 1;
-            this.WriteReviewTextBox_Review.TextChanged += new System.EventHandler(this.WriteReviewTextBox_Review_TextChanged);
             // 
             // dataGridView1
             // 
@@ -1470,6 +1461,53 @@
             this.FriendsReviewsGrid.Size = new System.Drawing.Size(438, 532);
             this.FriendsReviewsGrid.TabIndex = 10;
             // 
+            // tableLayoutPanel11
+            // 
+            this.tableLayoutPanel11.ColumnCount = 2;
+            this.tableLayoutPanel9.SetColumnSpan(this.tableLayoutPanel11, 3);
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel11.Controls.Add(this.WriteReviewTextBox_Review, 0, 0);
+            this.tableLayoutPanel11.Controls.Add(this.tableLayoutPanel8, 1, 0);
+            this.tableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel11.Location = new System.Drawing.Point(65, 96);
+            this.tableLayoutPanel11.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel11.Name = "tableLayoutPanel11";
+            this.tableLayoutPanel11.RowCount = 1;
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel11.Size = new System.Drawing.Size(590, 64);
+            this.tableLayoutPanel11.TabIndex = 19;
+            // 
+            // WriteReviewTextBox_Review
+            // 
+            this.WriteReviewTextBox_Review.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.WriteReviewTextBox_Review.Location = new System.Drawing.Point(0, 0);
+            this.WriteReviewTextBox_Review.Margin = new System.Windows.Forms.Padding(0);
+            this.WriteReviewTextBox_Review.Multiline = true;
+            this.WriteReviewTextBox_Review.Name = "WriteReviewTextBox_Review";
+            this.WriteReviewTextBox_Review.Size = new System.Drawing.Size(490, 64);
+            this.WriteReviewTextBox_Review.TabIndex = 1;
+            this.WriteReviewTextBox_Review.TextChanged += new System.EventHandler(this.WriteReviewTextBox_Review_TextChanged);
+            // 
+            // tableLayoutPanel12
+            // 
+            this.tableLayoutPanel12.ColumnCount = 1;
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel12.Controls.Add(this.ShowReviewsButton, 0, 0);
+            this.tableLayoutPanel12.Controls.Add(this.MapButton, 0, 1);
+            this.tableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel12.Location = new System.Drawing.Point(655, 38);
+            this.tableLayoutPanel12.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel12.Name = "tableLayoutPanel12";
+            this.tableLayoutPanel12.RowCount = 4;
+            this.tableLayoutPanel7.SetRowSpan(this.tableLayoutPanel12, 2);
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel12.Size = new System.Drawing.Size(100, 288);
+            this.tableLayoutPanel12.TabIndex = 6;
+            // 
             // YelpGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1530,6 +1568,9 @@
             this.RightUserLP.ResumeLayout(false);
             this.RightUserLP.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FriendsReviewsGrid)).EndInit();
+            this.tableLayoutPanel11.ResumeLayout(false);
+            this.tableLayoutPanel11.PerformLayout();
+            this.tableLayoutPanel12.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1552,7 +1593,6 @@
         private System.Windows.Forms.TextBox categoriesTextBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
         private System.Windows.Forms.RichTextBox businessNameTextBox_Review;
-        private System.Windows.Forms.TextBox WriteReviewTextBox_Review;
         private System.Windows.Forms.Button ShowReviewsButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
         private System.Windows.Forms.Button SubmitReviewButton;
@@ -1627,6 +1667,9 @@
         private System.Windows.Forms.Label Attributes_Label;
         private System.Windows.Forms.TextBox Attributes_Textbox;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel11;
+        private System.Windows.Forms.TextBox WriteReviewTextBox_Review;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel12;
     }
 }
 

@@ -119,7 +119,7 @@ namespace Milestone2App
 
             foreach (string city in queryEngine.GetCities())
                 cityCheckBox.Items.Add(city);
-            updateGrid();
+            //updateGrid(); //This is really slow because we end up loading thousands of businesses. THe user can still load them by clicking the search button.
         }
 
         /// <summary>
@@ -268,6 +268,7 @@ namespace Milestone2App
             updateFriendsRevGrid();
 
             queryEngine.SelectUser(currUserId);
+            updateGrid(); //update the business grid so the user can see how far away they are from the searched businesses.
         }
 
         /// <summary>
