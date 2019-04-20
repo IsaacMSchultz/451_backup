@@ -281,8 +281,48 @@ namespace Milestone2App
         {
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
-                businessNameTextBox_Review.Text = (string)businessGrid[0, e.RowIndex].Value;
-                currBusId = (string)businessGrid[9, e.RowIndex].Value;
+                currBusId = (string)businessGrid[9, e.RowIndex].Value; //set global currBusId to the current business ID. Probably want to change this to a function in the future            
+                string today = DateTime.Today.DayOfWeek.ToString(); //get the current day of the week from the local machine
+
+                businessNameTextBox_Review.Text = (string)businessGrid[0, e.RowIndex].Value; //Show business name
+                Address_Textbox.Text = (string)businessGrid[1, e.RowIndex].Value; //Show the business address
+                DayOfTheWeek_Textbox.Text = today; //put the day of the week in the hours textbox
+
+                // replace the categories checkbox with all the categories that the selected business has
+                string categoriesStr = "";
+                List<string> categories = queryEngine.GetCategories(currBusId);
+                if (categories.Count > 0)
+                {
+                    foreach (string category in categories)
+                    {
+                        categoriesStr += category + ", ";
+                    }
+                    categoriesStr = categoriesStr.Substring(0, categoriesStr.Length - 2); // Cuts off the final ", "
+                }
+                Categories_Textbox.Text = categoriesStr;
+
+                // replace the attributes checkbox with all the categories that the selected business has
+                string attributesStr = "";
+                List<List<string>> attributes = queryEngine.GetAttributes(currBusId);
+                if (attributes.Count > 1)
+                {
+                    for (int i = 1; i < attributes.Count; i++)                    
+                    {
+                        attributesStr += attributes[i][0] + ":" + attributes[i][1] + ", ";
+                    }
+                    attributesStr = attributesStr.Substring(0, attributesStr.Length - 2); // Cuts off the final ", "
+                }
+                Attributes_Textbox.Text = attributesStr;
+
+
+
+                List<List<string>> hours = queryEngine.GetHoursForDay(currBusId, today); // query the database for the hours of a business
+                if (hours.Count > 1) // If the query returned some hours
+                {
+                    Opens_Textbox.Text = hours[1].Count > 0 ? hours[1][0] : "N/A"; //show N/A if there are no hours at that time
+                    Closes_Textbox.Text = hours[1].Count > 1 ? hours[1][1] : "N/A";
+                }
+
 
                 ShowReviewsButton.Enabled = true; //enable the button to show reviews after we click one
                 ShowCheckinsButton.Enabled = true; //enable the button to show reviews after we click one

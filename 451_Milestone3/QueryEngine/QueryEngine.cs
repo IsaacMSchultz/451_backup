@@ -75,26 +75,69 @@ namespace QueryEngine1
             return ExecuteListQuery("SELECT DISTINCT zipcode FROM business WHERE state = '" + searchParameters["state"][0] + "' AND city = '" + city + "' ORDER BY zipcode;");
         }
 
-        public List<string> GetCategories()
+        public List<string> GetCategories(string id = "N/A")
         {
-            if (searchParameters.ContainsKey("zipcode"))
+            if (id.Length < 4) // If the call was not passed with a valid id
             {
-                string cmd = "SELECT DISTINCT category_name FROM category WHERE business_id IN (SELECT business_id FROM business WHERE state = '" + searchParameters["state"][0] + "')";
-
-                cmd += " AND business_id IN (SELECT business_id FROM business WHERE "; //building subquery to find all the cities in the listbox
-                foreach (string zipcode in searchParameters["zipcode"])
+                if (searchParameters.ContainsKey("zipcode"))
                 {
-                    cmd += "zipcode = '" + zipcode + "' OR "; // city = 'string' OR 
+                    string cmd = "SELECT DISTINCT category_name FROM category WHERE business_id IN (SELECT business_id FROM business WHERE state = '" + searchParameters["state"][0] + "')";
+
+                    cmd += " AND business_id IN (SELECT business_id FROM business WHERE "; //building subquery to find all the cities in the listbox
+                    foreach (string zipcode in searchParameters["zipcode"])
+                    {
+                        cmd += "zipcode = '" + zipcode + "' OR "; // city = 'string' OR 
+                    }
+                    cmd = cmd.Substring(0, cmd.Length - 3); // Cuts off the final "OR "
+                    cmd += ")";
+
+                    cmd += " ORDER BY category_name;";
+
+                    return ExecuteListQuery(cmd);
                 }
-                cmd = cmd.Substring(0, cmd.Length - 3); // Cuts off the final "OR "
-                cmd += ")";
-
-                cmd += " ORDER BY category_name;";
-
-                return ExecuteListQuery(cmd);
+                else
+                {
+                    return new List<string>();
+                }
             }
-            return new List<string>();
-        }        
+            else
+            {
+                //string q = "SELECT DISTINCT category_name FROM category WHERE business_id = '" + id + "';";
+                return ExecuteListQuery("SELECT DISTINCT category_name FROM category WHERE business_id = '" + id + "';");
+            }            
+        }
+
+        public List<List<string>> GetAttributes(string id = "N/A")
+        {
+            //if (id.Length < 4) // If the call was not passed with a valid id
+            //{
+            //    if (searchParameters.ContainsKey("attributes"))
+            //    {
+            //        string cmd = "SELECT DISTINCT attribute_name FROM attributes WHERE business_id IN (SELECT business_id FROM business WHERE state = '" + searchParameters["state"][0] + "')";
+
+            //        cmd += " AND business_id IN (SELECT business_id FROM business WHERE "; //building subquery to find all the cities in the listbox
+            //        foreach (string zipcode in searchParameters["zipcode"])
+            //        {
+            //            cmd += "zipcode = '" + zipcode + "' OR "; // city = 'string' OR 
+            //        }
+            //        cmd = cmd.Substring(0, cmd.Length - 3); // Cuts off the final "OR "
+            //        cmd += ")";
+
+            //        cmd += " ORDER BY category_name;";
+
+            //        return ExecuteListQuery(cmd);
+            //    }
+            //    else
+            //    {
+            //        return new List<string>();
+            //    }
+            //}
+            //else
+            //{
+                //string q = "SELECT DISTINCT attribute_name, attribute_value FROM attributes WHERE business_id = '" + id + "';";
+                return ExecuteCategorizedQuery("SELECT DISTINCT attribute_name, attribute_value FROM attributes WHERE business_id = '" + id + "';");
+            //}
+        }
 
         public List<List<string>> Search(string projection = "*")
         {
@@ -148,6 +191,13 @@ namespace QueryEngine1
             return ExecuteCategorizedQuery("SELECT " + projection + " from checkins WHERE business_id = '" + id + "' ORDER BY day;");
         }
 
+        public List<List<string>> GetHoursForDay(string id, string day)
+        {
+            string projection = "to_char(open, 'HH12:MI AM') as openTime, to_char(close, 'HH12:MI AM') as closeTime";
+            string q = "SELECT " + projection + " FROM hours WHERE business_id = '" + id + "' AND day = '" + day + "';";
+            return ExecuteCategorizedQuery("SELECT " + projection + " FROM hours WHERE business_id = '" + id + "' AND day = '" + day + "';");
+        }
+
         /// <summary>
         /// Runs a query to return the results based on the current search parameters as a 2 dimensional array of strings
         /// If there are no search parameters, returns an empty string array.
@@ -181,7 +231,7 @@ namespace QueryEngine1
                 else
                     orList = orList.Substring(0, orList.Length - 4); // Cuts off the last ") AND "
 
-                lastQuery = ExecuteCategorizedQuery("SELECT " + projection + " FROM " + tables + " WHERE " + orList + endQuery +" ORDER BY state;");
+                lastQuery = ExecuteCategorizedQuery("SELECT " + projection + " FROM " + tables + " WHERE " + orList + endQuery + " ORDER BY state;");
                 return lastQuery;
             }
             lastQuery = new List<List<string>>();
@@ -242,6 +292,8 @@ namespace QueryEngine1
                 connection.Open();
                 using (var cmd = new NpgsqlCommand())
                 {
+                    if (query == @"SELECT to_char(open, 'HH12:MI AM'), to_char(close, 'HH12:MI AM'), day FROM hours WHERE business_id = 'xmY0pzNvZKEzuN0XEqeV5w' AND day = 'Saturday';")
+                        Console.WriteLine("TEST");
                     cmd.Connection = connection;
                     cmd.CommandText = query;
                     using (var reader = cmd.ExecuteReader())
@@ -427,7 +479,7 @@ namespace QueryEngine1
                 using (var cmd = new NpgsqlCommand())
                 {
                     cmd.Connection = connection;
-                    cmd.CommandText = "select n2.name, b.name, b.city, n2.text from business as b inner join(select yu.name, n.text, n.business_id from yelpuser as yu inner join(select distinct on (user_id) user_id, text, business_id from review " + 
+                    cmd.CommandText = "select n2.name, b.name, b.city, n2.text from business as b inner join(select yu.name, n.text, n.business_id from yelpuser as yu inner join(select distinct on (user_id) user_id, text, business_id from review " +
                         "order by user_id, date desc) n on(yu.user_id = n.user_id and yu.user_id in (Select friend_id from friend where user_id = '" + userId + "'))) n2 on(n2.business_id = b.business_id)";
                     using (var reader = cmd.ExecuteReader())
                     {

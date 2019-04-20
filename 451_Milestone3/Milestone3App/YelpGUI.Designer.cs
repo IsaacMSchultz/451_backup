@@ -69,8 +69,10 @@
             this.SubmitReviewButton = new System.Windows.Forms.Button();
             this.ReviewStarsDropDown = new System.Windows.Forms.ComboBox();
             this.BusinessButtonsPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.CheckInButton = new System.Windows.Forms.Button();
             this.ShowReviewsButton = new System.Windows.Forms.Button();
             this.MapButton = new System.Windows.Forms.Button();
+            this.ShowCheckinsButton = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.BusinessTabPage = new System.Windows.Forms.TabPage();
             this.UsersTabPage = new System.Windows.Forms.TabPage();
@@ -122,8 +124,6 @@
             this.RightUserLP = new System.Windows.Forms.TableLayoutPanel();
             this.ReviewsByFriendsTitleTB = new System.Windows.Forms.TextBox();
             this.FriendsReviewsGrid = new System.Windows.Forms.DataGridView();
-            this.ShowCheckinsButton = new System.Windows.Forms.Button();
-            this.CheckInButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).BeginInit();
             this.SearchCheckBoxPanel.SuspendLayout();
             this.StateDropdownPanel.SuspendLayout();
@@ -456,12 +456,11 @@
             this.BusinessInfoListPanel.Name = "BusinessInfoListPanel";
             this.BusinessInfoListPanel.RowCount = 5;
             this.BusinessInfoPanel.SetRowSpan(this.BusinessInfoListPanel, 2);
-            this.BusinessInfoListPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.BusinessInfoListPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 16F));
-            this.BusinessInfoListPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.BusinessInfoListPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.BusinessInfoListPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.BusinessInfoListPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.BusinessInfoListPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 16F));
+            this.BusinessInfoListPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.BusinessInfoListPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.BusinessInfoListPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.BusinessInfoListPanel.Size = new System.Drawing.Size(655, 288);
             this.BusinessInfoListPanel.TabIndex = 5;
             // 
@@ -473,7 +472,7 @@
             this.AddressLabel.Margin = new System.Windows.Forms.Padding(0);
             this.AddressLabel.Name = "AddressLabel";
             this.BusinessInfoListPanel.SetRowSpan(this.AddressLabel, 2);
-            this.AddressLabel.Size = new System.Drawing.Size(65, 32);
+            this.AddressLabel.Size = new System.Drawing.Size(65, 36);
             this.AddressLabel.TabIndex = 3;
             this.AddressLabel.Text = "Address";
             this.AddressLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -487,7 +486,7 @@
             this.Address_Textbox.Name = "Address_Textbox";
             this.Address_Textbox.ReadOnly = true;
             this.BusinessInfoListPanel.SetRowSpan(this.Address_Textbox, 2);
-            this.Address_Textbox.Size = new System.Drawing.Size(262, 32);
+            this.Address_Textbox.Size = new System.Drawing.Size(262, 36);
             this.Address_Textbox.TabIndex = 11;
             this.Address_Textbox.Text = "Click Business to show Address";
             // 
@@ -495,10 +494,10 @@
             // 
             this.WriteReview_Label.AutoSize = true;
             this.WriteReview_Label.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.WriteReview_Label.Location = new System.Drawing.Point(0, 96);
+            this.WriteReview_Label.Location = new System.Drawing.Point(0, 111);
             this.WriteReview_Label.Margin = new System.Windows.Forms.Padding(0);
             this.WriteReview_Label.Name = "WriteReview_Label";
-            this.WriteReview_Label.Size = new System.Drawing.Size(65, 64);
+            this.WriteReview_Label.Size = new System.Drawing.Size(65, 50);
             this.WriteReview_Label.TabIndex = 8;
             this.WriteReview_Label.Text = "Write Review";
             this.WriteReview_Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -508,20 +507,20 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.BusinessInfoListPanel.SetColumnSpan(this.dataGridView1, 3);
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(65, 160);
+            this.dataGridView1.Location = new System.Drawing.Point(65, 161);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(0);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(590, 128);
+            this.dataGridView1.Size = new System.Drawing.Size(590, 127);
             this.dataGridView1.TabIndex = 18;
             // 
             // FriendsReviews_Label
             // 
             this.FriendsReviews_Label.AutoSize = true;
             this.FriendsReviews_Label.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FriendsReviews_Label.Location = new System.Drawing.Point(0, 160);
+            this.FriendsReviews_Label.Location = new System.Drawing.Point(0, 161);
             this.FriendsReviews_Label.Margin = new System.Windows.Forms.Padding(0);
             this.FriendsReviews_Label.Name = "FriendsReviews_Label";
-            this.FriendsReviews_Label.Size = new System.Drawing.Size(65, 128);
+            this.FriendsReviews_Label.Size = new System.Drawing.Size(65, 127);
             this.FriendsReviews_Label.TabIndex = 15;
             this.FriendsReviews_Label.Text = "Friends who reviewed this business";
             this.FriendsReviews_Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -530,10 +529,10 @@
             // 
             this.Attributes_Label.AutoSize = true;
             this.Attributes_Label.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Attributes_Label.Location = new System.Drawing.Point(327, 32);
+            this.Attributes_Label.Location = new System.Drawing.Point(327, 36);
             this.Attributes_Label.Margin = new System.Windows.Forms.Padding(0);
             this.Attributes_Label.Name = "Attributes_Label";
-            this.Attributes_Label.Size = new System.Drawing.Size(65, 64);
+            this.Attributes_Label.Size = new System.Drawing.Size(65, 75);
             this.Attributes_Label.TabIndex = 14;
             this.Attributes_Label.Text = "Attributes";
             this.Attributes_Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -541,12 +540,13 @@
             // Attributes_Textbox
             // 
             this.Attributes_Textbox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Attributes_Textbox.Location = new System.Drawing.Point(392, 32);
+            this.Attributes_Textbox.Location = new System.Drawing.Point(392, 36);
             this.Attributes_Textbox.Margin = new System.Windows.Forms.Padding(0);
             this.Attributes_Textbox.Multiline = true;
             this.Attributes_Textbox.Name = "Attributes_Textbox";
             this.Attributes_Textbox.ReadOnly = true;
-            this.Attributes_Textbox.Size = new System.Drawing.Size(263, 64);
+            this.Attributes_Textbox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.Attributes_Textbox.Size = new System.Drawing.Size(263, 75);
             this.Attributes_Textbox.TabIndex = 17;
             this.Attributes_Textbox.Text = "Click Business to show Attributes";
             // 
@@ -557,7 +557,7 @@
             this.Hours_Label.Location = new System.Drawing.Point(327, 0);
             this.Hours_Label.Margin = new System.Windows.Forms.Padding(0);
             this.Hours_Label.Name = "Hours_Label";
-            this.Hours_Label.Size = new System.Drawing.Size(65, 16);
+            this.Hours_Label.Size = new System.Drawing.Size(65, 20);
             this.Hours_Label.TabIndex = 7;
             this.Hours_Label.Text = "Hours:";
             this.Hours_Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -570,7 +570,7 @@
             this.DayOfTheWeek_Textbox.Multiline = true;
             this.DayOfTheWeek_Textbox.Name = "DayOfTheWeek_Textbox";
             this.DayOfTheWeek_Textbox.ReadOnly = true;
-            this.DayOfTheWeek_Textbox.Size = new System.Drawing.Size(263, 16);
+            this.DayOfTheWeek_Textbox.Size = new System.Drawing.Size(263, 20);
             this.DayOfTheWeek_Textbox.TabIndex = 13;
             this.DayOfTheWeek_Textbox.Text = "Day of the week";
             // 
@@ -587,7 +587,7 @@
             this.BusinessHoursPanel.Controls.Add(this.Opens_Label, 0, 0);
             this.BusinessHoursPanel.Controls.Add(this.Closes_Label, 2, 0);
             this.BusinessHoursPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BusinessHoursPanel.Location = new System.Drawing.Point(327, 16);
+            this.BusinessHoursPanel.Location = new System.Drawing.Point(327, 20);
             this.BusinessHoursPanel.Margin = new System.Windows.Forms.Padding(0);
             this.BusinessHoursPanel.Name = "BusinessHoursPanel";
             this.BusinessHoursPanel.RowCount = 1;
@@ -647,10 +647,10 @@
             // 
             this.CategoriesList_Label.AutoSize = true;
             this.CategoriesList_Label.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CategoriesList_Label.Location = new System.Drawing.Point(0, 32);
+            this.CategoriesList_Label.Location = new System.Drawing.Point(0, 36);
             this.CategoriesList_Label.Margin = new System.Windows.Forms.Padding(0);
             this.CategoriesList_Label.Name = "CategoriesList_Label";
-            this.CategoriesList_Label.Size = new System.Drawing.Size(65, 64);
+            this.CategoriesList_Label.Size = new System.Drawing.Size(65, 75);
             this.CategoriesList_Label.TabIndex = 9;
             this.CategoriesList_Label.Text = "Categories";
             this.CategoriesList_Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -658,12 +658,12 @@
             // Categories_Textbox
             // 
             this.Categories_Textbox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Categories_Textbox.Location = new System.Drawing.Point(65, 32);
+            this.Categories_Textbox.Location = new System.Drawing.Point(65, 36);
             this.Categories_Textbox.Margin = new System.Windows.Forms.Padding(0);
             this.Categories_Textbox.Multiline = true;
             this.Categories_Textbox.Name = "Categories_Textbox";
             this.Categories_Textbox.ReadOnly = true;
-            this.Categories_Textbox.Size = new System.Drawing.Size(262, 64);
+            this.Categories_Textbox.Size = new System.Drawing.Size(262, 75);
             this.Categories_Textbox.TabIndex = 10;
             this.Categories_Textbox.Text = "Click Business to show Categories";
             // 
@@ -676,12 +676,12 @@
             this.WriteReviewPanel.Controls.Add(this.WriteReviewTextBox_Review, 0, 0);
             this.WriteReviewPanel.Controls.Add(this.SubmitReviewPanel, 1, 0);
             this.WriteReviewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.WriteReviewPanel.Location = new System.Drawing.Point(65, 96);
+            this.WriteReviewPanel.Location = new System.Drawing.Point(65, 111);
             this.WriteReviewPanel.Margin = new System.Windows.Forms.Padding(0);
             this.WriteReviewPanel.Name = "WriteReviewPanel";
             this.WriteReviewPanel.RowCount = 1;
             this.WriteReviewPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.WriteReviewPanel.Size = new System.Drawing.Size(590, 64);
+            this.WriteReviewPanel.Size = new System.Drawing.Size(590, 50);
             this.WriteReviewPanel.TabIndex = 19;
             // 
             // WriteReviewTextBox_Review
@@ -691,7 +691,7 @@
             this.WriteReviewTextBox_Review.Margin = new System.Windows.Forms.Padding(0);
             this.WriteReviewTextBox_Review.Multiline = true;
             this.WriteReviewTextBox_Review.Name = "WriteReviewTextBox_Review";
-            this.WriteReviewTextBox_Review.Size = new System.Drawing.Size(490, 64);
+            this.WriteReviewTextBox_Review.Size = new System.Drawing.Size(490, 50);
             this.WriteReviewTextBox_Review.TabIndex = 1;
             this.WriteReviewTextBox_Review.TextChanged += new System.EventHandler(this.WriteReviewTextBox_Review_TextChanged);
             // 
@@ -709,7 +709,7 @@
             this.SubmitReviewPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.SubmitReviewPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.SubmitReviewPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.SubmitReviewPanel.Size = new System.Drawing.Size(100, 64);
+            this.SubmitReviewPanel.Size = new System.Drawing.Size(100, 50);
             this.SubmitReviewPanel.TabIndex = 3;
             // 
             // SubmitReviewButton
@@ -718,7 +718,7 @@
             this.SubmitReviewButton.Location = new System.Drawing.Point(0, 21);
             this.SubmitReviewButton.Margin = new System.Windows.Forms.Padding(0);
             this.SubmitReviewButton.Name = "SubmitReviewButton";
-            this.SubmitReviewButton.Size = new System.Drawing.Size(100, 43);
+            this.SubmitReviewButton.Size = new System.Drawing.Size(100, 29);
             this.SubmitReviewButton.TabIndex = 0;
             this.SubmitReviewButton.Text = "Submit Review";
             this.SubmitReviewButton.UseVisualStyleBackColor = true;
@@ -764,6 +764,18 @@
             this.BusinessButtonsPanel.Size = new System.Drawing.Size(100, 288);
             this.BusinessButtonsPanel.TabIndex = 6;
             // 
+            // CheckInButton
+            // 
+            this.CheckInButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CheckInButton.Enabled = false;
+            this.CheckInButton.Location = new System.Drawing.Point(0, 216);
+            this.CheckInButton.Margin = new System.Windows.Forms.Padding(0);
+            this.CheckInButton.Name = "CheckInButton";
+            this.CheckInButton.Size = new System.Drawing.Size(100, 72);
+            this.CheckInButton.TabIndex = 7;
+            this.CheckInButton.Text = "Check In";
+            this.CheckInButton.UseVisualStyleBackColor = true;
+            // 
             // ShowReviewsButton
             // 
             this.ShowReviewsButton.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -789,6 +801,19 @@
             this.MapButton.Text = "View Business on Map";
             this.MapButton.UseVisualStyleBackColor = true;
             this.MapButton.Click += new System.EventHandler(this.MapButton_Click);
+            // 
+            // ShowCheckinsButton
+            // 
+            this.ShowCheckinsButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ShowCheckinsButton.Enabled = false;
+            this.ShowCheckinsButton.Location = new System.Drawing.Point(0, 72);
+            this.ShowCheckinsButton.Margin = new System.Windows.Forms.Padding(0);
+            this.ShowCheckinsButton.Name = "ShowCheckinsButton";
+            this.ShowCheckinsButton.Size = new System.Drawing.Size(100, 72);
+            this.ShowCheckinsButton.TabIndex = 6;
+            this.ShowCheckinsButton.Text = "Show Checkins";
+            this.ShowCheckinsButton.UseVisualStyleBackColor = true;
+            this.ShowCheckinsButton.Click += new System.EventHandler(this.ShowCheckinsButton_Click);
             // 
             // tabControl1
             // 
@@ -1514,31 +1539,6 @@
             this.FriendsReviewsGrid.RowTemplate.Height = 24;
             this.FriendsReviewsGrid.Size = new System.Drawing.Size(438, 532);
             this.FriendsReviewsGrid.TabIndex = 10;
-            // 
-            // ShowCheckinsButton
-            // 
-            this.ShowCheckinsButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ShowCheckinsButton.Enabled = false;
-            this.ShowCheckinsButton.Location = new System.Drawing.Point(0, 72);
-            this.ShowCheckinsButton.Margin = new System.Windows.Forms.Padding(0);
-            this.ShowCheckinsButton.Name = "ShowCheckinsButton";
-            this.ShowCheckinsButton.Size = new System.Drawing.Size(100, 72);
-            this.ShowCheckinsButton.TabIndex = 6;
-            this.ShowCheckinsButton.Text = "Show Checkins";
-            this.ShowCheckinsButton.UseVisualStyleBackColor = true;
-            this.ShowCheckinsButton.Click += new System.EventHandler(this.ShowCheckinsButton_Click);
-            // 
-            // CheckInButton
-            // 
-            this.CheckInButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CheckInButton.Enabled = false;
-            this.CheckInButton.Location = new System.Drawing.Point(0, 216);
-            this.CheckInButton.Margin = new System.Windows.Forms.Padding(0);
-            this.CheckInButton.Name = "CheckInButton";
-            this.CheckInButton.Size = new System.Drawing.Size(100, 72);
-            this.CheckInButton.TabIndex = 7;
-            this.CheckInButton.Text = "Check In";
-            this.CheckInButton.UseVisualStyleBackColor = true;
             // 
             // YelpGUI
             // 
