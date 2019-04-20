@@ -30,28 +30,23 @@
         {
             this.businessGrid = new System.Windows.Forms.DataGridView();
             this.CityHeader = new System.Windows.Forms.TextBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.SearchCheckBoxPanel = new System.Windows.Forms.TableLayoutPanel();
             this.cityCheckBox = new System.Windows.Forms.CheckedListBox();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.StateDropdownPanel = new System.Windows.Forms.TableLayoutPanel();
             this.stateDropDown = new System.Windows.Forms.ComboBox();
             this.StateHeader = new System.Windows.Forms.TextBox();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.SearchPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.CategoriesCheckboxPanel = new System.Windows.Forms.TableLayoutPanel();
             this.categoriesCheckBox = new System.Windows.Forms.CheckedListBox();
             this.categoriesTextBox = new System.Windows.Forms.TextBox();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.ZipCheckboxPanel = new System.Windows.Forms.TableLayoutPanel();
             this.zipCheckBox = new System.Windows.Forms.CheckedListBox();
             this.ZipText = new System.Windows.Forms.TextBox();
             this.SearchButton = new System.Windows.Forms.Button();
-            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+            this.BusinessTabPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.BusinessInfoPanel = new System.Windows.Forms.TableLayoutPanel();
             this.businessNameTextBox_Review = new System.Windows.Forms.RichTextBox();
-            this.ShowReviewsButton = new System.Windows.Forms.Button();
-            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
-            this.SubmitReviewButton = new System.Windows.Forms.Button();
-            this.ReviewStarsDropDown = new System.Windows.Forms.ComboBox();
-            this.MapButton = new System.Windows.Forms.Button();
-            this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
+            this.BusinessInfoListPanel = new System.Windows.Forms.TableLayoutPanel();
             this.AddressLabel = new System.Windows.Forms.Label();
             this.Address_Textbox = new System.Windows.Forms.TextBox();
             this.WriteReview_Label = new System.Windows.Forms.Label();
@@ -61,13 +56,21 @@
             this.Attributes_Textbox = new System.Windows.Forms.TextBox();
             this.Hours_Label = new System.Windows.Forms.Label();
             this.DayOfTheWeek_Textbox = new System.Windows.Forms.TextBox();
-            this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
+            this.BusinessHoursPanel = new System.Windows.Forms.TableLayoutPanel();
             this.Closes_Textbox = new System.Windows.Forms.TextBox();
             this.Opens_Textbox = new System.Windows.Forms.TextBox();
             this.Opens_Label = new System.Windows.Forms.Label();
             this.Closes_Label = new System.Windows.Forms.Label();
             this.CategoriesList_Label = new System.Windows.Forms.Label();
             this.Categories_Textbox = new System.Windows.Forms.TextBox();
+            this.WriteReviewPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.WriteReviewTextBox_Review = new System.Windows.Forms.TextBox();
+            this.SubmitReviewPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.SubmitReviewButton = new System.Windows.Forms.Button();
+            this.ReviewStarsDropDown = new System.Windows.Forms.ComboBox();
+            this.BusinessButtonsPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.ShowReviewsButton = new System.Windows.Forms.Button();
+            this.MapButton = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.BusinessTabPage = new System.Windows.Forms.TabPage();
             this.UsersTabPage = new System.Windows.Forms.TabPage();
@@ -119,21 +122,22 @@
             this.RightUserLP = new System.Windows.Forms.TableLayoutPanel();
             this.ReviewsByFriendsTitleTB = new System.Windows.Forms.TextBox();
             this.FriendsReviewsGrid = new System.Windows.Forms.DataGridView();
-            this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
-            this.WriteReviewTextBox_Review = new System.Windows.Forms.TextBox();
-            this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
+            this.ShowCheckinsButton = new System.Windows.Forms.Button();
+            this.CheckInButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).BeginInit();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
-            this.tableLayoutPanel6.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
-            this.tableLayoutPanel5.SuspendLayout();
-            this.tableLayoutPanel7.SuspendLayout();
-            this.tableLayoutPanel8.SuspendLayout();
-            this.tableLayoutPanel9.SuspendLayout();
+            this.SearchCheckBoxPanel.SuspendLayout();
+            this.StateDropdownPanel.SuspendLayout();
+            this.SearchPanel.SuspendLayout();
+            this.CategoriesCheckboxPanel.SuspendLayout();
+            this.ZipCheckboxPanel.SuspendLayout();
+            this.BusinessTabPanel.SuspendLayout();
+            this.BusinessInfoPanel.SuspendLayout();
+            this.BusinessInfoListPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.tableLayoutPanel10.SuspendLayout();
+            this.BusinessHoursPanel.SuspendLayout();
+            this.WriteReviewPanel.SuspendLayout();
+            this.SubmitReviewPanel.SuspendLayout();
+            this.BusinessButtonsPanel.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.BusinessTabPage.SuspendLayout();
             this.UsersTabPage.SuspendLayout();
@@ -155,8 +159,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.FavoriteBusinessGrid)).BeginInit();
             this.RightUserLP.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FriendsReviewsGrid)).BeginInit();
-            this.tableLayoutPanel11.SuspendLayout();
-            this.tableLayoutPanel12.SuspendLayout();
             this.SuspendLayout();
             // 
             // businessGrid
@@ -187,23 +189,23 @@
             this.CityHeader.Text = "City";
             this.CityHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // tableLayoutPanel1
+            // SearchCheckBoxPanel
             // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.cityCheckBox, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.CityHeader, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 34);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(200, 179);
-            this.tableLayoutPanel1.TabIndex = 2;
+            this.SearchCheckBoxPanel.ColumnCount = 1;
+            this.SearchCheckBoxPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.SearchCheckBoxPanel.Controls.Add(this.cityCheckBox, 0, 1);
+            this.SearchCheckBoxPanel.Controls.Add(this.CityHeader, 0, 0);
+            this.SearchCheckBoxPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SearchCheckBoxPanel.Location = new System.Drawing.Point(0, 34);
+            this.SearchCheckBoxPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.SearchCheckBoxPanel.Name = "SearchCheckBoxPanel";
+            this.SearchCheckBoxPanel.RowCount = 2;
+            this.SearchCheckBoxPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.SearchCheckBoxPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.SearchCheckBoxPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.SearchCheckBoxPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.SearchCheckBoxPanel.Size = new System.Drawing.Size(200, 179);
+            this.SearchCheckBoxPanel.TabIndex = 2;
             // 
             // cityCheckBox
             // 
@@ -216,22 +218,22 @@
             this.cityCheckBox.TabIndex = 0;
             this.cityCheckBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.cityCheckBox_ItemCheck);
             // 
-            // tableLayoutPanel2
+            // StateDropdownPanel
             // 
-            this.tableLayoutPanel2.ColumnCount = 1;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Controls.Add(this.stateDropDown, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.StateHeader, 0, 0);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(200, 34);
-            this.tableLayoutPanel2.TabIndex = 7;
+            this.StateDropdownPanel.ColumnCount = 1;
+            this.StateDropdownPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.StateDropdownPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.StateDropdownPanel.Controls.Add(this.stateDropDown, 0, 1);
+            this.StateDropdownPanel.Controls.Add(this.StateHeader, 0, 0);
+            this.StateDropdownPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StateDropdownPanel.Location = new System.Drawing.Point(0, 0);
+            this.StateDropdownPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.StateDropdownPanel.Name = "StateDropdownPanel";
+            this.StateDropdownPanel.RowCount = 2;
+            this.StateDropdownPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.StateDropdownPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.StateDropdownPanel.Size = new System.Drawing.Size(200, 34);
+            this.StateDropdownPanel.TabIndex = 7;
             // 
             // stateDropDown
             // 
@@ -259,44 +261,44 @@
             this.StateHeader.Text = "State";
             this.StateHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // tableLayoutPanel3
+            // SearchPanel
             // 
-            this.tableLayoutPanel3.ColumnCount = 1;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel6, 0, 3);
-            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel1, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel2, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel4, 0, 2);
-            this.tableLayoutPanel3.Controls.Add(this.SearchButton, 0, 4);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 5;
-            this.tableLayoutPanel5.SetRowSpan(this.tableLayoutPanel3, 2);
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(200, 592);
-            this.tableLayoutPanel3.TabIndex = 8;
+            this.SearchPanel.ColumnCount = 1;
+            this.SearchPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.SearchPanel.Controls.Add(this.CategoriesCheckboxPanel, 0, 3);
+            this.SearchPanel.Controls.Add(this.SearchCheckBoxPanel, 0, 1);
+            this.SearchPanel.Controls.Add(this.StateDropdownPanel, 0, 0);
+            this.SearchPanel.Controls.Add(this.ZipCheckboxPanel, 0, 2);
+            this.SearchPanel.Controls.Add(this.SearchButton, 0, 4);
+            this.SearchPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SearchPanel.Location = new System.Drawing.Point(0, 0);
+            this.SearchPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.SearchPanel.Name = "SearchPanel";
+            this.SearchPanel.RowCount = 5;
+            this.BusinessTabPanel.SetRowSpan(this.SearchPanel, 2);
+            this.SearchPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
+            this.SearchPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.SearchPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.SearchPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.SearchPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.SearchPanel.Size = new System.Drawing.Size(200, 592);
+            this.SearchPanel.TabIndex = 8;
             // 
-            // tableLayoutPanel6
+            // CategoriesCheckboxPanel
             // 
-            this.tableLayoutPanel6.ColumnCount = 1;
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel6.Controls.Add(this.categoriesCheckBox, 1, 1);
-            this.tableLayoutPanel6.Controls.Add(this.categoriesTextBox, 1, 0);
-            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 392);
-            this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.tableLayoutPanel6.RowCount = 2;
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(200, 179);
-            this.tableLayoutPanel6.TabIndex = 9;
+            this.CategoriesCheckboxPanel.ColumnCount = 1;
+            this.CategoriesCheckboxPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.CategoriesCheckboxPanel.Controls.Add(this.categoriesCheckBox, 1, 1);
+            this.CategoriesCheckboxPanel.Controls.Add(this.categoriesTextBox, 1, 0);
+            this.CategoriesCheckboxPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CategoriesCheckboxPanel.Location = new System.Drawing.Point(0, 392);
+            this.CategoriesCheckboxPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.CategoriesCheckboxPanel.Name = "CategoriesCheckboxPanel";
+            this.CategoriesCheckboxPanel.RowCount = 2;
+            this.CategoriesCheckboxPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.CategoriesCheckboxPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.CategoriesCheckboxPanel.Size = new System.Drawing.Size(200, 179);
+            this.CategoriesCheckboxPanel.TabIndex = 9;
             // 
             // categoriesCheckBox
             // 
@@ -323,21 +325,21 @@
             this.categoriesTextBox.Text = "Categories";
             this.categoriesTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // tableLayoutPanel4
+            // ZipCheckboxPanel
             // 
-            this.tableLayoutPanel4.ColumnCount = 1;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel4.Controls.Add(this.zipCheckBox, 1, 1);
-            this.tableLayoutPanel4.Controls.Add(this.ZipText, 1, 0);
-            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 213);
-            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 2;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(200, 179);
-            this.tableLayoutPanel4.TabIndex = 8;
+            this.ZipCheckboxPanel.ColumnCount = 1;
+            this.ZipCheckboxPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.ZipCheckboxPanel.Controls.Add(this.zipCheckBox, 1, 1);
+            this.ZipCheckboxPanel.Controls.Add(this.ZipText, 1, 0);
+            this.ZipCheckboxPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ZipCheckboxPanel.Location = new System.Drawing.Point(0, 213);
+            this.ZipCheckboxPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.ZipCheckboxPanel.Name = "ZipCheckboxPanel";
+            this.ZipCheckboxPanel.RowCount = 2;
+            this.ZipCheckboxPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.ZipCheckboxPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.ZipCheckboxPanel.Size = new System.Drawing.Size(200, 179);
+            this.ZipCheckboxPanel.TabIndex = 8;
             // 
             // zipCheckBox
             // 
@@ -376,48 +378,48 @@
             this.SearchButton.UseVisualStyleBackColor = true;
             this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
             // 
-            // tableLayoutPanel5
+            // BusinessTabPanel
             // 
-            this.tableLayoutPanel5.ColumnCount = 3;
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel3, 0, 0);
-            this.tableLayoutPanel5.Controls.Add(this.businessGrid, 1, 0);
-            this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel7, 1, 1);
-            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            this.tableLayoutPanel5.RowCount = 2;
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 45F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(955, 592);
-            this.tableLayoutPanel5.TabIndex = 8;
+            this.BusinessTabPanel.ColumnCount = 3;
+            this.BusinessTabPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.BusinessTabPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.BusinessTabPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.BusinessTabPanel.Controls.Add(this.SearchPanel, 0, 0);
+            this.BusinessTabPanel.Controls.Add(this.businessGrid, 1, 0);
+            this.BusinessTabPanel.Controls.Add(this.BusinessInfoPanel, 1, 1);
+            this.BusinessTabPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BusinessTabPanel.Location = new System.Drawing.Point(0, 0);
+            this.BusinessTabPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.BusinessTabPanel.Name = "BusinessTabPanel";
+            this.BusinessTabPanel.RowCount = 2;
+            this.BusinessTabPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 45F));
+            this.BusinessTabPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55F));
+            this.BusinessTabPanel.Size = new System.Drawing.Size(955, 592);
+            this.BusinessTabPanel.TabIndex = 8;
             // 
-            // tableLayoutPanel7
+            // BusinessInfoPanel
             // 
-            this.tableLayoutPanel7.ColumnCount = 2;
-            this.tableLayoutPanel5.SetColumnSpan(this.tableLayoutPanel7, 2);
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel7.Controls.Add(this.businessNameTextBox_Review, 0, 0);
-            this.tableLayoutPanel7.Controls.Add(this.tableLayoutPanel9, 0, 1);
-            this.tableLayoutPanel7.Controls.Add(this.tableLayoutPanel12, 1, 1);
-            this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(200, 266);
-            this.tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel7.Name = "tableLayoutPanel7";
-            this.tableLayoutPanel7.RowCount = 3;
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(755, 326);
-            this.tableLayoutPanel7.TabIndex = 9;
+            this.BusinessInfoPanel.ColumnCount = 2;
+            this.BusinessTabPanel.SetColumnSpan(this.BusinessInfoPanel, 2);
+            this.BusinessInfoPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.BusinessInfoPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.BusinessInfoPanel.Controls.Add(this.businessNameTextBox_Review, 0, 0);
+            this.BusinessInfoPanel.Controls.Add(this.BusinessInfoListPanel, 0, 1);
+            this.BusinessInfoPanel.Controls.Add(this.BusinessButtonsPanel, 1, 1);
+            this.BusinessInfoPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BusinessInfoPanel.Location = new System.Drawing.Point(200, 266);
+            this.BusinessInfoPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.BusinessInfoPanel.Name = "BusinessInfoPanel";
+            this.BusinessInfoPanel.RowCount = 3;
+            this.BusinessInfoPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
+            this.BusinessInfoPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.BusinessInfoPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
+            this.BusinessInfoPanel.Size = new System.Drawing.Size(755, 326);
+            this.BusinessInfoPanel.TabIndex = 9;
             // 
             // businessNameTextBox_Review
             // 
-            this.tableLayoutPanel7.SetColumnSpan(this.businessNameTextBox_Review, 2);
+            this.BusinessInfoPanel.SetColumnSpan(this.businessNameTextBox_Review, 2);
             this.businessNameTextBox_Review.Dock = System.Windows.Forms.DockStyle.Fill;
             this.businessNameTextBox_Review.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.businessNameTextBox_Review.Location = new System.Drawing.Point(0, 0);
@@ -428,111 +430,40 @@
             this.businessNameTextBox_Review.TabIndex = 0;
             this.businessNameTextBox_Review.Text = "Business name (click on one)";
             // 
-            // ShowReviewsButton
+            // BusinessInfoListPanel
             // 
-            this.ShowReviewsButton.Enabled = false;
-            this.ShowReviewsButton.Location = new System.Drawing.Point(0, 0);
-            this.ShowReviewsButton.Margin = new System.Windows.Forms.Padding(0);
-            this.ShowReviewsButton.Name = "ShowReviewsButton";
-            this.ShowReviewsButton.Size = new System.Drawing.Size(100, 38);
-            this.ShowReviewsButton.TabIndex = 2;
-            this.ShowReviewsButton.Text = "Show Reviews";
-            this.ShowReviewsButton.UseVisualStyleBackColor = true;
-            this.ShowReviewsButton.Click += new System.EventHandler(this.ShowReviewsButton_Click);
-            // 
-            // tableLayoutPanel8
-            // 
-            this.tableLayoutPanel8.ColumnCount = 1;
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel8.Controls.Add(this.SubmitReviewButton, 0, 1);
-            this.tableLayoutPanel8.Controls.Add(this.ReviewStarsDropDown, 0, 0);
-            this.tableLayoutPanel8.Location = new System.Drawing.Point(490, 0);
-            this.tableLayoutPanel8.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
-            this.tableLayoutPanel8.RowCount = 2;
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(100, 64);
-            this.tableLayoutPanel8.TabIndex = 3;
-            // 
-            // SubmitReviewButton
-            // 
-            this.SubmitReviewButton.Enabled = false;
-            this.SubmitReviewButton.Location = new System.Drawing.Point(0, 21);
-            this.SubmitReviewButton.Margin = new System.Windows.Forms.Padding(0);
-            this.SubmitReviewButton.Name = "SubmitReviewButton";
-            this.SubmitReviewButton.Size = new System.Drawing.Size(100, 43);
-            this.SubmitReviewButton.TabIndex = 0;
-            this.SubmitReviewButton.Text = "Submit Review";
-            this.SubmitReviewButton.UseVisualStyleBackColor = true;
-            this.SubmitReviewButton.Click += new System.EventHandler(this.SubmitReviewButton_Click);
-            // 
-            // ReviewStarsDropDown
-            // 
-            this.ReviewStarsDropDown.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ReviewStarsDropDown.FormattingEnabled = true;
-            this.ReviewStarsDropDown.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5"});
-            this.ReviewStarsDropDown.Location = new System.Drawing.Point(0, 0);
-            this.ReviewStarsDropDown.Margin = new System.Windows.Forms.Padding(0);
-            this.ReviewStarsDropDown.Name = "ReviewStarsDropDown";
-            this.ReviewStarsDropDown.Size = new System.Drawing.Size(100, 21);
-            this.ReviewStarsDropDown.TabIndex = 1;
-            this.ReviewStarsDropDown.Text = "Review Stars";
-            this.ReviewStarsDropDown.SelectedIndexChanged += new System.EventHandler(this.ReviewStarsDropDown_SelectedIndexChanged);
-            // 
-            // MapButton
-            // 
-            this.MapButton.Enabled = false;
-            this.MapButton.Location = new System.Drawing.Point(0, 72);
-            this.MapButton.Margin = new System.Windows.Forms.Padding(0);
-            this.MapButton.Name = "MapButton";
-            this.MapButton.Size = new System.Drawing.Size(100, 38);
-            this.MapButton.TabIndex = 4;
-            this.MapButton.Text = "View Business on Map";
-            this.MapButton.UseVisualStyleBackColor = true;
-            this.MapButton.Click += new System.EventHandler(this.MapButton_Click);
-            // 
-            // tableLayoutPanel9
-            // 
-            this.tableLayoutPanel9.ColumnCount = 4;
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel9.Controls.Add(this.AddressLabel, 0, 0);
-            this.tableLayoutPanel9.Controls.Add(this.Address_Textbox, 1, 0);
-            this.tableLayoutPanel9.Controls.Add(this.WriteReview_Label, 0, 3);
-            this.tableLayoutPanel9.Controls.Add(this.dataGridView1, 1, 4);
-            this.tableLayoutPanel9.Controls.Add(this.FriendsReviews_Label, 0, 4);
-            this.tableLayoutPanel9.Controls.Add(this.Attributes_Label, 2, 2);
-            this.tableLayoutPanel9.Controls.Add(this.Attributes_Textbox, 3, 2);
-            this.tableLayoutPanel9.Controls.Add(this.Hours_Label, 2, 0);
-            this.tableLayoutPanel9.Controls.Add(this.DayOfTheWeek_Textbox, 3, 0);
-            this.tableLayoutPanel9.Controls.Add(this.tableLayoutPanel10, 2, 1);
-            this.tableLayoutPanel9.Controls.Add(this.CategoriesList_Label, 0, 2);
-            this.tableLayoutPanel9.Controls.Add(this.Categories_Textbox, 1, 2);
-            this.tableLayoutPanel9.Controls.Add(this.tableLayoutPanel11, 1, 3);
-            this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel9.Location = new System.Drawing.Point(0, 38);
-            this.tableLayoutPanel9.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel9.Name = "tableLayoutPanel9";
-            this.tableLayoutPanel9.RowCount = 5;
-            this.tableLayoutPanel7.SetRowSpan(this.tableLayoutPanel9, 2);
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 16F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(655, 288);
-            this.tableLayoutPanel9.TabIndex = 5;
+            this.BusinessInfoListPanel.ColumnCount = 4;
+            this.BusinessInfoListPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.BusinessInfoListPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.BusinessInfoListPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.BusinessInfoListPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.BusinessInfoListPanel.Controls.Add(this.AddressLabel, 0, 0);
+            this.BusinessInfoListPanel.Controls.Add(this.Address_Textbox, 1, 0);
+            this.BusinessInfoListPanel.Controls.Add(this.WriteReview_Label, 0, 3);
+            this.BusinessInfoListPanel.Controls.Add(this.dataGridView1, 1, 4);
+            this.BusinessInfoListPanel.Controls.Add(this.FriendsReviews_Label, 0, 4);
+            this.BusinessInfoListPanel.Controls.Add(this.Attributes_Label, 2, 2);
+            this.BusinessInfoListPanel.Controls.Add(this.Attributes_Textbox, 3, 2);
+            this.BusinessInfoListPanel.Controls.Add(this.Hours_Label, 2, 0);
+            this.BusinessInfoListPanel.Controls.Add(this.DayOfTheWeek_Textbox, 3, 0);
+            this.BusinessInfoListPanel.Controls.Add(this.BusinessHoursPanel, 2, 1);
+            this.BusinessInfoListPanel.Controls.Add(this.CategoriesList_Label, 0, 2);
+            this.BusinessInfoListPanel.Controls.Add(this.Categories_Textbox, 1, 2);
+            this.BusinessInfoListPanel.Controls.Add(this.WriteReviewPanel, 1, 3);
+            this.BusinessInfoListPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BusinessInfoListPanel.Location = new System.Drawing.Point(0, 38);
+            this.BusinessInfoListPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.BusinessInfoListPanel.Name = "BusinessInfoListPanel";
+            this.BusinessInfoListPanel.RowCount = 5;
+            this.BusinessInfoPanel.SetRowSpan(this.BusinessInfoListPanel, 2);
+            this.BusinessInfoListPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.BusinessInfoListPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 16F));
+            this.BusinessInfoListPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.BusinessInfoListPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.BusinessInfoListPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.BusinessInfoListPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.BusinessInfoListPanel.Size = new System.Drawing.Size(655, 288);
+            this.BusinessInfoListPanel.TabIndex = 5;
             // 
             // AddressLabel
             // 
@@ -541,7 +472,7 @@
             this.AddressLabel.Location = new System.Drawing.Point(0, 0);
             this.AddressLabel.Margin = new System.Windows.Forms.Padding(0);
             this.AddressLabel.Name = "AddressLabel";
-            this.tableLayoutPanel9.SetRowSpan(this.AddressLabel, 2);
+            this.BusinessInfoListPanel.SetRowSpan(this.AddressLabel, 2);
             this.AddressLabel.Size = new System.Drawing.Size(65, 32);
             this.AddressLabel.TabIndex = 3;
             this.AddressLabel.Text = "Address";
@@ -555,7 +486,7 @@
             this.Address_Textbox.Multiline = true;
             this.Address_Textbox.Name = "Address_Textbox";
             this.Address_Textbox.ReadOnly = true;
-            this.tableLayoutPanel9.SetRowSpan(this.Address_Textbox, 2);
+            this.BusinessInfoListPanel.SetRowSpan(this.Address_Textbox, 2);
             this.Address_Textbox.Size = new System.Drawing.Size(262, 32);
             this.Address_Textbox.TabIndex = 11;
             this.Address_Textbox.Text = "Click Business to show Address";
@@ -575,7 +506,7 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tableLayoutPanel9.SetColumnSpan(this.dataGridView1, 3);
+            this.BusinessInfoListPanel.SetColumnSpan(this.dataGridView1, 3);
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(65, 160);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(0);
@@ -643,26 +574,26 @@
             this.DayOfTheWeek_Textbox.TabIndex = 13;
             this.DayOfTheWeek_Textbox.Text = "Day of the week";
             // 
-            // tableLayoutPanel10
+            // BusinessHoursPanel
             // 
-            this.tableLayoutPanel10.ColumnCount = 4;
-            this.tableLayoutPanel9.SetColumnSpan(this.tableLayoutPanel10, 2);
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel10.Controls.Add(this.Closes_Textbox, 3, 0);
-            this.tableLayoutPanel10.Controls.Add(this.Opens_Textbox, 1, 0);
-            this.tableLayoutPanel10.Controls.Add(this.Opens_Label, 0, 0);
-            this.tableLayoutPanel10.Controls.Add(this.Closes_Label, 2, 0);
-            this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel10.Location = new System.Drawing.Point(327, 16);
-            this.tableLayoutPanel10.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel10.Name = "tableLayoutPanel10";
-            this.tableLayoutPanel10.RowCount = 1;
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel10.Size = new System.Drawing.Size(328, 16);
-            this.tableLayoutPanel10.TabIndex = 13;
+            this.BusinessHoursPanel.ColumnCount = 4;
+            this.BusinessInfoListPanel.SetColumnSpan(this.BusinessHoursPanel, 2);
+            this.BusinessHoursPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.BusinessHoursPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.BusinessHoursPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.BusinessHoursPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.BusinessHoursPanel.Controls.Add(this.Closes_Textbox, 3, 0);
+            this.BusinessHoursPanel.Controls.Add(this.Opens_Textbox, 1, 0);
+            this.BusinessHoursPanel.Controls.Add(this.Opens_Label, 0, 0);
+            this.BusinessHoursPanel.Controls.Add(this.Closes_Label, 2, 0);
+            this.BusinessHoursPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BusinessHoursPanel.Location = new System.Drawing.Point(327, 16);
+            this.BusinessHoursPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.BusinessHoursPanel.Name = "BusinessHoursPanel";
+            this.BusinessHoursPanel.RowCount = 1;
+            this.BusinessHoursPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.BusinessHoursPanel.Size = new System.Drawing.Size(328, 16);
+            this.BusinessHoursPanel.TabIndex = 13;
             // 
             // Closes_Textbox
             // 
@@ -736,6 +667,129 @@
             this.Categories_Textbox.TabIndex = 10;
             this.Categories_Textbox.Text = "Click Business to show Categories";
             // 
+            // WriteReviewPanel
+            // 
+            this.WriteReviewPanel.ColumnCount = 2;
+            this.BusinessInfoListPanel.SetColumnSpan(this.WriteReviewPanel, 3);
+            this.WriteReviewPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.WriteReviewPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.WriteReviewPanel.Controls.Add(this.WriteReviewTextBox_Review, 0, 0);
+            this.WriteReviewPanel.Controls.Add(this.SubmitReviewPanel, 1, 0);
+            this.WriteReviewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.WriteReviewPanel.Location = new System.Drawing.Point(65, 96);
+            this.WriteReviewPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.WriteReviewPanel.Name = "WriteReviewPanel";
+            this.WriteReviewPanel.RowCount = 1;
+            this.WriteReviewPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.WriteReviewPanel.Size = new System.Drawing.Size(590, 64);
+            this.WriteReviewPanel.TabIndex = 19;
+            // 
+            // WriteReviewTextBox_Review
+            // 
+            this.WriteReviewTextBox_Review.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.WriteReviewTextBox_Review.Location = new System.Drawing.Point(0, 0);
+            this.WriteReviewTextBox_Review.Margin = new System.Windows.Forms.Padding(0);
+            this.WriteReviewTextBox_Review.Multiline = true;
+            this.WriteReviewTextBox_Review.Name = "WriteReviewTextBox_Review";
+            this.WriteReviewTextBox_Review.Size = new System.Drawing.Size(490, 64);
+            this.WriteReviewTextBox_Review.TabIndex = 1;
+            this.WriteReviewTextBox_Review.TextChanged += new System.EventHandler(this.WriteReviewTextBox_Review_TextChanged);
+            // 
+            // SubmitReviewPanel
+            // 
+            this.SubmitReviewPanel.ColumnCount = 1;
+            this.SubmitReviewPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.SubmitReviewPanel.Controls.Add(this.SubmitReviewButton, 0, 1);
+            this.SubmitReviewPanel.Controls.Add(this.ReviewStarsDropDown, 0, 0);
+            this.SubmitReviewPanel.Location = new System.Drawing.Point(490, 0);
+            this.SubmitReviewPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.SubmitReviewPanel.Name = "SubmitReviewPanel";
+            this.SubmitReviewPanel.RowCount = 2;
+            this.SubmitReviewPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.SubmitReviewPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.SubmitReviewPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.SubmitReviewPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.SubmitReviewPanel.Size = new System.Drawing.Size(100, 64);
+            this.SubmitReviewPanel.TabIndex = 3;
+            // 
+            // SubmitReviewButton
+            // 
+            this.SubmitReviewButton.Enabled = false;
+            this.SubmitReviewButton.Location = new System.Drawing.Point(0, 21);
+            this.SubmitReviewButton.Margin = new System.Windows.Forms.Padding(0);
+            this.SubmitReviewButton.Name = "SubmitReviewButton";
+            this.SubmitReviewButton.Size = new System.Drawing.Size(100, 43);
+            this.SubmitReviewButton.TabIndex = 0;
+            this.SubmitReviewButton.Text = "Submit Review";
+            this.SubmitReviewButton.UseVisualStyleBackColor = true;
+            this.SubmitReviewButton.Click += new System.EventHandler(this.SubmitReviewButton_Click);
+            // 
+            // ReviewStarsDropDown
+            // 
+            this.ReviewStarsDropDown.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ReviewStarsDropDown.FormattingEnabled = true;
+            this.ReviewStarsDropDown.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"});
+            this.ReviewStarsDropDown.Location = new System.Drawing.Point(0, 0);
+            this.ReviewStarsDropDown.Margin = new System.Windows.Forms.Padding(0);
+            this.ReviewStarsDropDown.Name = "ReviewStarsDropDown";
+            this.ReviewStarsDropDown.Size = new System.Drawing.Size(100, 21);
+            this.ReviewStarsDropDown.TabIndex = 1;
+            this.ReviewStarsDropDown.Text = "Review Stars";
+            this.ReviewStarsDropDown.SelectedIndexChanged += new System.EventHandler(this.ReviewStarsDropDown_SelectedIndexChanged);
+            // 
+            // BusinessButtonsPanel
+            // 
+            this.BusinessButtonsPanel.ColumnCount = 1;
+            this.BusinessButtonsPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.BusinessButtonsPanel.Controls.Add(this.CheckInButton, 0, 3);
+            this.BusinessButtonsPanel.Controls.Add(this.ShowReviewsButton, 0, 0);
+            this.BusinessButtonsPanel.Controls.Add(this.MapButton, 0, 2);
+            this.BusinessButtonsPanel.Controls.Add(this.ShowCheckinsButton, 0, 1);
+            this.BusinessButtonsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BusinessButtonsPanel.Location = new System.Drawing.Point(655, 38);
+            this.BusinessButtonsPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.BusinessButtonsPanel.Name = "BusinessButtonsPanel";
+            this.BusinessButtonsPanel.RowCount = 4;
+            this.BusinessInfoPanel.SetRowSpan(this.BusinessButtonsPanel, 2);
+            this.BusinessButtonsPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.BusinessButtonsPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.BusinessButtonsPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.BusinessButtonsPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.BusinessButtonsPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.BusinessButtonsPanel.Size = new System.Drawing.Size(100, 288);
+            this.BusinessButtonsPanel.TabIndex = 6;
+            // 
+            // ShowReviewsButton
+            // 
+            this.ShowReviewsButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ShowReviewsButton.Enabled = false;
+            this.ShowReviewsButton.Location = new System.Drawing.Point(0, 0);
+            this.ShowReviewsButton.Margin = new System.Windows.Forms.Padding(0);
+            this.ShowReviewsButton.Name = "ShowReviewsButton";
+            this.ShowReviewsButton.Size = new System.Drawing.Size(100, 72);
+            this.ShowReviewsButton.TabIndex = 2;
+            this.ShowReviewsButton.Text = "Show Reviews";
+            this.ShowReviewsButton.UseVisualStyleBackColor = true;
+            this.ShowReviewsButton.Click += new System.EventHandler(this.ShowReviewsButton_Click);
+            // 
+            // MapButton
+            // 
+            this.MapButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MapButton.Enabled = false;
+            this.MapButton.Location = new System.Drawing.Point(0, 144);
+            this.MapButton.Margin = new System.Windows.Forms.Padding(0);
+            this.MapButton.Name = "MapButton";
+            this.MapButton.Size = new System.Drawing.Size(100, 72);
+            this.MapButton.TabIndex = 4;
+            this.MapButton.Text = "View Business on Map";
+            this.MapButton.UseVisualStyleBackColor = true;
+            this.MapButton.Click += new System.EventHandler(this.MapButton_Click);
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.BusinessTabPage);
@@ -750,7 +804,7 @@
             // 
             // BusinessTabPage
             // 
-            this.BusinessTabPage.Controls.Add(this.tableLayoutPanel5);
+            this.BusinessTabPage.Controls.Add(this.BusinessTabPanel);
             this.BusinessTabPage.Location = new System.Drawing.Point(4, 22);
             this.BusinessTabPage.Margin = new System.Windows.Forms.Padding(0);
             this.BusinessTabPage.Name = "BusinessTabPage";
@@ -1461,52 +1515,30 @@
             this.FriendsReviewsGrid.Size = new System.Drawing.Size(438, 532);
             this.FriendsReviewsGrid.TabIndex = 10;
             // 
-            // tableLayoutPanel11
+            // ShowCheckinsButton
             // 
-            this.tableLayoutPanel11.ColumnCount = 2;
-            this.tableLayoutPanel9.SetColumnSpan(this.tableLayoutPanel11, 3);
-            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel11.Controls.Add(this.WriteReviewTextBox_Review, 0, 0);
-            this.tableLayoutPanel11.Controls.Add(this.tableLayoutPanel8, 1, 0);
-            this.tableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel11.Location = new System.Drawing.Point(65, 96);
-            this.tableLayoutPanel11.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel11.Name = "tableLayoutPanel11";
-            this.tableLayoutPanel11.RowCount = 1;
-            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel11.Size = new System.Drawing.Size(590, 64);
-            this.tableLayoutPanel11.TabIndex = 19;
+            this.ShowCheckinsButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ShowCheckinsButton.Enabled = false;
+            this.ShowCheckinsButton.Location = new System.Drawing.Point(0, 72);
+            this.ShowCheckinsButton.Margin = new System.Windows.Forms.Padding(0);
+            this.ShowCheckinsButton.Name = "ShowCheckinsButton";
+            this.ShowCheckinsButton.Size = new System.Drawing.Size(100, 72);
+            this.ShowCheckinsButton.TabIndex = 6;
+            this.ShowCheckinsButton.Text = "Show Checkins";
+            this.ShowCheckinsButton.UseVisualStyleBackColor = true;
+            this.ShowCheckinsButton.Click += new System.EventHandler(this.ShowCheckinsButton_Click);
             // 
-            // WriteReviewTextBox_Review
+            // CheckInButton
             // 
-            this.WriteReviewTextBox_Review.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.WriteReviewTextBox_Review.Location = new System.Drawing.Point(0, 0);
-            this.WriteReviewTextBox_Review.Margin = new System.Windows.Forms.Padding(0);
-            this.WriteReviewTextBox_Review.Multiline = true;
-            this.WriteReviewTextBox_Review.Name = "WriteReviewTextBox_Review";
-            this.WriteReviewTextBox_Review.Size = new System.Drawing.Size(490, 64);
-            this.WriteReviewTextBox_Review.TabIndex = 1;
-            this.WriteReviewTextBox_Review.TextChanged += new System.EventHandler(this.WriteReviewTextBox_Review_TextChanged);
-            // 
-            // tableLayoutPanel12
-            // 
-            this.tableLayoutPanel12.ColumnCount = 1;
-            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel12.Controls.Add(this.ShowReviewsButton, 0, 0);
-            this.tableLayoutPanel12.Controls.Add(this.MapButton, 0, 1);
-            this.tableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel12.Location = new System.Drawing.Point(655, 38);
-            this.tableLayoutPanel12.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel12.Name = "tableLayoutPanel12";
-            this.tableLayoutPanel12.RowCount = 4;
-            this.tableLayoutPanel7.SetRowSpan(this.tableLayoutPanel12, 2);
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel12.Size = new System.Drawing.Size(100, 288);
-            this.tableLayoutPanel12.TabIndex = 6;
+            this.CheckInButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CheckInButton.Enabled = false;
+            this.CheckInButton.Location = new System.Drawing.Point(0, 216);
+            this.CheckInButton.Margin = new System.Windows.Forms.Padding(0);
+            this.CheckInButton.Name = "CheckInButton";
+            this.CheckInButton.Size = new System.Drawing.Size(100, 72);
+            this.CheckInButton.TabIndex = 7;
+            this.CheckInButton.Text = "Check In";
+            this.CheckInButton.UseVisualStyleBackColor = true;
             // 
             // YelpGUI
             // 
@@ -1518,23 +1550,26 @@
             this.Name = "YelpGUI";
             this.Text = "Yelp Application";
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).EndInit();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel6.ResumeLayout(false);
-            this.tableLayoutPanel6.PerformLayout();
-            this.tableLayoutPanel4.ResumeLayout(false);
-            this.tableLayoutPanel4.PerformLayout();
-            this.tableLayoutPanel5.ResumeLayout(false);
-            this.tableLayoutPanel7.ResumeLayout(false);
-            this.tableLayoutPanel8.ResumeLayout(false);
-            this.tableLayoutPanel9.ResumeLayout(false);
-            this.tableLayoutPanel9.PerformLayout();
+            this.SearchCheckBoxPanel.ResumeLayout(false);
+            this.SearchCheckBoxPanel.PerformLayout();
+            this.StateDropdownPanel.ResumeLayout(false);
+            this.StateDropdownPanel.PerformLayout();
+            this.SearchPanel.ResumeLayout(false);
+            this.CategoriesCheckboxPanel.ResumeLayout(false);
+            this.CategoriesCheckboxPanel.PerformLayout();
+            this.ZipCheckboxPanel.ResumeLayout(false);
+            this.ZipCheckboxPanel.PerformLayout();
+            this.BusinessTabPanel.ResumeLayout(false);
+            this.BusinessInfoPanel.ResumeLayout(false);
+            this.BusinessInfoListPanel.ResumeLayout(false);
+            this.BusinessInfoListPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.tableLayoutPanel10.ResumeLayout(false);
-            this.tableLayoutPanel10.PerformLayout();
+            this.BusinessHoursPanel.ResumeLayout(false);
+            this.BusinessHoursPanel.PerformLayout();
+            this.WriteReviewPanel.ResumeLayout(false);
+            this.WriteReviewPanel.PerformLayout();
+            this.SubmitReviewPanel.ResumeLayout(false);
+            this.BusinessButtonsPanel.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.BusinessTabPage.ResumeLayout(false);
             this.UsersTabPage.ResumeLayout(false);
@@ -1568,9 +1603,6 @@
             this.RightUserLP.ResumeLayout(false);
             this.RightUserLP.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FriendsReviewsGrid)).EndInit();
-            this.tableLayoutPanel11.ResumeLayout(false);
-            this.tableLayoutPanel11.PerformLayout();
-            this.tableLayoutPanel12.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1578,23 +1610,23 @@
         #endregion
         private System.Windows.Forms.DataGridView businessGrid;
         private System.Windows.Forms.TextBox CityHeader;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel SearchCheckBoxPanel;
         private System.Windows.Forms.CheckedListBox cityCheckBox;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+        private System.Windows.Forms.TableLayoutPanel StateDropdownPanel;
+        private System.Windows.Forms.TableLayoutPanel SearchPanel;
+        private System.Windows.Forms.TableLayoutPanel ZipCheckboxPanel;
+        private System.Windows.Forms.TableLayoutPanel BusinessTabPanel;
         private System.Windows.Forms.CheckedListBox zipCheckBox;
         private System.Windows.Forms.TextBox ZipText;
         private System.Windows.Forms.ComboBox stateDropDown;
         private System.Windows.Forms.TextBox StateHeader;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
+        private System.Windows.Forms.TableLayoutPanel CategoriesCheckboxPanel;
         private System.Windows.Forms.CheckedListBox categoriesCheckBox;
         private System.Windows.Forms.TextBox categoriesTextBox;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
+        private System.Windows.Forms.TableLayoutPanel BusinessInfoPanel;
         private System.Windows.Forms.RichTextBox businessNameTextBox_Review;
         private System.Windows.Forms.Button ShowReviewsButton;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
+        private System.Windows.Forms.TableLayoutPanel SubmitReviewPanel;
         private System.Windows.Forms.Button SubmitReviewButton;
         private System.Windows.Forms.ComboBox ReviewStarsDropDown;
         private System.Windows.Forms.TabControl tabControl1;
@@ -1650,7 +1682,7 @@
         private System.Windows.Forms.TextBox FriendsTitleTB;
         private System.Windows.Forms.TableLayoutPanel RightUserLP;
         private System.Windows.Forms.TextBox ReviewsByFriendsTitleTB;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
+        private System.Windows.Forms.TableLayoutPanel BusinessInfoListPanel;
         private System.Windows.Forms.Label AddressLabel;
         private System.Windows.Forms.Label Closes_Label;
         private System.Windows.Forms.Label Opens_Label;
@@ -1661,15 +1693,17 @@
         private System.Windows.Forms.TextBox Address_Textbox;
         private System.Windows.Forms.TextBox Opens_Textbox;
         private System.Windows.Forms.TextBox DayOfTheWeek_Textbox;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
+        private System.Windows.Forms.TableLayoutPanel BusinessHoursPanel;
         private System.Windows.Forms.TextBox Closes_Textbox;
         private System.Windows.Forms.Label FriendsReviews_Label;
         private System.Windows.Forms.Label Attributes_Label;
         private System.Windows.Forms.TextBox Attributes_Textbox;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel11;
+        private System.Windows.Forms.TableLayoutPanel WriteReviewPanel;
         private System.Windows.Forms.TextBox WriteReviewTextBox_Review;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel12;
+        private System.Windows.Forms.TableLayoutPanel BusinessButtonsPanel;
+        private System.Windows.Forms.Button ShowCheckinsButton;
+        private System.Windows.Forms.Button CheckInButton;
     }
 }
 

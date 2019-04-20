@@ -18,6 +18,7 @@ namespace Milestone2App
         string[] favBusCol = { "Name", "Stars", "City", "Zipcode", "Address" };
         string[] friendsRevCol = { "Name", "Business", "City", "Review" };
         string[] reviewCols = { "Stars", "Date", "Text", "Useful", "Funny", "Cool" }; //Column headers for the review form that can be opened from the GUI
+        string[] checkinsCols = { "Day", "Time", "Count" }; //Column headers for the review form that can be opened from the GUI
         string projection; //selected columns to show in the database. Need to implement column constructors based on the projection instead of the cols[] array.
 
         //TODO: change to functions so that debugging global variables is less ambiguous.
@@ -26,7 +27,7 @@ namespace Milestone2App
 
         // private variables used to generate a random ID.
         private static Random random = new Random();
-        const string chars = "abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_- ";        
+        const string chars = "abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_- ";
 
         private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone2db"; // Defines our connection to local databus
         //private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone2db"; // Defines our connection to cloud hosted databus
@@ -52,7 +53,7 @@ namespace Milestone2App
                 // Create the column headers for the data grid view.
                 DataGridViewTextBoxColumn newColumn = new DataGridViewTextBoxColumn();
                 newColumn.HeaderText = column;
-                
+
                 if (column == "Name")
                     newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells; //Can change this to fill depending on if we want to make our app window larger
                 else
@@ -67,7 +68,7 @@ namespace Milestone2App
             {
                 DataGridViewTextBoxColumn newColumn = new DataGridViewTextBoxColumn();
                 newColumn.HeaderText = column;
-                
+
                 FriendsGrid.Columns.Add(newColumn);
             }
 
@@ -82,7 +83,7 @@ namespace Milestone2App
             foreach (var column in friendsRevCol)
             {
                 //dataGridView1.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                
+
                 DataGridViewTextBoxColumn newColumn = new DataGridViewTextBoxColumn();
                 newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 newColumn.HeaderText = column;
@@ -277,13 +278,14 @@ namespace Milestone2App
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void businessGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {            
+        {
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
                 businessNameTextBox_Review.Text = (string)businessGrid[0, e.RowIndex].Value;
                 currBusId = (string)businessGrid[9, e.RowIndex].Value;
 
                 ShowReviewsButton.Enabled = true; //enable the button to show reviews after we click one
+                ShowCheckinsButton.Enabled = true; //enable the button to show reviews after we click one
 
                 MapButton.Enabled = true;
             }
@@ -386,7 +388,7 @@ namespace Milestone2App
                 //updateFriendsGrid();
             }
         }
-        
+
 
         // Should consider *Templatizing* this to work for multiple DataGrids
         private void updateFriendsGrid()
@@ -411,7 +413,7 @@ namespace Milestone2App
         private void updateFavBusinessGrid()
         {
             //FavoriteBusinessGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            
+
 
             int row = 0, col = 0;
             FavoriteBusinessGrid.Rows.Clear(); //removes all the data previously in the grid.            
@@ -431,7 +433,7 @@ namespace Milestone2App
 
         private void updateFriendsRevGrid()
         {
-            int row = 0, col = 0;  
+            int row = 0, col = 0;
             FriendsReviewsGrid.Rows.Clear();
 
             foreach (List<string> listRow in queryEngine.GetFriendsReview(currUserId))
@@ -481,6 +483,41 @@ namespace Milestone2App
             {
                 MessageBox.Show("Please enter valid Latitude and Longitude values.");
             }
+        }
+
+        private void ShowCheckinsButton_Click(object sender, EventArgs e)
+        {
+            // create a new datagridview to pass to the new form that will open to show the reviews.
+            DataGridView CheckinsGrid = new DataGridView();
+            CheckinsGrid.RowHeadersVisible = false;
+
+            // Build the columns and headers for the new form
+            foreach (var column in checkinsCols)
+            {
+                // Create the column headers for the data grid view.
+                DataGridViewTextBoxColumn newColumn = new DataGridViewTextBoxColumn();
+                newColumn.HeaderText = column;
+
+                if (column == "text")
+                    newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                else
+                    newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+
+                CheckinsGrid.Columns.Add(newColumn);
+            }
+
+            //Query the database for the reviews of the current business
+            List<List<string>> checkins = queryEngine.GetCheckins(currBusId, "day, time, count");
+            checkins.RemoveAt(0); //we dont need the headers so we can remove them.
+
+            // Add all the returned reviews to the new datagrid
+            foreach (List<string> checkin in checkins)
+                CheckinsGrid.Rows.Add(checkin[0], checkin[1], checkin[2]);
+
+            // Make the new form open up and show it to the user.
+            ReviewForm checkinsWindow = new ReviewForm(CheckinsGrid);
+            //checkinsWindow.size // 
+            checkinsWindow.Show();
         }
     }
 }

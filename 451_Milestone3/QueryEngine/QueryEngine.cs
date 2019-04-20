@@ -94,7 +94,7 @@ namespace QueryEngine1
                 return ExecuteListQuery(cmd);
             }
             return new List<string>();
-        }
+        }        
 
         public List<List<string>> Search(string projection = "*")
         {
@@ -141,6 +141,11 @@ namespace QueryEngine1
         public List<List<string>> GetReviews(string id, string projection = "*")
         {
             return ExecuteCategorizedQuery("SELECT " + projection + " from review WHERE business_id = '" + id + "' ORDER BY review_stars;");
+        }
+
+        public List<List<string>> GetCheckins(string id, string projection = "*")
+        {
+            return ExecuteCategorizedQuery("SELECT " + projection + " from checkins WHERE business_id = '" + id + "' ORDER BY day;");
         }
 
         /// <summary>
