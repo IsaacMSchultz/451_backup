@@ -547,7 +547,7 @@ namespace Milestone2App
             }
 
             //Query the database for the reviews of the current business
-            List<List<string>> checkins = queryEngine.GetCheckins(currBusId, "day, time, count");
+            List<List<string>> checkins = queryEngine.GetCheckins(currBusId, "day, to_char(time, 'HH12:MI AM'), count");
             checkins.RemoveAt(0); //we dont need the headers so we can remove them.
 
             // Add all the returned reviews to the new datagrid
@@ -555,9 +555,15 @@ namespace Milestone2App
                 CheckinsGrid.Rows.Add(checkin[0], checkin[1], checkin[2]);
 
             // Make the new form open up and show it to the user.
-            ReviewForm checkinsWindow = new ReviewForm(CheckinsGrid);
-            //checkinsWindow.size // 
+            ReviewForm checkinsWindow = new ReviewForm(CheckinsGrid);                        
             checkinsWindow.Show();
+
+            int width = 0; //find the width of all the columns and makes that the size of the window
+            foreach (DataGridViewColumn column in CheckinsGrid.Columns)
+                if (column.Visible == true)
+                    width += column.Width;
+            width += 40;
+            checkinsWindow.Size = new System.Drawing.Size(width, checkinsWindow.Size.Height);
         }
     }
 }
