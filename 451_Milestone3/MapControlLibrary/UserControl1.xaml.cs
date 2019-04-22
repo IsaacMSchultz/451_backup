@@ -21,25 +21,34 @@ namespace MapControlLibrary
     /// </summary>
     public partial class UserControl1 : UserControl
     {
+        //public Map map = new Map();
+
         // Will work on map functionalities later
         // Was having a hard time accessing the instance
         // that the displayed map is a part of
         public UserControl1()
         {
             InitializeComponent();
-            map.Focus();
+            this.map.Focus();
             // Defaults to snohomish now
-            Location temp = new Location(47.912876, -122.098183);
-            map.SetView(temp, 10);
-            Pushpin pin = new Pushpin();
-            pin.Location = temp;
-            map.Children.Add(pin);
+            //Location temp = new Location(47.912876, -122.098183);
+            //map.SetView(temp, 10);
+            ////Push
+                
+                
+            //    pin = new Pushpin();
+            //pin.Location = temp;
+            //map.Children.Add(pin);
         }
         
         // Method to add a business to the map later on
         public void addBusiness(double lat, double lon)
         {
-
+            Location temp = new Location(47.912876, -122.098183);
+            map.SetView(temp, 10);
+            Pushpin pin = new Pushpin();
+            pin.Location = temp;
+            map.Children.Add(pin);
         }
     }
 }

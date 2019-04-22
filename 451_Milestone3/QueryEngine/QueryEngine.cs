@@ -25,8 +25,8 @@ namespace QueryEngine1
         const string chars = "abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_- ";
 
         public event PropertyChangedEventHandler yelpDataChanged; // event for notifying that there was a property changed. 
-        private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone3db";
-        //private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone2db";
+        //private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone3db";
+        private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone2db";
 
         public QueryEngine()
         {
@@ -330,7 +330,118 @@ namespace QueryEngine1
             return false;
         }
 
-        // Beginning friend query, will need more detail
+        // Should only return 2 values in the list, latitude and longitude
+        public List<double> GetUserLocation(string userId)
+        {
+            List<double> returnValue = new List<double>();
+
+            ReadOnlyCollection<NpgsqlDbColumn> columns = new ReadOnlyCollection<NpgsqlDbColumn>(new List<NpgsqlDbColumn>());
+
+            using (var connection = new NpgsqlConnection(LOGININFO))
+            {
+                connection.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = connection;
+                    cmd.CommandText = "Select user_latitude, user_longitude from yelpuser where user_id = '" + userId + "'";
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            if (columns.Count == 0)
+                                columns = reader.GetColumnSchema();
+
+                            //List<double> row = new List<string>();
+                            double value = 0;
+
+                            foreach (NpgsqlDbColumn column in columns)
+                            {
+                                if (double.TryParse(reader[column.ColumnName].ToString(), out value))
+                                {
+                                    returnValue.Add(value);
+                                }
+                            }
+                                //returnValue.Add(reader[column.ColumnName]);
+                            //row.Add(reader[column.ColumnName].ToString());
+                            //return
+                            
+                        }
+                    }
+                }
+                connection.Close();
+            }
+            //// Returns the list of column names as the first row.
+            //List<string> header = new List<string>();
+            //foreach (NpgsqlDbColumn column in columns)
+            //    header.Add(column.ColumnName);
+            //results.Insert(0, header);
+
+            //lastQuery = results;
+            //return results;
+
+            return returnValue;
+        }
+
+        // Each business will have two values in their list: latitude and longitude
+        // Need to change this to search based off of business_ids
+        public List<List<double>> GetBusinessLocations(List<string> businessNames)
+        {
+            List<List<double>> results = new List<List<double>>();
+            ReadOnlyCollection<NpgsqlDbColumn> columns = new ReadOnlyCollection<NpgsqlDbColumn>(new List<NpgsqlDbColumn>());
+
+            //string query = "select b.latitude, b.longitude from business as b where b.name = 'Blimpie' or b.name = 'Back-Health Chiropractic' or b.name = 'QQ Foot Spa'";
+            string query = "select b.latitude, b.longitude from business as b where b.name";
+
+
+            foreach (string businessName in businessNames)
+            {
+                if (businessName != businessNames[businessNames.Count - 1])
+                {
+                    query = query + " = '" + businessName + "' or b.name";
+
+                }
+                else
+                {
+                    query = query + " = '" + businessName + "'";
+                }
+            }
+
+            using (var connection = new NpgsqlConnection(LOGININFO))
+            {
+                connection.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = connection;
+                    cmd.CommandText = query;
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            if (columns.Count == 0)
+                                columns = reader.GetColumnSchema();
+
+                            List<double> row = new List<double>();
+                            double value;
+
+                            foreach (NpgsqlDbColumn column in columns)
+                            {
+                                if (double.TryParse(reader[column.ColumnName].ToString(), out value))
+                                {
+                                    //returnValue.Add(value);
+                                    row.Add(value);
+                                }
+                            }
+                                
+                            results.Add(row);
+                        }
+                    }
+                }
+                connection.Close();
+
+                return results;
+            }
+        }
+
         public List<List<string>> GetFriends(string userId)
         {
             List<List<string>> results = new List<List<string>>();
@@ -411,6 +522,7 @@ namespace QueryEngine1
             return results;
         }
 
+        // Strange bug where whichever "name" column is first will also be the 2nd column
         public List<List<string>> GetFriendsReview(string userId)
         {
             List<List<string>> results = new List<List<string>>();
@@ -422,8 +534,10 @@ namespace QueryEngine1
                 using (var cmd = new NpgsqlCommand())
                 {
                     cmd.Connection = connection;
-                    cmd.CommandText = "select n2.name, b.name, b.city, n2.text from business as b inner join(select yu.name, n.text, n.business_id from yelpuser as yu inner join(select distinct on (user_id) user_id, text, business_id from review " + 
+                    cmd.CommandText = "select n2.name, b.name, b.city, n2.text from business as b inner join(select yu.name, n.text, n.business_id from yelpuser as yu inner join(select distinct on (user_id) user_id, text, business_id from review " +
                         "order by user_id, date desc) n on(yu.user_id = n.user_id and yu.user_id in (Select friend_id from friend where user_id = '" + userId + "'))) n2 on(n2.business_id = b.business_id)";
+                    //cmd.CommandText = "select n2.name, b.name, b.city, n2.text from business as b inner join(select yu.name, n.text, n.business_id from yelpuser as yu inner join(select distinct on (user_id) user_id, text, business_id from review " + 
+                    //  "order by user_id, date desc) n on(yu.user_id = n.user_id and yu.user_id in (Select friend_id from friend where user_id = '" + userId + "'))) n2 on(n2.business_id = b.business_id)";
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -450,6 +564,24 @@ namespace QueryEngine1
 
             lastQuery = results;
             return results;
+        }
+
+        public void RemoveFavBus(string user_id, string busName, string busAdd)
+        {
+            string query = "delete from favorite as f where f.user_id = '" + user_id + "' and f.favorited_business in (select business_id from business as b " +
+                "where b.name = '" + busName + "' and b.address = '" + busAdd + "')";
+
+            using (var connection = new NpgsqlConnection(LOGININFO))
+            {
+                connection.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = connection;
+                    cmd.CommandText = query;
+                    cmd.ExecuteNonQuery();
+                }
+                connection.Close();
+            }
         }
 
         /// <summary>

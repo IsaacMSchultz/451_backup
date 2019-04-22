@@ -49,13 +49,14 @@
             this.Controls.Add(this.elementHost1);
             this.Name = "MapForm";
             this.Text = "MapForm";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MapForm_FormClosed);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Integration.ElementHost elementHost1;
-        private MapControlLibrary.UserControl1 userControl11;
+        public System.Windows.Forms.Integration.ElementHost elementHost1;
+        public MapControlLibrary.UserControl1 userControl11;
     }
 }
