@@ -578,14 +578,22 @@ namespace Milestone2App
 
         private void CheckInButton_Click(object sender, EventArgs e)
         {
-            if (currBusId != "" && currUserId != "" && ReviewStarsDropDown.SelectedItem != null)
+            if (currBusId != "" && currUserId != "")
             {
-                queryEngine.PostReview(WriteReviewTextBox_Review.Text, int.Parse(ReviewStarsDropDown.SelectedItem as string), currBusId, currUserId);
-                return;
+                // Make the new form open up and show it to the user.
+                CheckinForm checkinsWindow = new CheckinForm(currUserId, currBusId, DateTime.Now);
+                checkinsWindow.Show();
             }
-            if (currUserId != "")
+            else
             {
-                MessageBox.Show("Please select a user to sign in as.");
+                if (currUserId != "")
+                {
+                    MessageBox.Show("Please select a user to sign in as.");
+                }
+                if (currBusId != "")
+                {
+                    MessageBox.Show("Please select a business");
+                }                
             }
         }
     }
