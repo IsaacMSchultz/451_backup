@@ -20,6 +20,7 @@ namespace Milestone2App
         string[] favBusCol = { "Name", "Stars", "City", "Zipcode", "Address" };
         string[] friendsRevCol = { "Name", "Business", "City", "Review" };
         string[] reviewCols = { "Stars", "Date", "Text", "Useful", "Funny", "Cool" }; //Column headers for the review form that can be opened from the GUI
+        string[] checkinsCols = { "Day", "Time", "Count" }; //Column headers for the review form that can be opened from the GUI
         string projection; //selected columns to show in the database. Need to implement column constructors based on the projection instead of the cols[] array.
 
         // Instance of MapForm to access map with
@@ -31,7 +32,7 @@ namespace Milestone2App
 
         // private variables used to generate a random ID.
         private static Random random = new Random();
-        const string chars = "abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_- ";        
+        const string chars = "abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_- ";
 
         private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone2db"; // Defines our connection to local databus
         //private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone2db"; // Defines our connection to cloud hosted databus
@@ -62,9 +63,9 @@ namespace Milestone2App
                 // Create the column headers for the data grid view.
                 DataGridViewTextBoxColumn newColumn = new DataGridViewTextBoxColumn();
                 newColumn.HeaderText = column;
-                
+
                 if (column == "Name")
-                    newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells; //Can change this to fill depending on if we want to make our app window larger
                 else
                     newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
@@ -77,7 +78,7 @@ namespace Milestone2App
             {
                 DataGridViewTextBoxColumn newColumn = new DataGridViewTextBoxColumn();
                 newColumn.HeaderText = column;
-                
+
                 FriendsGrid.Columns.Add(newColumn);
             }
 
@@ -92,7 +93,7 @@ namespace Milestone2App
             foreach (var column in friendsRevCol)
             {
                 //dataGridView1.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                
+
                 DataGridViewTextBoxColumn newColumn = new DataGridViewTextBoxColumn();
                 newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 newColumn.HeaderText = column;
@@ -129,7 +130,7 @@ namespace Milestone2App
 
             foreach (string city in queryEngine.GetCities())
                 cityCheckBox.Items.Add(city);
-            updateGrid();
+            //updateGrid(); //This is really slow because we end up loading thousands of businesses. THe user can still load them by clicking the search button.
         }
 
         /// <summary>
@@ -278,6 +279,7 @@ namespace Milestone2App
             updateFriendsRevGrid();
 
             queryEngine.SelectUser(currUserId);
+            updateGrid(); //update the business grid so the user can see how far away they are from the searched businesses.
         }
 
         /// <summary>
@@ -286,15 +288,56 @@ namespace Milestone2App
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void businessGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {            
+        {
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
-                businessNameTextBox_Review.Text = (string)businessGrid[0, e.RowIndex].Value;
-                currBusId = (string)businessGrid[9, e.RowIndex].Value;
+                currBusId = (string)businessGrid[9, e.RowIndex].Value; //set global currBusId to the current business ID. Probably want to change this to a function in the future            
+                string today = DateTime.Today.DayOfWeek.ToString(); //get the current day of the week from the local machine
+
+                businessNameTextBox_Review.Text = (string)businessGrid[0, e.RowIndex].Value; //Show business name
+                Address_Textbox.Text = (string)businessGrid[1, e.RowIndex].Value; //Show the business address
+                DayOfTheWeek_Textbox.Text = today; //put the day of the week in the hours textbox
+
+                // replace the categories checkbox with all the categories that the selected business has
+                string categoriesStr = "";
+                List<string> categories = queryEngine.GetCategories(currBusId);
+                if (categories.Count > 0)
+                {
+                    foreach (string category in categories)
+                    {
+                        categoriesStr += category + ", ";
+                    }
+                    categoriesStr = categoriesStr.Substring(0, categoriesStr.Length - 2); // Cuts off the final ", "
+                }
+                Categories_Textbox.Text = categoriesStr;
+
+                // replace the attributes checkbox with all the categories that the selected business has
+                string attributesStr = "";
+                List<List<string>> attributes = queryEngine.GetAttributes(currBusId);
+                if (attributes.Count > 1)
+                {
+                    for (int i = 1; i < attributes.Count; i++)
+                    {
+                        attributesStr += attributes[i][0] + ":" + attributes[i][1] + ", ";
+                    }
+                    attributesStr = attributesStr.Substring(0, attributesStr.Length - 2); // Cuts off the final ", "
+                }
+                Attributes_Textbox.Text = attributesStr;
+
+
+
+                List<List<string>> hours = queryEngine.GetHoursForDay(currBusId, today); // query the database for the hours of a business
+                if (hours.Count > 1) // If the query returned some hours
+                {
+                    Opens_Textbox.Text = hours[1].Count > 0 ? hours[1][0] : "N/A"; //show N/A if there are no hours at that time
+                    Closes_Textbox.Text = hours[1].Count > 1 ? hours[1][1] : "N/A";
+                }
+
 
                 ShowReviewsButton.Enabled = true; //enable the button to show reviews after we click one
+                ShowCheckinsButton.Enabled = true; //enable the button to show reviews after we click one
 
-                //MapButton.Enabled = true;
+                MapButton.Enabled = true;
             }
         }
 
@@ -395,7 +438,7 @@ namespace Milestone2App
                 //updateFriendsGrid();
             }
         }
-        
+
 
         // Should consider *Templatizing* this to work for multiple DataGrids
         private void updateFriendsGrid()
@@ -420,7 +463,7 @@ namespace Milestone2App
         private void updateFavBusinessGrid()
         {
             //FavoriteBusinessGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            
+
 
             int row = 0, col = 0;
             FavoriteBusinessGrid.Rows.Clear(); //removes all the data previously in the grid.            
@@ -440,7 +483,7 @@ namespace Milestone2App
 
         private void updateFriendsRevGrid()
         {
-            int row = 0, col = 0;  
+            int row = 0, col = 0;
             FriendsReviewsGrid.Rows.Clear();
 
             foreach (List<string> listRow in queryEngine.GetFriendsReview(currUserId))
@@ -558,6 +601,50 @@ namespace Milestone2App
         private void FavoriteBusinessGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             RemoveFavBtn.Enabled = true;
+        }
+
+
+        private void ShowCheckinsButton_Click(object sender, EventArgs e)
+        {
+            // create a new datagridview to pass to the new form that will open to show the reviews.
+            DataGridView CheckinsGrid = new DataGridView();
+            CheckinsGrid.RowHeadersVisible = false;
+
+            // Build the columns and headers for the new form
+            foreach (var column in checkinsCols)
+            {
+                // Create the column headers for the data grid view.
+                DataGridViewTextBoxColumn newColumn = new DataGridViewTextBoxColumn();
+                newColumn.HeaderText = column;
+
+                newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells; //make the size fo the columns be only the size of the data inside them
+
+                CheckinsGrid.Columns.Add(newColumn);
+            }
+
+            //Query the database for the reviews of the current business
+            List<List<string>> checkins = queryEngine.GetCheckins(currBusId, "day, to_char(time, 'HH12:MI AM'), count");
+            checkins.RemoveAt(0); //we dont need the headers so we can remove them.
+
+            // Add all the returned reviews to the new datagrid
+            foreach (List<string> checkin in checkins)
+                CheckinsGrid.Rows.Add(checkin[0], checkin[1], checkin[2]);
+
+            // Make the new form open up and show it to the user.
+            ReviewForm checkinsWindow = new ReviewForm(CheckinsGrid);
+            checkinsWindow.Show();
+
+            int width = 0; //find the width of all the columns and makes that the size of the window
+            foreach (DataGridViewColumn column in CheckinsGrid.Columns)
+                if (column.Visible == true)
+                    width += column.Width;
+            width += 40;
+            checkinsWindow.Size = new System.Drawing.Size(width, checkinsWindow.Size.Height);
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
