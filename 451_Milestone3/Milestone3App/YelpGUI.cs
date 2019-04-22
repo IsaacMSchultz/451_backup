@@ -7,6 +7,8 @@ using System.Collections.ObjectModel;
 using static System.Windows.Forms.CheckedListBox;
 using QueryEngine1;
 using System.Linq;
+using MapControlLibrary;
+using Microsoft.Maps.MapControl.WPF;
 
 namespace Milestone2App
 {
@@ -20,6 +22,9 @@ namespace Milestone2App
         string[] reviewCols = { "Stars", "Date", "Text", "Useful", "Funny", "Cool" }; //Column headers for the review form that can be opened from the GUI
         string[] checkinsCols = { "Day", "Time", "Count" }; //Column headers for the review form that can be opened from the GUI
         string projection; //selected columns to show in the database. Need to implement column constructors based on the projection instead of the cols[] array.
+
+        // Instance of MapForm to access map with
+        MapForm mapTest = new MapForm();
 
         //TODO: change to functions so that debugging global variables is less ambiguous.
         string currBusId; //global variable for the currend businessId
@@ -47,6 +52,12 @@ namespace Milestone2App
 
             InitializeComponent();
             initializeDropDowns();
+
+            // This is an error during a merge
+            // Initialize map to be able to scroll
+            mapTest.userControl11.map.Focus();
+
+            RemoveFavBtn.Enabled = false;
 
             foreach (var column in cols)
             {
@@ -326,7 +337,7 @@ namespace Milestone2App
                 ShowReviewsButton.Enabled = true;
                 ShowCheckinsButton.Enabled = true;
                 AddToFavoritesButton.Enabled = true;
-                CheckInButton.Enabled = true;            
+                CheckInButton.Enabled = true;
                 MapButton.Enabled = true;
             }
         }
@@ -504,11 +515,41 @@ namespace Milestone2App
 
         private void MapButton_Click(object sender, EventArgs e)
         {
-            //Form mapWindow = new Form();
-            //MapForm mapWindow = new MapForm(currBusId);
-            //mapWindow.Show();
-            MapForm mapTest = new MapForm(currBusId);
-            mapTest.Show();
+            //foreach (double value in queryEngine.GetUserLocation(currUserId))
+            //{
+
+            //}
+
+            List<double> userLocation = queryEngine.GetUserLocation(currUserId);
+            List<string> selectedBusinesses = new List<string>();
+
+            // Only set the map view to the user's position if the user has both a lat and long value entered
+            if (userLocation.Count == 2)
+            {
+                Microsoft.Maps.MapControl.WPF.Location temp = new Microsoft.Maps.MapControl.WPF.Location(userLocation[0], userLocation[1]);
+                mapTest.userControl11.map.SetView(temp, 10);
+            }
+
+            // Add pins for all of the businesses in the grid
+            // Instead of requerying the businesses, just pulling from the datagrid view the business names, 
+            // then I will query the locations for the businesses
+            foreach (DataGridViewRow row in businessGrid.Rows)
+            {
+                selectedBusinesses.Add(row.Cells[0].Value.ToString());
+            }
+
+            // Need to protect against case where no businesses are present in the grid
+            foreach (List<double> locations in queryEngine.GetBusinessLocations(selectedBusinesses))
+            {
+                Microsoft.Maps.MapControl.WPF.Location temp = new Microsoft.Maps.MapControl.WPF.Location(locations[0], locations[1]);
+                Pushpin pin = new Pushpin();
+                pin.Location = temp;
+                mapTest.userControl11.map.Children.Add(pin);
+            }
+
+            // Need to remove children when different businesses are selected
+            this.mapTest.Show();
+            //MapButton.Enabled = false;
         }
 
         private void EditBtn_Click(object sender, EventArgs e)
@@ -537,6 +578,45 @@ namespace Milestone2App
                 MessageBox.Show("Please enter valid Latitude and Longitude values.");
             }
         }
+
+        private void FavoriteBusinessGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            RemoveFavBtn.Enabled = true;
+
+        }
+
+        // User should only be able to select one business at a time
+        // Need to query by business_id
+        private void RemoveFavBtn_Click(object sender, EventArgs e)
+        {
+            //FavoriteBusinessGrid.SelectedRows[1];
+            //queryEngine.remove(FavoriteBusinessGrid.SelectedRows[1]);
+
+            RemoveFavBtn.Enabled = false;
+
+            //string temp = FavoriteBusinessGrid.SelectedRows[0].Cells[1].ToString();
+            //string temp = FavoriteBusinessGrid.SelectedCells.ToString();
+            foreach (DataGridViewRow row in FavoriteBusinessGrid.SelectedRows)
+            {
+                //string value1 = row.Cells[0].Value.ToString();
+                // Call method to remove favorite
+                // [0], [4], curruserid
+                queryEngine.RemoveFavBus(currUserId, row.Cells[0].Value.ToString(), row.Cells[4].Value.ToString());
+            }
+
+            updateFavBusinessGrid();
+        }
+
+        private void FavoriteBusinessGrid_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            e.PaintParts &= ~DataGridViewPaintParts.Focus;
+        }
+
+        private void FavoriteBusinessGrid_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            RemoveFavBtn.Enabled = true;
+        }
+
 
         private void ShowCheckinsButton_Click(object sender, EventArgs e)
         {
@@ -593,7 +673,7 @@ namespace Milestone2App
                 if (currBusId != "")
                 {
                     MessageBox.Show("Please select a business");
-                }                
+                }
             }
         }
     }
