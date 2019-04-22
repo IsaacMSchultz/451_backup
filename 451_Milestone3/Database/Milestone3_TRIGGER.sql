@@ -85,6 +85,17 @@ EXECUTE PROCEDURE defineCountCheckin();
 
 -- DROP TRIGGER countCheckin ON checkins;
 
+CREATE OR REPLACE FUNCTION defineInsertCheckin() RETURNS trigger AS $insertCheckin$
+BEGIN
+    IF TRIGGER_NESTLEVEL() <= 1
+        IF EXISTS (SELECT * FROM Checkins WHERE business_id = NEW.business_id AND checkins.day = NEW.day AND checkins.time = NEW.time)
+            UPDATE Checkins SET count = count + 1 WHERE business_id = NEW.business_id
+        ELSE
+            INSERT INTO Checkins VALUES (NEW.business_id, NEW.day, NEW.time, NEW.count)
+        END IF
+    END IF
+END
+
 ---------------------------------------------------------------------------------------------------------------------------------------
 -- Increment checkin count for proper hour and time
 ---------------------------------------------------------------------------------------------------------------------------------------
