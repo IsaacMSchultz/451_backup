@@ -306,7 +306,7 @@ namespace Milestone2App
                 List<List<string>> attributes = queryEngine.GetAttributes(currBusId);
                 if (attributes.Count > 1)
                 {
-                    for (int i = 1; i < attributes.Count; i++)                    
+                    for (int i = 1; i < attributes.Count; i++)
                     {
                         attributesStr += attributes[i][0] + ":" + attributes[i][1] + ", ";
                     }
@@ -538,10 +538,7 @@ namespace Milestone2App
                 DataGridViewTextBoxColumn newColumn = new DataGridViewTextBoxColumn();
                 newColumn.HeaderText = column;
 
-                if (column == "text")
-                    newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                else
-                    newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells; //make the size fo the columns be only the size of the data inside them
 
                 CheckinsGrid.Columns.Add(newColumn);
             }
@@ -555,7 +552,7 @@ namespace Milestone2App
                 CheckinsGrid.Rows.Add(checkin[0], checkin[1], checkin[2]);
 
             // Make the new form open up and show it to the user.
-            ReviewForm checkinsWindow = new ReviewForm(CheckinsGrid);                        
+            ReviewForm checkinsWindow = new ReviewForm(CheckinsGrid);
             checkinsWindow.Show();
 
             int width = 0; //find the width of all the columns and makes that the size of the window
