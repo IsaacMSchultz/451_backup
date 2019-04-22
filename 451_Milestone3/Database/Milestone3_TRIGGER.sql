@@ -31,20 +31,21 @@ EXECUTE PROCEDURE defineCountReview();
 -- Insertion on Review recalculates the reviewRating of a Business
 ----------------------------------------------------------------------------------------------------------------------------------------------
 
-CREATE OR REPLACE FUNCTION defineCalcReviewRating() RETURNS trigger AS '
+CREATE OR REPLACE FUNCTION defineCalcReviewRating() RETURNS trigger AS $calcReview$
 BEGIN
     UPDATE Business
-    SET reviewRating = (SELECT SUM(review_stars) FROM Review where review.business_id = NEW.business_id)/review_count
+    SET reviewRating = (SELECT SUM(review.review_stars) FROM Review WHERE review.business_id = NEW.business_id)/review_count
     WHERE Business.business_id = NEW.business_id;
     RETURN NEW;
 END
-' LANGUAGE plpgsql;
+$calcReview$ LANGUAGE plpgsql;
 
-CREATE TRIGGER zCalcReviewRating --triggers are executed in alphabetical order
+CREATE TRIGGER CalcReviewRating --triggers are executed in alphabetical order
 AFTER INSERT ON Review
 FOR EACH ROW
 WHEN (NEW.review_id IS NOT NULL)
 EXECUTE PROCEDURE defineCalcReviewRating();
+
 
 -- -- test
 -- INSERT INTO Business Values ('0000000000000000000001', 'Wendys', 'Alpaca', 'WA', '98296', 0, 0, 'Robinson Road', 0, 0, 0, True);
@@ -70,7 +71,7 @@ END
 $countCheckin$ LANGUAGE plpgsql;
 
 CREATE TRIGGER countCheckin
-AFTER UPDATE OR INSERT ON checkins
+AFTER UPDATE ON checkins
 FOR EACH ROW
 EXECUTE PROCEDURE defineCountCheckin();
 
@@ -86,15 +87,24 @@ EXECUTE PROCEDURE defineCountCheckin();
 -- DROP TRIGGER countCheckin ON checkins;
 
 CREATE OR REPLACE FUNCTION defineInsertCheckin() RETURNS trigger AS $insertCheckin$
-BEGIN
-    IF TRIGGER_NESTLEVEL() <= 1
-        IF EXISTS (SELECT * FROM Checkins WHERE business_id = NEW.business_id AND checkins.day = NEW.day AND checkins.time = NEW.time)
-            UPDATE Checkins SET count = count + 1 WHERE business_id = NEW.business_id
-        ELSE
-            INSERT INTO Checkins VALUES (NEW.business_id, NEW.day, NEW.time, NEW.count)
-        END IF
-    END IF
+BEGIN    
+    IF EXISTS (SELECT * FROM Checkins WHERE business_id = NEW.business_id AND checkins.day = NEW.day AND checkins.time = NEW.time) THEN	
+    	UPDATE Checkins SET count = count + NEW.count WHERE business_id = NEW.business_id AND checkins.day = NEW.day AND checkins.time = NEW.time;
+		RETURN NULL;
+    ELSE
+    	--INSERT INTO Checkins VALUES (NEW.business_id, NEW.day, NEW.time, NEW.count);
+		RETURN NEW;
+    END IF;	
 END
+$insertCheckin$ LANGUAGE plpgsql;
+
+CREATE TRIGGER insertCheckin
+BEFORE INSERT ON checkins
+FOR EACH ROW
+WHEN (pg_trigger_depth() < 1)
+EXECUTE PROCEDURE defineInsertCheckin();
+
+--DROP TRIGGER insertCheckin ON checkins;
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 -- Increment checkin count for proper hour and time
