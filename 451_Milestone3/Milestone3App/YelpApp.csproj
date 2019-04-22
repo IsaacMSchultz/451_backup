@@ -77,6 +77,12 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CheckinForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CheckinForm.Designer.cs">
+      <DependentUpon>CheckinForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MapForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +103,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CheckinForm.resx">
+      <DependentUpon>CheckinForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MapForm.resx">
       <DependentUpon>MapForm.cs</DependentUpon>
     </EmbeddedResource>

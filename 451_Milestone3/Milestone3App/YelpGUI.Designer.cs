@@ -124,6 +124,7 @@
             this.RightUserLP = new System.Windows.Forms.TableLayoutPanel();
             this.ReviewsByFriendsTitleTB = new System.Windows.Forms.TextBox();
             this.FriendsReviewsGrid = new System.Windows.Forms.DataGridView();
+            this.AddToFavoritesButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).BeginInit();
             this.SearchCheckBoxPanel.SuspendLayout();
             this.StateDropdownPanel.SuspendLayout();
@@ -746,6 +747,7 @@
             // 
             this.BusinessButtonsPanel.ColumnCount = 1;
             this.BusinessButtonsPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.BusinessButtonsPanel.Controls.Add(this.AddToFavoritesButton, 0, 4);
             this.BusinessButtonsPanel.Controls.Add(this.CheckInButton, 0, 3);
             this.BusinessButtonsPanel.Controls.Add(this.ShowReviewsButton, 0, 0);
             this.BusinessButtonsPanel.Controls.Add(this.MapButton, 0, 2);
@@ -754,13 +756,13 @@
             this.BusinessButtonsPanel.Location = new System.Drawing.Point(655, 38);
             this.BusinessButtonsPanel.Margin = new System.Windows.Forms.Padding(0);
             this.BusinessButtonsPanel.Name = "BusinessButtonsPanel";
-            this.BusinessButtonsPanel.RowCount = 4;
+            this.BusinessButtonsPanel.RowCount = 5;
             this.BusinessInfoPanel.SetRowSpan(this.BusinessButtonsPanel, 2);
-            this.BusinessButtonsPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.BusinessButtonsPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.BusinessButtonsPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.BusinessButtonsPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.BusinessButtonsPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.BusinessButtonsPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.BusinessButtonsPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.BusinessButtonsPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.BusinessButtonsPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.BusinessButtonsPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.BusinessButtonsPanel.Size = new System.Drawing.Size(100, 288);
             this.BusinessButtonsPanel.TabIndex = 6;
             // 
@@ -768,13 +770,14 @@
             // 
             this.CheckInButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CheckInButton.Enabled = false;
-            this.CheckInButton.Location = new System.Drawing.Point(0, 216);
+            this.CheckInButton.Location = new System.Drawing.Point(0, 171);
             this.CheckInButton.Margin = new System.Windows.Forms.Padding(0);
             this.CheckInButton.Name = "CheckInButton";
-            this.CheckInButton.Size = new System.Drawing.Size(100, 72);
+            this.CheckInButton.Size = new System.Drawing.Size(100, 57);
             this.CheckInButton.TabIndex = 7;
             this.CheckInButton.Text = "Check In";
             this.CheckInButton.UseVisualStyleBackColor = true;
+            this.CheckInButton.Click += new System.EventHandler(this.CheckInButton_Click);
             // 
             // ShowReviewsButton
             // 
@@ -783,7 +786,7 @@
             this.ShowReviewsButton.Location = new System.Drawing.Point(0, 0);
             this.ShowReviewsButton.Margin = new System.Windows.Forms.Padding(0);
             this.ShowReviewsButton.Name = "ShowReviewsButton";
-            this.ShowReviewsButton.Size = new System.Drawing.Size(100, 72);
+            this.ShowReviewsButton.Size = new System.Drawing.Size(100, 57);
             this.ShowReviewsButton.TabIndex = 2;
             this.ShowReviewsButton.Text = "Show Reviews";
             this.ShowReviewsButton.UseVisualStyleBackColor = true;
@@ -793,10 +796,10 @@
             // 
             this.MapButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MapButton.Enabled = false;
-            this.MapButton.Location = new System.Drawing.Point(0, 144);
+            this.MapButton.Location = new System.Drawing.Point(0, 114);
             this.MapButton.Margin = new System.Windows.Forms.Padding(0);
             this.MapButton.Name = "MapButton";
-            this.MapButton.Size = new System.Drawing.Size(100, 72);
+            this.MapButton.Size = new System.Drawing.Size(100, 57);
             this.MapButton.TabIndex = 4;
             this.MapButton.Text = "View Business on Map";
             this.MapButton.UseVisualStyleBackColor = true;
@@ -806,10 +809,10 @@
             // 
             this.ShowCheckinsButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ShowCheckinsButton.Enabled = false;
-            this.ShowCheckinsButton.Location = new System.Drawing.Point(0, 72);
+            this.ShowCheckinsButton.Location = new System.Drawing.Point(0, 57);
             this.ShowCheckinsButton.Margin = new System.Windows.Forms.Padding(0);
             this.ShowCheckinsButton.Name = "ShowCheckinsButton";
-            this.ShowCheckinsButton.Size = new System.Drawing.Size(100, 72);
+            this.ShowCheckinsButton.Size = new System.Drawing.Size(100, 57);
             this.ShowCheckinsButton.TabIndex = 6;
             this.ShowCheckinsButton.Text = "Show Checkins";
             this.ShowCheckinsButton.UseVisualStyleBackColor = true;
@@ -1540,6 +1543,18 @@
             this.FriendsReviewsGrid.Size = new System.Drawing.Size(438, 532);
             this.FriendsReviewsGrid.TabIndex = 10;
             // 
+            // AddToFavoritesButton
+            // 
+            this.AddToFavoritesButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.AddToFavoritesButton.Enabled = false;
+            this.AddToFavoritesButton.Location = new System.Drawing.Point(0, 228);
+            this.AddToFavoritesButton.Margin = new System.Windows.Forms.Padding(0);
+            this.AddToFavoritesButton.Name = "AddToFavoritesButton";
+            this.AddToFavoritesButton.Size = new System.Drawing.Size(100, 60);
+            this.AddToFavoritesButton.TabIndex = 8;
+            this.AddToFavoritesButton.Text = "Add Business To Favorites";
+            this.AddToFavoritesButton.UseVisualStyleBackColor = true;
+            // 
             // YelpGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1704,6 +1719,7 @@
         private System.Windows.Forms.TableLayoutPanel BusinessButtonsPanel;
         private System.Windows.Forms.Button ShowCheckinsButton;
         private System.Windows.Forms.Button CheckInButton;
+        private System.Windows.Forms.Button AddToFavoritesButton;
     }
 }
 

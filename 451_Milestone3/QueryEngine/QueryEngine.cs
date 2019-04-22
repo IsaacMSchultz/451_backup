@@ -533,5 +533,30 @@ namespace QueryEngine1
                 connection.Close();
             }
         }
+
+        /// <summary>
+        /// Add a checkin for the current user!
+        /// </summary>
+        /// <param name="user_id">selected user's id</param>
+        /// <param name="lat">entered latitude</param>
+        /// <param name="lon">entered lonitude</param>
+        public void AddCheckin(string user_id, double lat, double lon)
+        {
+            string query = "Update yelpuser set user_latitude = " + lat.ToString() +
+                ", user_longitude = " + lon.ToString() + " where user_id = '" +
+                user_id + "'";
+
+            using (var connection = new NpgsqlConnection(LOGININFO))
+            {
+                connection.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = connection;
+                    cmd.CommandText = query;
+                    cmd.ExecuteNonQuery();
+                }
+                connection.Close();
+            }
+        }
     }
 }

@@ -314,8 +314,7 @@ namespace Milestone2App
                 }
                 Attributes_Textbox.Text = attributesStr;
 
-
-
+                //Show the business' hours if it has any for the current day.
                 List<List<string>> hours = queryEngine.GetHoursForDay(currBusId, today); // query the database for the hours of a business
                 if (hours.Count > 1) // If the query returned some hours
                 {
@@ -323,10 +322,11 @@ namespace Milestone2App
                     Closes_Textbox.Text = hours[1].Count > 1 ? hours[1][1] : "N/A";
                 }
 
-
-                ShowReviewsButton.Enabled = true; //enable the button to show reviews after we click one
-                ShowCheckinsButton.Enabled = true; //enable the button to show reviews after we click one
-
+                //enable the buttons now that there is a business selected
+                ShowReviewsButton.Enabled = true;
+                ShowCheckinsButton.Enabled = true;
+                AddToFavoritesButton.Enabled = true;
+                CheckInButton.Enabled = true;            
                 MapButton.Enabled = true;
             }
         }
@@ -338,9 +338,22 @@ namespace Milestone2App
         /// <param name="e"></param>
         private void SubmitReviewButton_Click(object sender, EventArgs e)
         {
-            if (currBusId != "" && currUserId != "" && ReviewStarsDropDown.SelectedItem as string != "Review Stars")
+            if (currBusId != "" && currUserId != "" && ReviewStarsDropDown.SelectedItem != null)
             {
                 queryEngine.PostReview(WriteReviewTextBox_Review.Text, int.Parse(ReviewStarsDropDown.SelectedItem as string), currBusId, currUserId);
+                return;
+            }
+            if (currUserId != "")
+            {
+                MessageBox.Show("Please select a user to sign in as.");
+            }
+            if (ReviewStarsDropDown.SelectedItem as string != "Review Stars")
+            {
+                MessageBox.Show("Please select a stars rating.");
+            }
+            if (currBusId != "")
+            {
+                MessageBox.Show("Please select a business.");
             }
         }
 
@@ -561,6 +574,19 @@ namespace Milestone2App
                     width += column.Width;
             width += 40;
             checkinsWindow.Size = new System.Drawing.Size(width, checkinsWindow.Size.Height);
+        }
+
+        private void CheckInButton_Click(object sender, EventArgs e)
+        {
+            if (currBusId != "" && currUserId != "" && ReviewStarsDropDown.SelectedItem != null)
+            {
+                queryEngine.PostReview(WriteReviewTextBox_Review.Text, int.Parse(ReviewStarsDropDown.SelectedItem as string), currBusId, currUserId);
+                return;
+            }
+            if (currUserId != "")
+            {
+                MessageBox.Show("Please select a user to sign in as.");
+            }
         }
     }
 }
