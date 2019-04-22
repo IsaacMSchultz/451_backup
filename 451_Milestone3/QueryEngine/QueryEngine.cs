@@ -104,7 +104,7 @@ namespace QueryEngine1
             {
                 //string q = "SELECT DISTINCT category_name FROM category WHERE business_id = '" + id + "';";
                 return ExecuteListQuery("SELECT DISTINCT category_name FROM category WHERE business_id = '" + id + "';");
-            }            
+            }
         }
 
         public List<List<string>> GetAttributes(string id = "N/A")
@@ -134,8 +134,8 @@ namespace QueryEngine1
             //}
             //else
             //{
-                //string q = "SELECT DISTINCT attribute_name, attribute_value FROM attributes WHERE business_id = '" + id + "';";
-                return ExecuteCategorizedQuery("SELECT DISTINCT attribute_name, attribute_value FROM attributes WHERE business_id = '" + id + "';");
+            //string q = "SELECT DISTINCT attribute_name, attribute_value FROM attributes WHERE business_id = '" + id + "';";
+            return ExecuteCategorizedQuery("SELECT DISTINCT attribute_name, attribute_value FROM attributes WHERE business_id = '" + id + "';");
             //}
         }
 
@@ -521,17 +521,7 @@ namespace QueryEngine1
                 ", user_longitude = " + lon.ToString() + " where user_id = '" +
                 user_id + "'";
 
-            using (var connection = new NpgsqlConnection(LOGININFO))
-            {
-                connection.Open();
-                using (var cmd = new NpgsqlCommand())
-                {
-                    cmd.Connection = connection;
-                    cmd.CommandText = query;
-                    cmd.ExecuteNonQuery();
-                }
-                connection.Close();
-            }
+            ExecuteNonQuery(query);
         }
 
         /// <summary>
@@ -540,23 +530,37 @@ namespace QueryEngine1
         /// <param name="user_id">selected user's id</param>
         /// <param name="lat">entered latitude</param>
         /// <param name="lon">entered lonitude</param>
-        public void AddCheckin(string user_id, double lat, double lon)
+        public void AddCheckin(string business_id, DateTime time)
         {
-            string query = "Update yelpuser set user_latitude = " + lat.ToString() +
-                ", user_longitude = " + lon.ToString() + " where user_id = '" +
-                user_id + "'";
+            // Round to the nearest hour
+            long ticks = time.Ticks + 18000000000; // add 30 minutes
+            time = new DateTime(ticks - ticks % 36000000000, time.Kind); // Round down the hour
+            string query = "INSERT INTO checkins VALUES ('" + business_id + "', '" + time.DayOfWeek.ToString() + "', '" + time.ToString("HH:mm:ss") + "', 1);";
+            ExecuteNonQuery(query);
+        }
 
-            using (var connection = new NpgsqlConnection(LOGININFO))
+        private bool ExecuteNonQuery(string query)
+        {
+            try
             {
-                connection.Open();
-                using (var cmd = new NpgsqlCommand())
+                using (var connection = new NpgsqlConnection(LOGININFO))
                 {
-                    cmd.Connection = connection;
-                    cmd.CommandText = query;
-                    cmd.ExecuteNonQuery();
+                    connection.Open();
+                    using (var cmd = new NpgsqlCommand())
+                    {
+                        cmd.Connection = connection;
+                        cmd.CommandText = query;
+                        cmd.ExecuteNonQuery();
+                    }
+                    connection.Close();
                 }
-                connection.Close();
+                return true;
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return false;
+            }            
         }
     }
 }
