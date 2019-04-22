@@ -49,7 +49,9 @@
             this.Controls.Add(this.elementHost1);
             this.Name = "MapForm";
             this.Text = "MapForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MapForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MapForm_FormClosed);
+            this.Load += new System.EventHandler(this.MapForm_Load);
             this.ResumeLayout(false);
 
         }

@@ -128,23 +128,21 @@
             this.AdminTabPage = new System.Windows.Forms.TabPage();
             this.AdminLP = new System.Windows.Forms.TableLayoutPanel();
             this.AdminLeftLP = new System.Windows.Forms.TableLayoutPanel();
-            this.BusInfoHeaderTB = new System.Windows.Forms.TextBox();
-            this.BusinessNameLP = new System.Windows.Forms.TableLayoutPanel();
-            this.BussinessNameHeaderTB = new System.Windows.Forms.TextBox();
-            this.BusinessNameTB = new System.Windows.Forms.TextBox();
-            this.BusInfoTB = new System.Windows.Forms.TextBox();
             this.AdminInfoLP = new System.Windows.Forms.TableLayoutPanel();
-            this.BusNameLP = new System.Windows.Forms.TableLayoutPanel();
-            this.BusNameHeaderTB = new System.Windows.Forms.TextBox();
-            this.BusNameValue = new System.Windows.Forms.TextBox();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.AdminCityLP = new System.Windows.Forms.TableLayoutPanel();
+            this.AdminStateHeaderTb = new System.Windows.Forms.TextBox();
+            this.AdminCityValue = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.CityHeaderTb = new System.Windows.Forms.TextBox();
             this.AdminAddressLP = new System.Windows.Forms.TableLayoutPanel();
             this.AdminAddressValue = new System.Windows.Forms.TextBox();
             this.AddressHeaderTB = new System.Windows.Forms.TextBox();
-            this.AdminCityLP = new System.Windows.Forms.TableLayoutPanel();
-            this.AdminCityValue = new System.Windows.Forms.TextBox();
-            this.CityHeaderTb = new System.Windows.Forms.TextBox();
-            this.AdminStateHeaderTb = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.BusNameLP = new System.Windows.Forms.TableLayoutPanel();
+            this.BusNameValue = new System.Windows.Forms.TextBox();
+            this.BusNameHeaderTB = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -165,9 +163,11 @@
             this.textBox14 = new System.Windows.Forms.TextBox();
             this.textBox15 = new System.Windows.Forms.TextBox();
             this.textBox16 = new System.Windows.Forms.TextBox();
-            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.BusInfoTB = new System.Windows.Forms.TextBox();
+            this.BusInfoHeaderTB = new System.Windows.Forms.TextBox();
+            this.BusinessNameLP = new System.Windows.Forms.TableLayoutPanel();
+            this.BusinessNameTB = new System.Windows.Forms.TextBox();
+            this.BussinessNameHeaderTB = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).BeginInit();
             this.SearchCheckBoxPanel.SuspendLayout();
             this.StateDropdownPanel.SuspendLayout();
@@ -206,17 +206,17 @@
             this.AdminTabPage.SuspendLayout();
             this.AdminLP.SuspendLayout();
             this.AdminLeftLP.SuspendLayout();
-            this.BusinessNameLP.SuspendLayout();
             this.AdminInfoLP.SuspendLayout();
-            this.BusNameLP.SuspendLayout();
-            this.AdminAddressLP.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
             this.AdminCityLP.SuspendLayout();
+            this.AdminAddressLP.SuspendLayout();
+            this.BusNameLP.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
-            this.tableLayoutPanel6.SuspendLayout();
+            this.BusinessNameLP.SuspendLayout();
             this.SuspendLayout();
             // 
             // businessGrid
@@ -1668,71 +1668,8 @@
             this.AdminLeftLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 38.38951F));
             this.AdminLeftLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.AdminLeftLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 61.61049F));
-            this.AdminLeftLP.Size = new System.Drawing.Size(423, 692);
+            this.AdminLeftLP.Size = new System.Drawing.Size(424, 692);
             this.AdminLeftLP.TabIndex = 0;
-            // 
-            // BusInfoHeaderTB
-            // 
-            this.BusInfoHeaderTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.BusInfoHeaderTB.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.BusInfoHeaderTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BusInfoHeaderTB.Location = new System.Drawing.Point(20, 12);
-            this.BusInfoHeaderTB.Margin = new System.Windows.Forms.Padding(20, 2, 3, 2);
-            this.BusInfoHeaderTB.Name = "BusInfoHeaderTB";
-            this.BusInfoHeaderTB.Size = new System.Drawing.Size(400, 20);
-            this.BusInfoHeaderTB.TabIndex = 16;
-            this.BusInfoHeaderTB.Text = "Business Information";
-            // 
-            // BusinessNameLP
-            // 
-            this.BusinessNameLP.ColumnCount = 1;
-            this.BusinessNameLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.BusinessNameLP.Controls.Add(this.BusinessNameTB, 0, 1);
-            this.BusinessNameLP.Controls.Add(this.BussinessNameHeaderTB, 0, 0);
-            this.BusinessNameLP.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BusinessNameLP.Location = new System.Drawing.Point(3, 37);
-            this.BusinessNameLP.Name = "BusinessNameLP";
-            this.BusinessNameLP.RowCount = 2;
-            this.BusinessNameLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 21F));
-            this.BusinessNameLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.BusinessNameLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.BusinessNameLP.Size = new System.Drawing.Size(417, 237);
-            this.BusinessNameLP.TabIndex = 17;
-            // 
-            // BussinessNameHeaderTB
-            // 
-            this.BussinessNameHeaderTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.BussinessNameHeaderTB.Cursor = System.Windows.Forms.Cursors.Default;
-            this.BussinessNameHeaderTB.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BussinessNameHeaderTB.Location = new System.Drawing.Point(3, 3);
-            this.BussinessNameHeaderTB.Name = "BussinessNameHeaderTB";
-            this.BussinessNameHeaderTB.ReadOnly = true;
-            this.BussinessNameHeaderTB.Size = new System.Drawing.Size(411, 15);
-            this.BussinessNameHeaderTB.TabIndex = 4;
-            this.BussinessNameHeaderTB.Text = "Business Name";
-            this.BussinessNameHeaderTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // BusinessNameTB
-            // 
-            this.BusinessNameTB.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BusinessNameTB.Location = new System.Drawing.Point(3, 24);
-            this.BusinessNameTB.Name = "BusinessNameTB";
-            this.BusinessNameTB.Size = new System.Drawing.Size(411, 22);
-            this.BusinessNameTB.TabIndex = 12;
-            this.BusinessNameTB.Text = "Enter Business name...";
-            // 
-            // BusInfoTB
-            // 
-            this.BusInfoTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.BusInfoTB.Cursor = System.Windows.Forms.Cursors.Default;
-            this.BusInfoTB.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BusInfoTB.Location = new System.Drawing.Point(3, 280);
-            this.BusInfoTB.Name = "BusInfoTB";
-            this.BusInfoTB.ReadOnly = true;
-            this.BusInfoTB.Size = new System.Drawing.Size(417, 15);
-            this.BusInfoTB.TabIndex = 18;
-            this.BusInfoTB.Text = "Business Information";
-            this.BusInfoTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // AdminInfoLP
             // 
@@ -1762,47 +1699,114 @@
             this.AdminInfoLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.AdminInfoLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.AdminInfoLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.AdminInfoLP.Size = new System.Drawing.Size(417, 385);
+            this.AdminInfoLP.Size = new System.Drawing.Size(418, 385);
             this.AdminInfoLP.TabIndex = 1;
             // 
-            // BusNameLP
+            // tableLayoutPanel6
             // 
-            this.BusNameLP.ColumnCount = 2;
-            this.BusNameLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40.14598F));
-            this.BusNameLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 59.85402F));
-            this.BusNameLP.Controls.Add(this.BusNameValue, 0, 0);
-            this.BusNameLP.Controls.Add(this.BusNameHeaderTB, 0, 0);
-            this.BusNameLP.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BusNameLP.Location = new System.Drawing.Point(3, 3);
-            this.BusNameLP.Name = "BusNameLP";
-            this.BusNameLP.RowCount = 1;
-            this.BusNameLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.BusNameLP.Size = new System.Drawing.Size(411, 32);
-            this.BusNameLP.TabIndex = 0;
+            this.tableLayoutPanel6.ColumnCount = 2;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel6.Controls.Add(this.button1, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.button2, 1, 0);
+            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 342);
+            this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 1;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(418, 43);
+            this.tableLayoutPanel6.TabIndex = 15;
             // 
-            // BusNameHeaderTB
+            // button1
             // 
-            this.BusNameHeaderTB.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.BusNameHeaderTB.BackColor = System.Drawing.Color.White;
-            this.BusNameHeaderTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.BusNameHeaderTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BusNameHeaderTB.Location = new System.Drawing.Point(4, 8);
-            this.BusNameHeaderTB.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.BusNameHeaderTB.Name = "BusNameHeaderTB";
-            this.BusNameHeaderTB.ReadOnly = true;
-            this.BusNameHeaderTB.Size = new System.Drawing.Size(95, 15);
-            this.BusNameHeaderTB.TabIndex = 6;
-            this.BusNameHeaderTB.Text = "Name:";
+            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button1.Location = new System.Drawing.Point(8, 8);
+            this.button1.Margin = new System.Windows.Forms.Padding(8);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(193, 27);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "Edit";
+            this.button1.UseVisualStyleBackColor = true;
             // 
-            // BusNameValue
+            // button2
             // 
-            this.BusNameValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.BusNameValue.Enabled = false;
-            this.BusNameValue.Location = new System.Drawing.Point(165, 5);
-            this.BusNameValue.Margin = new System.Windows.Forms.Padding(1);
-            this.BusNameValue.Name = "BusNameValue";
-            this.BusNameValue.Size = new System.Drawing.Size(245, 22);
-            this.BusNameValue.TabIndex = 29;
+            this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button2.Enabled = false;
+            this.button2.Location = new System.Drawing.Point(217, 8);
+            this.button2.Margin = new System.Windows.Forms.Padding(8);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(193, 27);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "Update";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // AdminCityLP
+            // 
+            this.AdminCityLP.ColumnCount = 4;
+            this.AdminCityLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.80269F));
+            this.AdminCityLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.19731F));
+            this.AdminCityLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 71F));
+            this.AdminCityLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 117F));
+            this.AdminCityLP.Controls.Add(this.AdminStateHeaderTb, 0, 0);
+            this.AdminCityLP.Controls.Add(this.AdminCityValue, 1, 0);
+            this.AdminCityLP.Controls.Add(this.textBox1, 3, 0);
+            this.AdminCityLP.Controls.Add(this.CityHeaderTb, 2, 0);
+            this.AdminCityLP.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.AdminCityLP.Location = new System.Drawing.Point(3, 79);
+            this.AdminCityLP.Name = "AdminCityLP";
+            this.AdminCityLP.RowCount = 1;
+            this.AdminCityLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.AdminCityLP.Size = new System.Drawing.Size(412, 32);
+            this.AdminCityLP.TabIndex = 2;
+            // 
+            // AdminStateHeaderTb
+            // 
+            this.AdminStateHeaderTb.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.AdminStateHeaderTb.BackColor = System.Drawing.Color.White;
+            this.AdminStateHeaderTb.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.AdminStateHeaderTb.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AdminStateHeaderTb.Location = new System.Drawing.Point(4, 8);
+            this.AdminStateHeaderTb.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.AdminStateHeaderTb.Name = "AdminStateHeaderTb";
+            this.AdminStateHeaderTb.ReadOnly = true;
+            this.AdminStateHeaderTb.Size = new System.Drawing.Size(39, 15);
+            this.AdminStateHeaderTb.TabIndex = 30;
+            this.AdminStateHeaderTb.Text = "State:";
+            // 
+            // AdminCityValue
+            // 
+            this.AdminCityValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.AdminCityValue.Enabled = false;
+            this.AdminCityValue.Location = new System.Drawing.Point(63, 5);
+            this.AdminCityValue.Margin = new System.Windows.Forms.Padding(1);
+            this.AdminCityValue.Name = "AdminCityValue";
+            this.AdminCityValue.Size = new System.Drawing.Size(146, 22);
+            this.AdminCityValue.TabIndex = 29;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.textBox1.Enabled = false;
+            this.textBox1.Location = new System.Drawing.Point(295, 5);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(1);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(115, 22);
+            this.textBox1.TabIndex = 31;
+            // 
+            // CityHeaderTb
+            // 
+            this.CityHeaderTb.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.CityHeaderTb.BackColor = System.Drawing.Color.White;
+            this.CityHeaderTb.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.CityHeaderTb.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CityHeaderTb.Location = new System.Drawing.Point(227, 8);
+            this.CityHeaderTb.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.CityHeaderTb.Name = "CityHeaderTb";
+            this.CityHeaderTb.ReadOnly = true;
+            this.CityHeaderTb.Size = new System.Drawing.Size(39, 15);
+            this.CityHeaderTb.TabIndex = 6;
+            this.CityHeaderTb.Text = "City:";
             // 
             // AdminAddressLP
             // 
@@ -1816,14 +1820,14 @@
             this.AdminAddressLP.Name = "AdminAddressLP";
             this.AdminAddressLP.RowCount = 1;
             this.AdminAddressLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.AdminAddressLP.Size = new System.Drawing.Size(411, 32);
+            this.AdminAddressLP.Size = new System.Drawing.Size(412, 32);
             this.AdminAddressLP.TabIndex = 1;
             // 
             // AdminAddressValue
             // 
             this.AdminAddressValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.AdminAddressValue.Enabled = false;
-            this.AdminAddressValue.Location = new System.Drawing.Point(165, 5);
+            this.AdminAddressValue.Location = new System.Drawing.Point(166, 5);
             this.AdminAddressValue.Margin = new System.Windows.Forms.Padding(1);
             this.AdminAddressValue.Name = "AdminAddressValue";
             this.AdminAddressValue.Size = new System.Drawing.Size(245, 22);
@@ -1843,72 +1847,44 @@
             this.AddressHeaderTB.TabIndex = 6;
             this.AddressHeaderTB.Text = "Address:";
             // 
-            // AdminCityLP
+            // BusNameLP
             // 
-            this.AdminCityLP.ColumnCount = 4;
-            this.AdminCityLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.80269F));
-            this.AdminCityLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.19731F));
-            this.AdminCityLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 71F));
-            this.AdminCityLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 116F));
-            this.AdminCityLP.Controls.Add(this.AdminStateHeaderTb, 0, 0);
-            this.AdminCityLP.Controls.Add(this.AdminCityValue, 1, 0);
-            this.AdminCityLP.Controls.Add(this.textBox1, 3, 0);
-            this.AdminCityLP.Controls.Add(this.CityHeaderTb, 2, 0);
-            this.AdminCityLP.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.AdminCityLP.Location = new System.Drawing.Point(3, 79);
-            this.AdminCityLP.Name = "AdminCityLP";
-            this.AdminCityLP.RowCount = 1;
-            this.AdminCityLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.AdminCityLP.Size = new System.Drawing.Size(411, 32);
-            this.AdminCityLP.TabIndex = 2;
+            this.BusNameLP.ColumnCount = 2;
+            this.BusNameLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40.14598F));
+            this.BusNameLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 59.85402F));
+            this.BusNameLP.Controls.Add(this.BusNameValue, 0, 0);
+            this.BusNameLP.Controls.Add(this.BusNameHeaderTB, 0, 0);
+            this.BusNameLP.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BusNameLP.Location = new System.Drawing.Point(3, 3);
+            this.BusNameLP.Name = "BusNameLP";
+            this.BusNameLP.RowCount = 1;
+            this.BusNameLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.BusNameLP.Size = new System.Drawing.Size(412, 32);
+            this.BusNameLP.TabIndex = 0;
             // 
-            // AdminCityValue
+            // BusNameValue
             // 
-            this.AdminCityValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.AdminCityValue.Enabled = false;
-            this.AdminCityValue.Location = new System.Drawing.Point(63, 5);
-            this.AdminCityValue.Margin = new System.Windows.Forms.Padding(1);
-            this.AdminCityValue.Name = "AdminCityValue";
-            this.AdminCityValue.Size = new System.Drawing.Size(146, 22);
-            this.AdminCityValue.TabIndex = 29;
+            this.BusNameValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.BusNameValue.Enabled = false;
+            this.BusNameValue.Location = new System.Drawing.Point(166, 5);
+            this.BusNameValue.Margin = new System.Windows.Forms.Padding(1);
+            this.BusNameValue.Name = "BusNameValue";
+            this.BusNameValue.Size = new System.Drawing.Size(245, 22);
+            this.BusNameValue.TabIndex = 29;
             // 
-            // CityHeaderTb
+            // BusNameHeaderTB
             // 
-            this.CityHeaderTb.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.CityHeaderTb.BackColor = System.Drawing.Color.White;
-            this.CityHeaderTb.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.CityHeaderTb.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CityHeaderTb.Location = new System.Drawing.Point(227, 8);
-            this.CityHeaderTb.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.CityHeaderTb.Name = "CityHeaderTb";
-            this.CityHeaderTb.ReadOnly = true;
-            this.CityHeaderTb.Size = new System.Drawing.Size(39, 15);
-            this.CityHeaderTb.TabIndex = 6;
-            this.CityHeaderTb.Text = "City:";
-            // 
-            // AdminStateHeaderTb
-            // 
-            this.AdminStateHeaderTb.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.AdminStateHeaderTb.BackColor = System.Drawing.Color.White;
-            this.AdminStateHeaderTb.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.AdminStateHeaderTb.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AdminStateHeaderTb.Location = new System.Drawing.Point(4, 8);
-            this.AdminStateHeaderTb.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.AdminStateHeaderTb.Name = "AdminStateHeaderTb";
-            this.AdminStateHeaderTb.ReadOnly = true;
-            this.AdminStateHeaderTb.Size = new System.Drawing.Size(39, 15);
-            this.AdminStateHeaderTb.TabIndex = 30;
-            this.AdminStateHeaderTb.Text = "State:";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(295, 5);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(1);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(115, 22);
-            this.textBox1.TabIndex = 31;
+            this.BusNameHeaderTB.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.BusNameHeaderTB.BackColor = System.Drawing.Color.White;
+            this.BusNameHeaderTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.BusNameHeaderTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BusNameHeaderTB.Location = new System.Drawing.Point(4, 8);
+            this.BusNameHeaderTB.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.BusNameHeaderTB.Name = "BusNameHeaderTB";
+            this.BusNameHeaderTB.ReadOnly = true;
+            this.BusNameHeaderTB.Size = new System.Drawing.Size(95, 15);
+            this.BusNameHeaderTB.TabIndex = 6;
+            this.BusNameHeaderTB.Text = "Name:";
             // 
             // tableLayoutPanel1
             // 
@@ -1922,14 +1898,14 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(411, 32);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(412, 32);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
             // textBox2
             // 
             this.textBox2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.textBox2.Enabled = false;
-            this.textBox2.Location = new System.Drawing.Point(165, 5);
+            this.textBox2.Location = new System.Drawing.Point(166, 5);
             this.textBox2.Margin = new System.Windows.Forms.Padding(1);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(245, 22);
@@ -1976,14 +1952,14 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(411, 32);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(412, 32);
             this.tableLayoutPanel2.TabIndex = 8;
             // 
             // textBox5
             // 
             this.textBox5.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.textBox5.Enabled = false;
-            this.textBox5.Location = new System.Drawing.Point(165, 5);
+            this.textBox5.Location = new System.Drawing.Point(166, 5);
             this.textBox5.Margin = new System.Windows.Forms.Padding(1);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(245, 22);
@@ -2015,14 +1991,14 @@
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(411, 32);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(412, 32);
             this.tableLayoutPanel3.TabIndex = 9;
             // 
             // textBox7
             // 
             this.textBox7.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.textBox7.Enabled = false;
-            this.textBox7.Location = new System.Drawing.Point(165, 5);
+            this.textBox7.Location = new System.Drawing.Point(166, 5);
             this.textBox7.Margin = new System.Windows.Forms.Padding(1);
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(245, 22);
@@ -2048,7 +2024,7 @@
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.22613F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.77387F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 89F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 122F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 123F));
             this.tableLayoutPanel4.Controls.Add(this.textBox9, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.textBox10, 1, 0);
             this.tableLayoutPanel4.Controls.Add(this.textBox11, 3, 0);
@@ -2058,7 +2034,7 @@
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(411, 32);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(412, 32);
             this.tableLayoutPanel4.TabIndex = 10;
             // 
             // textBox9
@@ -2115,7 +2091,7 @@
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52.01794F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.98206F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 122F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 123F));
             this.tableLayoutPanel5.Controls.Add(this.textBox13, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.textBox14, 1, 0);
             this.tableLayoutPanel5.Controls.Add(this.textBox15, 3, 0);
@@ -2125,7 +2101,7 @@
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(411, 32);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(412, 32);
             this.tableLayoutPanel5.TabIndex = 11;
             // 
             // textBox13
@@ -2176,44 +2152,68 @@
             this.textBox16.TabIndex = 6;
             this.textBox16.Text = "Stars:";
             // 
-            // tableLayoutPanel6
+            // BusInfoTB
             // 
-            this.tableLayoutPanel6.ColumnCount = 2;
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel6.Controls.Add(this.button1, 0, 0);
-            this.tableLayoutPanel6.Controls.Add(this.button2, 1, 0);
-            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 342);
-            this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.tableLayoutPanel6.RowCount = 1;
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(417, 43);
-            this.tableLayoutPanel6.TabIndex = 15;
+            this.BusInfoTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.BusInfoTB.Cursor = System.Windows.Forms.Cursors.Default;
+            this.BusInfoTB.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BusInfoTB.Location = new System.Drawing.Point(3, 280);
+            this.BusInfoTB.Name = "BusInfoTB";
+            this.BusInfoTB.ReadOnly = true;
+            this.BusInfoTB.Size = new System.Drawing.Size(418, 15);
+            this.BusInfoTB.TabIndex = 18;
+            this.BusInfoTB.Text = "Business Information";
+            this.BusInfoTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // button1
+            // BusInfoHeaderTB
             // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button1.Location = new System.Drawing.Point(8, 8);
-            this.button1.Margin = new System.Windows.Forms.Padding(8);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(192, 27);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Edit";
-            this.button1.UseVisualStyleBackColor = true;
+            this.BusInfoHeaderTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.BusInfoHeaderTB.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.BusInfoHeaderTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BusInfoHeaderTB.Location = new System.Drawing.Point(20, 12);
+            this.BusInfoHeaderTB.Margin = new System.Windows.Forms.Padding(20, 2, 3, 2);
+            this.BusInfoHeaderTB.Name = "BusInfoHeaderTB";
+            this.BusInfoHeaderTB.Size = new System.Drawing.Size(401, 20);
+            this.BusInfoHeaderTB.TabIndex = 16;
+            this.BusInfoHeaderTB.Text = "Business Information";
             // 
-            // button2
+            // BusinessNameLP
             // 
-            this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button2.Enabled = false;
-            this.button2.Location = new System.Drawing.Point(216, 8);
-            this.button2.Margin = new System.Windows.Forms.Padding(8);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(193, 27);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Update";
-            this.button2.UseVisualStyleBackColor = true;
+            this.BusinessNameLP.ColumnCount = 1;
+            this.BusinessNameLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.BusinessNameLP.Controls.Add(this.BusinessNameTB, 0, 1);
+            this.BusinessNameLP.Controls.Add(this.BussinessNameHeaderTB, 0, 0);
+            this.BusinessNameLP.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BusinessNameLP.Location = new System.Drawing.Point(3, 37);
+            this.BusinessNameLP.Name = "BusinessNameLP";
+            this.BusinessNameLP.RowCount = 2;
+            this.BusinessNameLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 21F));
+            this.BusinessNameLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.BusinessNameLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.BusinessNameLP.Size = new System.Drawing.Size(418, 237);
+            this.BusinessNameLP.TabIndex = 17;
+            // 
+            // BusinessNameTB
+            // 
+            this.BusinessNameTB.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BusinessNameTB.Location = new System.Drawing.Point(3, 24);
+            this.BusinessNameTB.Name = "BusinessNameTB";
+            this.BusinessNameTB.Size = new System.Drawing.Size(412, 22);
+            this.BusinessNameTB.TabIndex = 12;
+            this.BusinessNameTB.Text = "Enter Business name...";
+            // 
+            // BussinessNameHeaderTB
+            // 
+            this.BussinessNameHeaderTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.BussinessNameHeaderTB.Cursor = System.Windows.Forms.Cursors.Default;
+            this.BussinessNameHeaderTB.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BussinessNameHeaderTB.Location = new System.Drawing.Point(3, 3);
+            this.BussinessNameHeaderTB.Name = "BussinessNameHeaderTB";
+            this.BussinessNameHeaderTB.ReadOnly = true;
+            this.BussinessNameHeaderTB.Size = new System.Drawing.Size(412, 15);
+            this.BussinessNameHeaderTB.TabIndex = 4;
+            this.BussinessNameHeaderTB.Text = "Business Name";
+            this.BussinessNameHeaderTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // YelpGUI
             // 
@@ -2283,16 +2283,15 @@
             this.AdminLP.ResumeLayout(false);
             this.AdminLeftLP.ResumeLayout(false);
             this.AdminLeftLP.PerformLayout();
-            this.BusinessNameLP.ResumeLayout(false);
-            this.BusinessNameLP.PerformLayout();
             this.AdminInfoLP.ResumeLayout(false);
             this.AdminInfoLP.PerformLayout();
-            this.BusNameLP.ResumeLayout(false);
-            this.BusNameLP.PerformLayout();
-            this.AdminAddressLP.ResumeLayout(false);
-            this.AdminAddressLP.PerformLayout();
+            this.tableLayoutPanel6.ResumeLayout(false);
             this.AdminCityLP.ResumeLayout(false);
             this.AdminCityLP.PerformLayout();
+            this.AdminAddressLP.ResumeLayout(false);
+            this.AdminAddressLP.PerformLayout();
+            this.BusNameLP.ResumeLayout(false);
+            this.BusNameLP.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -2303,7 +2302,8 @@
             this.tableLayoutPanel4.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
-            this.tableLayoutPanel6.ResumeLayout(false);
+            this.BusinessNameLP.ResumeLayout(false);
+            this.BusinessNameLP.PerformLayout();
             this.ResumeLayout(false);
 
         }
