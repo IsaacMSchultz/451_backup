@@ -1,0 +1,13 @@
+YelpApp Bugs:
+
+Categories list is not populating
+Categories are not compounded (using or instead of and when querying busineses)
+Map marks all businesses with the given names, it needs to query the locations by business_ids not names
+A user can create multiple review and map windows
+App breaks in ExecuteCategorizedQuery when the user logs and then you go to select a business state (Npgsql.PostgresException: 'External component has thrown an exception.')
+	Also happens when querying user after you have already queried business
+If a user is not logged in and a user views the map, it is not centeralized on anything
+App breaks if a user tries to redisplay the map after viewing it once
+If the businesses change, their pins still appear on the map
+Friends most recent review grid takes ~10 sec to populate (Use indexing once I learn how to)
+The friends most recent review grid query results in the name column repeating twice, even though the query run in pgadmin returns the different names 

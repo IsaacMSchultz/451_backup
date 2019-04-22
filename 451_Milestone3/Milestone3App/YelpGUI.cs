@@ -9,6 +9,9 @@ using QueryEngine1;
 using System.Linq;
 using MapControlLibrary;
 using Microsoft.Maps.MapControl.WPF;
+using System.Windows.Media;
+//using Microsoft.Maps.SpatialMath;
+//using Microsoft.Maps.SpatialMath.Geometry;
 
 namespace Milestone2App
 {
@@ -515,19 +518,29 @@ namespace Milestone2App
 
         private void MapButton_Click(object sender, EventArgs e)
         {
-            //foreach (double value in queryEngine.GetUserLocation(currUserId))
-            //{
-
-            //}
+            // Resets the map each time the button is clicked, even if it is already open
+            if (this.mapTest.Visible)
+            {
+                mapTest.Close();
+            }
+            
+            // Remove all pins on the map
+            mapTest.userControl11.map.Children.Clear();
 
             List<double> userLocation = queryEngine.GetUserLocation(currUserId);
             List<string> selectedBusinesses = new List<string>();
+            Microsoft.Maps.MapControl.WPF.Location userCoord = null;
 
             // Only set the map view to the user's position if the user has both a lat and long value entered
             if (userLocation.Count == 2)
             {
-                Microsoft.Maps.MapControl.WPF.Location temp = new Microsoft.Maps.MapControl.WPF.Location(userLocation[0], userLocation[1]);
-                mapTest.userControl11.map.SetView(temp, 10);
+                userCoord = new Microsoft.Maps.MapControl.WPF.Location(userLocation[0], userLocation[1]);
+                Pushpin pin = new Pushpin();
+                pin.Background = new SolidColorBrush(Color.FromArgb(200, 0, 100, 100));
+                pin.Location = userCoord;
+                mapTest.userControl11.map.Children.Add(pin);
+                
+                mapTest.userControl11.map.SetView(userCoord, 10);
             }
 
             // Add pins for all of the businesses in the grid
@@ -535,17 +548,37 @@ namespace Milestone2App
             // then I will query the locations for the businesses
             foreach (DataGridViewRow row in businessGrid.Rows)
             {
-                selectedBusinesses.Add(row.Cells[0].Value.ToString());
+                selectedBusinesses.Add(row.Cells[9].Value.ToString());
             }
 
             // Need to protect against case where no businesses are present in the grid
             foreach (List<double> locations in queryEngine.GetBusinessLocations(selectedBusinesses))
             {
-                Microsoft.Maps.MapControl.WPF.Location temp = new Microsoft.Maps.MapControl.WPF.Location(locations[0], locations[1]);
+                Microsoft.Maps.MapControl.WPF.Location busCoord = new Microsoft.Maps.MapControl.WPF.Location(locations[0], locations[1]);
                 Pushpin pin = new Pushpin();
-                pin.Location = temp;
+                pin.Location = busCoord;
                 mapTest.userControl11.map.Children.Add(pin);
+
+                mapTest.userControl11.map.SetView(busCoord, 13);
+
+                // Draw lines back to thea user to make map more readable
+                if (userCoord != null)
+                {
+                    MapPolyline polyline = new MapPolyline();
+                    polyline.Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.DarkRed);
+                    polyline.StrokeThickness = 5;
+                    polyline.Opacity = 0.7;
+                    polyline.Locations = new LocationCollection() {
+                        userCoord,
+                        busCoord };
+
+                    mapTest.userControl11.map.Children.Add(polyline);
+                }
             }
+            MapPolygon polygon = new MapPolygon();
+            //Microsoft.Maps.SpatialMath.Geometry.centroid(polygon);
+
+            //centroid(polygon);
 
             // Need to remove children when different businesses are selected
             this.mapTest.Show();

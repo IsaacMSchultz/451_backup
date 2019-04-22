@@ -19,12 +19,27 @@ namespace Milestone2App
             InitializeComponent();
         }
 
+        // Never runs
         private void MapForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             // Enable the MapButton on the YelpGUI
+            this.Hide();
+            this.Parent = null;
+            //e.Cancel = true;
+        }
+
+        // Don't need
+        private void MapForm_Load(object sender, EventArgs e)
+        {
 
         }
-        
+
+        private void MapForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Hide();
+            this.Parent = null;
+            e.Cancel = true;
+        }
     }
     
 }

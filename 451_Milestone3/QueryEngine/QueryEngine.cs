@@ -25,8 +25,8 @@ namespace QueryEngine1
         const string chars = "abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_- ";
 
         public event PropertyChangedEventHandler yelpDataChanged; // event for notifying that there was a property changed. 
-        //private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone3db";
-        private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone2db";
+        private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone3db";
+        //private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone2db";
 
         public QueryEngine()
         {
@@ -441,25 +441,25 @@ namespace QueryEngine1
 
         // Each business will have two values in their list: latitude and longitude
         // Need to change this to search based off of business_ids
-        public List<List<double>> GetBusinessLocations(List<string> businessNames)
+        public List<List<double>> GetBusinessLocations(List<string> businessIds)
         {
             List<List<double>> results = new List<List<double>>();
             ReadOnlyCollection<NpgsqlDbColumn> columns = new ReadOnlyCollection<NpgsqlDbColumn>(new List<NpgsqlDbColumn>());
 
             //string query = "select b.latitude, b.longitude from business as b where b.name = 'Blimpie' or b.name = 'Back-Health Chiropractic' or b.name = 'QQ Foot Spa'";
-            string query = "select b.latitude, b.longitude from business as b where b.name";
+            string query = "select b.latitude, b.longitude from business as b where b.business_id";
 
 
-            foreach (string businessName in businessNames)
+            foreach (string businessId in businessIds)
             {
-                if (businessName != businessNames[businessNames.Count - 1])
+                if (businessId != businessIds[businessIds.Count - 1])
                 {
-                    query = query + " = '" + businessName + "' or b.name";
+                    query = query + " = '" + businessId + "' or b.business_id";
 
                 }
                 else
                 {
-                    query = query + " = '" + businessName + "'";
+                    query = query + " = '" + businessId + "'";
                 }
             }
 
