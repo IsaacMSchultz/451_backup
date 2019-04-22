@@ -368,22 +368,29 @@ namespace QueryEngine1
 
         public bool PostReview(string reviewText, int reviewStars, string busID, string UserID)
         {
-            int rows = 0;
-            string reviewID = new string(Enumerable.Repeat(chars, 22).Select(s => s[random.Next(s.Length)]).ToArray()); //makes a random 22 charachter string
-            using (var connection = new NpgsqlConnection(LOGININFO))
+            try
             {
-                connection.Open();
-                using (var cmd = new NpgsqlCommand())
+                int rows = 0;
+                string reviewID = new string(Enumerable.Repeat(chars, 22).Select(s => s[random.Next(s.Length)]).ToArray()); //makes a random 22 charachter string
+                using (var connection = new NpgsqlConnection(LOGININFO))
                 {
-                    cmd.Connection = connection;
-                    cmd.CommandText = "INSERT INTO review VALUES ('" + reviewID + "', '" + busID + "', '" + UserID + "', '" + reviewStars +
-                        "', NOW(), '" + reviewText + "', 0, 0, 0);";
-                    rows = cmd.ExecuteNonQuery();
+                    connection.Open();
+                    using (var cmd = new NpgsqlCommand())
+                    {
+                        cmd.Connection = connection;
+                        cmd.CommandText = "INSERT INTO review VALUES ('" + reviewID + "', '" + busID + "', '" + UserID + "', '" + reviewStars +
+                            "', NOW(), '" + reviewText + "', 0, 0, 0);";
+                        rows = cmd.ExecuteNonQuery();
+                    }
+                    connection.Close();
                 }
-                connection.Close();
+                if (rows > 0)
+                    return true;
             }
-            if (rows > 0)
-                return true;
+            catch (NpgsqlException e)
+            {
+                Console.WriteLine(e.ToString()); //Catch errors. Mostly from reviewcount being 0 because we need the update statements!
+            }
             return false;
         }
 
@@ -418,10 +425,10 @@ namespace QueryEngine1
                                     returnValue.Add(value);
                                 }
                             }
-                                //returnValue.Add(reader[column.ColumnName]);
+                            //returnValue.Add(reader[column.ColumnName]);
                             //row.Add(reader[column.ColumnName].ToString());
                             //return
-                            
+
                         }
                     }
                 }
@@ -488,7 +495,7 @@ namespace QueryEngine1
                                     row.Add(value);
                                 }
                             }
-                                
+
                             results.Add(row);
                         }
                     }
@@ -692,7 +699,7 @@ namespace QueryEngine1
             {
                 Console.WriteLine(e.ToString());
                 return false;
-            }            
+            }
         }
     }
 }
