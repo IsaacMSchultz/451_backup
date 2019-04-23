@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.businessGrid = new System.Windows.Forms.DataGridView();
             this.CityHeader = new System.Windows.Forms.TextBox();
             this.SearchCheckBoxPanel = new System.Windows.Forms.TableLayoutPanel();
@@ -887,6 +887,7 @@
             this.AddToFavoritesButton.TabIndex = 8;
             this.AddToFavoritesButton.Text = "Add Business To Favorites";
             this.AddToFavoritesButton.UseVisualStyleBackColor = true;
+            this.AddToFavoritesButton.Click += new System.EventHandler(this.AddToFavoritesButton_Click);
             // 
             // CheckInButton
             // 
@@ -2653,14 +2654,14 @@
             this.ReviewKeywordGrid.AllowUserToAddRows = false;
             this.ReviewKeywordGrid.AllowUserToDeleteRows = false;
             this.ReviewKeywordGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ReviewKeywordGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ReviewKeywordGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.ReviewKeywordGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ReviewKeywordGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ReviewText});
@@ -2670,8 +2671,8 @@
             this.ReviewKeywordGrid.MultiSelect = false;
             this.ReviewKeywordGrid.Name = "ReviewKeywordGrid";
             this.ReviewKeywordGrid.RowHeadersVisible = false;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ReviewKeywordGrid.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ReviewKeywordGrid.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.ReviewKeywordGrid.RowTemplate.Height = 24;
             this.ReviewKeywordGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ReviewKeywordGrid.Size = new System.Drawing.Size(840, 426);
@@ -2717,7 +2718,6 @@
             this.SearchReviewsBtn.Text = "Search";
             this.SearchReviewsBtn.UseVisualStyleBackColor = true;
             this.SearchReviewsBtn.Click += new System.EventHandler(this.SearchReviewsBtn_Click);
-            this.SearchReviewsBtn.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SearchReviewsBtn_KeyPress);
             // 
             // KeywordValue
             // 
@@ -2729,6 +2729,7 @@
             this.KeywordValue.Size = new System.Drawing.Size(362, 23);
             this.KeywordValue.TabIndex = 13;
             this.KeywordValue.Text = "Enter a keyword to query reviews by...";
+            this.KeywordValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeywordValue_KeyPress);
             // 
             // KeywordHeaderTB
             // 
