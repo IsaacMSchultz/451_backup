@@ -908,15 +908,37 @@ namespace Milestone2App
                     MessageBox.Show("There are no reviews containing the phrase \"" + KeywordValue.Text + "\". Maybe you should write one!");
                 }
             }
+        }        
+
+        private void AddToFavoritesButton_Click(object sender, EventArgs e)
+        {
+            if (currBusId != "" && currUserId != "")
+            {
+                if (queryEngine.AddToFavorites(currBusId, currUserId))
+                    MessageBox.Show("Added to favorites");
+                else
+                    MessageBox.Show("Business already in favorites");
+            }
+            else
+            {
+                if (currUserId != "")
+                {
+                    MessageBox.Show("Please select a user to sign in as.");
+                }
+                if (currBusId != "")
+                {
+                    MessageBox.Show("Please select a business");
+                }
+            }
         }
 
         // Also search when the enter button is pressed
-        private void SearchReviewsBtn_KeyPress(object sender, KeyPressEventArgs e)
+        private void KeywordValue_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
-            {            
+            {
                 SearchReviewsBtn_Click(sender, e);
-                e.Handled = true;                
+                e.Handled = true;
             }
         }
     }
