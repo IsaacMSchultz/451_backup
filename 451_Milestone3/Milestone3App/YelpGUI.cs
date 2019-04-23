@@ -909,6 +909,16 @@ namespace Milestone2App
                 }
             }
         }
+
+        // Also search when the enter button is pressed
+        private void SearchReviewsBtn_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {            
+                SearchReviewsBtn_Click(sender, e);
+                e.Handled = true;                
+            }
+        }
     }
 }
 
