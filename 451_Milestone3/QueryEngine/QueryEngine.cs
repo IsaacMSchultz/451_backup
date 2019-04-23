@@ -11,9 +11,6 @@ using System.Text.RegularExpressions;
 
 namespace QueryEngine1
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class QueryEngine
     {
         private Dictionary<string, List<string>> searchParameters;
@@ -34,23 +31,6 @@ namespace QueryEngine1
             lastQuery = new List<List<string>>();
             currBusId = "";
         }
-
-        private void DataChanged(object sender, PropertyChangedEventArgs e) // Event handler for when user data changes.
-        {
-            // good model of how we will be implementing this class
-            if (sender is Review reviewChanged)
-            {
-                if (e.PropertyName == "newReview")
-                {
-                    // run an INSERT if the reviewId is not in the database
-                }
-
-                // "UPDATE review WHERE review.reviewId = " AND reviewChanged.reviewId AND " 
-            }
-            YelpPropertyChanged(sender, e);
-        }
-
-        //TODO: make a single GET function that takes the parameter we are looking for instead of many for each.
 
         /// <summary>
         /// interact with database to query the list of states contained within.  
@@ -96,9 +76,7 @@ namespace QueryEngine1
                     return ExecuteListQuery(cmd);
                 }
                 else
-                {
                     return new List<string>();
-                }
             }
             else
             {
@@ -109,34 +87,7 @@ namespace QueryEngine1
 
         public List<List<string>> GetAttributes(string id = "N/A")
         {
-            //if (id.Length < 4) // If the call was not passed with a valid id
-            //{
-            //    if (searchParameters.ContainsKey("attributes"))
-            //    {
-            //        string cmd = "SELECT DISTINCT attribute_name FROM attributes WHERE business_id IN (SELECT business_id FROM business WHERE state = '" + searchParameters["state"][0] + "')";
-
-            //        cmd += " AND business_id IN (SELECT business_id FROM business WHERE "; //building subquery to find all the cities in the listbox
-            //        foreach (string zipcode in searchParameters["zipcode"])
-            //        {
-            //            cmd += "zipcode = '" + zipcode + "' OR "; // city = 'string' OR 
-            //        }
-            //        cmd = cmd.Substring(0, cmd.Length - 3); // Cuts off the final "OR "
-            //        cmd += ")";
-
-            //        cmd += " ORDER BY category_name;";
-
-            //        return ExecuteListQuery(cmd);
-            //    }
-            //    else
-            //    {
-            //        return new List<string>();
-            //    }
-            //}
-            //else
-            //{
-            //string q = "SELECT DISTINCT attribute_name, attribute_value FROM attributes WHERE business_id = '" + id + "';";
             return ExecuteCategorizedQuery("SELECT DISTINCT attribute_name, attribute_value FROM attributes WHERE business_id = '" + id + "';");
-            //}
         }
 
         public List<List<string>> Search(string projection = "*")
@@ -364,7 +315,7 @@ namespace QueryEngine1
         {
             string query = "Select name, average_stars, yelping_since from yelpuser where user_id in (Select friend_id from friend where user_id = '" + userId + "')";
             return ExecuteCategorizedQuery(query);
-        }        
+        }
 
         // Strange bug where whichever "name" column is first will also be the 2nd column
         public List<List<string>> GetFriendsReview(string userId)
@@ -451,30 +402,38 @@ namespace QueryEngine1
             List<List<string>> returnList = new List<List<string>>();
             ReadOnlyCollection<NpgsqlDbColumn> columns = new ReadOnlyCollection<NpgsqlDbColumn>(new List<NpgsqlDbColumn>());
 
-            using (var connection = new NpgsqlConnection(LOGININFO))
+            try
             {
-                connection.Open();
-                using (var cmd = new NpgsqlCommand())
+                using (var connection = new NpgsqlConnection(LOGININFO))
                 {
-                    cmd.Connection = connection;
-                    cmd.CommandText = query;
-                    using (var reader = cmd.ExecuteReader())
+                    connection.Open();
+                    using (var cmd = new NpgsqlCommand())
                     {
-                        while (reader.Read())
+                        cmd.Connection = connection;
+                        cmd.CommandText = query;
+                        using (var reader = cmd.ExecuteReader())
                         {
-                            if (columns.Count == 0)
-                                columns = reader.GetColumnSchema();
+                            while (reader.Read())
+                            {
+                                if (columns.Count == 0)
+                                    columns = reader.GetColumnSchema();
 
-                            List<string> row = new List<string>();
+                                List<string> row = new List<string>();
 
-                            foreach (NpgsqlDbColumn column in columns)
-                                row.Add(reader[column.ColumnName].ToString());
+                                foreach (NpgsqlDbColumn column in columns)
+                                    row.Add(reader[column.ColumnName].ToString());
 
-                            returnList.Add(row);
+                                returnList.Add(row);
+                            }
                         }
                     }
+                    connection.Close();
                 }
-                connection.Close();
+            }
+            catch (NpgsqlException e)
+            {
+                Console.WriteLine(e.ToString());
+                return returnList;
             }
 
             // Returns the list of column names as the first row.
@@ -571,10 +530,8 @@ namespace QueryEngine1
                         cmd.CommandText = query;
                         using (var reader = cmd.ExecuteReader())
                         {
-                            double value = 0;
                             while (reader.Read())
-                                if (double.TryParse(reader.GetString(0), out value)) //Only add the value if it is actually a double
-                                    returnList.Add(value);
+                                returnList.Add(reader.GetDouble(0));
                         }
                     }
                     connection.Close();
