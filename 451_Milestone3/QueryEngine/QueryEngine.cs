@@ -330,7 +330,10 @@ namespace QueryEngine1
         public List<double> GetUserLocation(string userId)
         {
             string query = "Select user_latitude, user_longitude from yelpuser where user_id = '" + userId + "'";
-            return ExecuteDoubleQuery(query);
+            //return ExecuteDoubleQuery(query);
+            List<List<double>> userLocation =  ExecuteCategorizedDoubleQuery(query);
+
+            return userLocation[0];
         }
 
         // Each business will have two values in their list: latitude and longitude
@@ -573,8 +576,9 @@ namespace QueryEngine1
                         {
                             double value = 0;
                             while (reader.Read())
-                                if (double.TryParse(reader.GetString(0), out value)) //Only add the value if it is actually a double
-                                    returnList.Add(value);
+                                returnList.Add(reader.GetDouble(0));
+                            //if (double.TryParse(reader.GetString(0), out value)) //Only add the value if it is actually a double
+
                         }
                     }
                     connection.Close();

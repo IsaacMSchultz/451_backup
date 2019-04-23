@@ -9,6 +9,7 @@ using QueryEngine1;
 using System.Linq;
 using MapControlLibrary;
 using Microsoft.Maps.MapControl.WPF;
+using Microsoft.Maps.MapControl.WPF.Overlays;
 using System.Windows.Media;
 //using Microsoft.Maps.SpatialMath;
 //using Microsoft.Maps.SpatialMath.Geometry;
@@ -599,9 +600,10 @@ namespace Milestone2App
                 Pushpin pin = new Pushpin();
                 pin.Background = new SolidColorBrush(Color.FromArgb(200, 0, 100, 100));
                 pin.Location = userCoord;
-                //pin.Tag = "Yo";
-                pin.Heading = 12.5;
+                ShadowText label = new ShadowText();
+                label.Text = "User";
                 mapTest.userControl11.map.Children.Add(pin);
+                mapTest.userControl11.map.Children.Add(label);
                 
                 //mapTest.userControl11.map.SetView(userCoord, 10);
             }
@@ -622,9 +624,7 @@ namespace Milestone2App
                 pin.Location = busCoord;
                 mapTest.userControl11.map.Children.Add(pin);
 
-                mapTest.userControl11.map.SetView(busCoord, 10);
-
-                //polygon.Locations.Add(busCoord);
+                mapTest.userControl11.map.SetView(busCoord, 11);
 
                 // Draw lines back to thea user to make map more readable
                 if (userCoord != null)
@@ -640,8 +640,6 @@ namespace Milestone2App
                     mapTest.userControl11.map.Children.Add(polyline);
                 }
             }
-            
-            //mapTest.userControl11.map.Children.Add(polygon);
 
             this.mapTest.Show();
         }
