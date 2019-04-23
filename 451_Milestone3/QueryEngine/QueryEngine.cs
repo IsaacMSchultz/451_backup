@@ -198,6 +198,11 @@ namespace QueryEngine1
             return ExecuteCategorizedQuery("SELECT " + projection + " from yelpuser WHERE yelpuser.user_id = '" + id + "';");
         }
 
+        public List<List<string>> GetReviewsByKeyword(string keyword, string projection = "*")
+        {
+            return ExecuteCategorizedQuery("SELECT " + projection + " from review WHERE text like '%" + keyword + "%'");
+        }
+
         public List<List<string>> GetReviews(string id, string projection = "*")
         {
             return ExecuteCategorizedQuery("SELECT " + projection + " from review WHERE business_id = '" + id + "' ORDER BY review_stars;");
