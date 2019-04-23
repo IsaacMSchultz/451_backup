@@ -2797,7 +2797,7 @@
             // FunnyVotes
             // 
             this.FunnyVotes.HeaderText = "Funny Votes";
-            this.FunnyVotes.MinimumWidth = 100;
+            this.FunnyVotes.MinimumWidth = 80;
             this.FunnyVotes.Name = "FunnyVotes";
             this.FunnyVotes.ReadOnly = true;
             // 
