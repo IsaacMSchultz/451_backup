@@ -629,8 +629,8 @@ namespace Milestone2App
                 {
                     MapPolyline polyline = new MapPolyline();
                     polyline.Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.DarkRed);
-                    polyline.StrokeThickness = 5;
-                    polyline.Opacity = 0.7;
+                    polyline.StrokeThickness = 3;
+                    polyline.Opacity = 0.5;
                     polyline.Locations = new LocationCollection() {
                         userCoord,
                         busCoord };
@@ -794,7 +794,13 @@ namespace Milestone2App
             
             queryEngine.updateAttribute(currAdminId, AttributeNameValue.Text, AttributeValValue.Text);
 
+            AttributeNameValue.Text = string.Empty;
+            AttributeValValue.Text = string.Empty;
+
             updateBussAttributesGrid();
+
+            // Need to update the business UI when business attributes are updated
+            // businessGrid_CellContentClick(null, null);
         }
 
         /// <summary>
@@ -844,6 +850,13 @@ namespace Milestone2App
             {
                 MessageBox.Show("Attribute is already present in database!");
             }
+
+            NewAttrValue.Text = string.Empty;
+            NewAttriValValue.Text = string.Empty;
+            updateBussAttributesGrid();
+
+            // Need to update the business UI when business attributes are updated
+            //businessGrid_CellContentClick(null, null);
         }
 
         private void CheckInButton_Click(object sender, EventArgs e)
@@ -863,6 +876,36 @@ namespace Milestone2App
                 if (currBusId != "")
                 {
                     MessageBox.Show("Please select a business");
+                }
+            }
+        }
+
+        private void SearchReviewsBtn_Click(object sender, EventArgs e)
+        {
+            if (KeywordValue.Text != string.Empty)
+            {
+                int row = 0, col = 0;
+
+                ReviewKeywordGrid.Rows.Clear(); //removes all the data previously in the grid.            
+
+                foreach (List<string> listRow in queryEngine.GetReviewsByKeyword(KeywordValue.Text, "text"))
+                {
+                    if (row > 0)
+                    {
+                        ReviewKeywordGrid.Rows.Add(); //the index of the new row
+                        foreach (string item in listRow)
+                        {
+                            ReviewKeywordGrid.Rows[row - 1].Cells[col++].Value = item;
+                        }
+                           
+                        col = 0;
+                    }
+                    row++;
+                }
+
+                if (ReviewKeywordGrid.Rows.Count == 0)
+                {
+                    MessageBox.Show("There are no reviews containing the phrase \"" + KeywordValue.Text + "\". Maybe you should write one!");
                 }
             }
         }
