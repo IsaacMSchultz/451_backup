@@ -599,6 +599,8 @@ namespace Milestone2App
                 Pushpin pin = new Pushpin();
                 pin.Background = new SolidColorBrush(Color.FromArgb(200, 0, 100, 100));
                 pin.Location = userCoord;
+                //pin.Tag = "Yo";
+                pin.Heading = 12.5;
                 mapTest.userControl11.map.Children.Add(pin);
                 
                 //mapTest.userControl11.map.SetView(userCoord, 10);
@@ -798,6 +800,7 @@ namespace Milestone2App
             AttributeValValue.Text = string.Empty;
 
             updateBussAttributesGrid();
+            updateGrid();
 
             // Need to update the business UI when business attributes are updated
             // businessGrid_CellContentClick(null, null);
@@ -854,9 +857,7 @@ namespace Milestone2App
             NewAttrValue.Text = string.Empty;
             NewAttriValValue.Text = string.Empty;
             updateBussAttributesGrid();
-
-            // Need to update the business UI when business attributes are updated
-            //businessGrid_CellContentClick(null, null);
+            updateGrid();
         }
 
         private void CheckInButton_Click(object sender, EventArgs e)
