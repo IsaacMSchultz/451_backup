@@ -885,7 +885,7 @@ namespace Milestone2App
 
                 ReviewKeywordGrid.Rows.Clear(); //removes all the data previously in the grid.            
 
-                foreach (List<string> listRow in queryEngine.GetReviewsByKeyword(KeywordValue.Text, "text"))
+                foreach (List<string> listRow in queryEngine.GetReviewsByKeyword(KeywordValue.Text))
                 {
                     if (row > 0)
                     {

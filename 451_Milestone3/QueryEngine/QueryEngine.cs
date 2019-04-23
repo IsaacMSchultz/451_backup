@@ -367,7 +367,13 @@ namespace QueryEngine1
         {
             string query = "Select name, average_stars, yelping_since from yelpuser where user_id in (Select friend_id from friend where user_id = '" + userId + "')";
             return ExecuteCategorizedQuery(query);
-        }        
+        }
+
+        public List<List<string>> GetReviewsByKeyword(string keyword)
+        {
+            string query = "SELECT business.name, funny_vote, text FROM review INNER JOIN business ON business.business_id = review.business_id WHERE review.text like '%" + keyword+ "%'"; 
+            return ExecuteCategorizedQuery(query);
+        }
 
         // Strange bug where whichever "name" column is first will also be the 2nd column
         public List<List<string>> GetFriendsReview(string userId)

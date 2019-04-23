@@ -200,11 +200,13 @@
             this.KeywordSearchHeader = new System.Windows.Forms.TextBox();
             this.KeywordDataLP = new System.Windows.Forms.TableLayoutPanel();
             this.ReviewKeywordGrid = new System.Windows.Forms.DataGridView();
-            this.ReviewText = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.KeywordValueHeaderLP = new System.Windows.Forms.TableLayoutPanel();
             this.SearchReviewsBtn = new System.Windows.Forms.Button();
             this.KeywordValue = new System.Windows.Forms.TextBox();
             this.KeywordHeaderTB = new System.Windows.Forms.TextBox();
+            this.BusinessName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FunnyVotes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ReviewText = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).BeginInit();
             this.SearchCheckBoxPanel.SuspendLayout();
             this.StateDropdownPanel.SuspendLayout();
@@ -2712,6 +2714,8 @@
             this.ReviewKeywordGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.ReviewKeywordGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ReviewKeywordGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.BusinessName,
+            this.FunnyVotes,
             this.ReviewText});
             this.ReviewKeywordGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ReviewKeywordGrid.Location = new System.Drawing.Point(9, 84);
@@ -2725,16 +2729,6 @@
             this.ReviewKeywordGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ReviewKeywordGrid.Size = new System.Drawing.Size(1123, 529);
             this.ReviewKeywordGrid.TabIndex = 19;
-            // 
-            // ReviewText
-            // 
-            this.ReviewText.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.ReviewText.HeaderText = "Review Text";
-            this.ReviewText.MinimumWidth = 10000;
-            this.ReviewText.Name = "ReviewText";
-            this.ReviewText.ReadOnly = true;
-            this.ReviewText.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ReviewText.Width = 10000;
             // 
             // KeywordValueHeaderLP
             // 
@@ -2792,6 +2786,30 @@
             this.KeywordHeaderTB.Size = new System.Drawing.Size(95, 20);
             this.KeywordHeaderTB.TabIndex = 7;
             this.KeywordHeaderTB.Text = "Keyword:";
+            // 
+            // BusinessName
+            // 
+            this.BusinessName.HeaderText = "Business Name";
+            this.BusinessName.MinimumWidth = 300;
+            this.BusinessName.Name = "BusinessName";
+            this.BusinessName.ReadOnly = true;
+            // 
+            // FunnyVotes
+            // 
+            this.FunnyVotes.HeaderText = "Funny Votes";
+            this.FunnyVotes.MinimumWidth = 100;
+            this.FunnyVotes.Name = "FunnyVotes";
+            this.FunnyVotes.ReadOnly = true;
+            // 
+            // ReviewText
+            // 
+            this.ReviewText.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.ReviewText.HeaderText = "Review Text";
+            this.ReviewText.MinimumWidth = 10000;
+            this.ReviewText.Name = "ReviewText";
+            this.ReviewText.ReadOnly = true;
+            this.ReviewText.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ReviewText.Width = 10000;
             // 
             // YelpGUI
             // 
@@ -3076,10 +3094,12 @@
         private System.Windows.Forms.Button SearchReviewsBtn;
         private System.Windows.Forms.TextBox KeywordValue;
         private System.Windows.Forms.DataGridView ReviewKeywordGrid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ReviewText;
         private System.Windows.Forms.DataGridViewTextBoxColumn BusAdminNameCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn Value;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BusinessName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FunnyVotes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ReviewText;
     }
 }
 
