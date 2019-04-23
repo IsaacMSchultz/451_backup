@@ -798,6 +798,7 @@ namespace Milestone2App
             AttributeValValue.Text = string.Empty;
 
             updateBussAttributesGrid();
+            updateGrid();
 
             // Need to update the business UI when business attributes are updated
             // businessGrid_CellContentClick(null, null);
@@ -810,14 +811,10 @@ namespace Milestone2App
         /// <param name="e"></param>
         private void NewAttrValue_KeyDown(object sender, KeyEventArgs e)
         {
-            if (NewAttrValue.Text != string.Empty && NewAttriValValue.Text != string.Empty)
-            {
-                AddAttrBtn.Enabled = true;
-            }
-            else
-            {
-                AddAttrBtn.Enabled = false;
-            }
+            if (NewAttrValue.Text != string.Empty && NewAttriValValue.Text != string.Empty)            
+                AddAttrBtn.Enabled = true;            
+            else            
+                AddAttrBtn.Enabled = false;            
         }
 
         /// <summary>
@@ -827,14 +824,10 @@ namespace Milestone2App
         /// <param name="e"></param>
         private void NewAttriValValue_KeyDown(object sender, KeyEventArgs e)
         {
-            if (NewAttrValue.Text != string.Empty && NewAttriValValue.Text != string.Empty)
-            {
-                AddAttrBtn.Enabled = true;
-            }
-            else
-            {
-                AddAttrBtn.Enabled = false;
-            }
+            if (NewAttrValue.Text != string.Empty && NewAttriValValue.Text != string.Empty)            
+                AddAttrBtn.Enabled = true;           
+            else            
+                AddAttrBtn.Enabled = false;            
         }
 
         private void AddAttrBtn_Click(object sender, EventArgs e)
@@ -854,9 +847,7 @@ namespace Milestone2App
             NewAttrValue.Text = string.Empty;
             NewAttriValValue.Text = string.Empty;
             updateBussAttributesGrid();
-
-            // Need to update the business UI when business attributes are updated
-            //businessGrid_CellContentClick(null, null);
+            updateGrid();
         }
 
         private void CheckInButton_Click(object sender, EventArgs e)
