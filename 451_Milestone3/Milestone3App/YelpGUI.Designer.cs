@@ -281,7 +281,7 @@
             this.businessGrid.RowHeadersVisible = false;
             this.businessGrid.Size = new System.Drawing.Size(555, 266);
             this.businessGrid.TabIndex = 2;
-            this.businessGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.businessGrid_CellContentClick);
+            this.businessGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.BusinessGrid_CellContentClick);
             // 
             // CityHeader
             // 
@@ -324,7 +324,7 @@
             this.cityCheckBox.Name = "cityCheckBox";
             this.cityCheckBox.Size = new System.Drawing.Size(267, 206);
             this.cityCheckBox.TabIndex = 0;
-            this.cityCheckBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.cityCheckBox_ItemCheck);
+            this.cityCheckBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.CityCheckBox_ItemCheck);
             // 
             // StateDropdownPanel
             // 
@@ -353,7 +353,7 @@
             this.stateDropDown.Size = new System.Drawing.Size(267, 24);
             this.stateDropDown.TabIndex = 0;
             this.stateDropDown.Text = "Select state...";
-            this.stateDropDown.SelectedIndexChanged += new System.EventHandler(this.stateDropDown_SelectedIndexChanged);
+            this.stateDropDown.SelectedIndexChanged += new System.EventHandler(this.StateDropDown_SelectedIndexChanged);
             // 
             // StateHeader
             // 
@@ -417,7 +417,7 @@
             this.categoriesCheckBox.Name = "categoriesCheckBox";
             this.categoriesCheckBox.Size = new System.Drawing.Size(269, 206);
             this.categoriesCheckBox.TabIndex = 0;
-            this.categoriesCheckBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.categoriesCheckBox_ItemCheck);
+            this.categoriesCheckBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.CategoriesCheckBox_ItemCheck);
             // 
             // categoriesTextBox
             // 
@@ -458,7 +458,7 @@
             this.zipCheckBox.Name = "zipCheckBox";
             this.zipCheckBox.Size = new System.Drawing.Size(269, 206);
             this.zipCheckBox.TabIndex = 0;
-            this.zipCheckBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.zipCheckBox_ItemCheck);
+            this.zipCheckBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.ZipCheckBox_ItemCheck);
             // 
             // ZipText
             // 
