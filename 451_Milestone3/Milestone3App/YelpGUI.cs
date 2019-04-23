@@ -596,6 +596,8 @@ namespace Milestone2App
                 Pushpin pin = new Pushpin();
                 pin.Background = new SolidColorBrush(Color.FromArgb(200, 0, 100, 100));
                 pin.Location = userCoord;
+                //pin.Tag = "Yo";
+                pin.Heading = 12.5;
                 mapTest.userControl11.map.Children.Add(pin);
                 
                 //mapTest.userControl11.map.SetView(userCoord, 10);
