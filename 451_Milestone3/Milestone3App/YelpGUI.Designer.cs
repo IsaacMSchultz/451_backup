@@ -175,8 +175,6 @@
             this.AdminRightLP = new System.Windows.Forms.TableLayoutPanel();
             this.BusinessAttributesHeader = new System.Windows.Forms.TextBox();
             this.BusinessAttrGrid = new System.Windows.Forms.DataGridView();
-            this.NameHeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AdminEditAttrLP = new System.Windows.Forms.TableLayoutPanel();
             this.AddAttrLP = new System.Windows.Forms.TableLayoutPanel();
             this.NewAttrValue = new System.Windows.Forms.TextBox();
@@ -204,6 +202,8 @@
             this.SearchReviewsBtn = new System.Windows.Forms.Button();
             this.KeywordValue = new System.Windows.Forms.TextBox();
             this.KeywordHeaderTB = new System.Windows.Forms.TextBox();
+            this.BusAdminNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).BeginInit();
             this.SearchCheckBoxPanel.SuspendLayout();
             this.StateDropdownPanel.SuspendLayout();
@@ -938,6 +938,7 @@
             this.ShowCheckinsButton.TabIndex = 6;
             this.ShowCheckinsButton.Text = "Show Checkins";
             this.ShowCheckinsButton.UseVisualStyleBackColor = true;
+            this.ShowCheckinsButton.Click += new System.EventHandler(this.ShowCheckinsButton_Click);
             // 
             // tabControl1
             // 
@@ -1007,7 +1008,7 @@
             this.LeftUserLP.Controls.Add(this.RemoveFavBtn, 0, 4);
             this.LeftUserLP.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LeftUserLP.Location = new System.Drawing.Point(2, 2);
-            this.LeftUserLP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.LeftUserLP.Margin = new System.Windows.Forms.Padding(2);
             this.LeftUserLP.Name = "LeftUserLP";
             this.LeftUserLP.RowCount = 5;
             this.LeftUserLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
@@ -1115,7 +1116,7 @@
             this.LongLP.Controls.Add(this.LongHeaderTB, 0, 0);
             this.LongLP.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LongLP.Location = new System.Drawing.Point(2, 158);
-            this.LongLP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.LongLP.Margin = new System.Windows.Forms.Padding(2);
             this.LongLP.Name = "LongLP";
             this.LongLP.RowCount = 1;
             this.LongLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -1139,7 +1140,7 @@
             this.LongHeaderTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.LongHeaderTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LongHeaderTB.Location = new System.Drawing.Point(78, 2);
-            this.LongHeaderTB.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.LongHeaderTB.Margin = new System.Windows.Forms.Padding(2);
             this.LongHeaderTB.Multiline = true;
             this.LongHeaderTB.Name = "LongHeaderTB";
             this.LongHeaderTB.ReadOnly = true;
@@ -1159,11 +1160,11 @@
             this.VotesValuesLP.Controls.Add(this.FunnyValue, 1, 0);
             this.VotesValuesLP.Dock = System.Windows.Forms.DockStyle.Fill;
             this.VotesValuesLP.Location = new System.Drawing.Point(2, 98);
-            this.VotesValuesLP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.VotesValuesLP.Margin = new System.Windows.Forms.Padding(2);
             this.VotesValuesLP.Name = "VotesValuesLP";
             this.VotesValuesLP.RowCount = 1;
             this.VotesValuesLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.VotesValuesLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 17F));
+            this.VotesValuesLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 16F));
             this.VotesValuesLP.Size = new System.Drawing.Size(217, 16);
             this.VotesValuesLP.TabIndex = 10;
             // 
@@ -1206,11 +1207,11 @@
             this.NameLP.Controls.Add(this.NameValue, 1, 0);
             this.NameLP.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NameLP.Location = new System.Drawing.Point(2, 18);
-            this.NameLP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.NameLP.Margin = new System.Windows.Forms.Padding(2);
             this.NameLP.Name = "NameLP";
             this.NameLP.RowCount = 1;
             this.NameLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.NameLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 17F));
+            this.NameLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 16F));
             this.NameLP.Size = new System.Drawing.Size(217, 16);
             this.NameLP.TabIndex = 6;
             // 
@@ -1275,7 +1276,7 @@
             this.FansTitleTB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FansTitleTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FansTitleTB.Location = new System.Drawing.Point(108, 2);
-            this.FansTitleTB.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.FansTitleTB.Margin = new System.Windows.Forms.Padding(2);
             this.FansTitleTB.Name = "FansTitleTB";
             this.FansTitleTB.ReadOnly = true;
             this.FansTitleTB.Size = new System.Drawing.Size(49, 12);
@@ -1299,7 +1300,7 @@
             this.StarsTitleTB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.StarsTitleTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StarsTitleTB.Location = new System.Drawing.Point(2, 2);
-            this.StarsTitleTB.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.StarsTitleTB.Margin = new System.Windows.Forms.Padding(2);
             this.StarsTitleTB.Name = "StarsTitleTB";
             this.StarsTitleTB.ReadOnly = true;
             this.StarsTitleTB.Size = new System.Drawing.Size(49, 12);
@@ -1339,7 +1340,7 @@
             this.YelpingSinceTitleTB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.YelpingSinceTitleTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.YelpingSinceTitleTB.Location = new System.Drawing.Point(2, 2);
-            this.YelpingSinceTitleTB.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.YelpingSinceTitleTB.Margin = new System.Windows.Forms.Padding(2);
             this.YelpingSinceTitleTB.Multiline = true;
             this.YelpingSinceTitleTB.Name = "YelpingSinceTitleTB";
             this.YelpingSinceTitleTB.ReadOnly = true;
@@ -1374,7 +1375,7 @@
             this.UsefulHeaderTB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.UsefulHeaderTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UsefulHeaderTB.Location = new System.Drawing.Point(108, 2);
-            this.UsefulHeaderTB.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.UsefulHeaderTB.Margin = new System.Windows.Forms.Padding(2);
             this.UsefulHeaderTB.Name = "UsefulHeaderTB";
             this.UsefulHeaderTB.ReadOnly = true;
             this.UsefulHeaderTB.Size = new System.Drawing.Size(49, 12);
@@ -1388,7 +1389,7 @@
             this.CoolHeaderTB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CoolHeaderTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CoolHeaderTB.Location = new System.Drawing.Point(161, 2);
-            this.CoolHeaderTB.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.CoolHeaderTB.Margin = new System.Windows.Forms.Padding(2);
             this.CoolHeaderTB.Name = "CoolHeaderTB";
             this.CoolHeaderTB.ReadOnly = true;
             this.CoolHeaderTB.Size = new System.Drawing.Size(52, 12);
@@ -1402,7 +1403,7 @@
             this.VotesHeaderTB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.VotesHeaderTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.VotesHeaderTB.Location = new System.Drawing.Point(2, 2);
-            this.VotesHeaderTB.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.VotesHeaderTB.Margin = new System.Windows.Forms.Padding(2);
             this.VotesHeaderTB.Name = "VotesHeaderTB";
             this.VotesHeaderTB.ReadOnly = true;
             this.VotesHeaderTB.Size = new System.Drawing.Size(49, 12);
@@ -1416,7 +1417,7 @@
             this.FunnyHeaderTB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FunnyHeaderTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FunnyHeaderTB.Location = new System.Drawing.Point(55, 2);
-            this.FunnyHeaderTB.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.FunnyHeaderTB.Margin = new System.Windows.Forms.Padding(2);
             this.FunnyHeaderTB.Name = "FunnyHeaderTB";
             this.FunnyHeaderTB.ReadOnly = true;
             this.FunnyHeaderTB.Size = new System.Drawing.Size(49, 12);
@@ -1444,7 +1445,7 @@
             this.LocationHeaderTB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LocationHeaderTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LocationHeaderTB.Location = new System.Drawing.Point(2, 2);
-            this.LocationHeaderTB.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.LocationHeaderTB.Margin = new System.Windows.Forms.Padding(2);
             this.LocationHeaderTB.Name = "LocationHeaderTB";
             this.LocationHeaderTB.ReadOnly = true;
             this.LocationHeaderTB.Size = new System.Drawing.Size(211, 12);
@@ -1485,7 +1486,7 @@
             this.LatHeaderTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.LatHeaderTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LatHeaderTB.Location = new System.Drawing.Point(77, 2);
-            this.LatHeaderTB.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.LatHeaderTB.Margin = new System.Windows.Forms.Padding(2);
             this.LatHeaderTB.Name = "LatHeaderTB";
             this.LatHeaderTB.ReadOnly = true;
             this.LatHeaderTB.Size = new System.Drawing.Size(28, 12);
@@ -1512,7 +1513,7 @@
             // 
             this.EditBtn.Dock = System.Windows.Forms.DockStyle.Fill;
             this.EditBtn.Location = new System.Drawing.Point(2, 2);
-            this.EditBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.EditBtn.Margin = new System.Windows.Forms.Padding(2);
             this.EditBtn.Name = "EditBtn";
             this.EditBtn.Size = new System.Drawing.Size(106, 20);
             this.EditBtn.TabIndex = 0;
@@ -1525,7 +1526,7 @@
             this.UpdateBtn.Dock = System.Windows.Forms.DockStyle.Fill;
             this.UpdateBtn.Enabled = false;
             this.UpdateBtn.Location = new System.Drawing.Point(112, 2);
-            this.UpdateBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.UpdateBtn.Margin = new System.Windows.Forms.Padding(2);
             this.UpdateBtn.Name = "UpdateBtn";
             this.UpdateBtn.Size = new System.Drawing.Size(107, 20);
             this.UpdateBtn.TabIndex = 1;
@@ -1656,7 +1657,7 @@
             this.RightUserLP.Controls.Add(this.FriendsReviewsGrid, 0, 1);
             this.RightUserLP.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RightUserLP.Location = new System.Drawing.Point(485, 2);
-            this.RightUserLP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.RightUserLP.Margin = new System.Windows.Forms.Padding(2);
             this.RightUserLP.Name = "RightUserLP";
             this.RightUserLP.RowCount = 2;
             this.RightUserLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
@@ -1692,7 +1693,7 @@
             // 
             this.AdminTabPage.Controls.Add(this.AdminLP);
             this.AdminTabPage.Location = new System.Drawing.Point(4, 22);
-            this.AdminTabPage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.AdminTabPage.Margin = new System.Windows.Forms.Padding(2);
             this.AdminTabPage.Name = "AdminTabPage";
             this.AdminTabPage.Size = new System.Drawing.Size(955, 592);
             this.AdminTabPage.TabIndex = 2;
@@ -1708,7 +1709,7 @@
             this.AdminLP.Controls.Add(this.AdminRightLP, 1, 0);
             this.AdminLP.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AdminLP.Location = new System.Drawing.Point(0, 0);
-            this.AdminLP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.AdminLP.Margin = new System.Windows.Forms.Padding(2);
             this.AdminLP.Name = "AdminLP";
             this.AdminLP.RowCount = 1;
             this.AdminLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -1788,7 +1789,7 @@
             // 
             this.AdminEditNameBtn.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AdminEditNameBtn.Location = new System.Drawing.Point(8, 8);
-            this.AdminEditNameBtn.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.AdminEditNameBtn.Margin = new System.Windows.Forms.Padding(8);
             this.AdminEditNameBtn.Name = "AdminEditNameBtn";
             this.AdminEditNameBtn.Size = new System.Drawing.Size(137, 19);
             this.AdminEditNameBtn.TabIndex = 0;
@@ -1801,7 +1802,7 @@
             this.AdminUpdateBtn.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AdminUpdateBtn.Enabled = false;
             this.AdminUpdateBtn.Location = new System.Drawing.Point(161, 8);
-            this.AdminUpdateBtn.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.AdminUpdateBtn.Margin = new System.Windows.Forms.Padding(8);
             this.AdminUpdateBtn.Name = "AdminUpdateBtn";
             this.AdminUpdateBtn.Size = new System.Drawing.Size(138, 19);
             this.AdminUpdateBtn.TabIndex = 1;
@@ -1815,7 +1816,7 @@
             this.AdminCityLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.80269F));
             this.AdminCityLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.19731F));
             this.AdminCityLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 71F));
-            this.AdminCityLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 138F));
+            this.AdminCityLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 141F));
             this.AdminCityLP.Controls.Add(this.AdminStateHeaderTb, 0, 0);
             this.AdminCityLP.Controls.Add(this.AdminStateValue, 1, 0);
             this.AdminCityLP.Controls.Add(this.AdminCityValue, 3, 0);
@@ -1838,7 +1839,7 @@
             this.AdminStateHeaderTb.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.AdminStateHeaderTb.Name = "AdminStateHeaderTb";
             this.AdminStateHeaderTb.ReadOnly = true;
-            this.AdminStateHeaderTb.Size = new System.Drawing.Size(19, 12);
+            this.AdminStateHeaderTb.Size = new System.Drawing.Size(18, 12);
             this.AdminStateHeaderTb.TabIndex = 30;
             this.AdminStateHeaderTb.Text = "State:";
             // 
@@ -1846,17 +1847,17 @@
             // 
             this.AdminStateValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.AdminStateValue.Enabled = false;
-            this.AdminStateValue.Location = new System.Drawing.Point(26, 1);
+            this.AdminStateValue.Location = new System.Drawing.Point(25, 1);
             this.AdminStateValue.Margin = new System.Windows.Forms.Padding(1);
             this.AdminStateValue.Name = "AdminStateValue";
-            this.AdminStateValue.Size = new System.Drawing.Size(64, 20);
+            this.AdminStateValue.Size = new System.Drawing.Size(62, 20);
             this.AdminStateValue.TabIndex = 29;
             // 
             // AdminCityValue
             // 
             this.AdminCityValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.AdminCityValue.Enabled = false;
-            this.AdminCityValue.Location = new System.Drawing.Point(163, 1);
+            this.AdminCityValue.Location = new System.Drawing.Point(160, 1);
             this.AdminCityValue.Margin = new System.Windows.Forms.Padding(1);
             this.AdminCityValue.Name = "AdminCityValue";
             this.AdminCityValue.Size = new System.Drawing.Size(115, 20);
@@ -1868,7 +1869,7 @@
             this.CityHeaderTb.BackColor = System.Drawing.Color.White;
             this.CityHeaderTb.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.CityHeaderTb.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CityHeaderTb.Location = new System.Drawing.Point(95, 5);
+            this.CityHeaderTb.Location = new System.Drawing.Point(92, 5);
             this.CityHeaderTb.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.CityHeaderTb.Name = "CityHeaderTb";
             this.CityHeaderTb.ReadOnly = true;
@@ -2091,7 +2092,7 @@
             this.AdminReviewLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.45544F));
             this.AdminReviewLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.54456F));
             this.AdminReviewLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 61F));
-            this.AdminReviewLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.AdminReviewLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 103F));
             this.AdminReviewLP.Controls.Add(this.AdminReviewHeader, 0, 0);
             this.AdminReviewLP.Controls.Add(this.AdminReviewValue, 1, 0);
             this.AdminReviewLP.Controls.Add(this.AdminCheckinValue, 3, 0);
@@ -2122,17 +2123,17 @@
             // 
             this.AdminReviewValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.AdminReviewValue.Enabled = false;
-            this.AdminReviewValue.Location = new System.Drawing.Point(77, 1);
+            this.AdminReviewValue.Location = new System.Drawing.Point(75, 1);
             this.AdminReviewValue.Margin = new System.Windows.Forms.Padding(1);
             this.AdminReviewValue.Name = "AdminReviewValue";
-            this.AdminReviewValue.Size = new System.Drawing.Size(61, 20);
+            this.AdminReviewValue.Size = new System.Drawing.Size(60, 20);
             this.AdminReviewValue.TabIndex = 29;
             // 
             // AdminCheckinValue
             // 
             this.AdminCheckinValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.AdminCheckinValue.Enabled = false;
-            this.AdminCheckinValue.Location = new System.Drawing.Point(201, 1);
+            this.AdminCheckinValue.Location = new System.Drawing.Point(198, 1);
             this.AdminCheckinValue.Margin = new System.Windows.Forms.Padding(1);
             this.AdminCheckinValue.Name = "AdminCheckinValue";
             this.AdminCheckinValue.Size = new System.Drawing.Size(80, 20);
@@ -2144,7 +2145,7 @@
             this.AdminCheckinHeader.BackColor = System.Drawing.Color.White;
             this.AdminCheckinHeader.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.AdminCheckinHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AdminCheckinHeader.Location = new System.Drawing.Point(143, 5);
+            this.AdminCheckinHeader.Location = new System.Drawing.Point(140, 5);
             this.AdminCheckinHeader.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.AdminCheckinHeader.Name = "AdminCheckinHeader";
             this.AdminCheckinHeader.ReadOnly = true;
@@ -2158,7 +2159,7 @@
             this.AdminStarsLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.9505F));
             this.AdminStarsLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.0495F));
             this.AdminStarsLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 62F));
-            this.AdminStarsLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.AdminStarsLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 103F));
             this.AdminStarsLP.Controls.Add(this.AdminRevRatingHEad, 0, 0);
             this.AdminStarsLP.Controls.Add(this.AdminRatingValue, 1, 0);
             this.AdminStarsLP.Controls.Add(this.AdminStarsValue, 3, 0);
@@ -2181,7 +2182,7 @@
             this.AdminRevRatingHEad.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.AdminRevRatingHEad.Name = "AdminRevRatingHEad";
             this.AdminRevRatingHEad.ReadOnly = true;
-            this.AdminRevRatingHEad.Size = new System.Drawing.Size(68, 12);
+            this.AdminRevRatingHEad.Size = new System.Drawing.Size(66, 12);
             this.AdminRevRatingHEad.TabIndex = 30;
             this.AdminRevRatingHEad.Text = "Review Rating:";
             // 
@@ -2189,17 +2190,17 @@
             // 
             this.AdminRatingValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.AdminRatingValue.Enabled = false;
-            this.AdminRatingValue.Location = new System.Drawing.Point(77, 1);
+            this.AdminRatingValue.Location = new System.Drawing.Point(75, 1);
             this.AdminRatingValue.Margin = new System.Windows.Forms.Padding(1);
             this.AdminRatingValue.Name = "AdminRatingValue";
-            this.AdminRatingValue.Size = new System.Drawing.Size(60, 20);
+            this.AdminRatingValue.Size = new System.Drawing.Size(59, 20);
             this.AdminRatingValue.TabIndex = 29;
             // 
             // AdminStarsValue
             // 
             this.AdminStarsValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.AdminStarsValue.Enabled = false;
-            this.AdminStarsValue.Location = new System.Drawing.Point(201, 1);
+            this.AdminStarsValue.Location = new System.Drawing.Point(198, 1);
             this.AdminStarsValue.Margin = new System.Windows.Forms.Padding(1);
             this.AdminStarsValue.Name = "AdminStarsValue";
             this.AdminStarsValue.Size = new System.Drawing.Size(80, 20);
@@ -2211,7 +2212,7 @@
             this.AdminStarsHeader.BackColor = System.Drawing.Color.White;
             this.AdminStarsHeader.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.AdminStarsHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AdminStarsHeader.Location = new System.Drawing.Point(142, 5);
+            this.AdminStarsHeader.Location = new System.Drawing.Point(139, 5);
             this.AdminStarsHeader.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.AdminStarsHeader.Name = "AdminStarsHeader";
             this.AdminStarsHeader.ReadOnly = true;
@@ -2265,7 +2266,7 @@
             // 
             this.BusinessNameTB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BusinessNameTB.Location = new System.Drawing.Point(2, 23);
-            this.BusinessNameTB.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BusinessNameTB.Margin = new System.Windows.Forms.Padding(2);
             this.BusinessNameTB.Name = "BusinessNameTB";
             this.BusinessNameTB.Size = new System.Drawing.Size(305, 20);
             this.BusinessNameTB.TabIndex = 12;
@@ -2278,7 +2279,7 @@
             this.BussinessNameHeaderTB.Cursor = System.Windows.Forms.Cursors.Default;
             this.BussinessNameHeaderTB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BussinessNameHeaderTB.Location = new System.Drawing.Point(2, 2);
-            this.BussinessNameHeaderTB.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BussinessNameHeaderTB.Margin = new System.Windows.Forms.Padding(2);
             this.BussinessNameHeaderTB.Name = "BussinessNameHeaderTB";
             this.BussinessNameHeaderTB.ReadOnly = true;
             this.BussinessNameHeaderTB.Size = new System.Drawing.Size(305, 13);
@@ -2305,7 +2306,7 @@
             this.AdminRightLP.Controls.Add(this.AdminEditAttrLP, 0, 2);
             this.AdminRightLP.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AdminRightLP.Location = new System.Drawing.Point(367, 20);
-            this.AdminRightLP.Margin = new System.Windows.Forms.Padding(20, 20, 20, 20);
+            this.AdminRightLP.Margin = new System.Windows.Forms.Padding(20);
             this.AdminRightLP.Name = "AdminRightLP";
             this.AdminRightLP.RowCount = 3;
             this.AdminRightLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
@@ -2332,7 +2333,7 @@
             this.BusinessAttrGrid.AllowUserToDeleteRows = false;
             this.BusinessAttrGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.BusinessAttrGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.NameHeader,
+            this.BusAdminNameCol,
             this.Value});
             this.BusinessAttrGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BusinessAttrGrid.Location = new System.Drawing.Point(20, 39);
@@ -2347,21 +2348,6 @@
             this.BusinessAttrGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.BusinessAttrGrid_CellClick);
             this.BusinessAttrGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.BusinessAttrGrid_CellContentClick);
             // 
-            // Name
-            // 
-            this.NameHeader.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.NameHeader.HeaderText = "Attribute Name";
-            this.NameHeader.Name = "Name";
-            this.NameHeader.ReadOnly = true;
-            // 
-            // Value
-            // 
-            this.Value.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Value.HeaderText = "Value";
-            this.Value.Name = "Value";
-            this.Value.ReadOnly = true;
-            this.Value.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
             // AdminEditAttrLP
             // 
             this.AdminEditAttrLP.ColumnCount = 1;
@@ -2372,7 +2358,7 @@
             this.AdminEditAttrLP.Controls.Add(this.AddAttrHeader, 0, 2);
             this.AdminEditAttrLP.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AdminEditAttrLP.Location = new System.Drawing.Point(10, 365);
-            this.AdminEditAttrLP.Margin = new System.Windows.Forms.Padding(10, 10, 10, 10);
+            this.AdminEditAttrLP.Margin = new System.Windows.Forms.Padding(10);
             this.AdminEditAttrLP.Name = "AdminEditAttrLP";
             this.AdminEditAttrLP.RowCount = 4;
             this.AdminEditAttrLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
@@ -2606,7 +2592,7 @@
             // 
             this.KeywordSearchPage.Controls.Add(this.KeywordLP);
             this.KeywordSearchPage.Location = new System.Drawing.Point(4, 22);
-            this.KeywordSearchPage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.KeywordSearchPage.Margin = new System.Windows.Forms.Padding(2);
             this.KeywordSearchPage.Name = "KeywordSearchPage";
             this.KeywordSearchPage.Size = new System.Drawing.Size(955, 592);
             this.KeywordSearchPage.TabIndex = 3;
@@ -2623,7 +2609,7 @@
             this.KeywordLP.Controls.Add(this.KeywordDataLP, 1, 2);
             this.KeywordLP.Dock = System.Windows.Forms.DockStyle.Fill;
             this.KeywordLP.Location = new System.Drawing.Point(0, 0);
-            this.KeywordLP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.KeywordLP.Margin = new System.Windows.Forms.Padding(2);
             this.KeywordLP.Name = "KeywordLP";
             this.KeywordLP.RowCount = 4;
             this.KeywordLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
@@ -2654,7 +2640,7 @@
             this.KeywordDataLP.Controls.Add(this.KeywordValueHeaderLP, 0, 0);
             this.KeywordDataLP.Dock = System.Windows.Forms.DockStyle.Fill;
             this.KeywordDataLP.Location = new System.Drawing.Point(49, 58);
-            this.KeywordDataLP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.KeywordDataLP.Margin = new System.Windows.Forms.Padding(2);
             this.KeywordDataLP.Name = "KeywordDataLP";
             this.KeywordDataLP.RowCount = 2;
             this.KeywordDataLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
@@ -2712,7 +2698,7 @@
             this.KeywordValueHeaderLP.Controls.Add(this.KeywordHeaderTB, 0, 0);
             this.KeywordValueHeaderLP.Dock = System.Windows.Forms.DockStyle.Fill;
             this.KeywordValueHeaderLP.Location = new System.Drawing.Point(5, 5);
-            this.KeywordValueHeaderLP.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.KeywordValueHeaderLP.Margin = new System.Windows.Forms.Padding(4);
             this.KeywordValueHeaderLP.Name = "KeywordValueHeaderLP";
             this.KeywordValueHeaderLP.RowCount = 1;
             this.KeywordValueHeaderLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -2738,7 +2724,7 @@
             this.KeywordValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.KeywordValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.KeywordValue.Location = new System.Drawing.Point(148, 9);
-            this.KeywordValue.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.KeywordValue.Margin = new System.Windows.Forms.Padding(2);
             this.KeywordValue.Name = "KeywordValue";
             this.KeywordValue.Size = new System.Drawing.Size(362, 23);
             this.KeywordValue.TabIndex = 13;
@@ -2757,6 +2743,21 @@
             this.KeywordHeaderTB.Size = new System.Drawing.Size(71, 16);
             this.KeywordHeaderTB.TabIndex = 7;
             this.KeywordHeaderTB.Text = "Keyword:";
+            // 
+            // BusAdminNameCol
+            // 
+            this.BusAdminNameCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.BusAdminNameCol.HeaderText = "Attribute Name";
+            this.BusAdminNameCol.Name = "BusAdminNameCol";
+            this.BusAdminNameCol.ReadOnly = true;
+            // 
+            // Value
+            // 
+            this.Value.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Value.HeaderText = "Value";
+            this.Value.Name = "Value";
+            this.Value.ReadOnly = true;
+            this.Value.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // YelpGUI
             // 
@@ -3013,9 +3014,7 @@
         private System.Windows.Forms.TableLayoutPanel AdminRightLP;
         private System.Windows.Forms.TextBox BusinessAttributesHeader;
         private System.Windows.Forms.DataGridView BusinessAttrGrid;
-        private System.Windows.Forms.ListBox BusinessIdLB;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NameHeader;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Value;
+        private System.Windows.Forms.ListBox BusinessIdLB;        
         private System.Windows.Forms.TableLayoutPanel AdminEditAttrLP;
         private System.Windows.Forms.TableLayoutPanel AddAttrLP;
         private System.Windows.Forms.TextBox EditAttrHeaderTB;
@@ -3042,7 +3041,9 @@
         private System.Windows.Forms.Button SearchReviewsBtn;
         private System.Windows.Forms.TextBox KeywordValue;
         private System.Windows.Forms.DataGridView ReviewKeywordGrid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ReviewText;        
+        private System.Windows.Forms.DataGridViewTextBoxColumn ReviewText;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BusAdminNameCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Value;
     }
 }
 
