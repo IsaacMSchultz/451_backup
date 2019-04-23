@@ -359,18 +359,7 @@ namespace Milestone2App
                 }
                 Categories_Textbox.Text = categoriesStr;
 
-                // replace the attributes checkbox with all the categories that the selected business has
-                string attributesStr = "";
-                List<List<string>> attributes = queryEngine.GetAttributes(currBusId);
-                if (attributes.Count > 1)
-                {
-                    for (int i = 1; i < attributes.Count; i++)
-                    {
-                        attributesStr += attributes[i][0] + ":" + attributes[i][1] + ", ";
-                    }
-                    attributesStr = attributesStr.Substring(0, attributesStr.Length - 2); // Cuts off the final ", "
-                }
-                Attributes_Textbox.Text = attributesStr;
+                UpdateBusinessPageAttributes();
 
                 //Show the business' hours if it has any for the current day.
                 List<List<string>> hours = queryEngine.GetHoursForDay(currBusId, today); // query the database for the hours of a business
@@ -389,6 +378,26 @@ namespace Milestone2App
             }
         }
 
+        private bool UpdateBusinessPageAttributes()
+        {
+            if (currBusId != "")
+            {
+                // replace the attributes checkbox with all the categories that the selected business has
+                string attributesStr = "";
+                List<List<string>> attributes = queryEngine.GetAttributes(currBusId);
+                if (attributes.Count > 1)
+                {
+                    for (int i = 1; i < attributes.Count; i++)                    
+                        attributesStr += attributes[i][0] + ":" + attributes[i][1] + ", ";                    
+
+                    attributesStr = attributesStr.Substring(0, attributesStr.Length - 2); // Cuts off the final ", "
+                }
+                Attributes_Textbox.Text = attributesStr;
+                return true;
+            }
+            return false;
+        }
+
         /// <summary>
         /// When the user clicks the submit review button, it uses the queryEngine to post the review.
         /// </summary>
@@ -401,18 +410,12 @@ namespace Milestone2App
                 queryEngine.PostReview(WriteReviewTextBox_Review.Text, int.Parse(ReviewStarsDropDown.SelectedItem as string), currBusId, currUserId);
                 return;
             }
-            if (currUserId != "")
-            {
-                MessageBox.Show("Please select a user to sign in as.");
-            }
-            if (ReviewStarsDropDown.SelectedItem as string != "Review Stars")
-            {
-                MessageBox.Show("Please select a stars rating.");
-            }
-            if (currBusId != "")
-            {
-                MessageBox.Show("Please select a business.");
-            }
+            if (currUserId != "")            
+                MessageBox.Show("Please select a user to sign in as.");            
+            if (ReviewStarsDropDown.SelectedItem as string != "Review Stars")            
+                MessageBox.Show("Please select a stars rating.");            
+            if (currBusId != "")            
+                MessageBox.Show("Please select a business.");            
         }
 
         /// <summary>
@@ -422,14 +425,10 @@ namespace Milestone2App
         /// <param name="e"></param>
         private void WriteReviewTextBox_Review_TextChanged(object sender, EventArgs e)
         {
-            if (WriteReviewTextBox_Review.Text != "" && ReviewStarsDropDown.SelectedItem as string != "Review Stars")
-            {
-                SubmitReviewButton.Enabled = true;
-            }
-            else if (SubmitReviewButton.Enabled == true)
-            {
-                SubmitReviewButton.Enabled = false;
-            }
+            if (WriteReviewTextBox_Review.Text != "" && ReviewStarsDropDown.SelectedItem as string != "Review Stars")            
+                SubmitReviewButton.Enabled = true;            
+            else if (SubmitReviewButton.Enabled == true)            
+                SubmitReviewButton.Enabled = false;            
         }
 
         /// <summary>
@@ -444,6 +443,7 @@ namespace Milestone2App
                 SubmitReviewButton.Enabled = true;
             }
         }
+
         /// <summary>
         /// When the user clicks the "Show Reviews" Button, it will open a new form displaying all the reviews for the selected business.
         /// </summary>
@@ -540,9 +540,6 @@ namespace Milestone2App
         // Should consider *Templatizing* this to work for multiple DataGrids
         private void updateFavBusinessGrid()
         {
-            //FavoriteBusinessGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-
-
             int row = 0, col = 0;
             FavoriteBusinessGrid.Rows.Clear(); //removes all the data previously in the grid.            
 
@@ -591,7 +588,7 @@ namespace Milestone2App
             List<double> userLocation = queryEngine.GetUserLocation(currUserId);
             List<string> selectedBusinesses = new List<string>();
             Microsoft.Maps.MapControl.WPF.Location userCoord = null;
-            //MapPolygon polygon = new MapPolygon();
+            Microsoft.Maps.MapControl.WPF.Location busCoord = null;
 
             // Only set the map view to the user's position if the user has both a lat and long value entered
             if (userLocation.Count == 2)
@@ -600,12 +597,7 @@ namespace Milestone2App
                 Pushpin pin = new Pushpin();
                 pin.Background = new SolidColorBrush(Color.FromArgb(200, 0, 100, 100));
                 pin.Location = userCoord;
-                ShadowText label = new ShadowText();
-                label.Text = "User";
                 mapTest.userControl11.map.Children.Add(pin);
-                mapTest.userControl11.map.Children.Add(label);
-                
-                //mapTest.userControl11.map.SetView(userCoord, 10);
             }
 
             // Add pins for all of the businesses in the grid
@@ -619,26 +611,26 @@ namespace Milestone2App
             // Need to protect against case where no businesses are present in the grid
             foreach (List<double> locations in queryEngine.GetBusinessLocations(selectedBusinesses))
             {
-                Microsoft.Maps.MapControl.WPF.Location busCoord = new Microsoft.Maps.MapControl.WPF.Location(locations[0], locations[1]);
+                busCoord = new Microsoft.Maps.MapControl.WPF.Location(locations[0], locations[1]);
                 Pushpin pin = new Pushpin();
                 pin.Location = busCoord;
                 mapTest.userControl11.map.Children.Add(pin);
-
+                
                 mapTest.userControl11.map.SetView(busCoord, 11);
+            }
 
-                // Draw lines back to thea user to make map more readable
-                if (userCoord != null)
-                {
-                    MapPolyline polyline = new MapPolyline();
-                    polyline.Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.DarkRed);
-                    polyline.StrokeThickness = 3;
-                    polyline.Opacity = 0.5;
-                    polyline.Locations = new LocationCollection() {
+            // Draw line between the user and most recently added business to make map more readable
+            if (userCoord != null && busCoord != null)
+            {
+                MapPolyline polyline = new MapPolyline();
+                polyline.Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.DarkRed);
+                polyline.StrokeThickness = 3;
+                polyline.Opacity = 0.5;
+                polyline.Locations = new LocationCollection() {
                         userCoord,
                         busCoord };
 
-                    mapTest.userControl11.map.Children.Add(polyline);
-                }
+                mapTest.userControl11.map.Children.Add(polyline);
             }
 
             this.mapTest.Show();
@@ -683,10 +675,8 @@ namespace Milestone2App
         {
             RemoveFavBtn.Enabled = false;
             
-            foreach (DataGridViewRow row in FavoriteBusinessGrid.SelectedRows)
-            {
-                queryEngine.RemoveFavBus(currUserId, row.Cells[0].Value.ToString(), row.Cells[4].Value.ToString());
-            }
+            foreach (DataGridViewRow row in FavoriteBusinessGrid.SelectedRows)            
+                queryEngine.RemoveFavBus(currUserId, row.Cells[0].Value.ToString(), row.Cells[4].Value.ToString());            
 
             updateFavBusinessGrid();
         }
@@ -798,7 +788,7 @@ namespace Milestone2App
             AttributeValValue.Text = string.Empty;
 
             updateBussAttributesGrid();
-            updateGrid();
+            UpdateBusinessPageAttributes();
 
             // Need to update the business UI when business attributes are updated
             // businessGrid_CellContentClick(null, null);
@@ -811,14 +801,10 @@ namespace Milestone2App
         /// <param name="e"></param>
         private void NewAttrValue_KeyDown(object sender, KeyEventArgs e)
         {
-            if (NewAttrValue.Text != string.Empty && NewAttriValValue.Text != string.Empty)
-            {
-                AddAttrBtn.Enabled = true;
-            }
-            else
-            {
-                AddAttrBtn.Enabled = false;
-            }
+            if (NewAttrValue.Text != string.Empty && NewAttriValValue.Text != string.Empty)            
+                AddAttrBtn.Enabled = true;            
+            else            
+                AddAttrBtn.Enabled = false;            
         }
 
         /// <summary>
@@ -828,14 +814,10 @@ namespace Milestone2App
         /// <param name="e"></param>
         private void NewAttriValValue_KeyDown(object sender, KeyEventArgs e)
         {
-            if (NewAttrValue.Text != string.Empty && NewAttriValValue.Text != string.Empty)
-            {
-                AddAttrBtn.Enabled = true;
-            }
-            else
-            {
-                AddAttrBtn.Enabled = false;
-            }
+            if (NewAttrValue.Text != string.Empty && NewAttriValValue.Text != string.Empty)            
+                AddAttrBtn.Enabled = true;           
+            else            
+                AddAttrBtn.Enabled = false;            
         }
 
         private void AddAttrBtn_Click(object sender, EventArgs e)
@@ -855,7 +837,7 @@ namespace Milestone2App
             NewAttrValue.Text = string.Empty;
             NewAttriValValue.Text = string.Empty;
             updateBussAttributesGrid();
-            updateGrid();
+            UpdateBusinessPageAttributes();
         }
 
         private void CheckInButton_Click(object sender, EventArgs e)
@@ -914,7 +896,10 @@ namespace Milestone2App
             if (currBusId != "" && currUserId != "")
             {
                 if (queryEngine.AddToFavorites(currBusId, currUserId))
+                {
                     MessageBox.Show("Added to favorites");
+                    updateFavBusinessGrid();
+                }
                 else
                     MessageBox.Show("Business already in favorites");
             }

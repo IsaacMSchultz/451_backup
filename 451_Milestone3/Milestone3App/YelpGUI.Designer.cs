@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.businessGrid = new System.Windows.Forms.DataGridView();
             this.CityHeader = new System.Windows.Forms.TextBox();
             this.SearchCheckBoxPanel = new System.Windows.Forms.TableLayoutPanel();
@@ -203,7 +205,8 @@
             this.KeywordValueHeaderLP = new System.Windows.Forms.TableLayoutPanel();
             this.SearchReviewsBtn = new System.Windows.Forms.Button();
             this.KeywordValue = new System.Windows.Forms.TextBox();
-            this.KeywordHeaderTB = new System.Windows.Forms.TextBox();
+            this.KeywordHeaderTB = new System.Windows.Forms.TextBox();                        
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).BeginInit();
             this.SearchCheckBoxPanel.SuspendLayout();
             this.StateDropdownPanel.SuspendLayout();
@@ -276,7 +279,7 @@
             this.businessGrid.Name = "businessGrid";
             this.businessGrid.ReadOnly = true;
             this.businessGrid.RowHeadersVisible = false;
-            this.businessGrid.Size = new System.Drawing.Size(876, 329);
+            this.businessGrid.Size = new System.Drawing.Size(555, 266);
             this.businessGrid.TabIndex = 2;
             this.businessGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.businessGrid_CellContentClick);
             // 
@@ -488,10 +491,11 @@
             this.BusinessTabPanel.ColumnCount = 3;
             this.BusinessTabPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 267F));
             this.BusinessTabPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.BusinessTabPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 133F));
+            this.BusinessTabPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
             this.BusinessTabPanel.Controls.Add(this.SearchPanel, 0, 0);
             this.BusinessTabPanel.Controls.Add(this.businessGrid, 1, 0);
             this.BusinessTabPanel.Controls.Add(this.BusinessInfoPanel, 1, 1);
+            this.BusinessTabPanel.Controls.Add(this.tableLayoutPanel1, 2, 0);
             this.BusinessTabPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BusinessTabPanel.Location = new System.Drawing.Point(0, 0);
             this.BusinessTabPanel.Margin = new System.Windows.Forms.Padding(0);
@@ -2685,14 +2689,22 @@
             this.ReviewKeywordGrid.AllowUserToAddRows = false;
             this.ReviewKeywordGrid.AllowUserToDeleteRows = false;
             this.ReviewKeywordGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ReviewKeywordGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ReviewKeywordGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ReviewKeywordGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.ReviewKeywordGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ReviewKeywordGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ReviewText});
@@ -2702,8 +2714,10 @@
             this.ReviewKeywordGrid.MultiSelect = false;
             this.ReviewKeywordGrid.Name = "ReviewKeywordGrid";
             this.ReviewKeywordGrid.RowHeadersVisible = false;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ReviewKeywordGrid.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ReviewKeywordGrid.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ReviewKeywordGrid.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.ReviewKeywordGrid.RowTemplate.Height = 24;
             this.ReviewKeywordGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ReviewKeywordGrid.Size = new System.Drawing.Size(1123, 529);
@@ -2775,6 +2789,21 @@
             this.KeywordHeaderTB.Size = new System.Drawing.Size(95, 20);
             this.KeywordHeaderTB.TabIndex = 7;
             this.KeywordHeaderTB.Text = "Keyword:";
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(755, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(200, 266);
+            this.tableLayoutPanel1.TabIndex = 10;
             // 
             // YelpGUI
             // 
@@ -3062,6 +3091,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ReviewText;
         private System.Windows.Forms.DataGridViewTextBoxColumn BusAdminNameCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn Value;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }
 
