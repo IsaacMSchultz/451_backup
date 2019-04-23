@@ -25,8 +25,8 @@ namespace QueryEngine1
         const string chars = "abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_- ";
 
         public event PropertyChangedEventHandler yelpDataChanged; // event for notifying that there was a property changed. 
-        private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone3db";
-        //private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone2db";
+        //private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone3db";
+        private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone2db";
 
         public QueryEngine()
         {
@@ -174,6 +174,23 @@ namespace QueryEngine1
             returnList = ExecuteListQuery("SELECT distinct " + projection + " FROM yelpuser WHERE yelpuser.name like '%" + name + "%' ORDER BY user_id;");
 
             return returnList;
+        }
+
+        // Need to templatize to avoid repeated code
+        public List<string> GetBusinesses(string name, string projection = "business_id")
+        {
+            List<string> returnList = new List<string>();
+            if (name == string.Empty)
+                return returnList;
+
+            returnList = ExecuteListQuery("SELECT distinct " + projection + " FROM business WHERE business.name like '%" + name + "%' ORDER BY business_id;");
+
+            return returnList;
+        }
+
+        public List<List<string>> GetBusiness(string id, string projection = "*")
+        {
+            return ExecuteCategorizedQuery("SELECT " + projection + " from business WHERE business.business_id = '" + id + "';");
         }
 
         public List<List<string>> GetUser(string id, string projection = "*")
@@ -427,14 +444,6 @@ namespace QueryEngine1
                 }
                 connection.Close();
             }
-            //// Returns the list of column names as the first row.
-            //List<string> header = new List<string>();
-            //foreach (NpgsqlDbColumn column in columns)
-            //    header.Add(column.ColumnName);
-            //results.Insert(0, header);
-
-            //lastQuery = results;
-            //return results;
 
             return returnValue;
         }
@@ -641,6 +650,42 @@ namespace QueryEngine1
             }
         }
 
+        public void updateAttribute(string business_id, string attribute_name, string attribute_value)
+        {
+            string query = "Update attributes set attribute_value = '" + attribute_value + "' where business_id = '" +
+                business_id + "' and attribute_name = '" + attribute_name + "'";
+
+            using (var connection = new NpgsqlConnection(LOGININFO))
+            {
+                connection.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = connection;
+                    cmd.CommandText = query;
+                    cmd.ExecuteNonQuery();
+                }
+                connection.Close();
+            }
+        }
+
+        public void updateBusinessName(string business_id, string business_name)
+        {
+            string query = "Update business set name = '" + business_name + "' where business_id = '" +
+                business_id + "'";
+
+            using (var connection = new NpgsqlConnection(LOGININFO))
+            {
+                connection.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = connection;
+                    cmd.CommandText = query;
+                    cmd.ExecuteNonQuery();
+                }
+                connection.Close();
+            }
+        }
+
         /// <summary>
         /// Update the selected user's latitude and longitude
         /// </summary>
@@ -652,6 +697,23 @@ namespace QueryEngine1
             string query = "Update yelpuser set user_latitude = " + lat.ToString() +
                 ", user_longitude = " + lon.ToString() + " where user_id = '" +
                 user_id + "'";
+
+            using (var connection = new NpgsqlConnection(LOGININFO))
+            {
+                connection.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = connection;
+                    cmd.CommandText = query;
+                    cmd.ExecuteNonQuery();
+                }
+                connection.Close();
+            }
+        }
+
+        public void InsertAttribute(string business_id, string attribute_name, string attribute_value)
+        {
+            string query = "INSERT INTO attributes VALUES ('" + business_id + "', '" + attribute_name + "', '" + attribute_value + "');";
 
             using (var connection = new NpgsqlConnection(LOGININFO))
             {

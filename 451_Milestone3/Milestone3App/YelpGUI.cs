@@ -22,6 +22,7 @@ namespace Milestone2App
         string[] friendsCol = { "Name", "Average Stars", "Yelping Since" };
         string[] favBusCol = { "Name", "Stars", "City", "Zipcode", "Address" };
         string[] friendsRevCol = { "Name", "Business", "City", "Review" };
+        string[] businessAttributesCol = { "Attribute Name", "Value" };
         string[] reviewCols = { "Stars", "Date", "Text", "Useful", "Funny", "Cool" }; //Column headers for the review form that can be opened from the GUI
         string[] checkinsCols = { "Day", "Time", "Count" }; //Column headers for the review form that can be opened from the GUI
         string projection; //selected columns to show in the database. Need to implement column constructors based on the projection instead of the cols[] array.
@@ -32,6 +33,7 @@ namespace Milestone2App
         //TODO: change to functions so that debugging global variables is less ambiguous.
         string currBusId; //global variable for the currend businessId
         string currUserId;
+        string currAdminId;
 
         // private variables used to generate a random ID.
         private static Random random = new Random();
@@ -103,6 +105,7 @@ namespace Milestone2App
 
                 FriendsReviewsGrid.Columns.Add(newColumn);
             }
+            
         }
 
         /// <summary>
@@ -238,6 +241,25 @@ namespace Milestone2App
                 row++;
             }
         }
+        
+
+        private void updateBussAttributesGrid()
+        {
+            int row = 0, col = 0;
+            BusinessAttrGrid.Rows.Clear(); //removes all the data previously in the grid.            
+
+            foreach (List<string> listRow in queryEngine.GetAttributes(currAdminId))
+            {
+                if (row > 0)
+                {
+                    BusinessAttrGrid.Rows.Add(); //the index of the new row
+                    foreach (string item in listRow)
+                        BusinessAttrGrid.Rows[row - 1].Cells[col++].Value = item;
+                    col = 0;
+                }
+                row++;
+            }
+        }
 
         /// <summary>
         /// Update the datagrid when the search button is clicked!
@@ -283,6 +305,27 @@ namespace Milestone2App
 
             queryEngine.SelectUser(currUserId);
             updateGrid(); //update the business grid so the user can see how far away they are from the searched businesses.
+        }
+
+        private void BusinessIdLB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            List<List<string>> busData = queryEngine.GetBusiness(BusinessIdLB.SelectedItem.ToString(), "name, address, state, city, zipcode, latitude, longitude, review_count, num_checkins, reviewrating, stars, business_id");
+
+            BusNameValue.Text = busData[1][0];
+            AdminAddressValue.Text = busData[1][1];
+            AdminStateValue.Text = busData[1][2];
+            AdminCityValue.Text = busData[1][3];
+            AdminZipValue.Text = busData[1][4];
+            AdminLatValue.Text = busData[1][5];
+            AdminLonValue.Text = busData[1][6];
+            AdminReviewValue.Text = busData[1][7];
+            AdminCheckinValue.Text = busData[1][8];
+            AdminRatingValue.Text = busData[1][9];
+            AdminStarsValue.Text = busData[1][10];
+
+            currAdminId = busData[1][11]; //set the current user id to what was returned by the query.
+
+            updateBussAttributesGrid();
         }
 
         /// <summary>
@@ -443,6 +486,23 @@ namespace Milestone2App
         }
 
 
+        private void BusinessNameTB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                List<string> busIds = queryEngine.GetBusinesses(BusinessNameTB.Text);
+
+                BusinessIdLB.Items.Clear();
+
+                foreach (string id in busIds)
+                    BusinessIdLB.Items.Add(id);
+
+                e.Handled = true;
+
+                //updateFriendsGrid();
+            }
+        }
+
         // Should consider *Templatizing* this to work for multiple DataGrids
         private void updateFriendsGrid()
         {
@@ -516,6 +576,7 @@ namespace Milestone2App
             List<double> userLocation = queryEngine.GetUserLocation(currUserId);
             List<string> selectedBusinesses = new List<string>();
             Microsoft.Maps.MapControl.WPF.Location userCoord = null;
+            //MapPolygon polygon = new MapPolygon();
 
             // Only set the map view to the user's position if the user has both a lat and long value entered
             if (userLocation.Count == 2)
@@ -547,6 +608,8 @@ namespace Milestone2App
 
                 mapTest.userControl11.map.SetView(busCoord, 13);
 
+                //polygon.Locations.Add(busCoord);
+
                 // Draw lines back to thea user to make map more readable
                 if (userCoord != null)
                 {
@@ -561,14 +624,10 @@ namespace Milestone2App
                     mapTest.userControl11.map.Children.Add(polyline);
                 }
             }
-            MapPolygon polygon = new MapPolygon();
-            //Microsoft.Maps.SpatialMath.Geometry.centroid(polygon);
+            
+            //mapTest.userControl11.map.Children.Add(polygon);
 
-            //centroid(polygon);
-
-            // Need to remove children when different businesses are selected
             this.mapTest.Show();
-            //MapButton.Enabled = false;
         }
 
         private void EditBtn_Click(object sender, EventArgs e)
@@ -608,18 +667,10 @@ namespace Milestone2App
         // Need to query by business_id
         private void RemoveFavBtn_Click(object sender, EventArgs e)
         {
-            //FavoriteBusinessGrid.SelectedRows[1];
-            //queryEngine.remove(FavoriteBusinessGrid.SelectedRows[1]);
-
             RemoveFavBtn.Enabled = false;
-
-            //string temp = FavoriteBusinessGrid.SelectedRows[0].Cells[1].ToString();
-            //string temp = FavoriteBusinessGrid.SelectedCells.ToString();
+            
             foreach (DataGridViewRow row in FavoriteBusinessGrid.SelectedRows)
             {
-                //string value1 = row.Cells[0].Value.ToString();
-                // Call method to remove favorite
-                // [0], [4], curruserid
                 queryEngine.RemoveFavBus(currUserId, row.Cells[0].Value.ToString(), row.Cells[4].Value.ToString());
             }
 
@@ -675,9 +726,110 @@ namespace Milestone2App
             checkinsWindow.Size = new System.Drawing.Size(width, checkinsWindow.Size.Height);
         }
 
-        private void textBox4_TextChanged(object sender, EventArgs e)
+        private void AdminEditNameBtn_Click(object sender, EventArgs e)
         {
+            AdminEditNameBtn.Enabled = false;
+            AdminUpdateBtn.Enabled = true;
+            BusNameValue.Enabled = true;
+        }
 
+        private void AdminUpdateBtn_Click(object sender, EventArgs e)
+        {
+            AdminUpdateBtn.Enabled = false;
+            AdminEditNameBtn.Enabled = true;
+            
+            // Execute update query
+            if (BusNameValue.Text != string.Empty)
+            {
+                queryEngine.updateBusinessName(currAdminId, BusNameValue.Text);
+            }
+            
+        }
+
+        private void BusinessAttrGrid_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            EditAttrBtn.Enabled = true;
+
+            foreach (DataGridViewRow row in BusinessAttrGrid.SelectedRows)
+            {
+                //queryEngine.updateAttribute(currAdminId, row.Cells[0].Value.ToString(), AttributeValValue.Text);
+                AttributeNameValue.Text = row.Cells[0].Value.ToString();
+                AttributeValValue.Text = row.Cells[1].Value.ToString();
+            }
+        }
+
+        private void BusinessAttrGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            EditAttrBtn.Enabled = true;
+        }
+
+        private void EditAttrBtn_Click(object sender, EventArgs e)
+        {
+            AttributeValValue.Enabled = true;
+            UpdateAttrBtn.Enabled = true;
+            EditAttrBtn.Enabled = false;
+        }
+
+        private void UpdateAttrBtn_Click(object sender, EventArgs e)
+        {
+            AttributeValValue.Enabled = false;
+            UpdateAttrBtn.Enabled = false;
+            EditAttrBtn.Enabled = true;
+
+            // Execute update query
+            
+            queryEngine.updateAttribute(currAdminId, AttributeNameValue.Text, AttributeValValue.Text);
+
+            updateBussAttributesGrid();
+        }
+
+        /// <summary>
+        /// Used for making sure the user adds somewhat valid data into the business's attributes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NewAttrValue_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (NewAttrValue.Text != string.Empty && NewAttriValValue.Text != string.Empty)
+            {
+                AddAttrBtn.Enabled = true;
+            }
+            else
+            {
+                AddAttrBtn.Enabled = false;
+            }
+        }
+
+        /// <summary>
+        /// Used for making sure the user adds somewhat valid data into the business's attributes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NewAttriValValue_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (NewAttrValue.Text != string.Empty && NewAttriValValue.Text != string.Empty)
+            {
+                AddAttrBtn.Enabled = true;
+            }
+            else
+            {
+                AddAttrBtn.Enabled = false;
+            }
+        }
+
+        private void AddAttrBtn_Click(object sender, EventArgs e)
+        {
+            // Execute insert query
+
+            try
+            {
+                queryEngine.InsertAttribute(currAdminId, NewAttrValue.Text, NewAttriValValue.Text);
+                updateBussAttributesGrid();
+            }
+            catch (PostgresException)
+            {
+                MessageBox.Show("Attribute is already present in database!");
+            }
         }
     }
 }
