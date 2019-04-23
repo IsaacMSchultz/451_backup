@@ -794,6 +794,9 @@ namespace Milestone2App
             
             queryEngine.updateAttribute(currAdminId, AttributeNameValue.Text, AttributeValValue.Text);
 
+            AttributeNameValue.Text = string.Empty;
+            AttributeValValue.Text = string.Empty;
+
             updateBussAttributesGrid();
 
             // Need to update the business UI when business attributes are updated
@@ -848,6 +851,8 @@ namespace Milestone2App
                 MessageBox.Show("Attribute is already present in database!");
             }
 
+            NewAttrValue.Text = string.Empty;
+            NewAttriValValue.Text = string.Empty;
             updateBussAttributesGrid();
 
             // Need to update the business UI when business attributes are updated
