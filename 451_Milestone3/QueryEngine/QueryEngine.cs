@@ -25,8 +25,8 @@ namespace QueryEngine1
         const string chars = "abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_- ";
 
         public event PropertyChangedEventHandler yelpDataChanged; // event for notifying that there was a property changed. 
-        //private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone3db";
-        private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone2db";
+        private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone3db";
+        //private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone2db";
 
         public QueryEngine()
         {
@@ -104,7 +104,7 @@ namespace QueryEngine1
             {
                 //string q = "SELECT DISTINCT category_name FROM category WHERE business_id = '" + id + "';";
                 return ExecuteListQuery("SELECT DISTINCT category_name FROM category WHERE business_id = '" + id + "';");
-            }            
+            }
         }
 
         public List<List<string>> GetAttributes(string id = "N/A")
@@ -134,8 +134,8 @@ namespace QueryEngine1
             //}
             //else
             //{
-                //string q = "SELECT DISTINCT attribute_name, attribute_value FROM attributes WHERE business_id = '" + id + "';";
-                return ExecuteCategorizedQuery("SELECT DISTINCT attribute_name, attribute_value FROM attributes WHERE business_id = '" + id + "';");
+            //string q = "SELECT DISTINCT attribute_name, attribute_value FROM attributes WHERE business_id = '" + id + "';";
+            return ExecuteCategorizedQuery("SELECT DISTINCT attribute_name, attribute_value FROM attributes WHERE business_id = '" + id + "';");
             //}
         }
 
@@ -385,22 +385,29 @@ namespace QueryEngine1
 
         public bool PostReview(string reviewText, int reviewStars, string busID, string UserID)
         {
-            int rows = 0;
-            string reviewID = new string(Enumerable.Repeat(chars, 22).Select(s => s[random.Next(s.Length)]).ToArray()); //makes a random 22 charachter string
-            using (var connection = new NpgsqlConnection(LOGININFO))
+            try
             {
-                connection.Open();
-                using (var cmd = new NpgsqlCommand())
+                int rows = 0;
+                string reviewID = new string(Enumerable.Repeat(chars, 22).Select(s => s[random.Next(s.Length)]).ToArray()); //makes a random 22 charachter string
+                using (var connection = new NpgsqlConnection(LOGININFO))
                 {
-                    cmd.Connection = connection;
-                    cmd.CommandText = "INSERT INTO review VALUES ('" + reviewID + "', '" + busID + "', '" + UserID + "', '" + reviewStars +
-                        "', NOW(), '" + reviewText + "', 0, 0, 0);";
-                    rows = cmd.ExecuteNonQuery();
+                    connection.Open();
+                    using (var cmd = new NpgsqlCommand())
+                    {
+                        cmd.Connection = connection;
+                        cmd.CommandText = "INSERT INTO review VALUES ('" + reviewID + "', '" + busID + "', '" + UserID + "', '" + reviewStars +
+                            "', NOW(), '" + reviewText + "', 0, 0, 0);";
+                        rows = cmd.ExecuteNonQuery();
+                    }
+                    connection.Close();
                 }
-                connection.Close();
+                if (rows > 0)
+                    return true;
             }
-            if (rows > 0)
-                return true;
+            catch (NpgsqlException e)
+            {
+                Console.WriteLine(e.ToString()); //Catch errors. Mostly from reviewcount being 0 because we need the update statements!
+            }
             return false;
         }
 
@@ -435,10 +442,10 @@ namespace QueryEngine1
                                     returnValue.Add(value);
                                 }
                             }
-                                //returnValue.Add(reader[column.ColumnName]);
+                            //returnValue.Add(reader[column.ColumnName]);
                             //row.Add(reader[column.ColumnName].ToString());
                             //return
-                            
+
                         }
                     }
                 }
@@ -497,7 +504,7 @@ namespace QueryEngine1
                                     row.Add(value);
                                 }
                             }
-                                
+
                             results.Add(row);
                         }
                     }
@@ -698,16 +705,45 @@ namespace QueryEngine1
                 ", user_longitude = " + lon.ToString() + " where user_id = '" +
                 user_id + "'";
 
-            using (var connection = new NpgsqlConnection(LOGININFO))
+            ExecuteNonQuery(query);
+        }
+
+        /// <summary>
+        /// Add a checkin for the current user!
+        /// </summary>
+        /// <param name="user_id">selected user's id</param>
+        /// <param name="lat">entered latitude</param>
+        /// <param name="lon">entered lonitude</param>
+        public void AddCheckin(string business_id, DateTime time)
+        {
+            // Round to the nearest hour
+            long ticks = time.Ticks + 18000000000; // add 30 minutes
+            time = new DateTime(ticks - ticks % 36000000000, time.Kind); // Round down the hour
+            string query = "INSERT INTO checkins VALUES ('" + business_id + "', '" + time.DayOfWeek.ToString() + "', '" + time.ToString("HH:mm:ss") + "', 1);";
+            ExecuteNonQuery(query);
+        }
+
+        private bool ExecuteNonQuery(string query)
+        {
+            try
             {
-                connection.Open();
-                using (var cmd = new NpgsqlCommand())
+                using (var connection = new NpgsqlConnection(LOGININFO))
                 {
-                    cmd.Connection = connection;
-                    cmd.CommandText = query;
-                    cmd.ExecuteNonQuery();
+                    connection.Open();
+                    using (var cmd = new NpgsqlCommand())
+                    {
+                        cmd.Connection = connection;
+                        cmd.CommandText = query;
+                        cmd.ExecuteNonQuery();
+                    }
+                    connection.Close();
                 }
-                connection.Close();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return false;
             }
         }
 

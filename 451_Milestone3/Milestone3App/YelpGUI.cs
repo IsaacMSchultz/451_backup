@@ -58,11 +58,12 @@ namespace Milestone2App
             InitializeComponent();
             initializeDropDowns();
 
+            // This is an error during a merge
             // Initialize map to be able to scroll
             mapTest.userControl11.map.Focus();
 
             RemoveFavBtn.Enabled = false;
-            
+
             foreach (var column in cols)
             {
                 // Create the column headers for the data grid view.
@@ -370,8 +371,7 @@ namespace Milestone2App
                 }
                 Attributes_Textbox.Text = attributesStr;
 
-
-
+                //Show the business' hours if it has any for the current day.
                 List<List<string>> hours = queryEngine.GetHoursForDay(currBusId, today); // query the database for the hours of a business
                 if (hours.Count > 1) // If the query returned some hours
                 {
@@ -379,10 +379,11 @@ namespace Milestone2App
                     Closes_Textbox.Text = hours[1].Count > 1 ? hours[1][1] : "N/A";
                 }
 
-
-                ShowReviewsButton.Enabled = true; //enable the button to show reviews after we click one
-                ShowCheckinsButton.Enabled = true; //enable the button to show reviews after we click one
-
+                //enable the buttons now that there is a business selected
+                ShowReviewsButton.Enabled = true;
+                ShowCheckinsButton.Enabled = true;
+                AddToFavoritesButton.Enabled = true;
+                CheckInButton.Enabled = true;
                 MapButton.Enabled = true;
             }
         }
@@ -394,9 +395,22 @@ namespace Milestone2App
         /// <param name="e"></param>
         private void SubmitReviewButton_Click(object sender, EventArgs e)
         {
-            if (currBusId != "" && currUserId != "" && ReviewStarsDropDown.SelectedItem as string != "Review Stars")
+            if (currBusId != "" && currUserId != "" && ReviewStarsDropDown.SelectedItem != null)
             {
                 queryEngine.PostReview(WriteReviewTextBox_Review.Text, int.Parse(ReviewStarsDropDown.SelectedItem as string), currBusId, currUserId);
+                return;
+            }
+            if (currUserId != "")
+            {
+                MessageBox.Show("Please select a user to sign in as.");
+            }
+            if (ReviewStarsDropDown.SelectedItem as string != "Review Stars")
+            {
+                MessageBox.Show("Please select a stars rating.");
+            }
+            if (currBusId != "")
+            {
+                MessageBox.Show("Please select a business.");
             }
         }
 
@@ -587,7 +601,7 @@ namespace Milestone2App
                 pin.Location = userCoord;
                 mapTest.userControl11.map.Children.Add(pin);
                 
-                mapTest.userControl11.map.SetView(userCoord, 10);
+                //mapTest.userControl11.map.SetView(userCoord, 10);
             }
 
             // Add pins for all of the businesses in the grid
@@ -606,7 +620,7 @@ namespace Milestone2App
                 pin.Location = busCoord;
                 mapTest.userControl11.map.Children.Add(pin);
 
-                mapTest.userControl11.map.SetView(busCoord, 13);
+                mapTest.userControl11.map.SetView(busCoord, 10);
 
                 //polygon.Locations.Add(busCoord);
 
@@ -725,7 +739,7 @@ namespace Milestone2App
             width += 40;
             checkinsWindow.Size = new System.Drawing.Size(width, checkinsWindow.Size.Height);
         }
-
+        
         private void AdminEditNameBtn_Click(object sender, EventArgs e)
         {
             AdminEditNameBtn.Enabled = false;
@@ -831,5 +845,27 @@ namespace Milestone2App
                 MessageBox.Show("Attribute is already present in database!");
             }
         }
+
+        private void CheckInButton_Click(object sender, EventArgs e)
+        {
+            if (currBusId != "" && currUserId != "")
+            {
+                // Make the new form open up and show it to the user.
+                CheckinForm checkinsWindow = new CheckinForm(currUserId, currBusId, DateTime.Now);
+                checkinsWindow.Show();
+            }
+            else
+            {
+                if (currUserId != "")
+                {
+                    MessageBox.Show("Please select a user to sign in as.");
+                }
+                if (currBusId != "")
+                {
+                    MessageBox.Show("Please select a business");
+                }
+            }
+        }
     }
 }
+
