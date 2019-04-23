@@ -39,8 +39,8 @@ namespace Milestone2App
         private static Random random = new Random();
         const string chars = "abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_- ";
 
-        private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone2db"; // Defines our connection to local databus
-        //private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone2db"; // Defines our connection to cloud hosted databus
+        private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone3db"; // Defines our connection to local databus
+        //private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone3db"; // Defines our connection to cloud hosted databus
 
         /// <summary>
         /// Constructor for a yelpGUI.
