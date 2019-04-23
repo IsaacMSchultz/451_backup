@@ -281,7 +281,10 @@ namespace QueryEngine1
         public List<double> GetUserLocation(string userId)
         {
             string query = "Select user_latitude, user_longitude from yelpuser where user_id = '" + userId + "'";
-            return ExecuteDoubleQuery(query);
+            //return ExecuteDoubleQuery(query);
+            List<List<double>> userLocation =  ExecuteCategorizedDoubleQuery(query);
+
+            return userLocation[0];
         }
 
         // Each business will have two values in their list: latitude and longitude
@@ -314,6 +317,12 @@ namespace QueryEngine1
         public List<List<string>> GetFriends(string userId)
         {
             string query = "Select name, average_stars, yelping_since from yelpuser where user_id in (Select friend_id from friend where user_id = '" + userId + "')";
+            return ExecuteCategorizedQuery(query);
+        }
+
+        public List<List<string>> GetReviewsByKeyword(string keyword)
+        {
+            string query = "SELECT business.name, funny_vote, text FROM review INNER JOIN business ON business.business_id = review.business_id WHERE review.text like '%" + keyword+ "%'"; 
             return ExecuteCategorizedQuery(query);
         }
 

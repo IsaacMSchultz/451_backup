@@ -42,5 +42,14 @@ namespace Milestone2App
             ((System.ComponentModel.ISupportInitialize)(this.ReviewGrid)).EndInit();
             this.ResumeLayout(false);            
         }
+
+        private void ReviewForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Hide();
+            this.Parent = null;
+            e.Cancel = true;
+
+            
+        }
     }
 }

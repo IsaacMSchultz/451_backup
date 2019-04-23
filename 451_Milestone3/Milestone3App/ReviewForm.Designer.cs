@@ -28,7 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            
+            this.SuspendLayout();
+            // 
+            // ReviewForm
+            // 
+            this.ClientSize = new System.Drawing.Size(282, 253);
+            this.Name = "ReviewForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ReviewForm_FormClosing);
+            this.ResumeLayout(false);
 
         }
 

@@ -9,6 +9,7 @@ using QueryEngine1;
 using System.Linq;
 using MapControlLibrary;
 using Microsoft.Maps.MapControl.WPF;
+using Microsoft.Maps.MapControl.WPF.Overlays;
 using System.Windows.Media;
 //using Microsoft.Maps.SpatialMath;
 //using Microsoft.Maps.SpatialMath.Geometry;
@@ -450,6 +451,14 @@ namespace Milestone2App
         /// <param name="e"></param>
         private void ShowReviewsButton_Click(object sender, EventArgs e)
         {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form is ReviewForm)
+                {
+                    form.Hide();
+                }
+            }
+
             // create a new datagridview to pass to the new form that will open to show the reviews.
             DataGridView ReviewGrid = new DataGridView();
             ReviewGrid.RowHeadersVisible = false;
@@ -587,7 +596,7 @@ namespace Milestone2App
             List<double> userLocation = queryEngine.GetUserLocation(currUserId);
             List<string> selectedBusinesses = new List<string>();
             Microsoft.Maps.MapControl.WPF.Location userCoord = null;
-            //MapPolygon polygon = new MapPolygon();
+            Microsoft.Maps.MapControl.WPF.Location busCoord = null;
 
             // Only set the map view to the user's position if the user has both a lat and long value entered
             if (userLocation.Count == 2)
@@ -596,11 +605,7 @@ namespace Milestone2App
                 Pushpin pin = new Pushpin();
                 pin.Background = new SolidColorBrush(Color.FromArgb(200, 0, 100, 100));
                 pin.Location = userCoord;
-                //pin.Tag = "Yo";
-                pin.Heading = 12.5;
                 mapTest.userControl11.map.Children.Add(pin);
-                
-                //mapTest.userControl11.map.SetView(userCoord, 10);
             }
 
             // Add pins for all of the businesses in the grid
@@ -614,27 +619,27 @@ namespace Milestone2App
             // Need to protect against case where no businesses are present in the grid
             foreach (List<double> locations in queryEngine.GetBusinessLocations(selectedBusinesses))
             {
-                Microsoft.Maps.MapControl.WPF.Location busCoord = new Microsoft.Maps.MapControl.WPF.Location(locations[0], locations[1]);
+                busCoord = new Microsoft.Maps.MapControl.WPF.Location(locations[0], locations[1]);
                 Pushpin pin = new Pushpin();
                 pin.Location = busCoord;
                 mapTest.userControl11.map.Children.Add(pin);
+                
+                mapTest.userControl11.map.SetView(busCoord, 11);
+            }
 
-                mapTest.userControl11.map.SetView(busCoord, 10);                
-
-                // Draw lines back to thea user to make map more readable
-                if (userCoord != null)
-                {
-                    MapPolyline polyline = new MapPolyline();
-                    polyline.Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.DarkRed);
-                    polyline.StrokeThickness = 3;
-                    polyline.Opacity = 0.5;
-                    polyline.Locations = new LocationCollection() {
+            // Draw line between the user and most recently added business to make map more readable
+            if (userCoord != null && busCoord != null)
+            {
+                MapPolyline polyline = new MapPolyline();
+                polyline.Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.DarkRed);
+                polyline.StrokeThickness = 3;
+                polyline.Opacity = 0.5;
+                polyline.Locations = new LocationCollection() {
                         userCoord,
                         busCoord };
 
-                    mapTest.userControl11.map.Children.Add(polyline);
-                }
-            }                        
+                mapTest.userControl11.map.Children.Add(polyline);
+            }
 
             this.mapTest.Show();
         }
@@ -697,6 +702,14 @@ namespace Milestone2App
 
         private void ShowCheckinsButton_Click(object sender, EventArgs e)
         {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form is ReviewForm)
+                {
+                    form.Hide();
+                }
+            }
+
             // create a new datagridview to pass to the new form that will open to show the reviews.
             DataGridView CheckinsGrid = new DataGridView();
             CheckinsGrid.RowHeadersVisible = false;
@@ -872,7 +885,7 @@ namespace Milestone2App
 
                 ReviewKeywordGrid.Rows.Clear(); //removes all the data previously in the grid.            
 
-                foreach (List<string> listRow in queryEngine.GetReviewsByKeyword(KeywordValue.Text, "text"))
+                foreach (List<string> listRow in queryEngine.GetReviewsByKeyword(KeywordValue.Text))
                 {
                     if (row > 0)
                     {
