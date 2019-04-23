@@ -173,7 +173,7 @@
             this.AdminRightLP = new System.Windows.Forms.TableLayoutPanel();
             this.BusinessAttributesHeader = new System.Windows.Forms.TextBox();
             this.BusinessAttrGrid = new System.Windows.Forms.DataGridView();
-            this.Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NameHeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AdminEditAttrLP = new System.Windows.Forms.TableLayoutPanel();
             this.AddAttrLP = new System.Windows.Forms.TableLayoutPanel();
@@ -2328,7 +2328,7 @@
             this.BusinessAttrGrid.AllowUserToDeleteRows = false;
             this.BusinessAttrGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.BusinessAttrGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Name,
+            this.NameHeader,
             this.Value});
             this.BusinessAttrGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BusinessAttrGrid.Location = new System.Drawing.Point(27, 48);
@@ -2345,10 +2345,10 @@
             // 
             // Name
             // 
-            this.Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Name.HeaderText = "Attribute Name";
-            this.Name.Name = "Name";
-            this.Name.ReadOnly = true;
+            this.NameHeader.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NameHeader.HeaderText = "Attribute Name";
+            this.NameHeader.Name = "Name";
+            this.NameHeader.ReadOnly = true;
             // 
             // Value
             // 
@@ -2850,7 +2850,7 @@
         private System.Windows.Forms.TextBox BusinessAttributesHeader;
         private System.Windows.Forms.DataGridView BusinessAttrGrid;
         private System.Windows.Forms.ListBox BusinessIdLB;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NameHeader;
         private System.Windows.Forms.DataGridViewTextBoxColumn Value;
         private System.Windows.Forms.TableLayoutPanel AdminEditAttrLP;
         private System.Windows.Forms.TableLayoutPanel AddAttrLP;
