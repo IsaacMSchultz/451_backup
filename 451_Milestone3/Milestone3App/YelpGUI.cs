@@ -451,6 +451,14 @@ namespace Milestone2App
         /// <param name="e"></param>
         private void ShowReviewsButton_Click(object sender, EventArgs e)
         {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form is ReviewForm)
+                {
+                    form.Hide();
+                }
+            }
+
             // create a new datagridview to pass to the new form that will open to show the reviews.
             DataGridView ReviewGrid = new DataGridView();
             ReviewGrid.RowHeadersVisible = false;
@@ -694,6 +702,14 @@ namespace Milestone2App
 
         private void ShowCheckinsButton_Click(object sender, EventArgs e)
         {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form is ReviewForm)
+                {
+                    form.Hide();
+                }
+            }
+
             // create a new datagridview to pass to the new form that will open to show the reviews.
             DataGridView CheckinsGrid = new DataGridView();
             CheckinsGrid.RowHeadersVisible = false;
