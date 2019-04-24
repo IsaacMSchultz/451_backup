@@ -85,6 +85,7 @@ namespace QueryEngine1
             }
         }
 
+        //TODO: BUG WHERE THIS RETURNS ALL CATEGORIES EVEN IF THEY ARENT IN THE DATA.
         //Returns a list of all the checked categories, or an empty list if there are no checked categories
         public List<string> GetCheckedCategories()
         {
