@@ -77,7 +77,9 @@
             this.MapButton = new System.Windows.Forms.Button();
             this.ShowCheckinsButton = new System.Windows.Forms.Button();
             this.AttributesCheckboxPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.FilterByAttributesLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.PriceFilterPanel = new System.Windows.Forms.TableLayoutPanel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.BusinessTabPage = new System.Windows.Forms.TabPage();
             this.UsersTabPage = new System.Windows.Forms.TabPage();
@@ -201,13 +203,16 @@
             this.KeywordSearchHeader = new System.Windows.Forms.TextBox();
             this.KeywordDataLP = new System.Windows.Forms.TableLayoutPanel();
             this.ReviewKeywordGrid = new System.Windows.Forms.DataGridView();
+            this.BusinessName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FunnyVotes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ReviewText = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.KeywordValueHeaderLP = new System.Windows.Forms.TableLayoutPanel();
             this.SearchReviewsBtn = new System.Windows.Forms.Button();
             this.KeywordValue = new System.Windows.Forms.TextBox();
             this.KeywordHeaderTB = new System.Windows.Forms.TextBox();
-            this.BusinessName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FunnyVotes = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ReviewText = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FilterByMealLabel = new System.Windows.Forms.Label();
+            this.FilterByMealPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.FilterByAttributesPanel = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).BeginInit();
             this.SearchCheckBoxPanel.SuspendLayout();
             this.StateDropdownPanel.SuspendLayout();
@@ -281,7 +286,7 @@
             this.businessGrid.Name = "businessGrid";
             this.businessGrid.ReadOnly = true;
             this.businessGrid.RowHeadersVisible = false;
-            this.businessGrid.Size = new System.Drawing.Size(605, 266);
+            this.businessGrid.Size = new System.Drawing.Size(668, 266);
             this.businessGrid.TabIndex = 2;
             this.businessGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.BusinessGrid_CellContentClick);
             // 
@@ -494,7 +499,7 @@
             this.BusinessTabPanel.ColumnCount = 3;
             this.BusinessTabPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
             this.BusinessTabPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.BusinessTabPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.BusinessTabPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
             this.BusinessTabPanel.Controls.Add(this.SearchPanel, 0, 0);
             this.BusinessTabPanel.Controls.Add(this.businessGrid, 1, 0);
             this.BusinessTabPanel.Controls.Add(this.BusinessInfoPanel, 1, 1);
@@ -506,7 +511,7 @@
             this.BusinessTabPanel.RowCount = 2;
             this.BusinessTabPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 45F));
             this.BusinessTabPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55F));
-            this.BusinessTabPanel.Size = new System.Drawing.Size(955, 592);
+            this.BusinessTabPanel.Size = new System.Drawing.Size(1118, 592);
             this.BusinessTabPanel.TabIndex = 8;
             // 
             // BusinessInfoPanel
@@ -526,7 +531,7 @@
             this.BusinessInfoPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
             this.BusinessInfoPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.BusinessInfoPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
-            this.BusinessInfoPanel.Size = new System.Drawing.Size(755, 326);
+            this.BusinessInfoPanel.Size = new System.Drawing.Size(918, 326);
             this.BusinessInfoPanel.TabIndex = 9;
             // 
             // businessNameTextBox_Review
@@ -538,7 +543,7 @@
             this.businessNameTextBox_Review.Margin = new System.Windows.Forms.Padding(0);
             this.businessNameTextBox_Review.Name = "businessNameTextBox_Review";
             this.businessNameTextBox_Review.ReadOnly = true;
-            this.businessNameTextBox_Review.Size = new System.Drawing.Size(755, 38);
+            this.businessNameTextBox_Review.Size = new System.Drawing.Size(918, 38);
             this.businessNameTextBox_Review.TabIndex = 0;
             this.businessNameTextBox_Review.Text = "Business name (click on one)";
             // 
@@ -573,7 +578,7 @@
             this.BusinessInfoListPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.BusinessInfoListPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.BusinessInfoListPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.BusinessInfoListPanel.Size = new System.Drawing.Size(655, 288);
+            this.BusinessInfoListPanel.Size = new System.Drawing.Size(818, 288);
             this.BusinessInfoListPanel.TabIndex = 5;
             // 
             // AddressLabel
@@ -584,7 +589,7 @@
             this.AddressLabel.Margin = new System.Windows.Forms.Padding(0);
             this.AddressLabel.Name = "AddressLabel";
             this.BusinessInfoListPanel.SetRowSpan(this.AddressLabel, 2);
-            this.AddressLabel.Size = new System.Drawing.Size(65, 36);
+            this.AddressLabel.Size = new System.Drawing.Size(81, 36);
             this.AddressLabel.TabIndex = 3;
             this.AddressLabel.Text = "Address";
             this.AddressLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -592,13 +597,13 @@
             // Address_Textbox
             // 
             this.Address_Textbox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Address_Textbox.Location = new System.Drawing.Point(65, 0);
+            this.Address_Textbox.Location = new System.Drawing.Point(81, 0);
             this.Address_Textbox.Margin = new System.Windows.Forms.Padding(0);
             this.Address_Textbox.Multiline = true;
             this.Address_Textbox.Name = "Address_Textbox";
             this.Address_Textbox.ReadOnly = true;
             this.BusinessInfoListPanel.SetRowSpan(this.Address_Textbox, 2);
-            this.Address_Textbox.Size = new System.Drawing.Size(262, 36);
+            this.Address_Textbox.Size = new System.Drawing.Size(327, 36);
             this.Address_Textbox.TabIndex = 11;
             this.Address_Textbox.Text = "Click Business to show Address";
             // 
@@ -609,7 +614,7 @@
             this.WriteReview_Label.Location = new System.Drawing.Point(0, 111);
             this.WriteReview_Label.Margin = new System.Windows.Forms.Padding(0);
             this.WriteReview_Label.Name = "WriteReview_Label";
-            this.WriteReview_Label.Size = new System.Drawing.Size(65, 50);
+            this.WriteReview_Label.Size = new System.Drawing.Size(81, 50);
             this.WriteReview_Label.TabIndex = 8;
             this.WriteReview_Label.Text = "Write Review";
             this.WriteReview_Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -619,10 +624,10 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.BusinessInfoListPanel.SetColumnSpan(this.dataGridView1, 3);
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(65, 161);
+            this.dataGridView1.Location = new System.Drawing.Point(81, 161);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(0);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(590, 127);
+            this.dataGridView1.Size = new System.Drawing.Size(737, 127);
             this.dataGridView1.TabIndex = 18;
             // 
             // FriendsReviews_Label
@@ -632,7 +637,7 @@
             this.FriendsReviews_Label.Location = new System.Drawing.Point(0, 161);
             this.FriendsReviews_Label.Margin = new System.Windows.Forms.Padding(0);
             this.FriendsReviews_Label.Name = "FriendsReviews_Label";
-            this.FriendsReviews_Label.Size = new System.Drawing.Size(65, 127);
+            this.FriendsReviews_Label.Size = new System.Drawing.Size(81, 127);
             this.FriendsReviews_Label.TabIndex = 15;
             this.FriendsReviews_Label.Text = "Friends who reviewed this business";
             this.FriendsReviews_Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -641,10 +646,10 @@
             // 
             this.Attributes_Label.AutoSize = true;
             this.Attributes_Label.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Attributes_Label.Location = new System.Drawing.Point(327, 36);
+            this.Attributes_Label.Location = new System.Drawing.Point(408, 36);
             this.Attributes_Label.Margin = new System.Windows.Forms.Padding(0);
             this.Attributes_Label.Name = "Attributes_Label";
-            this.Attributes_Label.Size = new System.Drawing.Size(65, 75);
+            this.Attributes_Label.Size = new System.Drawing.Size(81, 75);
             this.Attributes_Label.TabIndex = 14;
             this.Attributes_Label.Text = "Attributes";
             this.Attributes_Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -652,13 +657,13 @@
             // Attributes_Textbox
             // 
             this.Attributes_Textbox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Attributes_Textbox.Location = new System.Drawing.Point(392, 36);
+            this.Attributes_Textbox.Location = new System.Drawing.Point(489, 36);
             this.Attributes_Textbox.Margin = new System.Windows.Forms.Padding(0);
             this.Attributes_Textbox.Multiline = true;
             this.Attributes_Textbox.Name = "Attributes_Textbox";
             this.Attributes_Textbox.ReadOnly = true;
             this.Attributes_Textbox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.Attributes_Textbox.Size = new System.Drawing.Size(263, 75);
+            this.Attributes_Textbox.Size = new System.Drawing.Size(329, 75);
             this.Attributes_Textbox.TabIndex = 17;
             this.Attributes_Textbox.Text = "Click Business to show Attributes";
             // 
@@ -666,10 +671,10 @@
             // 
             this.Hours_Label.AutoSize = true;
             this.Hours_Label.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Hours_Label.Location = new System.Drawing.Point(327, 0);
+            this.Hours_Label.Location = new System.Drawing.Point(408, 0);
             this.Hours_Label.Margin = new System.Windows.Forms.Padding(0);
             this.Hours_Label.Name = "Hours_Label";
-            this.Hours_Label.Size = new System.Drawing.Size(65, 20);
+            this.Hours_Label.Size = new System.Drawing.Size(81, 20);
             this.Hours_Label.TabIndex = 7;
             this.Hours_Label.Text = "Hours:";
             this.Hours_Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -677,12 +682,12 @@
             // DayOfTheWeek_Textbox
             // 
             this.DayOfTheWeek_Textbox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DayOfTheWeek_Textbox.Location = new System.Drawing.Point(392, 0);
+            this.DayOfTheWeek_Textbox.Location = new System.Drawing.Point(489, 0);
             this.DayOfTheWeek_Textbox.Margin = new System.Windows.Forms.Padding(0);
             this.DayOfTheWeek_Textbox.Multiline = true;
             this.DayOfTheWeek_Textbox.Name = "DayOfTheWeek_Textbox";
             this.DayOfTheWeek_Textbox.ReadOnly = true;
-            this.DayOfTheWeek_Textbox.Size = new System.Drawing.Size(263, 20);
+            this.DayOfTheWeek_Textbox.Size = new System.Drawing.Size(329, 20);
             this.DayOfTheWeek_Textbox.TabIndex = 13;
             this.DayOfTheWeek_Textbox.Text = "Day of the week";
             // 
@@ -699,35 +704,35 @@
             this.BusinessHoursPanel.Controls.Add(this.Opens_Label, 0, 0);
             this.BusinessHoursPanel.Controls.Add(this.Closes_Label, 2, 0);
             this.BusinessHoursPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BusinessHoursPanel.Location = new System.Drawing.Point(327, 20);
+            this.BusinessHoursPanel.Location = new System.Drawing.Point(408, 20);
             this.BusinessHoursPanel.Margin = new System.Windows.Forms.Padding(0);
             this.BusinessHoursPanel.Name = "BusinessHoursPanel";
             this.BusinessHoursPanel.RowCount = 1;
             this.BusinessHoursPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.BusinessHoursPanel.Size = new System.Drawing.Size(328, 16);
+            this.BusinessHoursPanel.Size = new System.Drawing.Size(410, 16);
             this.BusinessHoursPanel.TabIndex = 13;
             // 
             // Closes_Textbox
             // 
             this.Closes_Textbox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Closes_Textbox.Location = new System.Drawing.Point(228, 0);
+            this.Closes_Textbox.Location = new System.Drawing.Point(287, 0);
             this.Closes_Textbox.Margin = new System.Windows.Forms.Padding(0);
             this.Closes_Textbox.Multiline = true;
             this.Closes_Textbox.Name = "Closes_Textbox";
             this.Closes_Textbox.ReadOnly = true;
-            this.Closes_Textbox.Size = new System.Drawing.Size(100, 16);
+            this.Closes_Textbox.Size = new System.Drawing.Size(123, 16);
             this.Closes_Textbox.TabIndex = 17;
             this.Closes_Textbox.Text = "N/A";
             // 
             // Opens_Textbox
             // 
             this.Opens_Textbox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Opens_Textbox.Location = new System.Drawing.Point(65, 0);
+            this.Opens_Textbox.Location = new System.Drawing.Point(82, 0);
             this.Opens_Textbox.Margin = new System.Windows.Forms.Padding(0);
             this.Opens_Textbox.Multiline = true;
             this.Opens_Textbox.Name = "Opens_Textbox";
             this.Opens_Textbox.ReadOnly = true;
-            this.Opens_Textbox.Size = new System.Drawing.Size(98, 16);
+            this.Opens_Textbox.Size = new System.Drawing.Size(123, 16);
             this.Opens_Textbox.TabIndex = 12;
             this.Opens_Textbox.Text = "N/A";
             // 
@@ -738,7 +743,7 @@
             this.Opens_Label.Location = new System.Drawing.Point(0, 0);
             this.Opens_Label.Margin = new System.Windows.Forms.Padding(0);
             this.Opens_Label.Name = "Opens_Label";
-            this.Opens_Label.Size = new System.Drawing.Size(65, 16);
+            this.Opens_Label.Size = new System.Drawing.Size(82, 16);
             this.Opens_Label.TabIndex = 6;
             this.Opens_Label.Text = "Opens";
             this.Opens_Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -747,10 +752,10 @@
             // 
             this.Closes_Label.AutoSize = true;
             this.Closes_Label.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Closes_Label.Location = new System.Drawing.Point(163, 0);
+            this.Closes_Label.Location = new System.Drawing.Point(205, 0);
             this.Closes_Label.Margin = new System.Windows.Forms.Padding(0);
             this.Closes_Label.Name = "Closes_Label";
-            this.Closes_Label.Size = new System.Drawing.Size(65, 16);
+            this.Closes_Label.Size = new System.Drawing.Size(82, 16);
             this.Closes_Label.TabIndex = 4;
             this.Closes_Label.Text = "Closes";
             this.Closes_Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -762,7 +767,7 @@
             this.CategoriesList_Label.Location = new System.Drawing.Point(0, 36);
             this.CategoriesList_Label.Margin = new System.Windows.Forms.Padding(0);
             this.CategoriesList_Label.Name = "CategoriesList_Label";
-            this.CategoriesList_Label.Size = new System.Drawing.Size(65, 75);
+            this.CategoriesList_Label.Size = new System.Drawing.Size(81, 75);
             this.CategoriesList_Label.TabIndex = 9;
             this.CategoriesList_Label.Text = "Categories";
             this.CategoriesList_Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -770,12 +775,12 @@
             // Categories_Textbox
             // 
             this.Categories_Textbox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Categories_Textbox.Location = new System.Drawing.Point(65, 36);
+            this.Categories_Textbox.Location = new System.Drawing.Point(81, 36);
             this.Categories_Textbox.Margin = new System.Windows.Forms.Padding(0);
             this.Categories_Textbox.Multiline = true;
             this.Categories_Textbox.Name = "Categories_Textbox";
             this.Categories_Textbox.ReadOnly = true;
-            this.Categories_Textbox.Size = new System.Drawing.Size(262, 75);
+            this.Categories_Textbox.Size = new System.Drawing.Size(327, 75);
             this.Categories_Textbox.TabIndex = 10;
             this.Categories_Textbox.Text = "Click Business to show Categories";
             // 
@@ -788,12 +793,12 @@
             this.WriteReviewPanel.Controls.Add(this.WriteReviewTextBox_Review, 0, 0);
             this.WriteReviewPanel.Controls.Add(this.SubmitReviewPanel, 1, 0);
             this.WriteReviewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.WriteReviewPanel.Location = new System.Drawing.Point(65, 111);
+            this.WriteReviewPanel.Location = new System.Drawing.Point(81, 111);
             this.WriteReviewPanel.Margin = new System.Windows.Forms.Padding(0);
             this.WriteReviewPanel.Name = "WriteReviewPanel";
             this.WriteReviewPanel.RowCount = 1;
             this.WriteReviewPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.WriteReviewPanel.Size = new System.Drawing.Size(590, 50);
+            this.WriteReviewPanel.Size = new System.Drawing.Size(737, 50);
             this.WriteReviewPanel.TabIndex = 19;
             // 
             // WriteReviewTextBox_Review
@@ -803,7 +808,7 @@
             this.WriteReviewTextBox_Review.Margin = new System.Windows.Forms.Padding(0);
             this.WriteReviewTextBox_Review.Multiline = true;
             this.WriteReviewTextBox_Review.Name = "WriteReviewTextBox_Review";
-            this.WriteReviewTextBox_Review.Size = new System.Drawing.Size(490, 50);
+            this.WriteReviewTextBox_Review.Size = new System.Drawing.Size(637, 50);
             this.WriteReviewTextBox_Review.TabIndex = 1;
             this.WriteReviewTextBox_Review.TextChanged += new System.EventHandler(this.WriteReviewTextBox_Review_TextChanged);
             // 
@@ -813,7 +818,7 @@
             this.SubmitReviewPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.SubmitReviewPanel.Controls.Add(this.SubmitReviewButton, 0, 1);
             this.SubmitReviewPanel.Controls.Add(this.ReviewStarsDropDown, 0, 0);
-            this.SubmitReviewPanel.Location = new System.Drawing.Point(490, 0);
+            this.SubmitReviewPanel.Location = new System.Drawing.Point(637, 0);
             this.SubmitReviewPanel.Margin = new System.Windows.Forms.Padding(0);
             this.SubmitReviewPanel.Name = "SubmitReviewPanel";
             this.SubmitReviewPanel.RowCount = 2;
@@ -870,7 +875,7 @@
             this.BusinessButtonsPanel.Controls.Add(this.MapButton, 0, 2);
             this.BusinessButtonsPanel.Controls.Add(this.ShowCheckinsButton, 0, 1);
             this.BusinessButtonsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BusinessButtonsPanel.Location = new System.Drawing.Point(655, 38);
+            this.BusinessButtonsPanel.Location = new System.Drawing.Point(818, 38);
             this.BusinessButtonsPanel.Margin = new System.Windows.Forms.Padding(0);
             this.BusinessButtonsPanel.Name = "BusinessButtonsPanel";
             this.BusinessButtonsPanel.RowCount = 5;
@@ -953,18 +958,34 @@
             this.AttributesCheckboxPanel.ColumnCount = 2;
             this.AttributesCheckboxPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.AttributesCheckboxPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.AttributesCheckboxPanel.Controls.Add(this.FilterByAttributesPanel, 0, 3);
+            this.AttributesCheckboxPanel.Controls.Add(this.FilterByMealPanel, 0, 3);
+            this.AttributesCheckboxPanel.Controls.Add(this.FilterByAttributesLabel, 0, 2);
             this.AttributesCheckboxPanel.Controls.Add(this.label1, 0, 0);
+            this.AttributesCheckboxPanel.Controls.Add(this.PriceFilterPanel, 0, 1);
+            this.AttributesCheckboxPanel.Controls.Add(this.FilterByMealLabel, 1, 2);
             this.AttributesCheckboxPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.AttributesCheckboxPanel.Location = new System.Drawing.Point(805, 0);
+            this.AttributesCheckboxPanel.Location = new System.Drawing.Point(868, 0);
             this.AttributesCheckboxPanel.Margin = new System.Windows.Forms.Padding(0);
             this.AttributesCheckboxPanel.Name = "AttributesCheckboxPanel";
             this.AttributesCheckboxPanel.RowCount = 4;
             this.AttributesCheckboxPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8F));
             this.AttributesCheckboxPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12F));
-            this.AttributesCheckboxPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8F));
-            this.AttributesCheckboxPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 72F));
-            this.AttributesCheckboxPanel.Size = new System.Drawing.Size(150, 266);
+            this.AttributesCheckboxPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12F));
+            this.AttributesCheckboxPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 68F));
+            this.AttributesCheckboxPanel.Size = new System.Drawing.Size(250, 266);
             this.AttributesCheckboxPanel.TabIndex = 10;
+            // 
+            // FilterByAttributesLabel
+            // 
+            this.FilterByAttributesLabel.AutoSize = true;
+            this.FilterByAttributesLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FilterByAttributesLabel.Location = new System.Drawing.Point(3, 52);
+            this.FilterByAttributesLabel.Name = "FilterByAttributesLabel";
+            this.FilterByAttributesLabel.Size = new System.Drawing.Size(119, 31);
+            this.FilterByAttributesLabel.TabIndex = 2;
+            this.FilterByAttributesLabel.Text = "Filter By Attributes:";
+            this.FilterByAttributesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label1
             // 
@@ -973,9 +994,28 @@
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(144, 21);
+            this.label1.Size = new System.Drawing.Size(244, 21);
             this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
+            this.label1.Text = "Filter By Price:";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // PriceFilterPanel
+            // 
+            this.PriceFilterPanel.ColumnCount = 4;
+            this.AttributesCheckboxPanel.SetColumnSpan(this.PriceFilterPanel, 2);
+            this.PriceFilterPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.PriceFilterPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.PriceFilterPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.PriceFilterPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.PriceFilterPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PriceFilterPanel.Location = new System.Drawing.Point(0, 21);
+            this.PriceFilterPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.PriceFilterPanel.Name = "PriceFilterPanel";
+            this.PriceFilterPanel.RowCount = 1;
+            this.PriceFilterPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.PriceFilterPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.PriceFilterPanel.Size = new System.Drawing.Size(250, 31);
+            this.PriceFilterPanel.TabIndex = 1;
             // 
             // tabControl1
             // 
@@ -988,7 +1028,7 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(963, 618);
+            this.tabControl1.Size = new System.Drawing.Size(1126, 618);
             this.tabControl1.TabIndex = 9;
             // 
             // BusinessTabPage
@@ -997,7 +1037,7 @@
             this.BusinessTabPage.Location = new System.Drawing.Point(4, 22);
             this.BusinessTabPage.Margin = new System.Windows.Forms.Padding(0);
             this.BusinessTabPage.Name = "BusinessTabPage";
-            this.BusinessTabPage.Size = new System.Drawing.Size(955, 592);
+            this.BusinessTabPage.Size = new System.Drawing.Size(1118, 592);
             this.BusinessTabPage.TabIndex = 0;
             this.BusinessTabPage.Text = "Business";
             this.BusinessTabPage.UseVisualStyleBackColor = true;
@@ -1008,7 +1048,7 @@
             this.UsersTabPage.Location = new System.Drawing.Point(4, 22);
             this.UsersTabPage.Margin = new System.Windows.Forms.Padding(0);
             this.UsersTabPage.Name = "UsersTabPage";
-            this.UsersTabPage.Size = new System.Drawing.Size(955, 592);
+            this.UsersTabPage.Size = new System.Drawing.Size(1118, 592);
             this.UsersTabPage.TabIndex = 1;
             this.UsersTabPage.Text = "Users";
             this.UsersTabPage.UseVisualStyleBackColor = true;
@@ -1028,7 +1068,7 @@
             this.UserLayoutPanel.Name = "UserLayoutPanel";
             this.UserLayoutPanel.RowCount = 1;
             this.UserLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.UserLayoutPanel.Size = new System.Drawing.Size(955, 592);
+            this.UserLayoutPanel.Size = new System.Drawing.Size(1118, 592);
             this.UserLayoutPanel.TabIndex = 9;
             // 
             // LeftUserLP
@@ -1053,7 +1093,7 @@
             this.LeftUserLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
             this.LeftUserLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 39.77011F));
             this.LeftUserLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.LeftUserLP.Size = new System.Drawing.Size(479, 588);
+            this.LeftUserLP.Size = new System.Drawing.Size(561, 588);
             this.LeftUserLP.TabIndex = 9;
             // 
             // UserInfoTitleTB
@@ -1064,7 +1104,7 @@
             this.UserInfoTitleTB.Location = new System.Drawing.Point(15, 16);
             this.UserInfoTitleTB.Margin = new System.Windows.Forms.Padding(15, 2, 2, 2);
             this.UserInfoTitleTB.Name = "UserInfoTitleTB";
-            this.UserInfoTitleTB.Size = new System.Drawing.Size(242, 16);
+            this.UserInfoTitleTB.Size = new System.Drawing.Size(286, 16);
             this.UserInfoTitleTB.TabIndex = 15;
             this.UserInfoTitleTB.Text = "User Information";
             // 
@@ -1073,10 +1113,10 @@
             this.FriendsTitleTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.FriendsTitleTB.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.FriendsTitleTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FriendsTitleTB.Location = new System.Drawing.Point(274, 16);
+            this.FriendsTitleTB.Location = new System.Drawing.Point(318, 16);
             this.FriendsTitleTB.Margin = new System.Windows.Forms.Padding(15, 2, 2, 2);
             this.FriendsTitleTB.Name = "FriendsTitleTB";
-            this.FriendsTitleTB.Size = new System.Drawing.Size(203, 16);
+            this.FriendsTitleTB.Size = new System.Drawing.Size(241, 16);
             this.FriendsTitleTB.TabIndex = 14;
             this.FriendsTitleTB.Text = "Friends";
             // 
@@ -1085,12 +1125,12 @@
             this.FriendsGrid.AllowUserToAddRows = false;
             this.FriendsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.FriendsGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FriendsGrid.Location = new System.Drawing.Point(274, 38);
+            this.FriendsGrid.Location = new System.Drawing.Point(318, 38);
             this.FriendsGrid.Margin = new System.Windows.Forms.Padding(15, 4, 0, 16);
             this.FriendsGrid.Name = "FriendsGrid";
             this.FriendsGrid.RowHeadersVisible = false;
             this.FriendsGrid.RowTemplate.Height = 24;
-            this.FriendsGrid.Size = new System.Drawing.Size(205, 278);
+            this.FriendsGrid.Size = new System.Drawing.Size(243, 278);
             this.FriendsGrid.TabIndex = 10;
             // 
             // UserInfoLP
@@ -1108,7 +1148,7 @@
             this.UserInfoLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 28.57143F));
             this.UserInfoLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 71.42857F));
             this.UserInfoLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.UserInfoLP.Size = new System.Drawing.Size(229, 288);
+            this.UserInfoLP.Size = new System.Drawing.Size(273, 288);
             this.UserInfoLP.TabIndex = 8;
             // 
             // userInfoPanel
@@ -1140,7 +1180,7 @@
             this.userInfoPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
             this.userInfoPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
             this.userInfoPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
-            this.userInfoPanel.Size = new System.Drawing.Size(221, 200);
+            this.userInfoPanel.Size = new System.Drawing.Size(265, 200);
             this.userInfoPanel.TabIndex = 5;
             // 
             // LongLP
@@ -1157,17 +1197,17 @@
             this.LongLP.Name = "LongLP";
             this.LongLP.RowCount = 1;
             this.LongLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.LongLP.Size = new System.Drawing.Size(217, 16);
+            this.LongLP.Size = new System.Drawing.Size(261, 16);
             this.LongLP.TabIndex = 13;
             // 
             // LongitudeValue
             // 
             this.LongitudeValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LongitudeValue.Enabled = false;
-            this.LongitudeValue.Location = new System.Drawing.Point(109, 1);
+            this.LongitudeValue.Location = new System.Drawing.Point(131, 1);
             this.LongitudeValue.Margin = new System.Windows.Forms.Padding(1);
             this.LongitudeValue.Name = "LongitudeValue";
-            this.LongitudeValue.Size = new System.Drawing.Size(107, 20);
+            this.LongitudeValue.Size = new System.Drawing.Size(129, 20);
             this.LongitudeValue.TabIndex = 37;
             // 
             // LongHeaderTB
@@ -1176,7 +1216,7 @@
             this.LongHeaderTB.BackColor = System.Drawing.Color.White;
             this.LongHeaderTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.LongHeaderTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LongHeaderTB.Location = new System.Drawing.Point(78, 2);
+            this.LongHeaderTB.Location = new System.Drawing.Point(100, 2);
             this.LongHeaderTB.Margin = new System.Windows.Forms.Padding(2);
             this.LongHeaderTB.Multiline = true;
             this.LongHeaderTB.Name = "LongHeaderTB";
@@ -1202,37 +1242,37 @@
             this.VotesValuesLP.RowCount = 1;
             this.VotesValuesLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.VotesValuesLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 16F));
-            this.VotesValuesLP.Size = new System.Drawing.Size(217, 16);
+            this.VotesValuesLP.Size = new System.Drawing.Size(261, 16);
             this.VotesValuesLP.TabIndex = 10;
             // 
             // CoolValue
             // 
             this.CoolValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CoolValue.Enabled = false;
-            this.CoolValue.Location = new System.Drawing.Point(163, 1);
+            this.CoolValue.Location = new System.Drawing.Point(196, 1);
             this.CoolValue.Margin = new System.Windows.Forms.Padding(1);
             this.CoolValue.Name = "CoolValue";
-            this.CoolValue.Size = new System.Drawing.Size(53, 20);
+            this.CoolValue.Size = new System.Drawing.Size(64, 20);
             this.CoolValue.TabIndex = 35;
             // 
             // UsefulValue
             // 
             this.UsefulValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.UsefulValue.Enabled = false;
-            this.UsefulValue.Location = new System.Drawing.Point(109, 1);
+            this.UsefulValue.Location = new System.Drawing.Point(131, 1);
             this.UsefulValue.Margin = new System.Windows.Forms.Padding(1);
             this.UsefulValue.Name = "UsefulValue";
-            this.UsefulValue.Size = new System.Drawing.Size(52, 20);
+            this.UsefulValue.Size = new System.Drawing.Size(63, 20);
             this.UsefulValue.TabIndex = 34;
             // 
             // FunnyValue
             // 
             this.FunnyValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FunnyValue.Enabled = false;
-            this.FunnyValue.Location = new System.Drawing.Point(55, 1);
+            this.FunnyValue.Location = new System.Drawing.Point(66, 1);
             this.FunnyValue.Margin = new System.Windows.Forms.Padding(1);
             this.FunnyValue.Name = "FunnyValue";
-            this.FunnyValue.Size = new System.Drawing.Size(52, 20);
+            this.FunnyValue.Size = new System.Drawing.Size(63, 20);
             this.FunnyValue.TabIndex = 33;
             // 
             // NameLP
@@ -1249,7 +1289,7 @@
             this.NameLP.RowCount = 1;
             this.NameLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.NameLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 16F));
-            this.NameLP.Size = new System.Drawing.Size(217, 16);
+            this.NameLP.Size = new System.Drawing.Size(261, 16);
             this.NameLP.TabIndex = 6;
             // 
             // nameTitleTB
@@ -1270,10 +1310,10 @@
             // 
             this.NameValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NameValue.Enabled = false;
-            this.NameValue.Location = new System.Drawing.Point(89, 1);
+            this.NameValue.Location = new System.Drawing.Point(108, 1);
             this.NameValue.Margin = new System.Windows.Forms.Padding(1);
             this.NameValue.Name = "NameValue";
-            this.NameValue.Size = new System.Drawing.Size(127, 20);
+            this.NameValue.Size = new System.Drawing.Size(152, 20);
             this.NameValue.TabIndex = 28;
             // 
             // StarsLP
@@ -1293,17 +1333,17 @@
             this.StarsLP.Name = "StarsLP";
             this.StarsLP.RowCount = 1;
             this.StarsLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.StarsLP.Size = new System.Drawing.Size(215, 16);
+            this.StarsLP.Size = new System.Drawing.Size(259, 16);
             this.StarsLP.TabIndex = 7;
             // 
             // FansValue
             // 
             this.FansValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FansValue.Enabled = false;
-            this.FansValue.Location = new System.Drawing.Point(160, 1);
+            this.FansValue.Location = new System.Drawing.Point(193, 1);
             this.FansValue.Margin = new System.Windows.Forms.Padding(1);
             this.FansValue.Name = "FansValue";
-            this.FansValue.Size = new System.Drawing.Size(54, 20);
+            this.FansValue.Size = new System.Drawing.Size(65, 20);
             this.FansValue.TabIndex = 31;
             // 
             // FansTitleTB
@@ -1312,11 +1352,11 @@
             this.FansTitleTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.FansTitleTB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FansTitleTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FansTitleTB.Location = new System.Drawing.Point(108, 2);
+            this.FansTitleTB.Location = new System.Drawing.Point(130, 2);
             this.FansTitleTB.Margin = new System.Windows.Forms.Padding(2);
             this.FansTitleTB.Name = "FansTitleTB";
             this.FansTitleTB.ReadOnly = true;
-            this.FansTitleTB.Size = new System.Drawing.Size(49, 12);
+            this.FansTitleTB.Size = new System.Drawing.Size(60, 12);
             this.FansTitleTB.TabIndex = 30;
             this.FansTitleTB.Text = "Fans:";
             // 
@@ -1324,10 +1364,10 @@
             // 
             this.StarsValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.StarsValue.Enabled = false;
-            this.StarsValue.Location = new System.Drawing.Point(54, 1);
+            this.StarsValue.Location = new System.Drawing.Point(65, 1);
             this.StarsValue.Margin = new System.Windows.Forms.Padding(1);
             this.StarsValue.Name = "StarsValue";
-            this.StarsValue.Size = new System.Drawing.Size(51, 20);
+            this.StarsValue.Size = new System.Drawing.Size(62, 20);
             this.StarsValue.TabIndex = 32;
             // 
             // StarsTitleTB
@@ -1340,7 +1380,7 @@
             this.StarsTitleTB.Margin = new System.Windows.Forms.Padding(2);
             this.StarsTitleTB.Name = "StarsTitleTB";
             this.StarsTitleTB.ReadOnly = true;
-            this.StarsTitleTB.Size = new System.Drawing.Size(49, 12);
+            this.StarsTitleTB.Size = new System.Drawing.Size(60, 12);
             this.StarsTitleTB.TabIndex = 29;
             this.StarsTitleTB.Text = "Stars:";
             // 
@@ -1357,17 +1397,17 @@
             this.YelpingSinceLP.Name = "YelpingSinceLP";
             this.YelpingSinceLP.RowCount = 1;
             this.YelpingSinceLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.YelpingSinceLP.Size = new System.Drawing.Size(215, 16);
+            this.YelpingSinceLP.Size = new System.Drawing.Size(259, 16);
             this.YelpingSinceLP.TabIndex = 8;
             // 
             // YelpingSinceValue
             // 
             this.YelpingSinceValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.YelpingSinceValue.Enabled = false;
-            this.YelpingSinceValue.Location = new System.Drawing.Point(108, 1);
+            this.YelpingSinceValue.Location = new System.Drawing.Point(130, 1);
             this.YelpingSinceValue.Margin = new System.Windows.Forms.Padding(1);
             this.YelpingSinceValue.Name = "YelpingSinceValue";
-            this.YelpingSinceValue.Size = new System.Drawing.Size(106, 20);
+            this.YelpingSinceValue.Size = new System.Drawing.Size(128, 20);
             this.YelpingSinceValue.TabIndex = 35;
             // 
             // YelpingSinceTitleTB
@@ -1381,7 +1421,7 @@
             this.YelpingSinceTitleTB.Multiline = true;
             this.YelpingSinceTitleTB.Name = "YelpingSinceTitleTB";
             this.YelpingSinceTitleTB.ReadOnly = true;
-            this.YelpingSinceTitleTB.Size = new System.Drawing.Size(103, 12);
+            this.YelpingSinceTitleTB.Size = new System.Drawing.Size(125, 12);
             this.YelpingSinceTitleTB.TabIndex = 34;
             this.YelpingSinceTitleTB.Text = "Yelping Since:";
             // 
@@ -1402,7 +1442,7 @@
             this.VotesHeadersLP.Name = "VotesHeadersLP";
             this.VotesHeadersLP.RowCount = 1;
             this.VotesHeadersLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.VotesHeadersLP.Size = new System.Drawing.Size(215, 16);
+            this.VotesHeadersLP.Size = new System.Drawing.Size(259, 16);
             this.VotesHeadersLP.TabIndex = 9;
             // 
             // UsefulHeaderTB
@@ -1411,11 +1451,11 @@
             this.UsefulHeaderTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.UsefulHeaderTB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.UsefulHeaderTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UsefulHeaderTB.Location = new System.Drawing.Point(108, 2);
+            this.UsefulHeaderTB.Location = new System.Drawing.Point(130, 2);
             this.UsefulHeaderTB.Margin = new System.Windows.Forms.Padding(2);
             this.UsefulHeaderTB.Name = "UsefulHeaderTB";
             this.UsefulHeaderTB.ReadOnly = true;
-            this.UsefulHeaderTB.Size = new System.Drawing.Size(49, 12);
+            this.UsefulHeaderTB.Size = new System.Drawing.Size(60, 12);
             this.UsefulHeaderTB.TabIndex = 38;
             this.UsefulHeaderTB.Text = "Useful:";
             // 
@@ -1425,11 +1465,11 @@
             this.CoolHeaderTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.CoolHeaderTB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CoolHeaderTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CoolHeaderTB.Location = new System.Drawing.Point(161, 2);
+            this.CoolHeaderTB.Location = new System.Drawing.Point(194, 2);
             this.CoolHeaderTB.Margin = new System.Windows.Forms.Padding(2);
             this.CoolHeaderTB.Name = "CoolHeaderTB";
             this.CoolHeaderTB.ReadOnly = true;
-            this.CoolHeaderTB.Size = new System.Drawing.Size(52, 12);
+            this.CoolHeaderTB.Size = new System.Drawing.Size(63, 12);
             this.CoolHeaderTB.TabIndex = 37;
             this.CoolHeaderTB.Text = "Cool:";
             // 
@@ -1443,7 +1483,7 @@
             this.VotesHeaderTB.Margin = new System.Windows.Forms.Padding(2);
             this.VotesHeaderTB.Name = "VotesHeaderTB";
             this.VotesHeaderTB.ReadOnly = true;
-            this.VotesHeaderTB.Size = new System.Drawing.Size(49, 12);
+            this.VotesHeaderTB.Size = new System.Drawing.Size(60, 12);
             this.VotesHeaderTB.TabIndex = 36;
             this.VotesHeaderTB.Text = "Votes:";
             // 
@@ -1453,11 +1493,11 @@
             this.FunnyHeaderTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.FunnyHeaderTB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FunnyHeaderTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FunnyHeaderTB.Location = new System.Drawing.Point(55, 2);
+            this.FunnyHeaderTB.Location = new System.Drawing.Point(66, 2);
             this.FunnyHeaderTB.Margin = new System.Windows.Forms.Padding(2);
             this.FunnyHeaderTB.Name = "FunnyHeaderTB";
             this.FunnyHeaderTB.ReadOnly = true;
-            this.FunnyHeaderTB.Size = new System.Drawing.Size(49, 12);
+            this.FunnyHeaderTB.Size = new System.Drawing.Size(60, 12);
             this.FunnyHeaderTB.TabIndex = 35;
             this.FunnyHeaderTB.Text = "Funny:";
             // 
@@ -1472,7 +1512,7 @@
             this.LocationHeaderLP.Name = "LocationHeaderLP";
             this.LocationHeaderLP.RowCount = 1;
             this.LocationHeaderLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.LocationHeaderLP.Size = new System.Drawing.Size(215, 16);
+            this.LocationHeaderLP.Size = new System.Drawing.Size(259, 16);
             this.LocationHeaderLP.TabIndex = 11;
             // 
             // LocationHeaderTB
@@ -1485,7 +1525,7 @@
             this.LocationHeaderTB.Margin = new System.Windows.Forms.Padding(2);
             this.LocationHeaderTB.Name = "LocationHeaderTB";
             this.LocationHeaderTB.ReadOnly = true;
-            this.LocationHeaderTB.Size = new System.Drawing.Size(211, 12);
+            this.LocationHeaderTB.Size = new System.Drawing.Size(255, 12);
             this.LocationHeaderTB.TabIndex = 35;
             this.LocationHeaderTB.Text = "Location:";
             // 
@@ -1503,17 +1543,17 @@
             this.LatLP.Name = "LatLP";
             this.LatLP.RowCount = 1;
             this.LatLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.LatLP.Size = new System.Drawing.Size(215, 16);
+            this.LatLP.Size = new System.Drawing.Size(259, 16);
             this.LatLP.TabIndex = 12;
             // 
             // LatitudeValue
             // 
             this.LatitudeValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LatitudeValue.Enabled = false;
-            this.LatitudeValue.Location = new System.Drawing.Point(108, 1);
+            this.LatitudeValue.Location = new System.Drawing.Point(130, 1);
             this.LatitudeValue.Margin = new System.Windows.Forms.Padding(1);
             this.LatitudeValue.Name = "LatitudeValue";
-            this.LatitudeValue.Size = new System.Drawing.Size(106, 20);
+            this.LatitudeValue.Size = new System.Drawing.Size(128, 20);
             this.LatitudeValue.TabIndex = 37;
             // 
             // LatHeaderTB
@@ -1522,7 +1562,7 @@
             this.LatHeaderTB.BackColor = System.Drawing.Color.White;
             this.LatHeaderTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.LatHeaderTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LatHeaderTB.Location = new System.Drawing.Point(77, 2);
+            this.LatHeaderTB.Location = new System.Drawing.Point(99, 2);
             this.LatHeaderTB.Margin = new System.Windows.Forms.Padding(2);
             this.LatHeaderTB.Name = "LatHeaderTB";
             this.LatHeaderTB.ReadOnly = true;
@@ -1543,7 +1583,7 @@
             this.UserBtnsLP.Name = "UserBtnsLP";
             this.UserBtnsLP.RowCount = 1;
             this.UserBtnsLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.UserBtnsLP.Size = new System.Drawing.Size(221, 24);
+            this.UserBtnsLP.Size = new System.Drawing.Size(265, 24);
             this.UserBtnsLP.TabIndex = 14;
             // 
             // EditBtn
@@ -1552,7 +1592,7 @@
             this.EditBtn.Location = new System.Drawing.Point(2, 2);
             this.EditBtn.Margin = new System.Windows.Forms.Padding(2);
             this.EditBtn.Name = "EditBtn";
-            this.EditBtn.Size = new System.Drawing.Size(106, 20);
+            this.EditBtn.Size = new System.Drawing.Size(128, 20);
             this.EditBtn.TabIndex = 0;
             this.EditBtn.Text = "Edit";
             this.EditBtn.UseVisualStyleBackColor = true;
@@ -1562,10 +1602,10 @@
             // 
             this.UpdateBtn.Dock = System.Windows.Forms.DockStyle.Fill;
             this.UpdateBtn.Enabled = false;
-            this.UpdateBtn.Location = new System.Drawing.Point(112, 2);
+            this.UpdateBtn.Location = new System.Drawing.Point(134, 2);
             this.UpdateBtn.Margin = new System.Windows.Forms.Padding(2);
             this.UpdateBtn.Name = "UpdateBtn";
-            this.UpdateBtn.Size = new System.Drawing.Size(107, 20);
+            this.UpdateBtn.Size = new System.Drawing.Size(129, 20);
             this.UpdateBtn.TabIndex = 1;
             this.UpdateBtn.Text = "Update";
             this.UpdateBtn.UseVisualStyleBackColor = true;
@@ -1580,7 +1620,7 @@
             this.UserInfoHeader.Margin = new System.Windows.Forms.Padding(0);
             this.UserInfoHeader.Name = "UserInfoHeader";
             this.UserInfoHeader.ReadOnly = true;
-            this.UserInfoHeader.Size = new System.Drawing.Size(221, 13);
+            this.UserInfoHeader.Size = new System.Drawing.Size(265, 13);
             this.UserInfoHeader.TabIndex = 5;
             this.UserInfoHeader.Text = "User Information";
             this.UserInfoHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1600,7 +1640,7 @@
             this.UserNamePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 16F));
             this.UserNamePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 16F));
             this.UserNamePanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.UserNamePanel.Size = new System.Drawing.Size(227, 81);
+            this.UserNamePanel.Size = new System.Drawing.Size(271, 81);
             this.UserNamePanel.TabIndex = 7;
             // 
             // NameHeaderTB
@@ -1612,7 +1652,7 @@
             this.NameHeaderTB.Margin = new System.Windows.Forms.Padding(0);
             this.NameHeaderTB.Name = "NameHeaderTB";
             this.NameHeaderTB.ReadOnly = true;
-            this.NameHeaderTB.Size = new System.Drawing.Size(227, 13);
+            this.NameHeaderTB.Size = new System.Drawing.Size(271, 13);
             this.NameHeaderTB.TabIndex = 3;
             this.NameHeaderTB.Text = "Name";
             this.NameHeaderTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1624,7 +1664,7 @@
             this.PlayerIDListBox.Location = new System.Drawing.Point(0, 32);
             this.PlayerIDListBox.Margin = new System.Windows.Forms.Padding(0);
             this.PlayerIDListBox.Name = "PlayerIDListBox";
-            this.PlayerIDListBox.Size = new System.Drawing.Size(227, 56);
+            this.PlayerIDListBox.Size = new System.Drawing.Size(271, 56);
             this.PlayerIDListBox.TabIndex = 10;
             this.PlayerIDListBox.SelectedIndexChanged += new System.EventHandler(this.PlayerIDListBox_SelectedIndexChanged);
             // 
@@ -1634,7 +1674,7 @@
             this.UserNameEntryTextBox.Location = new System.Drawing.Point(0, 16);
             this.UserNameEntryTextBox.Margin = new System.Windows.Forms.Padding(0);
             this.UserNameEntryTextBox.Name = "UserNameEntryTextBox";
-            this.UserNameEntryTextBox.Size = new System.Drawing.Size(227, 20);
+            this.UserNameEntryTextBox.Size = new System.Drawing.Size(271, 20);
             this.UserNameEntryTextBox.TabIndex = 11;
             this.UserNameEntryTextBox.Text = "Enter name...";
             this.UserNameEntryTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.UserNameEntryTextBox_KeyPress);
@@ -1656,7 +1696,7 @@
             this.FavoriteBusinessGrid.RowHeadersVisible = false;
             this.FavoriteBusinessGrid.RowTemplate.Height = 24;
             this.FavoriteBusinessGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.FavoriteBusinessGrid.Size = new System.Drawing.Size(439, 182);
+            this.FavoriteBusinessGrid.Size = new System.Drawing.Size(521, 182);
             this.FavoriteBusinessGrid.TabIndex = 11;
             this.FavoriteBusinessGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.FavoriteBusinessGrid_CellClick);
             this.FavoriteBusinessGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.FavoriteBusinessGrid_CellContentClick);
@@ -1670,7 +1710,7 @@
             this.FavoriteBusTitleTB.Location = new System.Drawing.Point(20, 342);
             this.FavoriteBusTitleTB.Margin = new System.Windows.Forms.Padding(20, 2, 3, 2);
             this.FavoriteBusTitleTB.Name = "FavoriteBusTitleTB";
-            this.FavoriteBusTitleTB.Size = new System.Drawing.Size(236, 16);
+            this.FavoriteBusTitleTB.Size = new System.Drawing.Size(280, 16);
             this.FavoriteBusTitleTB.TabIndex = 12;
             this.FavoriteBusTitleTB.Text = "Favorite Businesses";
             // 
@@ -1693,13 +1733,13 @@
             this.RightUserLP.Controls.Add(this.ReviewsByFriendsTitleTB, 0, 0);
             this.RightUserLP.Controls.Add(this.FriendsReviewsGrid, 0, 1);
             this.RightUserLP.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.RightUserLP.Location = new System.Drawing.Point(485, 2);
+            this.RightUserLP.Location = new System.Drawing.Point(567, 2);
             this.RightUserLP.Margin = new System.Windows.Forms.Padding(2);
             this.RightUserLP.Name = "RightUserLP";
             this.RightUserLP.RowCount = 2;
             this.RightUserLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
             this.RightUserLP.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.RightUserLP.Size = new System.Drawing.Size(468, 588);
+            this.RightUserLP.Size = new System.Drawing.Size(549, 588);
             this.RightUserLP.TabIndex = 10;
             // 
             // ReviewsByFriendsTitleTB
@@ -1710,7 +1750,7 @@
             this.ReviewsByFriendsTitleTB.Location = new System.Drawing.Point(15, 10);
             this.ReviewsByFriendsTitleTB.Margin = new System.Windows.Forms.Padding(15, 2, 2, 2);
             this.ReviewsByFriendsTitleTB.Name = "ReviewsByFriendsTitleTB";
-            this.ReviewsByFriendsTitleTB.Size = new System.Drawing.Size(451, 16);
+            this.ReviewsByFriendsTitleTB.Size = new System.Drawing.Size(532, 16);
             this.ReviewsByFriendsTitleTB.TabIndex = 15;
             this.ReviewsByFriendsTitleTB.Text = "Reviews by Friends";
             // 
@@ -1723,7 +1763,7 @@
             this.FriendsReviewsGrid.Name = "FriendsReviewsGrid";
             this.FriendsReviewsGrid.RowHeadersVisible = false;
             this.FriendsReviewsGrid.RowTemplate.Height = 24;
-            this.FriendsReviewsGrid.Size = new System.Drawing.Size(438, 535);
+            this.FriendsReviewsGrid.Size = new System.Drawing.Size(519, 535);
             this.FriendsReviewsGrid.TabIndex = 10;
             // 
             // AdminTabPage
@@ -1732,7 +1772,7 @@
             this.AdminTabPage.Location = new System.Drawing.Point(4, 22);
             this.AdminTabPage.Margin = new System.Windows.Forms.Padding(2);
             this.AdminTabPage.Name = "AdminTabPage";
-            this.AdminTabPage.Size = new System.Drawing.Size(955, 592);
+            this.AdminTabPage.Size = new System.Drawing.Size(1118, 592);
             this.AdminTabPage.TabIndex = 2;
             this.AdminTabPage.Text = "Business Admin";
             this.AdminTabPage.UseVisualStyleBackColor = true;
@@ -1750,7 +1790,7 @@
             this.AdminLP.Name = "AdminLP";
             this.AdminLP.RowCount = 1;
             this.AdminLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.AdminLP.Size = new System.Drawing.Size(955, 592);
+            this.AdminLP.Size = new System.Drawing.Size(1118, 592);
             this.AdminLP.TabIndex = 0;
             // 
             // AdminLeftLP
@@ -1771,7 +1811,7 @@
             this.AdminLeftLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 38.38951F));
             this.AdminLeftLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.AdminLeftLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 61.61049F));
-            this.AdminLeftLP.Size = new System.Drawing.Size(317, 560);
+            this.AdminLeftLP.Size = new System.Drawing.Size(376, 560);
             this.AdminLeftLP.TabIndex = 0;
             // 
             // AdminInfoLP
@@ -1803,7 +1843,7 @@
             this.AdminInfoLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.AdminInfoLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.AdminInfoLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.AdminInfoLP.Size = new System.Drawing.Size(309, 307);
+            this.AdminInfoLP.Size = new System.Drawing.Size(368, 307);
             this.AdminInfoLP.TabIndex = 1;
             // 
             // AdminEditLP
@@ -1819,7 +1859,7 @@
             this.AdminEditLP.Name = "AdminEditLP";
             this.AdminEditLP.RowCount = 1;
             this.AdminEditLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.AdminEditLP.Size = new System.Drawing.Size(307, 35);
+            this.AdminEditLP.Size = new System.Drawing.Size(366, 35);
             this.AdminEditLP.TabIndex = 15;
             // 
             // AdminEditNameBtn
@@ -1828,7 +1868,7 @@
             this.AdminEditNameBtn.Location = new System.Drawing.Point(8, 8);
             this.AdminEditNameBtn.Margin = new System.Windows.Forms.Padding(8);
             this.AdminEditNameBtn.Name = "AdminEditNameBtn";
-            this.AdminEditNameBtn.Size = new System.Drawing.Size(137, 19);
+            this.AdminEditNameBtn.Size = new System.Drawing.Size(167, 19);
             this.AdminEditNameBtn.TabIndex = 0;
             this.AdminEditNameBtn.Text = "Edit";
             this.AdminEditNameBtn.UseVisualStyleBackColor = true;
@@ -1838,10 +1878,10 @@
             // 
             this.AdminUpdateBtn.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AdminUpdateBtn.Enabled = false;
-            this.AdminUpdateBtn.Location = new System.Drawing.Point(161, 8);
+            this.AdminUpdateBtn.Location = new System.Drawing.Point(191, 8);
             this.AdminUpdateBtn.Margin = new System.Windows.Forms.Padding(8);
             this.AdminUpdateBtn.Name = "AdminUpdateBtn";
-            this.AdminUpdateBtn.Size = new System.Drawing.Size(138, 19);
+            this.AdminUpdateBtn.Size = new System.Drawing.Size(167, 19);
             this.AdminUpdateBtn.TabIndex = 1;
             this.AdminUpdateBtn.Text = "Update";
             this.AdminUpdateBtn.UseVisualStyleBackColor = true;
@@ -1853,7 +1893,7 @@
             this.AdminCityLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.80269F));
             this.AdminCityLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.19731F));
             this.AdminCityLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 71F));
-            this.AdminCityLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 143F));
+            this.AdminCityLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 144F));
             this.AdminCityLP.Controls.Add(this.AdminStateHeaderTb, 0, 0);
             this.AdminCityLP.Controls.Add(this.AdminStateValue, 1, 0);
             this.AdminCityLP.Controls.Add(this.AdminCityValue, 3, 0);
@@ -1863,7 +1903,7 @@
             this.AdminCityLP.Name = "AdminCityLP";
             this.AdminCityLP.RowCount = 1;
             this.AdminCityLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.AdminCityLP.Size = new System.Drawing.Size(301, 23);
+            this.AdminCityLP.Size = new System.Drawing.Size(360, 23);
             this.AdminCityLP.TabIndex = 2;
             // 
             // AdminStateHeaderTb
@@ -1884,7 +1924,7 @@
             // 
             this.AdminStateValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.AdminStateValue.Enabled = false;
-            this.AdminStateValue.Location = new System.Drawing.Point(25, 1);
+            this.AdminStateValue.Location = new System.Drawing.Point(41, 1);
             this.AdminStateValue.Margin = new System.Windows.Forms.Padding(1);
             this.AdminStateValue.Name = "AdminStateValue";
             this.AdminStateValue.Size = new System.Drawing.Size(60, 20);
@@ -1894,7 +1934,7 @@
             // 
             this.AdminCityValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.AdminCityValue.Enabled = false;
-            this.AdminCityValue.Location = new System.Drawing.Point(158, 1);
+            this.AdminCityValue.Location = new System.Drawing.Point(216, 1);
             this.AdminCityValue.Margin = new System.Windows.Forms.Padding(1);
             this.AdminCityValue.Name = "AdminCityValue";
             this.AdminCityValue.Size = new System.Drawing.Size(115, 20);
@@ -1906,7 +1946,7 @@
             this.CityHeaderTb.BackColor = System.Drawing.Color.White;
             this.CityHeaderTb.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.CityHeaderTb.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CityHeaderTb.Location = new System.Drawing.Point(90, 5);
+            this.CityHeaderTb.Location = new System.Drawing.Point(148, 5);
             this.CityHeaderTb.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.CityHeaderTb.Name = "CityHeaderTb";
             this.CityHeaderTb.ReadOnly = true;
@@ -1926,14 +1966,14 @@
             this.AdminAddressLP.Name = "AdminAddressLP";
             this.AdminAddressLP.RowCount = 1;
             this.AdminAddressLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.AdminAddressLP.Size = new System.Drawing.Size(301, 23);
+            this.AdminAddressLP.Size = new System.Drawing.Size(360, 23);
             this.AdminAddressLP.TabIndex = 1;
             // 
             // AdminAddressValue
             // 
             this.AdminAddressValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.AdminAddressValue.Enabled = false;
-            this.AdminAddressValue.Location = new System.Drawing.Point(121, 1);
+            this.AdminAddressValue.Location = new System.Drawing.Point(145, 1);
             this.AdminAddressValue.Margin = new System.Windows.Forms.Padding(1);
             this.AdminAddressValue.Name = "AdminAddressValue";
             this.AdminAddressValue.Size = new System.Drawing.Size(179, 20);
@@ -1965,14 +2005,14 @@
             this.BusNameLP.Name = "BusNameLP";
             this.BusNameLP.RowCount = 1;
             this.BusNameLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.BusNameLP.Size = new System.Drawing.Size(301, 23);
+            this.BusNameLP.Size = new System.Drawing.Size(360, 23);
             this.BusNameLP.TabIndex = 0;
             // 
             // BusNameValue
             // 
             this.BusNameValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.BusNameValue.Enabled = false;
-            this.BusNameValue.Location = new System.Drawing.Point(121, 1);
+            this.BusNameValue.Location = new System.Drawing.Point(145, 1);
             this.BusNameValue.Margin = new System.Windows.Forms.Padding(1);
             this.BusNameValue.Name = "BusNameValue";
             this.BusNameValue.Size = new System.Drawing.Size(179, 20);
@@ -2004,14 +2044,14 @@
             this.AdminZipLP.Name = "AdminZipLP";
             this.AdminZipLP.RowCount = 1;
             this.AdminZipLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.AdminZipLP.Size = new System.Drawing.Size(301, 23);
+            this.AdminZipLP.Size = new System.Drawing.Size(360, 23);
             this.AdminZipLP.TabIndex = 3;
             // 
             // AdminZipValue
             // 
             this.AdminZipValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.AdminZipValue.Enabled = false;
-            this.AdminZipValue.Location = new System.Drawing.Point(121, 1);
+            this.AdminZipValue.Location = new System.Drawing.Point(145, 1);
             this.AdminZipValue.Margin = new System.Windows.Forms.Padding(1);
             this.AdminZipValue.Name = "AdminZipValue";
             this.AdminZipValue.Size = new System.Drawing.Size(179, 20);
@@ -2057,14 +2097,14 @@
             this.AdminLatitudeLP.Name = "AdminLatitudeLP";
             this.AdminLatitudeLP.RowCount = 1;
             this.AdminLatitudeLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.AdminLatitudeLP.Size = new System.Drawing.Size(301, 23);
+            this.AdminLatitudeLP.Size = new System.Drawing.Size(360, 23);
             this.AdminLatitudeLP.TabIndex = 8;
             // 
             // AdminLatValue
             // 
             this.AdminLatValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.AdminLatValue.Enabled = false;
-            this.AdminLatValue.Location = new System.Drawing.Point(121, 1);
+            this.AdminLatValue.Location = new System.Drawing.Point(145, 1);
             this.AdminLatValue.Margin = new System.Windows.Forms.Padding(1);
             this.AdminLatValue.Name = "AdminLatValue";
             this.AdminLatValue.Size = new System.Drawing.Size(179, 20);
@@ -2096,14 +2136,14 @@
             this.AdminLatLP.Name = "AdminLatLP";
             this.AdminLatLP.RowCount = 1;
             this.AdminLatLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.AdminLatLP.Size = new System.Drawing.Size(301, 23);
+            this.AdminLatLP.Size = new System.Drawing.Size(360, 23);
             this.AdminLatLP.TabIndex = 9;
             // 
             // AdminLonValue
             // 
             this.AdminLonValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.AdminLonValue.Enabled = false;
-            this.AdminLonValue.Location = new System.Drawing.Point(121, 1);
+            this.AdminLonValue.Location = new System.Drawing.Point(145, 1);
             this.AdminLonValue.Margin = new System.Windows.Forms.Padding(1);
             this.AdminLonValue.Name = "AdminLonValue";
             this.AdminLonValue.Size = new System.Drawing.Size(179, 20);
@@ -2129,7 +2169,7 @@
             this.AdminReviewLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.45544F));
             this.AdminReviewLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.54456F));
             this.AdminReviewLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 61F));
-            this.AdminReviewLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 106F));
+            this.AdminReviewLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 107F));
             this.AdminReviewLP.Controls.Add(this.AdminReviewHeader, 0, 0);
             this.AdminReviewLP.Controls.Add(this.AdminReviewValue, 1, 0);
             this.AdminReviewLP.Controls.Add(this.AdminCheckinValue, 3, 0);
@@ -2139,7 +2179,7 @@
             this.AdminReviewLP.Name = "AdminReviewLP";
             this.AdminReviewLP.RowCount = 1;
             this.AdminReviewLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.AdminReviewLP.Size = new System.Drawing.Size(301, 23);
+            this.AdminReviewLP.Size = new System.Drawing.Size(360, 23);
             this.AdminReviewLP.TabIndex = 10;
             // 
             // AdminReviewHeader
@@ -2160,7 +2200,7 @@
             // 
             this.AdminReviewValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.AdminReviewValue.Enabled = false;
-            this.AdminReviewValue.Location = new System.Drawing.Point(73, 1);
+            this.AdminReviewValue.Location = new System.Drawing.Point(105, 1);
             this.AdminReviewValue.Margin = new System.Windows.Forms.Padding(1);
             this.AdminReviewValue.Name = "AdminReviewValue";
             this.AdminReviewValue.Size = new System.Drawing.Size(59, 20);
@@ -2170,7 +2210,7 @@
             // 
             this.AdminCheckinValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.AdminCheckinValue.Enabled = false;
-            this.AdminCheckinValue.Location = new System.Drawing.Point(195, 1);
+            this.AdminCheckinValue.Location = new System.Drawing.Point(253, 1);
             this.AdminCheckinValue.Margin = new System.Windows.Forms.Padding(1);
             this.AdminCheckinValue.Name = "AdminCheckinValue";
             this.AdminCheckinValue.Size = new System.Drawing.Size(80, 20);
@@ -2182,7 +2222,7 @@
             this.AdminCheckinHeader.BackColor = System.Drawing.Color.White;
             this.AdminCheckinHeader.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.AdminCheckinHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AdminCheckinHeader.Location = new System.Drawing.Point(137, 5);
+            this.AdminCheckinHeader.Location = new System.Drawing.Point(195, 5);
             this.AdminCheckinHeader.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.AdminCheckinHeader.Name = "AdminCheckinHeader";
             this.AdminCheckinHeader.ReadOnly = true;
@@ -2196,7 +2236,7 @@
             this.AdminStarsLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.9505F));
             this.AdminStarsLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.0495F));
             this.AdminStarsLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 62F));
-            this.AdminStarsLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 106F));
+            this.AdminStarsLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 107F));
             this.AdminStarsLP.Controls.Add(this.AdminRevRatingHEad, 0, 0);
             this.AdminStarsLP.Controls.Add(this.AdminRatingValue, 1, 0);
             this.AdminStarsLP.Controls.Add(this.AdminStarsValue, 3, 0);
@@ -2206,7 +2246,7 @@
             this.AdminStarsLP.Name = "AdminStarsLP";
             this.AdminStarsLP.RowCount = 1;
             this.AdminStarsLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.AdminStarsLP.Size = new System.Drawing.Size(301, 23);
+            this.AdminStarsLP.Size = new System.Drawing.Size(360, 23);
             this.AdminStarsLP.TabIndex = 11;
             // 
             // AdminRevRatingHEad
@@ -2227,7 +2267,7 @@
             // 
             this.AdminRatingValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.AdminRatingValue.Enabled = false;
-            this.AdminRatingValue.Location = new System.Drawing.Point(74, 1);
+            this.AdminRatingValue.Location = new System.Drawing.Point(105, 1);
             this.AdminRatingValue.Margin = new System.Windows.Forms.Padding(1);
             this.AdminRatingValue.Name = "AdminRatingValue";
             this.AdminRatingValue.Size = new System.Drawing.Size(57, 20);
@@ -2237,7 +2277,7 @@
             // 
             this.AdminStarsValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.AdminStarsValue.Enabled = false;
-            this.AdminStarsValue.Location = new System.Drawing.Point(195, 1);
+            this.AdminStarsValue.Location = new System.Drawing.Point(253, 1);
             this.AdminStarsValue.Margin = new System.Windows.Forms.Padding(1);
             this.AdminStarsValue.Name = "AdminStarsValue";
             this.AdminStarsValue.Size = new System.Drawing.Size(80, 20);
@@ -2249,7 +2289,7 @@
             this.AdminStarsHeader.BackColor = System.Drawing.Color.White;
             this.AdminStarsHeader.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.AdminStarsHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AdminStarsHeader.Location = new System.Drawing.Point(136, 5);
+            this.AdminStarsHeader.Location = new System.Drawing.Point(194, 5);
             this.AdminStarsHeader.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.AdminStarsHeader.Name = "AdminStarsHeader";
             this.AdminStarsHeader.ReadOnly = true;
@@ -2265,7 +2305,7 @@
             this.BusInfoTB.Location = new System.Drawing.Point(4, 228);
             this.BusInfoTB.Name = "BusInfoTB";
             this.BusInfoTB.ReadOnly = true;
-            this.BusInfoTB.Size = new System.Drawing.Size(309, 13);
+            this.BusInfoTB.Size = new System.Drawing.Size(368, 13);
             this.BusInfoTB.TabIndex = 18;
             this.BusInfoTB.Text = "Business Information";
             this.BusInfoTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -2278,7 +2318,7 @@
             this.BusInfoHeaderTB.Location = new System.Drawing.Point(21, 11);
             this.BusInfoHeaderTB.Margin = new System.Windows.Forms.Padding(20, 2, 3, 2);
             this.BusInfoHeaderTB.Name = "BusInfoHeaderTB";
-            this.BusInfoHeaderTB.Size = new System.Drawing.Size(292, 16);
+            this.BusInfoHeaderTB.Size = new System.Drawing.Size(351, 16);
             this.BusInfoHeaderTB.TabIndex = 16;
             this.BusInfoHeaderTB.Text = "Business Information";
             // 
@@ -2296,7 +2336,7 @@
             this.BusinessNameLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 21F));
             this.BusinessNameLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
             this.BusinessNameLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.BusinessNameLP.Size = new System.Drawing.Size(309, 188);
+            this.BusinessNameLP.Size = new System.Drawing.Size(368, 188);
             this.BusinessNameLP.TabIndex = 17;
             // 
             // BusinessNameTB
@@ -2305,7 +2345,7 @@
             this.BusinessNameTB.Location = new System.Drawing.Point(2, 23);
             this.BusinessNameTB.Margin = new System.Windows.Forms.Padding(2);
             this.BusinessNameTB.Name = "BusinessNameTB";
-            this.BusinessNameTB.Size = new System.Drawing.Size(305, 20);
+            this.BusinessNameTB.Size = new System.Drawing.Size(364, 20);
             this.BusinessNameTB.TabIndex = 12;
             this.BusinessNameTB.Text = "Enter Business name...";
             this.BusinessNameTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BusinessNameTB_KeyPress);
@@ -2319,7 +2359,7 @@
             this.BussinessNameHeaderTB.Margin = new System.Windows.Forms.Padding(2);
             this.BussinessNameHeaderTB.Name = "BussinessNameHeaderTB";
             this.BussinessNameHeaderTB.ReadOnly = true;
-            this.BussinessNameHeaderTB.Size = new System.Drawing.Size(305, 13);
+            this.BussinessNameHeaderTB.Size = new System.Drawing.Size(364, 13);
             this.BussinessNameHeaderTB.TabIndex = 4;
             this.BussinessNameHeaderTB.Text = "Business Name";
             this.BussinessNameHeaderTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -2330,7 +2370,7 @@
             this.BusinessIdLB.FormattingEnabled = true;
             this.BusinessIdLB.Location = new System.Drawing.Point(3, 52);
             this.BusinessIdLB.Name = "BusinessIdLB";
-            this.BusinessIdLB.Size = new System.Drawing.Size(303, 133);
+            this.BusinessIdLB.Size = new System.Drawing.Size(362, 133);
             this.BusinessIdLB.TabIndex = 13;
             this.BusinessIdLB.SelectedIndexChanged += new System.EventHandler(this.BusinessIdLB_SelectedIndexChanged);
             // 
@@ -2342,14 +2382,14 @@
             this.AdminRightLP.Controls.Add(this.BusinessAttrGrid, 0, 1);
             this.AdminRightLP.Controls.Add(this.AdminEditAttrLP, 0, 2);
             this.AdminRightLP.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.AdminRightLP.Location = new System.Drawing.Point(367, 20);
+            this.AdminRightLP.Location = new System.Drawing.Point(426, 20);
             this.AdminRightLP.Margin = new System.Windows.Forms.Padding(20);
             this.AdminRightLP.Name = "AdminRightLP";
             this.AdminRightLP.RowCount = 3;
             this.AdminRightLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
             this.AdminRightLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 62.00608F));
             this.AdminRightLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 37.99392F));
-            this.AdminRightLP.Size = new System.Drawing.Size(568, 552);
+            this.AdminRightLP.Size = new System.Drawing.Size(672, 552);
             this.AdminRightLP.TabIndex = 1;
             // 
             // BusinessAttributesHeader
@@ -2360,7 +2400,7 @@
             this.BusinessAttributesHeader.Location = new System.Drawing.Point(20, 16);
             this.BusinessAttributesHeader.Margin = new System.Windows.Forms.Padding(20, 2, 3, 2);
             this.BusinessAttributesHeader.Name = "BusinessAttributesHeader";
-            this.BusinessAttributesHeader.Size = new System.Drawing.Size(545, 16);
+            this.BusinessAttributesHeader.Size = new System.Drawing.Size(649, 16);
             this.BusinessAttributesHeader.TabIndex = 17;
             this.BusinessAttributesHeader.Text = "Business Attributes";
             // 
@@ -2380,7 +2420,7 @@
             this.BusinessAttrGrid.RowHeadersVisible = false;
             this.BusinessAttrGrid.RowTemplate.Height = 24;
             this.BusinessAttrGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.BusinessAttrGrid.Size = new System.Drawing.Size(528, 296);
+            this.BusinessAttrGrid.Size = new System.Drawing.Size(632, 296);
             this.BusinessAttrGrid.TabIndex = 18;
             this.BusinessAttrGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.BusinessAttrGrid_CellClick);
             this.BusinessAttrGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.BusinessAttrGrid_CellContentClick);
@@ -2417,7 +2457,7 @@
             this.AdminEditAttrLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.AdminEditAttrLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
             this.AdminEditAttrLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.AdminEditAttrLP.Size = new System.Drawing.Size(548, 177);
+            this.AdminEditAttrLP.Size = new System.Drawing.Size(652, 177);
             this.AdminEditAttrLP.TabIndex = 19;
             // 
             // AddAttrLP
@@ -2439,13 +2479,13 @@
             this.AddAttrLP.Name = "AddAttrLP";
             this.AddAttrLP.RowCount = 1;
             this.AddAttrLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.AddAttrLP.Size = new System.Drawing.Size(542, 49);
+            this.AddAttrLP.Size = new System.Drawing.Size(646, 49);
             this.AddAttrLP.TabIndex = 21;
             // 
             // NewAttrValue
             // 
             this.NewAttrValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.NewAttrValue.Location = new System.Drawing.Point(57, 14);
+            this.NewAttrValue.Location = new System.Drawing.Point(68, 14);
             this.NewAttrValue.Margin = new System.Windows.Forms.Padding(1);
             this.NewAttrValue.Name = "NewAttrValue";
             this.NewAttrValue.Size = new System.Drawing.Size(156, 20);
@@ -2458,7 +2498,7 @@
             this.NewAttrValueHeader.BackColor = System.Drawing.Color.White;
             this.NewAttrValueHeader.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.NewAttrValueHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NewAttrValueHeader.Location = new System.Drawing.Point(219, 18);
+            this.NewAttrValueHeader.Location = new System.Drawing.Point(261, 18);
             this.NewAttrValueHeader.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.NewAttrValueHeader.Name = "NewAttrValueHeader";
             this.NewAttrValueHeader.ReadOnly = true;
@@ -2483,7 +2523,7 @@
             // NewAttriValValue
             // 
             this.NewAttriValValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.NewAttriValValue.Location = new System.Drawing.Point(266, 14);
+            this.NewAttriValValue.Location = new System.Drawing.Point(318, 14);
             this.NewAttriValValue.Margin = new System.Windows.Forms.Padding(1);
             this.NewAttriValValue.Name = "NewAttriValValue";
             this.NewAttriValValue.Size = new System.Drawing.Size(120, 20);
@@ -2494,10 +2534,10 @@
             // 
             this.AddAttrBtn.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AddAttrBtn.Enabled = false;
-            this.AddAttrBtn.Location = new System.Drawing.Point(399, 13);
+            this.AddAttrBtn.Location = new System.Drawing.Point(475, 13);
             this.AddAttrBtn.Margin = new System.Windows.Forms.Padding(11, 12, 11, 12);
             this.AddAttrBtn.Name = "AddAttrBtn";
-            this.AddAttrBtn.Size = new System.Drawing.Size(131, 23);
+            this.AddAttrBtn.Size = new System.Drawing.Size(159, 23);
             this.AddAttrBtn.TabIndex = 34;
             this.AddAttrBtn.Text = "Add";
             this.AddAttrBtn.UseVisualStyleBackColor = true;
@@ -2511,7 +2551,7 @@
             this.EditAttrHeaderTB.Location = new System.Drawing.Point(20, 16);
             this.EditAttrHeaderTB.Margin = new System.Windows.Forms.Padding(20, 2, 3, 2);
             this.EditAttrHeaderTB.Name = "EditAttrHeaderTB";
-            this.EditAttrHeaderTB.Size = new System.Drawing.Size(525, 16);
+            this.EditAttrHeaderTB.Size = new System.Drawing.Size(629, 16);
             this.EditAttrHeaderTB.TabIndex = 18;
             this.EditAttrHeaderTB.Text = "Edit Attribute";
             // 
@@ -2534,7 +2574,7 @@
             this.AttributeValuesLP.Name = "AttributeValuesLP";
             this.AttributeValuesLP.RowCount = 1;
             this.AttributeValuesLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.AttributeValuesLP.Size = new System.Drawing.Size(542, 48);
+            this.AttributeValuesLP.Size = new System.Drawing.Size(646, 48);
             this.AttributeValuesLP.TabIndex = 19;
             // 
             // AttributeNameHeader
@@ -2557,7 +2597,7 @@
             this.AttributeValHeader.BackColor = System.Drawing.Color.White;
             this.AttributeValHeader.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.AttributeValHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AttributeValHeader.Location = new System.Drawing.Point(219, 18);
+            this.AttributeValHeader.Location = new System.Drawing.Point(260, 18);
             this.AttributeValHeader.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.AttributeValHeader.Name = "AttributeValHeader";
             this.AttributeValHeader.ReadOnly = true;
@@ -2569,7 +2609,7 @@
             // 
             this.AttributeNameValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.AttributeNameValue.Enabled = false;
-            this.AttributeNameValue.Location = new System.Drawing.Point(57, 14);
+            this.AttributeNameValue.Location = new System.Drawing.Point(67, 14);
             this.AttributeNameValue.Margin = new System.Windows.Forms.Padding(1);
             this.AttributeNameValue.Name = "AttributeNameValue";
             this.AttributeNameValue.Size = new System.Drawing.Size(156, 20);
@@ -2579,7 +2619,7 @@
             // 
             this.AttributeValValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.AttributeValValue.Enabled = false;
-            this.AttributeValValue.Location = new System.Drawing.Point(267, 14);
+            this.AttributeValValue.Location = new System.Drawing.Point(318, 14);
             this.AttributeValValue.Margin = new System.Windows.Forms.Padding(1);
             this.AttributeValValue.Name = "AttributeValValue";
             this.AttributeValValue.Size = new System.Drawing.Size(119, 20);
@@ -2593,13 +2633,13 @@
             this.EditAttrButtonLP.Controls.Add(this.UpdateAttrBtn, 0, 1);
             this.EditAttrButtonLP.Controls.Add(this.EditAttrBtn, 0, 0);
             this.EditAttrButtonLP.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.EditAttrButtonLP.Location = new System.Drawing.Point(389, 2);
+            this.EditAttrButtonLP.Location = new System.Drawing.Point(463, 2);
             this.EditAttrButtonLP.Margin = new System.Windows.Forms.Padding(1);
             this.EditAttrButtonLP.Name = "EditAttrButtonLP";
             this.EditAttrButtonLP.RowCount = 2;
             this.EditAttrButtonLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.EditAttrButtonLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.EditAttrButtonLP.Size = new System.Drawing.Size(151, 44);
+            this.EditAttrButtonLP.Size = new System.Drawing.Size(181, 44);
             this.EditAttrButtonLP.TabIndex = 33;
             // 
             // UpdateAttrBtn
@@ -2609,7 +2649,7 @@
             this.UpdateAttrBtn.Location = new System.Drawing.Point(11, 24);
             this.UpdateAttrBtn.Margin = new System.Windows.Forms.Padding(11, 2, 11, 2);
             this.UpdateAttrBtn.Name = "UpdateAttrBtn";
-            this.UpdateAttrBtn.Size = new System.Drawing.Size(129, 18);
+            this.UpdateAttrBtn.Size = new System.Drawing.Size(159, 18);
             this.UpdateAttrBtn.TabIndex = 2;
             this.UpdateAttrBtn.Text = "Update";
             this.UpdateAttrBtn.UseVisualStyleBackColor = true;
@@ -2622,7 +2662,7 @@
             this.EditAttrBtn.Location = new System.Drawing.Point(11, 2);
             this.EditAttrBtn.Margin = new System.Windows.Forms.Padding(11, 2, 11, 2);
             this.EditAttrBtn.Name = "EditAttrBtn";
-            this.EditAttrBtn.Size = new System.Drawing.Size(129, 18);
+            this.EditAttrBtn.Size = new System.Drawing.Size(159, 18);
             this.EditAttrBtn.TabIndex = 1;
             this.EditAttrBtn.Text = "Edit";
             this.EditAttrBtn.UseVisualStyleBackColor = true;
@@ -2636,7 +2676,7 @@
             this.AddAttrHeader.Location = new System.Drawing.Point(20, 104);
             this.AddAttrHeader.Margin = new System.Windows.Forms.Padding(20, 2, 3, 2);
             this.AddAttrHeader.Name = "AddAttrHeader";
-            this.AddAttrHeader.Size = new System.Drawing.Size(525, 16);
+            this.AddAttrHeader.Size = new System.Drawing.Size(629, 16);
             this.AddAttrHeader.TabIndex = 20;
             this.AddAttrHeader.Text = "Add Attribute";
             // 
@@ -2646,7 +2686,7 @@
             this.KeywordSearchPage.Location = new System.Drawing.Point(4, 22);
             this.KeywordSearchPage.Margin = new System.Windows.Forms.Padding(2);
             this.KeywordSearchPage.Name = "KeywordSearchPage";
-            this.KeywordSearchPage.Size = new System.Drawing.Size(955, 592);
+            this.KeywordSearchPage.Size = new System.Drawing.Size(1118, 592);
             this.KeywordSearchPage.TabIndex = 3;
             this.KeywordSearchPage.Text = "Keyword Search";
             this.KeywordSearchPage.UseVisualStyleBackColor = true;
@@ -2668,7 +2708,7 @@
             this.KeywordLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
             this.KeywordLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90F));
             this.KeywordLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            this.KeywordLP.Size = new System.Drawing.Size(955, 592);
+            this.KeywordLP.Size = new System.Drawing.Size(1118, 592);
             this.KeywordLP.TabIndex = 0;
             // 
             // KeywordSearchHeader
@@ -2676,10 +2716,10 @@
             this.KeywordSearchHeader.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.KeywordSearchHeader.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.KeywordSearchHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.KeywordSearchHeader.Location = new System.Drawing.Point(67, 38);
+            this.KeywordSearchHeader.Location = new System.Drawing.Point(75, 38);
             this.KeywordSearchHeader.Margin = new System.Windows.Forms.Padding(20, 2, 3, 2);
             this.KeywordSearchHeader.Name = "KeywordSearchHeader";
-            this.KeywordSearchHeader.Size = new System.Drawing.Size(836, 16);
+            this.KeywordSearchHeader.Size = new System.Drawing.Size(983, 16);
             this.KeywordSearchHeader.TabIndex = 18;
             this.KeywordSearchHeader.Text = "Review Keyword Search";
             // 
@@ -2691,13 +2731,13 @@
             this.KeywordDataLP.Controls.Add(this.ReviewKeywordGrid, 0, 1);
             this.KeywordDataLP.Controls.Add(this.KeywordValueHeaderLP, 0, 0);
             this.KeywordDataLP.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.KeywordDataLP.Location = new System.Drawing.Point(49, 58);
+            this.KeywordDataLP.Location = new System.Drawing.Point(57, 58);
             this.KeywordDataLP.Margin = new System.Windows.Forms.Padding(2);
             this.KeywordDataLP.Name = "KeywordDataLP";
             this.KeywordDataLP.RowCount = 2;
             this.KeywordDataLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.KeywordDataLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90F));
-            this.KeywordDataLP.Size = new System.Drawing.Size(855, 503);
+            this.KeywordDataLP.Size = new System.Drawing.Size(1002, 503);
             this.KeywordDataLP.TabIndex = 19;
             // 
             // ReviewKeywordGrid
@@ -2728,65 +2768,8 @@
             this.ReviewKeywordGrid.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.ReviewKeywordGrid.RowTemplate.Height = 24;
             this.ReviewKeywordGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ReviewKeywordGrid.Size = new System.Drawing.Size(840, 426);
+            this.ReviewKeywordGrid.Size = new System.Drawing.Size(987, 426);
             this.ReviewKeywordGrid.TabIndex = 19;
-            // 
-            // KeywordValueHeaderLP
-            // 
-            this.KeywordValueHeaderLP.ColumnCount = 3;
-            this.KeywordValueHeaderLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.33068F));
-            this.KeywordValueHeaderLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.20319F));
-            this.KeywordValueHeaderLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.KeywordValueHeaderLP.Controls.Add(this.SearchReviewsBtn, 0, 0);
-            this.KeywordValueHeaderLP.Controls.Add(this.KeywordValue, 0, 0);
-            this.KeywordValueHeaderLP.Controls.Add(this.KeywordHeaderTB, 0, 0);
-            this.KeywordValueHeaderLP.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.KeywordValueHeaderLP.Location = new System.Drawing.Point(5, 5);
-            this.KeywordValueHeaderLP.Margin = new System.Windows.Forms.Padding(4);
-            this.KeywordValueHeaderLP.Name = "KeywordValueHeaderLP";
-            this.KeywordValueHeaderLP.RowCount = 1;
-            this.KeywordValueHeaderLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.KeywordValueHeaderLP.Size = new System.Drawing.Size(845, 42);
-            this.KeywordValueHeaderLP.TabIndex = 0;
-            // 
-            // SearchReviewsBtn
-            // 
-            this.SearchReviewsBtn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SearchReviewsBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SearchReviewsBtn.Location = new System.Drawing.Point(570, 4);
-            this.SearchReviewsBtn.Margin = new System.Windows.Forms.Padding(8, 4, 8, 4);
-            this.SearchReviewsBtn.Name = "SearchReviewsBtn";
-            this.SearchReviewsBtn.Size = new System.Drawing.Size(267, 34);
-            this.SearchReviewsBtn.TabIndex = 14;
-            this.SearchReviewsBtn.Text = "Search";
-            this.SearchReviewsBtn.UseVisualStyleBackColor = true;
-            this.SearchReviewsBtn.Click += new System.EventHandler(this.SearchReviewsBtn_Click);
-            // 
-            // KeywordValue
-            // 
-            this.KeywordValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.KeywordValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.KeywordValue.Location = new System.Drawing.Point(148, 9);
-            this.KeywordValue.Margin = new System.Windows.Forms.Padding(2);
-            this.KeywordValue.Name = "KeywordValue";
-            this.KeywordValue.Size = new System.Drawing.Size(362, 23);
-            this.KeywordValue.TabIndex = 13;
-            this.KeywordValue.Text = "Enter a keyword to query reviews by...";
-            this.KeywordValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeywordValue_KeyPress);
-            // 
-            // KeywordHeaderTB
-            // 
-            this.KeywordHeaderTB.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.KeywordHeaderTB.BackColor = System.Drawing.Color.White;
-            this.KeywordHeaderTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.KeywordHeaderTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.KeywordHeaderTB.Location = new System.Drawing.Point(3, 13);
-            this.KeywordHeaderTB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.KeywordHeaderTB.Name = "KeywordHeaderTB";
-            this.KeywordHeaderTB.ReadOnly = true;
-            this.KeywordHeaderTB.Size = new System.Drawing.Size(71, 16);
-            this.KeywordHeaderTB.TabIndex = 7;
-            this.KeywordHeaderTB.Text = "Keyword:";
             // 
             // BusinessName
             // 
@@ -2814,11 +2797,126 @@
             this.ReviewText.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.ReviewText.Width = 10000;
             // 
+            // KeywordValueHeaderLP
+            // 
+            this.KeywordValueHeaderLP.ColumnCount = 3;
+            this.KeywordValueHeaderLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.33068F));
+            this.KeywordValueHeaderLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.20319F));
+            this.KeywordValueHeaderLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.KeywordValueHeaderLP.Controls.Add(this.SearchReviewsBtn, 0, 0);
+            this.KeywordValueHeaderLP.Controls.Add(this.KeywordValue, 0, 0);
+            this.KeywordValueHeaderLP.Controls.Add(this.KeywordHeaderTB, 0, 0);
+            this.KeywordValueHeaderLP.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.KeywordValueHeaderLP.Location = new System.Drawing.Point(5, 5);
+            this.KeywordValueHeaderLP.Margin = new System.Windows.Forms.Padding(4);
+            this.KeywordValueHeaderLP.Name = "KeywordValueHeaderLP";
+            this.KeywordValueHeaderLP.RowCount = 1;
+            this.KeywordValueHeaderLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.KeywordValueHeaderLP.Size = new System.Drawing.Size(992, 42);
+            this.KeywordValueHeaderLP.TabIndex = 0;
+            // 
+            // SearchReviewsBtn
+            // 
+            this.SearchReviewsBtn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SearchReviewsBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SearchReviewsBtn.Location = new System.Drawing.Point(668, 4);
+            this.SearchReviewsBtn.Margin = new System.Windows.Forms.Padding(8, 4, 8, 4);
+            this.SearchReviewsBtn.Name = "SearchReviewsBtn";
+            this.SearchReviewsBtn.Size = new System.Drawing.Size(316, 34);
+            this.SearchReviewsBtn.TabIndex = 14;
+            this.SearchReviewsBtn.Text = "Search";
+            this.SearchReviewsBtn.UseVisualStyleBackColor = true;
+            this.SearchReviewsBtn.Click += new System.EventHandler(this.SearchReviewsBtn_Click);
+            // 
+            // KeywordValue
+            // 
+            this.KeywordValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.KeywordValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.KeywordValue.Location = new System.Drawing.Point(174, 9);
+            this.KeywordValue.Margin = new System.Windows.Forms.Padding(2);
+            this.KeywordValue.Name = "KeywordValue";
+            this.KeywordValue.Size = new System.Drawing.Size(362, 23);
+            this.KeywordValue.TabIndex = 13;
+            this.KeywordValue.Text = "Enter a keyword to query reviews by...";
+            this.KeywordValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeywordValue_KeyPress);
+            // 
+            // KeywordHeaderTB
+            // 
+            this.KeywordHeaderTB.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.KeywordHeaderTB.BackColor = System.Drawing.Color.White;
+            this.KeywordHeaderTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.KeywordHeaderTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.KeywordHeaderTB.Location = new System.Drawing.Point(3, 13);
+            this.KeywordHeaderTB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.KeywordHeaderTB.Name = "KeywordHeaderTB";
+            this.KeywordHeaderTB.ReadOnly = true;
+            this.KeywordHeaderTB.Size = new System.Drawing.Size(71, 16);
+            this.KeywordHeaderTB.TabIndex = 7;
+            this.KeywordHeaderTB.Text = "Keyword:";
+            // 
+            // FilterByMealLabel
+            // 
+            this.FilterByMealLabel.AutoSize = true;
+            this.FilterByMealLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FilterByMealLabel.Location = new System.Drawing.Point(128, 52);
+            this.FilterByMealLabel.Name = "FilterByMealLabel";
+            this.FilterByMealLabel.Size = new System.Drawing.Size(119, 31);
+            this.FilterByMealLabel.TabIndex = 3;
+            this.FilterByMealLabel.Text = "Filter By Meal:";
+            this.FilterByMealLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // FilterByMealPanel
+            // 
+            this.FilterByMealPanel.ColumnCount = 1;
+            this.FilterByMealPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.FilterByMealPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FilterByMealPanel.Location = new System.Drawing.Point(125, 83);
+            this.FilterByMealPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.FilterByMealPanel.Name = "FilterByMealPanel";
+            this.FilterByMealPanel.RowCount = 10;
+            this.FilterByMealPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0017F));
+            this.FilterByMealPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.998701F));
+            this.FilterByMealPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.998701F));
+            this.FilterByMealPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.998701F));
+            this.FilterByMealPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.998701F));
+            this.FilterByMealPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.998699F));
+            this.FilterByMealPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0012F));
+            this.FilterByMealPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0012F));
+            this.FilterByMealPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0012F));
+            this.FilterByMealPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0012F));
+            this.FilterByMealPanel.Size = new System.Drawing.Size(125, 183);
+            this.FilterByMealPanel.TabIndex = 4;
+            // 
+            // FilterByAttributesPanel
+            // 
+            this.FilterByAttributesPanel.ColumnCount = 1;
+            this.FilterByAttributesPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.FilterByAttributesPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.FilterByAttributesPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.FilterByAttributesPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.FilterByAttributesPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FilterByAttributesPanel.Location = new System.Drawing.Point(0, 83);
+            this.FilterByAttributesPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.FilterByAttributesPanel.Name = "FilterByAttributesPanel";
+            this.FilterByAttributesPanel.RowCount = 10;
+            this.FilterByAttributesPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.FilterByAttributesPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.FilterByAttributesPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.FilterByAttributesPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.FilterByAttributesPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.FilterByAttributesPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.FilterByAttributesPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.FilterByAttributesPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.FilterByAttributesPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.FilterByAttributesPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.FilterByAttributesPanel.Size = new System.Drawing.Size(125, 183);
+            this.FilterByAttributesPanel.TabIndex = 5;
+            // 
             // YelpGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(963, 618);
+            this.ClientSize = new System.Drawing.Size(1126, 618);
             this.Controls.Add(this.tabControl1);
             this.MinimumSize = new System.Drawing.Size(978, 653);
             this.Name = "YelpGUI";
@@ -3105,5 +3203,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn BusinessName;
         private System.Windows.Forms.DataGridViewTextBoxColumn FunnyVotes;
         private System.Windows.Forms.DataGridViewTextBoxColumn ReviewText;
+        private System.Windows.Forms.Label FilterByAttributesLabel;
+        private System.Windows.Forms.TableLayoutPanel PriceFilterPanel;
+        private System.Windows.Forms.TableLayoutPanel FilterByAttributesPanel;
+        private System.Windows.Forms.TableLayoutPanel FilterByMealPanel;
+        private System.Windows.Forms.Label FilterByMealLabel;
     }
 }
