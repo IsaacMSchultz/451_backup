@@ -1,18 +1,11 @@
 ﻿using Npgsql;
-using Npgsql.Schema;
 using System;
 using System.Windows.Forms;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using static System.Windows.Forms.CheckedListBox;
 using QueryEngine1;
-using System.Linq;
-using MapControlLibrary;
 using Microsoft.Maps.MapControl.WPF;
-using Microsoft.Maps.MapControl.WPF.Overlays;
 using System.Windows.Media;
-//using Microsoft.Maps.SpatialMath;
-//using Microsoft.Maps.SpatialMath.Geometry;
+using System.Runtime.Serialization;
 
 namespace Milestone2App
 {
@@ -83,32 +76,37 @@ namespace Milestone2App
                 businessGrid.Columns.Add(newColumn);
             }
 
-            foreach (var column in friendsCol)
-            {
-                DataGridViewTextBoxColumn newColumn = new DataGridViewTextBoxColumn();
-                newColumn.HeaderText = column;
+            //foreach (var column in friendsCol)
+            //{
+            //    DataGridViewTextBoxColumn newColumn = new DataGridViewTextBoxColumn();
+            //    newColumn.HeaderText = column;
 
-                FriendsGrid.Columns.Add(newColumn);
-            }
+            //    FriendsGrid.Columns.Add(newColumn);
+            //}
 
-            foreach (var column in favBusCol)
-            {
-                DataGridViewTextBoxColumn newColumn = new DataGridViewTextBoxColumn();
-                newColumn.HeaderText = column;
+            //foreach (var column in favBusCol)
+            //{
+            //    DataGridViewTextBoxColumn newColumn = new DataGridViewTextBoxColumn();
+            //    newColumn.HeaderText = column;
 
-                FavoriteBusinessGrid.Columns.Add(newColumn);
-            }
+            //    FavoriteBusinessGrid.Columns.Add(newColumn);
+            //}
 
-            foreach (var column in friendsRevCol)
-            {
-                //dataGridView1.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //foreach (var column in friendsRevCol)
+            //{
+            //    //dataGridView1.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
-                DataGridViewTextBoxColumn newColumn = new DataGridViewTextBoxColumn();
-                newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                newColumn.HeaderText = column;
+            //    DataGridViewTextBoxColumn newColumn = new DataGridViewTextBoxColumn();
+            //    newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //    newColumn.HeaderText = column;
 
-                FriendsReviewsGrid.Columns.Add(newColumn);
-            }
+            //    FriendsReviewsGrid.Columns.Add(newColumn);
+            //}
+
+            //foreach (DataGridViewTextBoxColumn column in FriendsReviewsGrid.Columns)
+            //{
+            //    column.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //}
 
         }
 
@@ -261,6 +259,23 @@ namespace Milestone2App
             }
         }
 
+        private void UpdateFriendsWhoReviewed()
+        {
+            int row = 0, col = 0;
+            FriendsWhoRevewedGrid.Rows.Clear(); //removes all the data previously in the grid.  
+            
+            foreach (List<string> listRow in queryEngine.GetFriendsWhoReviewedBus(currUserId, currBusId))
+            {
+                if (row > 0)
+                {
+                    FriendsWhoRevewedGrid.Rows.Add(); //the index of the new row
+                    foreach (string item in listRow)
+                        FriendsWhoRevewedGrid.Rows[row - 1].Cells[col++].Value = item;
+                    col = 0;
+                }
+                row++;
+            }
+        }
 
         private void UpdateBussAttributesGrid()
         {
@@ -298,6 +313,7 @@ namespace Milestone2App
         private void PlayerIDListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Fill all of the user's info textboxes
+            // Object reference not set to an instance of an object.
             List<List<string>> userData = queryEngine.GetUser(PlayerIDListBox.SelectedItem.ToString(), "name, average_stars, cool, funny, useful, fans, review_count, yelping_since, user_latitude, user_longitude, user_id");
 
             NameValue.Text = userData[1][0];
@@ -386,6 +402,9 @@ namespace Milestone2App
                     Closes_Textbox.Text = hours[1].Count > 1 ? hours[1][1] : "N/A";
                 }
 
+                // update the friends who reviewd grid
+                UpdateFriendsWhoReviewed();
+
                 //enable the buttons now that there is a business selected
                 ShowReviewsButton.Enabled = true;
                 ShowCheckinsButton.Enabled = true;
@@ -433,6 +452,8 @@ namespace Milestone2App
                 MessageBox.Show("Please select a stars rating.");
             if (currBusId != "")
                 MessageBox.Show("Please select a business.");
+
+            UpdateGrid();
         }
 
         /// <summary>
@@ -601,28 +622,35 @@ namespace Milestone2App
 
         private void MapButton_Click(object sender, EventArgs e)
         {
+            // Remove all pins on the map
+            mapTest.userControl11.map.Children.Clear();
+
+            //List<double> userLocation = queryEngine.GetUserLocation(currUserId);
+            List<string> selectedBusinesses = new List<string>();
+            Microsoft.Maps.MapControl.WPF.Location userCoord = null;
+            Microsoft.Maps.MapControl.WPF.Location busCoord = null;
+
             // Resets the map each time the button is clicked, even if it is already open
             if (this.mapTest.Visible)
             {
                 mapTest.Close();
             }
 
-            // Remove all pins on the map
-            mapTest.userControl11.map.Children.Clear();
-
-            List<double> userLocation = queryEngine.GetUserLocation(currUserId);
-            List<string> selectedBusinesses = new List<string>();
-            Microsoft.Maps.MapControl.WPF.Location userCoord = null;
-            Microsoft.Maps.MapControl.WPF.Location busCoord = null;
-
-            // Only set the map view to the user's position if the user has both a lat and long value entered
-            if (userLocation.Count == 2)
+            if (currUserId != string.Empty)
             {
-                userCoord = new Microsoft.Maps.MapControl.WPF.Location(userLocation[0], userLocation[1]);
-                Pushpin pin = new Pushpin();
-                pin.Background = new SolidColorBrush(Color.FromArgb(200, 0, 100, 100));
-                pin.Location = userCoord;
-                mapTest.userControl11.map.Children.Add(pin);
+                //MessageBox.Show("Log in to a user to view business on map");
+                //return;
+                List<double> userLocation = queryEngine.GetUserLocation(currUserId);
+
+                // Only set the map view to the user's position if the user has both a lat and long value entered
+                if (userLocation.Count == 2)
+                {
+                    userCoord = new Microsoft.Maps.MapControl.WPF.Location(userLocation[0], userLocation[1]);
+                    Pushpin pin = new Pushpin();
+                    pin.Background = new SolidColorBrush(Color.FromArgb(200, 0, 100, 100));
+                    pin.Location = userCoord;
+                    mapTest.userControl11.map.Children.Add(pin);
+                }
             }
 
             // Add pins for all of the businesses in the grid
@@ -772,6 +800,7 @@ namespace Milestone2App
 
         private void AdminUpdateBtn_Click(object sender, EventArgs e)
         {
+
             AdminUpdateBtn.Enabled = false;
             AdminEditNameBtn.Enabled = true;
 
@@ -781,6 +810,11 @@ namespace Milestone2App
                 queryEngine.UpdateBusinessName(currAdminId, BusNameValue.Text);
             }
 
+            UpdateGrid();
+
+            string query = string.Empty;
+            string address = AdminAddressValue.Text;
+            //string 
         }
 
         private void BusinessAttrGrid_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -822,9 +856,6 @@ namespace Milestone2App
 
             UpdateBussAttributesGrid();
             UpdateBusinessPageAttributes();
-
-            // Need to update the business UI when business attributes are updated
-            // businessGrid_CellContentClick(null, null);
         }
 
         /// <summary>
