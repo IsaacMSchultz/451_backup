@@ -38,16 +38,15 @@
             this.stateDropDown = new System.Windows.Forms.ComboBox();
             this.StateHeader = new System.Windows.Forms.TextBox();
             this.SearchPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.ZipCheckboxPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.ZipText = new System.Windows.Forms.TextBox();
+            this.zipCheckBox = new System.Windows.Forms.CheckedListBox();
             this.CategoriesCheckboxPanel = new System.Windows.Forms.TableLayoutPanel();
             this.categoriesCheckBox = new System.Windows.Forms.CheckedListBox();
             this.categoriesTextBox = new System.Windows.Forms.TextBox();
-            this.ZipCheckboxPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.zipCheckBox = new System.Windows.Forms.CheckedListBox();
-            this.ZipText = new System.Windows.Forms.TextBox();
             this.SearchButton = new System.Windows.Forms.Button();
             this.BusinessTabPanel = new System.Windows.Forms.TableLayoutPanel();
             this.BusinessInfoPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.businessNameTextBox_Review = new System.Windows.Forms.RichTextBox();
             this.BusinessInfoListPanel = new System.Windows.Forms.TableLayoutPanel();
             this.AddressLabel = new System.Windows.Forms.Label();
             this.Address_Textbox = new System.Windows.Forms.TextBox();
@@ -70,6 +69,7 @@
             this.SubmitReviewPanel = new System.Windows.Forms.TableLayoutPanel();
             this.SubmitReviewButton = new System.Windows.Forms.Button();
             this.ReviewStarsDropDown = new System.Windows.Forms.ComboBox();
+            this.businessNameTextBox_Review = new System.Windows.Forms.RichTextBox();
             this.BusinessButtonsPanel = new System.Windows.Forms.TableLayoutPanel();
             this.AddToFavoritesButton = new System.Windows.Forms.Button();
             this.CheckInButton = new System.Windows.Forms.Button();
@@ -237,8 +237,8 @@
             this.SearchCheckBoxPanel.SuspendLayout();
             this.StateDropdownPanel.SuspendLayout();
             this.SearchPanel.SuspendLayout();
-            this.CategoriesCheckboxPanel.SuspendLayout();
             this.ZipCheckboxPanel.SuspendLayout();
+            this.CategoriesCheckboxPanel.SuspendLayout();
             this.BusinessTabPanel.SuspendLayout();
             this.BusinessInfoPanel.SuspendLayout();
             this.BusinessInfoListPanel.SuspendLayout();
@@ -423,6 +423,47 @@
             this.SearchPanel.Size = new System.Drawing.Size(200, 592);
             this.SearchPanel.TabIndex = 8;
             // 
+            // ZipCheckboxPanel
+            // 
+            this.ZipCheckboxPanel.ColumnCount = 1;
+            this.ZipCheckboxPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.ZipCheckboxPanel.Controls.Add(this.ZipText, 1, 0);
+            this.ZipCheckboxPanel.Controls.Add(this.zipCheckBox, 1, 1);
+            this.ZipCheckboxPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ZipCheckboxPanel.Location = new System.Drawing.Point(0, 213);
+            this.ZipCheckboxPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.ZipCheckboxPanel.Name = "ZipCheckboxPanel";
+            this.ZipCheckboxPanel.RowCount = 2;
+            this.ZipCheckboxPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.ZipCheckboxPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.ZipCheckboxPanel.Size = new System.Drawing.Size(200, 179);
+            this.ZipCheckboxPanel.TabIndex = 8;
+            // 
+            // ZipText
+            // 
+            this.ZipText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ZipText.Cursor = System.Windows.Forms.Cursors.Default;
+            this.ZipText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ZipText.Location = new System.Drawing.Point(0, 0);
+            this.ZipText.Margin = new System.Windows.Forms.Padding(0);
+            this.ZipText.Name = "ZipText";
+            this.ZipText.ReadOnly = true;
+            this.ZipText.Size = new System.Drawing.Size(203, 13);
+            this.ZipText.TabIndex = 4;
+            this.ZipText.Text = "Zip";
+            this.ZipText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // zipCheckBox
+            // 
+            this.zipCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.zipCheckBox.FormattingEnabled = true;
+            this.zipCheckBox.Location = new System.Drawing.Point(0, 13);
+            this.zipCheckBox.Margin = new System.Windows.Forms.Padding(0);
+            this.zipCheckBox.Name = "zipCheckBox";
+            this.zipCheckBox.Size = new System.Drawing.Size(203, 166);
+            this.zipCheckBox.TabIndex = 0;
+            this.zipCheckBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.ZipCheckBox_ItemCheck);
+            // 
             // CategoriesCheckboxPanel
             // 
             this.CategoriesCheckboxPanel.ColumnCount = 1;
@@ -463,47 +504,6 @@
             this.categoriesTextBox.TabIndex = 4;
             this.categoriesTextBox.Text = "Categories";
             this.categoriesTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // ZipCheckboxPanel
-            // 
-            this.ZipCheckboxPanel.ColumnCount = 1;
-            this.ZipCheckboxPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.ZipCheckboxPanel.Controls.Add(this.ZipText, 1, 0);
-            this.ZipCheckboxPanel.Controls.Add(this.zipCheckBox, 1, 1);
-            this.ZipCheckboxPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ZipCheckboxPanel.Location = new System.Drawing.Point(0, 213);
-            this.ZipCheckboxPanel.Margin = new System.Windows.Forms.Padding(0);
-            this.ZipCheckboxPanel.Name = "ZipCheckboxPanel";
-            this.ZipCheckboxPanel.RowCount = 2;
-            this.ZipCheckboxPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.ZipCheckboxPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.ZipCheckboxPanel.Size = new System.Drawing.Size(200, 179);
-            this.ZipCheckboxPanel.TabIndex = 8;
-            // 
-            // zipCheckBox
-            // 
-            this.zipCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.zipCheckBox.FormattingEnabled = true;
-            this.zipCheckBox.Location = new System.Drawing.Point(0, 13);
-            this.zipCheckBox.Margin = new System.Windows.Forms.Padding(0);
-            this.zipCheckBox.Name = "zipCheckBox";
-            this.zipCheckBox.Size = new System.Drawing.Size(203, 166);
-            this.zipCheckBox.TabIndex = 0;
-            this.zipCheckBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.ZipCheckBox_ItemCheck);
-            // 
-            // ZipText
-            // 
-            this.ZipText.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.ZipText.Cursor = System.Windows.Forms.Cursors.Default;
-            this.ZipText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ZipText.Location = new System.Drawing.Point(0, 0);
-            this.ZipText.Margin = new System.Windows.Forms.Padding(0);
-            this.ZipText.Name = "ZipText";
-            this.ZipText.ReadOnly = true;
-            this.ZipText.Size = new System.Drawing.Size(203, 13);
-            this.ZipText.TabIndex = 4;
-            this.ZipText.Text = "Zip";
-            this.ZipText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // SearchButton
             // 
@@ -556,19 +556,6 @@
             this.BusinessInfoPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
             this.BusinessInfoPanel.Size = new System.Drawing.Size(918, 326);
             this.BusinessInfoPanel.TabIndex = 9;
-            // 
-            // businessNameTextBox_Review
-            // 
-            this.BusinessInfoPanel.SetColumnSpan(this.businessNameTextBox_Review, 2);
-            this.businessNameTextBox_Review.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.businessNameTextBox_Review.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.businessNameTextBox_Review.Location = new System.Drawing.Point(0, 0);
-            this.businessNameTextBox_Review.Margin = new System.Windows.Forms.Padding(0);
-            this.businessNameTextBox_Review.Name = "businessNameTextBox_Review";
-            this.businessNameTextBox_Review.ReadOnly = true;
-            this.businessNameTextBox_Review.Size = new System.Drawing.Size(918, 38);
-            this.businessNameTextBox_Review.TabIndex = 0;
-            this.businessNameTextBox_Review.Text = "Business name (click on one)";
             // 
             // BusinessInfoListPanel
             // 
@@ -887,6 +874,19 @@
             this.ReviewStarsDropDown.TabIndex = 1;
             this.ReviewStarsDropDown.Text = "Review Stars";
             this.ReviewStarsDropDown.SelectedIndexChanged += new System.EventHandler(this.ReviewStarsDropDown_SelectedIndexChanged);
+            // 
+            // businessNameTextBox_Review
+            // 
+            this.BusinessInfoPanel.SetColumnSpan(this.businessNameTextBox_Review, 2);
+            this.businessNameTextBox_Review.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.businessNameTextBox_Review.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.businessNameTextBox_Review.Location = new System.Drawing.Point(0, 0);
+            this.businessNameTextBox_Review.Margin = new System.Windows.Forms.Padding(0);
+            this.businessNameTextBox_Review.Name = "businessNameTextBox_Review";
+            this.businessNameTextBox_Review.ReadOnly = true;
+            this.businessNameTextBox_Review.Size = new System.Drawing.Size(918, 38);
+            this.businessNameTextBox_Review.TabIndex = 0;
+            this.businessNameTextBox_Review.Text = "Business name (click on one)";
             // 
             // BusinessButtonsPanel
             // 
@@ -2233,7 +2233,7 @@
             this.AdminCityLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.80269F));
             this.AdminCityLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.19731F));
             this.AdminCityLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 71F));
-            this.AdminCityLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 145F));
+            this.AdminCityLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 146F));
             this.AdminCityLP.Controls.Add(this.AdminStateHeaderTb, 0, 0);
             this.AdminCityLP.Controls.Add(this.AdminStateValue, 1, 0);
             this.AdminCityLP.Controls.Add(this.AdminCityValue, 3, 0);
@@ -2264,7 +2264,7 @@
             // 
             this.AdminStateValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.AdminStateValue.Enabled = false;
-            this.AdminStateValue.Location = new System.Drawing.Point(41, 1);
+            this.AdminStateValue.Location = new System.Drawing.Point(40, 1);
             this.AdminStateValue.Margin = new System.Windows.Forms.Padding(1);
             this.AdminStateValue.Name = "AdminStateValue";
             this.AdminStateValue.Size = new System.Drawing.Size(60, 20);
@@ -2274,7 +2274,7 @@
             // 
             this.AdminCityValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.AdminCityValue.Enabled = false;
-            this.AdminCityValue.Location = new System.Drawing.Point(215, 1);
+            this.AdminCityValue.Location = new System.Drawing.Point(214, 1);
             this.AdminCityValue.Margin = new System.Windows.Forms.Padding(1);
             this.AdminCityValue.Name = "AdminCityValue";
             this.AdminCityValue.Size = new System.Drawing.Size(115, 20);
@@ -2286,7 +2286,7 @@
             this.CityHeaderTb.BackColor = System.Drawing.Color.White;
             this.CityHeaderTb.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.CityHeaderTb.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CityHeaderTb.Location = new System.Drawing.Point(147, 5);
+            this.CityHeaderTb.Location = new System.Drawing.Point(146, 5);
             this.CityHeaderTb.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.CityHeaderTb.Name = "CityHeaderTb";
             this.CityHeaderTb.ReadOnly = true;
@@ -2509,7 +2509,7 @@
             this.AdminReviewLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.45544F));
             this.AdminReviewLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.54456F));
             this.AdminReviewLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 61F));
-            this.AdminReviewLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 108F));
+            this.AdminReviewLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 109F));
             this.AdminReviewLP.Controls.Add(this.AdminReviewHeader, 0, 0);
             this.AdminReviewLP.Controls.Add(this.AdminReviewValue, 1, 0);
             this.AdminReviewLP.Controls.Add(this.AdminCheckinValue, 3, 0);
@@ -2540,7 +2540,7 @@
             // 
             this.AdminReviewValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.AdminReviewValue.Enabled = false;
-            this.AdminReviewValue.Location = new System.Drawing.Point(105, 1);
+            this.AdminReviewValue.Location = new System.Drawing.Point(104, 1);
             this.AdminReviewValue.Margin = new System.Windows.Forms.Padding(1);
             this.AdminReviewValue.Name = "AdminReviewValue";
             this.AdminReviewValue.Size = new System.Drawing.Size(59, 20);
@@ -2550,7 +2550,7 @@
             // 
             this.AdminCheckinValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.AdminCheckinValue.Enabled = false;
-            this.AdminCheckinValue.Location = new System.Drawing.Point(252, 1);
+            this.AdminCheckinValue.Location = new System.Drawing.Point(251, 1);
             this.AdminCheckinValue.Margin = new System.Windows.Forms.Padding(1);
             this.AdminCheckinValue.Name = "AdminCheckinValue";
             this.AdminCheckinValue.Size = new System.Drawing.Size(80, 20);
@@ -2562,7 +2562,7 @@
             this.AdminCheckinHeader.BackColor = System.Drawing.Color.White;
             this.AdminCheckinHeader.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.AdminCheckinHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AdminCheckinHeader.Location = new System.Drawing.Point(194, 5);
+            this.AdminCheckinHeader.Location = new System.Drawing.Point(193, 5);
             this.AdminCheckinHeader.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.AdminCheckinHeader.Name = "AdminCheckinHeader";
             this.AdminCheckinHeader.ReadOnly = true;
@@ -2576,7 +2576,7 @@
             this.AdminStarsLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.9505F));
             this.AdminStarsLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.0495F));
             this.AdminStarsLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 62F));
-            this.AdminStarsLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 108F));
+            this.AdminStarsLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 109F));
             this.AdminStarsLP.Controls.Add(this.AdminRevRatingHEad, 0, 0);
             this.AdminStarsLP.Controls.Add(this.AdminRatingValue, 1, 0);
             this.AdminStarsLP.Controls.Add(this.AdminStarsValue, 3, 0);
@@ -2607,7 +2607,7 @@
             // 
             this.AdminRatingValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.AdminRatingValue.Enabled = false;
-            this.AdminRatingValue.Location = new System.Drawing.Point(105, 1);
+            this.AdminRatingValue.Location = new System.Drawing.Point(104, 1);
             this.AdminRatingValue.Margin = new System.Windows.Forms.Padding(1);
             this.AdminRatingValue.Name = "AdminRatingValue";
             this.AdminRatingValue.Size = new System.Drawing.Size(57, 20);
@@ -2617,7 +2617,7 @@
             // 
             this.AdminStarsValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.AdminStarsValue.Enabled = false;
-            this.AdminStarsValue.Location = new System.Drawing.Point(252, 1);
+            this.AdminStarsValue.Location = new System.Drawing.Point(251, 1);
             this.AdminStarsValue.Margin = new System.Windows.Forms.Padding(1);
             this.AdminStarsValue.Name = "AdminStarsValue";
             this.AdminStarsValue.Size = new System.Drawing.Size(80, 20);
@@ -2629,7 +2629,7 @@
             this.AdminStarsHeader.BackColor = System.Drawing.Color.White;
             this.AdminStarsHeader.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.AdminStarsHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AdminStarsHeader.Location = new System.Drawing.Point(193, 5);
+            this.AdminStarsHeader.Location = new System.Drawing.Point(192, 5);
             this.AdminStarsHeader.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.AdminStarsHeader.Name = "AdminStarsHeader";
             this.AdminStarsHeader.ReadOnly = true;
@@ -3209,10 +3209,10 @@
             this.StateDropdownPanel.ResumeLayout(false);
             this.StateDropdownPanel.PerformLayout();
             this.SearchPanel.ResumeLayout(false);
-            this.CategoriesCheckboxPanel.ResumeLayout(false);
-            this.CategoriesCheckboxPanel.PerformLayout();
             this.ZipCheckboxPanel.ResumeLayout(false);
             this.ZipCheckboxPanel.PerformLayout();
+            this.CategoriesCheckboxPanel.ResumeLayout(false);
+            this.CategoriesCheckboxPanel.PerformLayout();
             this.BusinessTabPanel.ResumeLayout(false);
             this.BusinessInfoPanel.ResumeLayout(false);
             this.BusinessInfoListPanel.ResumeLayout(false);

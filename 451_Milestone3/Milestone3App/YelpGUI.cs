@@ -19,6 +19,7 @@ namespace Milestone2App
     public partial class YelpGUI : Form
     {
         QueryEngine queryEngine;
+        MapNamesToAttrValPair mapNamesToAttrValPair;
         string[] cols = { "Name", "Address", "City", "State", "Stars Shown", "Reviews", "Checkins", "Stars", "Open?", "business_id", "Distance" }; //column titles for the main datagridview
         string[] friendsCol = { "Name", "Average Stars", "Yelping Since" };
         string[] favBusCol = { "Name", "Stars", "City", "Zipcode", "Address" };
@@ -51,6 +52,7 @@ namespace Milestone2App
         {
             queryEngine = new QueryEngine();
             List<string> businessIds = new List<string>();
+            mapNamesToAttrValPair = new MapNamesToAttrValPair();
 
             currBusId = "";
             currUserId = "";
@@ -202,9 +204,6 @@ namespace Milestone2App
             List<string> categorylist = queryEngine.GetCategories();
             List<string> checkedCategories = queryEngine.GetCheckedCategories();
             categoriesCheckBox.Items.Clear(); //since attributes likely have a ton of overlap, it is simpler to just clear the list and re-populate each time a new item is checked.
-
-            if (categorylist.Count == 0)
-                Console.WriteLine("TEST");
 
             foreach (string item in categorylist) // add returned categories   
             {
@@ -960,16 +959,18 @@ namespace Milestone2App
             }
         }
 
+        //TODO: implement attribute support in the queryEngine -- if statement looking for "attribute" that puts the list of elements in an AND list inside of the subquery.
+        //      Assuming that attributes only have a max of two values
         //Implementing one function to add or remove ALL attribute checklists
         private void AttributesPanel_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            CheckedListBox senderCheckBox = (CheckedListBox)sender; //casts the sending object as a checkedbox
-            string newItem = zipCheckBox.Items[e.Index].ToString();
+            CheckedListBox senderCheckBox = (CheckedListBox)sender; //casts the sending object as a checkedbox            
+            mapNamesToAttrValPair.MapFrom(senderCheckBox.Name); //accesses a map that uses sender names to get the values needed from the database
 
-            if (e.NewValue == CheckState.Checked) //add or remove the check box item that just changed to the list            
-                queryEngine.AddSearchParameter("zipcode", newItem); //add the new item to the list if it is checked            
-            else
-                queryEngine.RemoveSearchParameter("zipcode", newItem);//remove the new item to the list if its unchecked              
+            //if (e.NewValue == CheckState.Checked) //add or remove the check box item that just changed to the list            
+            //queryEngine.AddSearchParameter("attribute", true); //add the new item to the list if it is checked            
+            //else
+            //queryEngine.RemoveSearchParameter("attribute", false);//remove the new item to the list if its unchecked              
 
             UpdateCategories();
             UpdateGrid();
