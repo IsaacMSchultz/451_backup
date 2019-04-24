@@ -115,6 +115,9 @@
             this.UserInfoTitleTB = new System.Windows.Forms.TextBox();
             this.FriendsTitleTB = new System.Windows.Forms.TextBox();
             this.FriendsGrid = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AverageStars = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.YelpingSince = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UserInfoLP = new System.Windows.Forms.TableLayoutPanel();
             this.userInfoPanel = new System.Windows.Forms.TableLayoutPanel();
             this.LongLP = new System.Windows.Forms.TableLayoutPanel();
@@ -246,9 +249,6 @@
             this.SearchReviewsBtn = new System.Windows.Forms.Button();
             this.KeywordValue = new System.Windows.Forms.TextBox();
             this.KeywordHeaderTB = new System.Windows.Forms.TextBox();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AverageStars = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.YelpingSince = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).BeginInit();
             this.SearchCheckBoxPanel.SuspendLayout();
             this.StateDropdownPanel.SuspendLayout();
@@ -1544,6 +1544,29 @@
             this.FriendsGrid.Size = new System.Drawing.Size(324, 345);
             this.FriendsGrid.TabIndex = 10;
             // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn1.HeaderText = "Name";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 74;
+            // 
+            // AverageStars
+            // 
+            this.AverageStars.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.AverageStars.HeaderText = "Average Stars";
+            this.AverageStars.Name = "AverageStars";
+            this.AverageStars.ReadOnly = true;
+            this.AverageStars.Width = 117;
+            // 
+            // YelpingSince
+            // 
+            this.YelpingSince.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.YelpingSince.HeaderText = "Yelping Since";
+            this.YelpingSince.Name = "YelpingSince";
+            this.YelpingSince.ReadOnly = true;
+            // 
             // UserInfoLP
             // 
             this.UserInfoLP.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
@@ -2392,7 +2415,7 @@
             this.AdminCityLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.80269F));
             this.AdminCityLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.19731F));
             this.AdminCityLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 95F));
-            this.AdminCityLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 205F));
+            this.AdminCityLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 207F));
             this.AdminCityLP.Controls.Add(this.AdminStateHeaderTb, 0, 0);
             this.AdminCityLP.Controls.Add(this.AdminStateValue, 1, 0);
             this.AdminCityLP.Controls.Add(this.AdminCityValue, 3, 0);
@@ -2434,7 +2457,7 @@
             // 
             this.AdminCityValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.AdminCityValue.Enabled = false;
-            this.AdminCityValue.Location = new System.Drawing.Point(277, 3);
+            this.AdminCityValue.Location = new System.Drawing.Point(275, 3);
             this.AdminCityValue.Margin = new System.Windows.Forms.Padding(1);
             this.AdminCityValue.Name = "AdminCityValue";
             this.AdminCityValue.Size = new System.Drawing.Size(152, 22);
@@ -2446,7 +2469,7 @@
             this.CityHeaderTb.BackColor = System.Drawing.Color.White;
             this.CityHeaderTb.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.CityHeaderTb.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CityHeaderTb.Location = new System.Drawing.Point(186, 6);
+            this.CityHeaderTb.Location = new System.Drawing.Point(184, 6);
             this.CityHeaderTb.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.CityHeaderTb.Name = "CityHeaderTb";
             this.CityHeaderTb.ReadOnly = true;
@@ -2674,7 +2697,7 @@
             this.AdminReviewLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.45544F));
             this.AdminReviewLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.54456F));
             this.AdminReviewLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 81F));
-            this.AdminReviewLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 156F));
+            this.AdminReviewLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 158F));
             this.AdminReviewLP.Controls.Add(this.AdminReviewHeader, 0, 0);
             this.AdminReviewLP.Controls.Add(this.AdminReviewValue, 1, 0);
             this.AdminReviewLP.Controls.Add(this.AdminCheckinValue, 3, 0);
@@ -2706,7 +2729,7 @@
             // 
             this.AdminReviewValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.AdminReviewValue.Enabled = false;
-            this.AdminReviewValue.Location = new System.Drawing.Point(134, 3);
+            this.AdminReviewValue.Location = new System.Drawing.Point(133, 3);
             this.AdminReviewValue.Margin = new System.Windows.Forms.Padding(1);
             this.AdminReviewValue.Name = "AdminReviewValue";
             this.AdminReviewValue.Size = new System.Drawing.Size(77, 22);
@@ -2716,7 +2739,7 @@
             // 
             this.AdminCheckinValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.AdminCheckinValue.Enabled = false;
-            this.AdminCheckinValue.Location = new System.Drawing.Point(326, 3);
+            this.AdminCheckinValue.Location = new System.Drawing.Point(324, 3);
             this.AdminCheckinValue.Margin = new System.Windows.Forms.Padding(1);
             this.AdminCheckinValue.Name = "AdminCheckinValue";
             this.AdminCheckinValue.Size = new System.Drawing.Size(105, 22);
@@ -2728,7 +2751,7 @@
             this.AdminCheckinHeader.BackColor = System.Drawing.Color.White;
             this.AdminCheckinHeader.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.AdminCheckinHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AdminCheckinHeader.Location = new System.Drawing.Point(249, 6);
+            this.AdminCheckinHeader.Location = new System.Drawing.Point(247, 6);
             this.AdminCheckinHeader.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.AdminCheckinHeader.Name = "AdminCheckinHeader";
             this.AdminCheckinHeader.ReadOnly = true;
@@ -2742,7 +2765,7 @@
             this.AdminStarsLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.9505F));
             this.AdminStarsLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.0495F));
             this.AdminStarsLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 83F));
-            this.AdminStarsLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 156F));
+            this.AdminStarsLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 158F));
             this.AdminStarsLP.Controls.Add(this.AdminRevRatingHEad, 0, 0);
             this.AdminStarsLP.Controls.Add(this.AdminRatingValue, 1, 0);
             this.AdminStarsLP.Controls.Add(this.AdminStarsValue, 3, 0);
@@ -2774,7 +2797,7 @@
             // 
             this.AdminRatingValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.AdminRatingValue.Enabled = false;
-            this.AdminRatingValue.Location = new System.Drawing.Point(134, 3);
+            this.AdminRatingValue.Location = new System.Drawing.Point(133, 3);
             this.AdminRatingValue.Margin = new System.Windows.Forms.Padding(1);
             this.AdminRatingValue.Name = "AdminRatingValue";
             this.AdminRatingValue.Size = new System.Drawing.Size(75, 22);
@@ -2784,7 +2807,7 @@
             // 
             this.AdminStarsValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.AdminStarsValue.Enabled = false;
-            this.AdminStarsValue.Location = new System.Drawing.Point(326, 3);
+            this.AdminStarsValue.Location = new System.Drawing.Point(324, 3);
             this.AdminStarsValue.Margin = new System.Windows.Forms.Padding(1);
             this.AdminStarsValue.Name = "AdminStarsValue";
             this.AdminStarsValue.Size = new System.Drawing.Size(105, 22);
@@ -2796,7 +2819,7 @@
             this.AdminStarsHeader.BackColor = System.Drawing.Color.White;
             this.AdminStarsHeader.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.AdminStarsHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AdminStarsHeader.Location = new System.Drawing.Point(247, 6);
+            this.AdminStarsHeader.Location = new System.Drawing.Point(245, 6);
             this.AdminStarsHeader.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.AdminStarsHeader.Name = "AdminStarsHeader";
             this.AdminStarsHeader.ReadOnly = true;
@@ -3370,29 +3393,6 @@
             this.KeywordHeaderTB.TabIndex = 7;
             this.KeywordHeaderTB.Text = "Keyword:";
             // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewTextBoxColumn1.HeaderText = "Name";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Width = 74;
-            // 
-            // AverageStars
-            // 
-            this.AverageStars.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.AverageStars.HeaderText = "Average Stars";
-            this.AverageStars.Name = "AverageStars";
-            this.AverageStars.ReadOnly = true;
-            this.AverageStars.Width = 127;
-            // 
-            // YelpingSince
-            // 
-            this.YelpingSince.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.YelpingSince.HeaderText = "Yelping Since";
-            this.YelpingSince.Name = "YelpingSince";
-            this.YelpingSince.ReadOnly = true;
-            // 
             // YelpGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -3401,7 +3401,7 @@
             this.Controls.Add(this.tabControl1);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimumSize = new System.Drawing.Size(1298, 793);
-            //this.Name = "YelpGUI";
+            this.Name = "YelpGUI";
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).EndInit();
             this.SearchCheckBoxPanel.ResumeLayout(false);
             this.SearchCheckBoxPanel.PerformLayout();

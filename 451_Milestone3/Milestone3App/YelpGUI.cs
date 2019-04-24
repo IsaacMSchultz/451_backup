@@ -14,10 +14,6 @@ namespace Milestone2App
         QueryEngine queryEngine;
         MapNamesToAttrValPair mapNamesToAttrValPair;
         string[] cols = { "Name", "Address", "City", "State", "Stars Shown", "Reviews", "Checkins", "Stars", "Open?", "business_id", "Distance" }; //column titles for the main datagridview
-        string[] friendsCol = { "Name", "Average Stars", "Yelping Since" };
-        string[] favBusCol = { "Name", "Stars", "City", "Zipcode", "Address" };
-        string[] friendsRevCol = { "Name", "Business", "City", "Review" };
-        string[] businessAttributesCol = { "Attribute Name", "Value" };
         string[] reviewCols = { "Stars", "Date", "Text", "Useful", "Funny", "Cool" }; //Column headers for the review form that can be opened from the GUI
         string[] checkinsCols = { "Day", "Time", "Count" }; //Column headers for the review form that can be opened from the GUI
         string projection; //selected columns to show in the database. Need to implement column constructors based on the projection instead of the cols[] array.
@@ -75,39 +71,6 @@ namespace Milestone2App
                     newColumn.Visible = false;
                 businessGrid.Columns.Add(newColumn);
             }
-
-            //foreach (var column in friendsCol)
-            //{
-            //    DataGridViewTextBoxColumn newColumn = new DataGridViewTextBoxColumn();
-            //    newColumn.HeaderText = column;
-
-            //    FriendsGrid.Columns.Add(newColumn);
-            //}
-
-            //foreach (var column in favBusCol)
-            //{
-            //    DataGridViewTextBoxColumn newColumn = new DataGridViewTextBoxColumn();
-            //    newColumn.HeaderText = column;
-
-            //    FavoriteBusinessGrid.Columns.Add(newColumn);
-            //}
-
-            //foreach (var column in friendsRevCol)
-            //{
-            //    //dataGridView1.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-
-            //    DataGridViewTextBoxColumn newColumn = new DataGridViewTextBoxColumn();
-            //    newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            //    newColumn.HeaderText = column;
-
-            //    FriendsReviewsGrid.Columns.Add(newColumn);
-            //}
-
-            //foreach (DataGridViewTextBoxColumn column in FriendsReviewsGrid.Columns)
-            //{
-            //    column.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            //}
-
         }
 
         /// <summary>
