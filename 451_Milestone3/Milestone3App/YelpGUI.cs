@@ -107,7 +107,7 @@ namespace Milestone2App
 
                 FriendsReviewsGrid.Columns.Add(newColumn);
             }
-            
+
         }
 
         /// <summary>
@@ -199,10 +199,28 @@ namespace Milestone2App
         /// </summary>
         private void UpdateCategories()
         {
+            List<string> categorylist = queryEngine.GetCategories();
+            List<string> checkedCategories = queryEngine.GetCheckedCategories();
             categoriesCheckBox.Items.Clear(); //since attributes likely have a ton of overlap, it is simpler to just clear the list and re-populate each time a new item is checked.
-            foreach (string item in queryEngine.GetCategories()) // add returned categories            
-                if (!categoriesCheckBox.Items.Contains(item)) // if the category is not already in the listbox
-                    categoriesCheckBox.Items.Add(item);
+
+            if (categorylist.Count == 0)
+                Console.WriteLine("TEST");
+
+            foreach (string item in categorylist) // add returned categories   
+            {
+                int index = categoriesCheckBox.Items.Add(item); //adds the item and gets the index that it was added.
+                if (checkedCategories.Contains(item)) // if that item was included in the checked list, then show that it is checked on the grid.
+                {
+                    categoriesCheckBox.SetItemChecked(index, true);
+                    checkedCategories.Remove(item); //remove the new item to the list if its checked
+                }
+            }
+
+            //Remove each item that is not show in from the search parameters in the queryEngine
+            foreach (string item in checkedCategories)
+            {
+                queryEngine.RemoveSearchParameter("category_name", item);//remove the new item to the list if its unchecked
+            }
         }
 
         /// <summary>
@@ -243,7 +261,7 @@ namespace Milestone2App
                 row++;
             }
         }
-        
+
 
         private void UpdateBussAttributesGrid()
         {
@@ -270,7 +288,7 @@ namespace Milestone2App
         /// <param name="e"></param>
         private void SearchButton_Click(object sender, EventArgs e)
         {
-            UpdateGrid();            
+            UpdateGrid();
         }
 
         /// <summary>
@@ -387,8 +405,8 @@ namespace Milestone2App
                 List<List<string>> attributes = queryEngine.GetAttributes(currBusId);
                 if (attributes.Count > 1)
                 {
-                    for (int i = 1; i < attributes.Count; i++)                    
-                        attributesStr += attributes[i][0] + ":" + attributes[i][1] + ", ";                    
+                    for (int i = 1; i < attributes.Count; i++)
+                        attributesStr += attributes[i][0] + ":" + attributes[i][1] + ", ";
 
                     attributesStr = attributesStr.Substring(0, attributesStr.Length - 2); // Cuts off the final ", "
                 }
@@ -410,12 +428,12 @@ namespace Milestone2App
                 queryEngine.PostReview(WriteReviewTextBox_Review.Text, int.Parse(ReviewStarsDropDown.SelectedItem as string), currBusId, currUserId);
                 return;
             }
-            if (currUserId != "")            
-                MessageBox.Show("Please select a user to sign in as.");            
-            if (ReviewStarsDropDown.SelectedItem as string != "Review Stars")            
-                MessageBox.Show("Please select a stars rating.");            
-            if (currBusId != "")            
-                MessageBox.Show("Please select a business.");            
+            if (currUserId != "")
+                MessageBox.Show("Please select a user to sign in as.");
+            if (ReviewStarsDropDown.SelectedItem as string != "Review Stars")
+                MessageBox.Show("Please select a stars rating.");
+            if (currBusId != "")
+                MessageBox.Show("Please select a business.");
         }
 
         /// <summary>
@@ -425,10 +443,10 @@ namespace Milestone2App
         /// <param name="e"></param>
         private void WriteReviewTextBox_Review_TextChanged(object sender, EventArgs e)
         {
-            if (WriteReviewTextBox_Review.Text != "" && ReviewStarsDropDown.SelectedItem as string != "Review Stars")            
-                SubmitReviewButton.Enabled = true;            
-            else if (SubmitReviewButton.Enabled == true)            
-                SubmitReviewButton.Enabled = false;            
+            if (WriteReviewTextBox_Review.Text != "" && ReviewStarsDropDown.SelectedItem as string != "Review Stars")
+                SubmitReviewButton.Enabled = true;
+            else if (SubmitReviewButton.Enabled == true)
+                SubmitReviewButton.Enabled = false;
         }
 
         /// <summary>
@@ -589,7 +607,7 @@ namespace Milestone2App
             {
                 mapTest.Close();
             }
-            
+
             // Remove all pins on the map
             mapTest.userControl11.map.Children.Clear();
 
@@ -623,7 +641,7 @@ namespace Milestone2App
                 Pushpin pin = new Pushpin();
                 pin.Location = busCoord;
                 mapTest.userControl11.map.Children.Add(pin);
-                
+
                 mapTest.userControl11.map.SetView(busCoord, 11);
             }
 
@@ -682,9 +700,9 @@ namespace Milestone2App
         private void RemoveFavBtn_Click(object sender, EventArgs e)
         {
             RemoveFavBtn.Enabled = false;
-            
-            foreach (DataGridViewRow row in FavoriteBusinessGrid.SelectedRows)            
-                queryEngine.RemoveFavBus(currUserId, row.Cells[0].Value.ToString(), row.Cells[4].Value.ToString());            
+
+            foreach (DataGridViewRow row in FavoriteBusinessGrid.SelectedRows)
+                queryEngine.RemoveFavBus(currUserId, row.Cells[0].Value.ToString(), row.Cells[4].Value.ToString());
 
             UpdateFavBusinessGrid();
         }
@@ -745,7 +763,7 @@ namespace Milestone2App
             width += 40;
             checkinsWindow.Size = new System.Drawing.Size(width, checkinsWindow.Size.Height);
         }
-        
+
         private void AdminEditNameBtn_Click(object sender, EventArgs e)
         {
             AdminEditNameBtn.Enabled = false;
@@ -757,13 +775,13 @@ namespace Milestone2App
         {
             AdminUpdateBtn.Enabled = false;
             AdminEditNameBtn.Enabled = true;
-            
+
             // Execute update query
             if (BusNameValue.Text != string.Empty)
             {
                 queryEngine.UpdateBusinessName(currAdminId, BusNameValue.Text);
             }
-            
+
         }
 
         private void BusinessAttrGrid_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -797,7 +815,7 @@ namespace Milestone2App
             EditAttrBtn.Enabled = true;
 
             // Execute update query
-            
+
             queryEngine.UpdateAttribute(currAdminId, AttributeNameValue.Text, AttributeValValue.Text);
 
             AttributeNameValue.Text = string.Empty;
@@ -817,10 +835,10 @@ namespace Milestone2App
         /// <param name="e"></param>
         private void NewAttrValue_KeyDown(object sender, KeyEventArgs e)
         {
-            if (NewAttrValue.Text != string.Empty && NewAttriValValue.Text != string.Empty)            
-                AddAttrBtn.Enabled = true;            
-            else            
-                AddAttrBtn.Enabled = false;            
+            if (NewAttrValue.Text != string.Empty && NewAttriValValue.Text != string.Empty)
+                AddAttrBtn.Enabled = true;
+            else
+                AddAttrBtn.Enabled = false;
         }
 
         /// <summary>
@@ -830,10 +848,10 @@ namespace Milestone2App
         /// <param name="e"></param>
         private void NewAttriValValue_KeyDown(object sender, KeyEventArgs e)
         {
-            if (NewAttrValue.Text != string.Empty && NewAttriValValue.Text != string.Empty)            
-                AddAttrBtn.Enabled = true;           
-            else            
-                AddAttrBtn.Enabled = false;            
+            if (NewAttrValue.Text != string.Empty && NewAttriValValue.Text != string.Empty)
+                AddAttrBtn.Enabled = true;
+            else
+                AddAttrBtn.Enabled = false;
         }
 
         private void AddAttrBtn_Click(object sender, EventArgs e)
@@ -891,10 +909,10 @@ namespace Milestone2App
                     {
                         ReviewKeywordGrid.Rows.Add(); //the index of the new row
                         foreach (string item in listRow)
-                        {                            
+                        {
                             ReviewKeywordGrid.Rows[row - 1].Cells[col++].Value = item;
                         }
-                           
+
                         col = 0;
                     }
                     row++;
@@ -905,7 +923,7 @@ namespace Milestone2App
                     MessageBox.Show("There are no reviews containing the phrase \"" + KeywordValue.Text + "\". Maybe you should write one!");
                 }
             }
-        }        
+        }
 
         private void AddToFavoritesButton_Click(object sender, EventArgs e)
         {

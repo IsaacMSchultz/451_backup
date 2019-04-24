@@ -85,6 +85,19 @@ namespace QueryEngine1
             }
         }
 
+        //Returns a list of all the checked categories, or an empty list if there are no checked categories
+        public List<string> GetCheckedCategories()
+        {
+            if (searchParameters.ContainsKey("category_name"))
+            {
+                List<string> returnListNoReference = new List<string>(); //need to deep copy because just returning searchParameters["category_name"] gives a reference to data from here which causes issues
+                foreach (string value in searchParameters["category_name"])
+                    returnListNoReference.Add(value);
+                return returnListNoReference;
+            }
+            else return new List<string>();
+        }
+
         public List<List<string>> GetAttributes(string id = "N/A")
         {
             return ExecuteCategorizedQuery("SELECT DISTINCT attribute_name, attribute_value FROM attributes WHERE business_id = '" + id + "';");
@@ -218,9 +231,9 @@ namespace QueryEngine1
                     orList = orList.Substring(0, orList.Length - 6); // if there is just one parameter, we wont need parenthesis or and AND.
                 else
                     if (searchParams.ContainsKey("category_name"))
-                        orList = orList.Substring(0, orList.Length - (AND_OR + 2)); // Cuts off the last ") AND "
-                    else
-                        orList = orList.Substring(0, orList.Length - 4); // Cuts off the last ") AND "              
+                    orList = orList.Substring(0, orList.Length - (AND_OR + 2)); // Cuts off the last ") AND "
+                else
+                    orList = orList.Substring(0, orList.Length - 4); // Cuts off the last ") AND "              
 
                 string query = "SELECT " + projection + " FROM " + tables + " WHERE " + orList + endQuery + " ORDER BY state;";
 
