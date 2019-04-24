@@ -941,5 +941,20 @@ namespace Milestone2App
                 e.Handled = true;
             }
         }
+
+        //Implementing one function to add or remove ALL attribute checklists
+        private void AttributesPanel_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            CheckedListBox senderCheckBox = (CheckedListBox)sender; //casts the sending object as a checkedbox
+            string newItem = zipCheckBox.Items[e.Index].ToString();
+
+            if (e.NewValue == CheckState.Checked) //add or remove the check box item that just changed to the list            
+                queryEngine.AddSearchParameter("zipcode", newItem); //add the new item to the list if it is checked            
+            else
+                queryEngine.RemoveSearchParameter("zipcode", newItem);//remove the new item to the list if its unchecked              
+
+            UpdateCategories();
+            UpdateGrid();
+        }
     }
 }
