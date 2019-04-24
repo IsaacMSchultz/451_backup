@@ -19,6 +19,7 @@ namespace Milestone2App
     public partial class YelpGUI : Form
     {
         QueryEngine queryEngine;
+        MapNamesToAttrValPair mapNamesToAttrValPair;
         string[] cols = { "Name", "Address", "City", "State", "Stars Shown", "Reviews", "Checkins", "Stars", "Open?", "business_id", "Distance" }; //column titles for the main datagridview
         string[] friendsCol = { "Name", "Average Stars", "Yelping Since" };
         string[] favBusCol = { "Name", "Stars", "City", "Zipcode", "Address" };
@@ -40,7 +41,7 @@ namespace Milestone2App
         private static Random random = new Random();
         const string chars = "abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_- ";
 
-        private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone3db"; // Defines our connection to local databus
+        //private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone3db"; // Defines our connection to local databus
         //private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone3db"; // Defines our connection to cloud hosted databus
 
         /// <summary>
@@ -51,13 +52,14 @@ namespace Milestone2App
         {
             queryEngine = new QueryEngine();
             List<string> businessIds = new List<string>();
+            mapNamesToAttrValPair = new MapNamesToAttrValPair();
 
             currBusId = "";
             currUserId = "";
             projection = proj;
 
             InitializeComponent();
-            initializeDropDowns();
+            InitializeDropDowns();
 
             // This is an error during a merge
             // Initialize map to be able to scroll
@@ -107,13 +109,13 @@ namespace Milestone2App
 
                 FriendsReviewsGrid.Columns.Add(newColumn);
             }
-            
+
         }
 
         /// <summary>
         /// Initializes the state dropdown with a list of states from the database.
         /// </summary>
-        private void initializeDropDowns()
+        private void InitializeDropDowns()
         {
             List<string> states = queryEngine.GetStates();
             foreach (var state in states)
@@ -125,7 +127,7 @@ namespace Milestone2App
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void stateDropDown_SelectedIndexChanged(object sender, EventArgs e)
+        private void StateDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBox box = (ComboBox)sender; //casts sender as a ComboBox
 
@@ -133,10 +135,10 @@ namespace Milestone2App
             zipCheckBox.Items.Clear();
             categoriesCheckBox.Items.Clear();
 
-            queryEngine.resetSearchParameter("state", (string)box.SelectedItem); //by using setSearchParameter, we ensure that there is only ever one state parameter.
+            queryEngine.ResetSearchParameter("state", (string)box.SelectedItem); //by using setSearchParameter, we ensure that there is only ever one state parameter.
             List<string> cities = queryEngine.GetCities(); //get the list of cities 
 
-            foreach (string city in queryEngine.GetCities())
+            foreach (string city in cities)
                 cityCheckBox.Items.Add(city);
             //updateGrid(); //This is really slow because we end up loading thousands of businesses. THe user can still load them by clicking the search button.
         }
@@ -148,7 +150,7 @@ namespace Milestone2App
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cityCheckBox_ItemCheck(object sender, ItemCheckEventArgs e)
+        private void CityCheckBox_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             CheckedListBox CheckBox = (CheckedListBox)sender; //casts the sending object as a checkedbox
             string newItem = cityCheckBox.Items[e.Index].ToString();
@@ -157,21 +159,21 @@ namespace Milestone2App
             //since zipcodes are always mutually exclusive, we can add and remove them based soley on the contetn of the city checkbox changing.
             if (e.NewValue == CheckState.Checked) //add or remove the check box item that just changed to the list
             {
-                queryEngine.addSearchParameter("city", newItem);
+                queryEngine.AddSearchParameter("city", newItem);
                 foreach (string item in newZips)
                     zipCheckBox.Items.Add(item);
             }
             else
             {
-                queryEngine.removeSearchParameter("city", newItem);
+                queryEngine.RemoveSearchParameter("city", newItem);
                 foreach (string item in newZips)
                 {
-                    queryEngine.removeSearchParameter("zipcode", item);
+                    queryEngine.RemoveSearchParameter("zipcode", item);
                     zipCheckBox.Items.Remove(item);
                 }
-                updateCategories();
+                UpdateCategories();
             }
-            updateGrid();
+            UpdateGrid();
         }
 
         /// <summary>
@@ -180,29 +182,44 @@ namespace Milestone2App
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void zipCheckBox_ItemCheck(object sender, ItemCheckEventArgs e)
+        private void ZipCheckBox_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             CheckedListBox senderCheckBox = (CheckedListBox)sender; //casts the sending object as a checkedbox
             string newItem = zipCheckBox.Items[e.Index].ToString();
 
             if (e.NewValue == CheckState.Checked) //add or remove the check box item that just changed to the list            
-                queryEngine.addSearchParameter("zipcode", newItem); //add the new item to the list if it is checked            
+                queryEngine.AddSearchParameter("zipcode", newItem); //add the new item to the list if it is checked            
             else
-                queryEngine.removeSearchParameter("zipcode", newItem);//remove the new item to the list if its unchecked              
+                queryEngine.RemoveSearchParameter("zipcode", newItem);//remove the new item to the list if its unchecked              
 
-            updateCategories();
-            updateGrid();
+            UpdateCategories();
+            UpdateGrid();
         }
 
         /// <summary>
         /// Updates the checkboxes in the categories list based on the queryEngine
         /// </summary>
-        private void updateCategories()
+        private void UpdateCategories()
         {
+            List<string> categorylist = queryEngine.GetCategories();
+            List<string> checkedCategories = queryEngine.GetCheckedCategories();
             categoriesCheckBox.Items.Clear(); //since attributes likely have a ton of overlap, it is simpler to just clear the list and re-populate each time a new item is checked.
-            foreach (string item in queryEngine.GetCategories()) // add returned categories            
-                if (!categoriesCheckBox.Items.Contains(item)) // if the category is not already in the listbox
-                    categoriesCheckBox.Items.Add(item);
+
+            foreach (string item in categorylist) // add returned categories   
+            {
+                int index = categoriesCheckBox.Items.Add(item); //adds the item and gets the index that it was added.
+                if (checkedCategories.Contains(item)) // if that item was included in the checked list, then show that it is checked on the grid.
+                {
+                    categoriesCheckBox.SetItemChecked(index, true);
+                    checkedCategories.Remove(item); //remove the new item to the list if its checked
+                }
+            }
+
+            //Remove each item that is not show in from the search parameters in the queryEngine
+            foreach (string item in checkedCategories)
+            {
+                queryEngine.RemoveSearchParameter("category_name", item);//remove the new item to the list if its unchecked
+            }
         }
 
         /// <summary>
@@ -210,23 +227,23 @@ namespace Milestone2App
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void categoriesCheckBox_ItemCheck(object sender, ItemCheckEventArgs e)
+        private void CategoriesCheckBox_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             CheckedListBox senderCheckBox = (CheckedListBox)sender; //casts the sending object as a checkedbox
             string newItem = categoriesCheckBox.Items[e.Index].ToString();
 
             if (e.NewValue == CheckState.Checked) //add or remove the check box item that just changed to the list            
-                queryEngine.addSearchParameter("category_name", newItem); //add the new item to the list if it is checked            
+                queryEngine.AddSearchParameter("category_name", newItem); //add the new item to the list if it is checked            
             else
-                queryEngine.removeSearchParameter("category_name", newItem);//remove the new item to the list if its unchecked
-            updateGrid();
+                queryEngine.RemoveSearchParameter("category_name", newItem);//remove the new item to the list if its unchecked
+            UpdateGrid();
         }
 
         /// <summary>
         /// Runs a search with the current query parameters that were built for the queryEngine.
         /// Updates the datagridview with the data returned from the queryEngine.
         /// </summary>
-        private void updateGrid(/*List<string> categoryContents*/) //way to call before the ItemCheck function completes (old ghetto way)
+        private void UpdateGrid(/*List<string> categoryContents*/) //way to call before the ItemCheck function completes (old ghetto way)
         {
             int row = 0, col = 0;
             businessGrid.Rows.Clear(); //removes all the data previously in the grid.            
@@ -243,9 +260,9 @@ namespace Milestone2App
                 row++;
             }
         }
-        
 
-        private void updateBussAttributesGrid()
+
+        private void UpdateBussAttributesGrid()
         {
             int row = 0, col = 0;
             BusinessAttrGrid.Rows.Clear(); //removes all the data previously in the grid.            
@@ -270,7 +287,7 @@ namespace Milestone2App
         /// <param name="e"></param>
         private void SearchButton_Click(object sender, EventArgs e)
         {
-            updateGrid();
+            UpdateGrid();
         }
 
         /// <summary>
@@ -301,12 +318,12 @@ namespace Milestone2App
 
             currUserId = userData[1][10]; //set the current user id to what was returned by the query.
 
-            updateFriendsGrid();
-            updateFavBusinessGrid();
-            updateFriendsRevGrid();
+            UpdateFriendsGrid();
+            UpdateFavBusinessGrid();
+            UpdateFriendsRevGrid();
 
             queryEngine.SelectUser(currUserId);
-            updateGrid(); //update the business grid so the user can see how far away they are from the searched businesses.
+            UpdateGrid(); //update the business grid so the user can see how far away they are from the searched businesses.
         }
 
         private void BusinessIdLB_SelectedIndexChanged(object sender, EventArgs e)
@@ -327,7 +344,7 @@ namespace Milestone2App
 
             currAdminId = busData[1][11]; //set the current user id to what was returned by the query.
 
-            updateBussAttributesGrid();
+            UpdateBussAttributesGrid();
         }
 
         /// <summary>
@@ -335,7 +352,7 @@ namespace Milestone2App
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void businessGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void BusinessGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
@@ -387,8 +404,8 @@ namespace Milestone2App
                 List<List<string>> attributes = queryEngine.GetAttributes(currBusId);
                 if (attributes.Count > 1)
                 {
-                    for (int i = 1; i < attributes.Count; i++)                    
-                        attributesStr += attributes[i][0] + ":" + attributes[i][1] + ", ";                    
+                    for (int i = 1; i < attributes.Count; i++)
+                        attributesStr += attributes[i][0] + ":" + attributes[i][1] + ", ";
 
                     attributesStr = attributesStr.Substring(0, attributesStr.Length - 2); // Cuts off the final ", "
                 }
@@ -410,12 +427,12 @@ namespace Milestone2App
                 queryEngine.PostReview(WriteReviewTextBox_Review.Text, int.Parse(ReviewStarsDropDown.SelectedItem as string), currBusId, currUserId);
                 return;
             }
-            if (currUserId != "")            
-                MessageBox.Show("Please select a user to sign in as.");            
-            if (ReviewStarsDropDown.SelectedItem as string != "Review Stars")            
-                MessageBox.Show("Please select a stars rating.");            
-            if (currBusId != "")            
-                MessageBox.Show("Please select a business.");            
+            if (currUserId != "")
+                MessageBox.Show("Please select a user to sign in as.");
+            if (ReviewStarsDropDown.SelectedItem as string != "Review Stars")
+                MessageBox.Show("Please select a stars rating.");
+            if (currBusId != "")
+                MessageBox.Show("Please select a business.");
         }
 
         /// <summary>
@@ -425,10 +442,10 @@ namespace Milestone2App
         /// <param name="e"></param>
         private void WriteReviewTextBox_Review_TextChanged(object sender, EventArgs e)
         {
-            if (WriteReviewTextBox_Review.Text != "" && ReviewStarsDropDown.SelectedItem as string != "Review Stars")            
-                SubmitReviewButton.Enabled = true;            
-            else if (SubmitReviewButton.Enabled == true)            
-                SubmitReviewButton.Enabled = false;            
+            if (WriteReviewTextBox_Review.Text != "" && ReviewStarsDropDown.SelectedItem as string != "Review Stars")
+                SubmitReviewButton.Enabled = true;
+            else if (SubmitReviewButton.Enabled == true)
+                SubmitReviewButton.Enabled = false;
         }
 
         /// <summary>
@@ -527,7 +544,7 @@ namespace Milestone2App
         }
 
         // Should consider *Templatizing* this to work for multiple DataGrids
-        private void updateFriendsGrid()
+        private void UpdateFriendsGrid()
         {
             int row = 0, col = 0;
             FriendsGrid.Rows.Clear(); //removes all the data previously in the grid.            
@@ -546,7 +563,7 @@ namespace Milestone2App
         }
 
         // Should consider *Templatizing* this to work for multiple DataGrids
-        private void updateFavBusinessGrid()
+        private void UpdateFavBusinessGrid()
         {
             int row = 0, col = 0;
             FavoriteBusinessGrid.Rows.Clear(); //removes all the data previously in the grid.            
@@ -564,7 +581,7 @@ namespace Milestone2App
             }
         }
 
-        private void updateFriendsRevGrid()
+        private void UpdateFriendsRevGrid()
         {
             int row = 0, col = 0;
             FriendsReviewsGrid.Rows.Clear();
@@ -589,7 +606,7 @@ namespace Milestone2App
             {
                 mapTest.Close();
             }
-            
+
             // Remove all pins on the map
             mapTest.userControl11.map.Children.Clear();
 
@@ -623,7 +640,7 @@ namespace Milestone2App
                 Pushpin pin = new Pushpin();
                 pin.Location = busCoord;
                 mapTest.userControl11.map.Children.Add(pin);
-                
+
                 mapTest.userControl11.map.SetView(busCoord, 11);
             }
 
@@ -658,7 +675,7 @@ namespace Milestone2App
             if (double.TryParse(LatitudeValue.Text, out lat) && double.TryParse(LongitudeValue.Text, out lon))
             {
                 // Update the User's location values
-                queryEngine.updateUserLocation(currUserId, lat, lon);
+                queryEngine.UpdateUserLocation(currUserId, lat, lon);
 
                 UpdateBtn.Enabled = false;
                 EditBtn.Enabled = true;
@@ -682,11 +699,11 @@ namespace Milestone2App
         private void RemoveFavBtn_Click(object sender, EventArgs e)
         {
             RemoveFavBtn.Enabled = false;
-            
-            foreach (DataGridViewRow row in FavoriteBusinessGrid.SelectedRows)            
-                queryEngine.RemoveFavBus(currUserId, row.Cells[0].Value.ToString(), row.Cells[4].Value.ToString());            
 
-            updateFavBusinessGrid();
+            foreach (DataGridViewRow row in FavoriteBusinessGrid.SelectedRows)
+                queryEngine.RemoveFavBus(currUserId, row.Cells[0].Value.ToString(), row.Cells[4].Value.ToString());
+
+            UpdateFavBusinessGrid();
         }
 
         private void FavoriteBusinessGrid_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
@@ -745,7 +762,7 @@ namespace Milestone2App
             width += 40;
             checkinsWindow.Size = new System.Drawing.Size(width, checkinsWindow.Size.Height);
         }
-        
+
         private void AdminEditNameBtn_Click(object sender, EventArgs e)
         {
             AdminEditNameBtn.Enabled = false;
@@ -757,13 +774,13 @@ namespace Milestone2App
         {
             AdminUpdateBtn.Enabled = false;
             AdminEditNameBtn.Enabled = true;
-            
+
             // Execute update query
             if (BusNameValue.Text != string.Empty)
             {
-                queryEngine.updateBusinessName(currAdminId, BusNameValue.Text);
+                queryEngine.UpdateBusinessName(currAdminId, BusNameValue.Text);
             }
-            
+
         }
 
         private void BusinessAttrGrid_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -797,13 +814,13 @@ namespace Milestone2App
             EditAttrBtn.Enabled = true;
 
             // Execute update query
-            
-            queryEngine.updateAttribute(currAdminId, AttributeNameValue.Text, AttributeValValue.Text);
+
+            queryEngine.UpdateAttribute(currAdminId, AttributeNameValue.Text, AttributeValValue.Text);
 
             AttributeNameValue.Text = string.Empty;
             AttributeValValue.Text = string.Empty;
 
-            updateBussAttributesGrid();
+            UpdateBussAttributesGrid();
             UpdateBusinessPageAttributes();
 
             // Need to update the business UI when business attributes are updated
@@ -817,10 +834,10 @@ namespace Milestone2App
         /// <param name="e"></param>
         private void NewAttrValue_KeyDown(object sender, KeyEventArgs e)
         {
-            if (NewAttrValue.Text != string.Empty && NewAttriValValue.Text != string.Empty)            
-                AddAttrBtn.Enabled = true;            
-            else            
-                AddAttrBtn.Enabled = false;            
+            if (NewAttrValue.Text != string.Empty && NewAttriValValue.Text != string.Empty)
+                AddAttrBtn.Enabled = true;
+            else
+                AddAttrBtn.Enabled = false;
         }
 
         /// <summary>
@@ -830,10 +847,10 @@ namespace Milestone2App
         /// <param name="e"></param>
         private void NewAttriValValue_KeyDown(object sender, KeyEventArgs e)
         {
-            if (NewAttrValue.Text != string.Empty && NewAttriValValue.Text != string.Empty)            
-                AddAttrBtn.Enabled = true;           
-            else            
-                AddAttrBtn.Enabled = false;            
+            if (NewAttrValue.Text != string.Empty && NewAttriValValue.Text != string.Empty)
+                AddAttrBtn.Enabled = true;
+            else
+                AddAttrBtn.Enabled = false;
         }
 
         private void AddAttrBtn_Click(object sender, EventArgs e)
@@ -843,7 +860,7 @@ namespace Milestone2App
             try
             {
                 queryEngine.InsertAttribute(currAdminId, NewAttrValue.Text, NewAttriValValue.Text);
-                updateBussAttributesGrid();
+                UpdateBussAttributesGrid();
             }
             catch (PostgresException)
             {
@@ -852,7 +869,7 @@ namespace Milestone2App
 
             NewAttrValue.Text = string.Empty;
             NewAttriValValue.Text = string.Empty;
-            updateBussAttributesGrid();
+            UpdateBussAttributesGrid();
             UpdateBusinessPageAttributes();
         }
 
@@ -894,7 +911,7 @@ namespace Milestone2App
                         {
                             ReviewKeywordGrid.Rows[row - 1].Cells[col++].Value = item;
                         }
-                           
+
                         col = 0;
                     }
                     row++;
@@ -905,7 +922,7 @@ namespace Milestone2App
                     MessageBox.Show("There are no reviews containing the phrase \"" + KeywordValue.Text + "\". Maybe you should write one!");
                 }
             }
-        }        
+        }
 
         private void AddToFavoritesButton_Click(object sender, EventArgs e)
         {
@@ -914,7 +931,7 @@ namespace Milestone2App
                 if (queryEngine.AddToFavorites(currBusId, currUserId))
                 {
                     MessageBox.Show("Added to favorites");
-                    updateFavBusinessGrid();
+                    UpdateFavBusinessGrid();
                 }
                 else
                     MessageBox.Show("Business already in favorites");
@@ -941,6 +958,22 @@ namespace Milestone2App
                 e.Handled = true;
             }
         }
+
+        //TODO: implement attribute support in the queryEngine -- if statement looking for "attribute" that puts the list of elements in an AND list inside of the subquery.
+        //      Assuming that attributes only have a max of two values
+        //Implementing one function to add or remove ALL attribute checklists
+        private void AttributesPanel_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            CheckedListBox senderCheckBox = (CheckedListBox)sender; //casts the sending object as a checkedbox            
+            mapNamesToAttrValPair.MapFrom(senderCheckBox.Name); //accesses a map that uses sender names to get the values needed from the database
+
+            //if (e.NewValue == CheckState.Checked) //add or remove the check box item that just changed to the list            
+            //queryEngine.AddSearchParameter("attribute", true); //add the new item to the list if it is checked            
+            //else
+            //queryEngine.RemoveSearchParameter("attribute", false);//remove the new item to the list if its unchecked              
+
+            UpdateCategories();
+            UpdateGrid();
+        }
     }
 }
-

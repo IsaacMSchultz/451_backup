@@ -11,9 +11,6 @@ using System.Text.RegularExpressions;
 
 namespace QueryEngine1
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class QueryEngine
     {
         private Dictionary<string, List<string>> searchParameters;
@@ -24,9 +21,9 @@ namespace QueryEngine1
         private static Random random = new Random();
         const string chars = "abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_- ";
 
-        public event PropertyChangedEventHandler yelpDataChanged; // event for notifying that there was a property changed. 
-        private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone3db"; // cloud database
-        //private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone2db";
+        public event PropertyChangedEventHandler YelpDataChanged; // event for notifying that there was a property changed. 
+        //private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone3db"; // cloud database
+        private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone3db";
 
         public QueryEngine()
         {
@@ -34,23 +31,6 @@ namespace QueryEngine1
             lastQuery = new List<List<string>>();
             currBusId = "";
         }
-
-        private void DataChanged(object sender, PropertyChangedEventArgs e) // Event handler for when user data changes.
-        {
-            // good model of how we will be implementing this class
-            if (sender is Review reviewChanged)
-            {
-                if (e.PropertyName == "newReview")
-                {
-                    // run an INSERT if the reviewId is not in the database
-                }
-
-                // "UPDATE review WHERE review.reviewId = " AND reviewChanged.reviewId AND " 
-            }
-            YelpPropertyChanged(sender, e);
-        }
-
-        //TODO: make a single GET function that takes the parameter we are looking for instead of many for each.
 
         /// <summary>
         /// interact with database to query the list of states contained within.  
@@ -96,9 +76,7 @@ namespace QueryEngine1
                     return ExecuteListQuery(cmd);
                 }
                 else
-                {
                     return new List<string>();
-                }
             }
             else
             {
@@ -107,36 +85,23 @@ namespace QueryEngine1
             }
         }
 
+        //TODO: BUG WHERE THIS RETURNS ALL CATEGORIES EVEN IF THEY ARENT IN THE DATA.
+        //Returns a list of all the checked categories, or an empty list if there are no checked categories
+        public List<string> GetCheckedCategories()
+        {
+            if (searchParameters.ContainsKey("category_name"))
+            {
+                List<string> returnListNoReference = new List<string>(); //need to deep copy because just returning searchParameters["category_name"] gives a reference to data from here which causes issues
+                foreach (string value in searchParameters["category_name"])
+                    returnListNoReference.Add(value);
+                return returnListNoReference;
+            }
+            else return new List<string>();
+        }
+
         public List<List<string>> GetAttributes(string id = "N/A")
         {
-            //if (id.Length < 4) // If the call was not passed with a valid id
-            //{
-            //    if (searchParameters.ContainsKey("attributes"))
-            //    {
-            //        string cmd = "SELECT DISTINCT attribute_name FROM attributes WHERE business_id IN (SELECT business_id FROM business WHERE state = '" + searchParameters["state"][0] + "')";
-
-            //        cmd += " AND business_id IN (SELECT business_id FROM business WHERE "; //building subquery to find all the cities in the listbox
-            //        foreach (string zipcode in searchParameters["zipcode"])
-            //        {
-            //            cmd += "zipcode = '" + zipcode + "' OR "; // city = 'string' OR 
-            //        }
-            //        cmd = cmd.Substring(0, cmd.Length - 3); // Cuts off the final "OR "
-            //        cmd += ")";
-
-            //        cmd += " ORDER BY category_name;";
-
-            //        return ExecuteListQuery(cmd);
-            //    }
-            //    else
-            //    {
-            //        return new List<string>();
-            //    }
-            //}
-            //else
-            //{
-            //string q = "SELECT DISTINCT attribute_name, attribute_value FROM attributes WHERE business_id = '" + id + "';";
             return ExecuteCategorizedQuery("SELECT DISTINCT attribute_name, attribute_value FROM attributes WHERE business_id = '" + id + "';");
-            //}
         }
 
         public List<List<string>> Search(string projection = "*")
@@ -230,30 +195,53 @@ namespace QueryEngine1
             {
                 int currIndex = 0; //keeps track of what key we are looking at from the dictionary                
                 string orList = ""; //building subquery to find all the cities in the listbox
+                int AND_OR = 0;
 
                 //iterate through all the Keys and values and build all the necesary subqueries
                 foreach (KeyValuePair<string, List<string>> key in searchParams) //each keyValuePar
                 {
+                    AND_OR = 0;
                     // Build the subquery to find all tuples with the value from that keyPair
-                    if (key.Key == "category_name")
-                        orList += " business_id IN ( SELECT business_id FROM category WHERE ";
-                    else
+                    if (key.Key != "category_name")
                         if (searchParams.Keys.Last() != searchParams.Keys.ElementAt(currIndex)) //if this key is not the last one in the Dictionary, add the start of the next subquery
-                        orList += key.Key + " IN ( SELECT " + key.Key + " FROM business WHERE "; // ") AND <nextKey> IN ( SELECT  FROM business WHERE " (also increments the currIndex)
+                            orList += key.Key + " IN ( SELECT " + key.Key + " FROM business WHERE "; // ") AND <nextKey> IN ( SELECT  FROM business WHERE " (also increments the currIndex)
 
-                    foreach (string item in key.Value) //Each item in the list for each key                  
-                        orList += key.Key + " = '" + item + "' OR "; // "<key> = '<each item in the list with that key>' OR "                    
+                    foreach (string item in key.Value) //Each item in the list for each key      
+                    {
+                        if (key.Key != "category_name")
+                        {
+                            orList += key.Key + " = '" + item + "' OR "; // "<key> = '<each item in the list with that key>' OR "
+                            AND_OR = 3;
+                        }
+                        else
+                        {
+                            orList += " business_id IN ( SELECT business_id FROM category WHERE ";
+                            orList += key.Key + " = '" + item + "') AND "; // "<key> = '<each item in the list with that key>' AND "
+                                                                           //if (AND_OR == 0)
+                                                                           //    AND_OR = 6;
+                                                                           //else
+                            AND_OR = 4;
+                        }
+                    }
 
-                    orList = orList.Substring(0, orList.Length - 3); // Cuts off the final "OR "orList       
+                    orList = orList.Substring(0, orList.Length - AND_OR); // Cuts off the final "AND "orList       
                     orList += ") AND ";
                 }
 
                 if (searchParams.Count == 1)
                     orList = orList.Substring(0, orList.Length - 6); // if there is just one parameter, we wont need parenthesis or and AND.
                 else
-                    orList = orList.Substring(0, orList.Length - 4); // Cuts off the last ") AND "
+                    if (searchParams.ContainsKey("category_name"))
+                    orList = orList.Substring(0, orList.Length - (AND_OR + 2)); // Cuts off the last ") AND "
+                else
+                    orList = orList.Substring(0, orList.Length - 4); // Cuts off the last ") AND "              
 
-                lastQuery = ExecuteCategorizedQuery("SELECT " + projection + " FROM " + tables + " WHERE " + orList + endQuery + " ORDER BY state;");
+                string query = "SELECT " + projection + " FROM " + tables + " WHERE " + orList + endQuery + " ORDER BY state;";
+
+                if (searchParams.ContainsKey("category_name"))
+                    Console.WriteLine(query);
+
+                lastQuery = ExecuteCategorizedQuery(query);
                 return lastQuery;
             }
             lastQuery = new List<List<string>>();
@@ -263,7 +251,7 @@ namespace QueryEngine1
         /// <summary>
         /// Adds a value to the search parameters  
         /// </summary>
-        public void addSearchParameter(string key, string value)
+        public void AddSearchParameter(string key, string value)
         {
             if (searchParameters.ContainsKey(key))
                 searchParameters[key].Add(value);
@@ -278,7 +266,7 @@ namespace QueryEngine1
         /// <summary>
         /// Removes a value from the search parameters    
         /// </summary>
-        public void removeSearchParameter(string key, string value)
+        public void RemoveSearchParameter(string key, string value)
         {
             if (searchParameters.ContainsKey(key) && searchParameters[key].Contains(value)) // can only remove something if its actually there.
             {
@@ -291,7 +279,7 @@ namespace QueryEngine1
         /// <summary>
         /// sets a search parameter to contain only one value 
         /// </summary>
-        public void resetSearchParameter(string key, string value)
+        public void ResetSearchParameter(string key, string value)
         {
             searchParameters = new Dictionary<string, List<string>>();
 
@@ -302,7 +290,7 @@ namespace QueryEngine1
 
         private void YelpPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            yelpDataChanged?.Invoke(sender, e);
+            YelpDataChanged?.Invoke(sender, e);
         }
 
         // way for the queryengine to know what business a user has selected based off the rows.
@@ -331,7 +319,7 @@ namespace QueryEngine1
         {
             string query = "Select user_latitude, user_longitude from yelpuser where user_id = '" + userId + "'";
             //return ExecuteDoubleQuery(query);
-            List<List<double>> userLocation =  ExecuteCategorizedDoubleQuery(query);
+            List<List<double>> userLocation = ExecuteCategorizedDoubleQuery(query);
 
             return userLocation[0];
         }
@@ -371,7 +359,7 @@ namespace QueryEngine1
 
         public List<List<string>> GetReviewsByKeyword(string keyword)
         {
-            string query = "SELECT business.name, funny_vote, text FROM review INNER JOIN business ON business.business_id = review.business_id WHERE review.text like '%" + keyword+ "%'"; 
+            string query = "SELECT business.name, funny_vote, text FROM review INNER JOIN business ON business.business_id = review.business_id WHERE review.text like '%" + keyword + "%'";
             return ExecuteCategorizedQuery(query);
         }
 
@@ -390,14 +378,14 @@ namespace QueryEngine1
             return ExecuteNonQuery(query);
         }
 
-        public bool updateAttribute(string business_id, string attribute_name, string attribute_value)
+        public bool UpdateAttribute(string business_id, string attribute_name, string attribute_value)
         {
             string query = "Update attributes set attribute_value = '" + attribute_value + "' where business_id = '" +
                 business_id + "' and attribute_name = '" + attribute_name + "'";
             return ExecuteNonQuery(query);
         }
 
-        public bool updateBusinessName(string business_id, string business_name)
+        public bool UpdateBusinessName(string business_id, string business_name)
         {
             string query = "Update business set name = '" + business_name + "' where business_id = '" +
                 business_id + "'";
@@ -410,7 +398,7 @@ namespace QueryEngine1
         /// <param name="user_id">selected user's id</param>
         /// <param name="lat">entered latitude</param>
         /// <param name="lon">entered lonitude</param>
-        public bool updateUserLocation(string user_id, double lat, double lon)
+        public bool UpdateUserLocation(string user_id, double lat, double lon)
         {
             string query = "Update yelpuser set user_latitude = " + lat.ToString() +
                 ", user_longitude = " + lon.ToString() + " where user_id = '" +
@@ -460,30 +448,38 @@ namespace QueryEngine1
             List<List<string>> returnList = new List<List<string>>();
             ReadOnlyCollection<NpgsqlDbColumn> columns = new ReadOnlyCollection<NpgsqlDbColumn>(new List<NpgsqlDbColumn>());
 
-            using (var connection = new NpgsqlConnection(LOGININFO))
+            try
             {
-                connection.Open();
-                using (var cmd = new NpgsqlCommand())
+                using (var connection = new NpgsqlConnection(LOGININFO))
                 {
-                    cmd.Connection = connection;
-                    cmd.CommandText = query;
-                    using (var reader = cmd.ExecuteReader())
+                    connection.Open();
+                    using (var cmd = new NpgsqlCommand())
                     {
-                        while (reader.Read())
+                        cmd.Connection = connection;
+                        cmd.CommandText = query;
+                        using (var reader = cmd.ExecuteReader())
                         {
-                            if (columns.Count == 0)
-                                columns = reader.GetColumnSchema();
+                            while (reader.Read())
+                            {
+                                if (columns.Count == 0)
+                                    columns = reader.GetColumnSchema();
 
-                            List<string> row = new List<string>();
+                                List<string> row = new List<string>();
 
-                            foreach (NpgsqlDbColumn column in columns)
-                                row.Add(reader[column.ColumnName].ToString());
+                                foreach (NpgsqlDbColumn column in columns)
+                                    row.Add(reader[column.ColumnName].ToString());
 
-                            returnList.Add(row);
+                                returnList.Add(row);
+                            }
                         }
                     }
+                    connection.Close();
                 }
-                connection.Close();
+            }
+            catch (NpgsqlException e)
+            {
+                Console.WriteLine(e.ToString());
+                return returnList;
             }
 
             // Returns the list of column names as the first row.
@@ -580,11 +576,8 @@ namespace QueryEngine1
                         cmd.CommandText = query;
                         using (var reader = cmd.ExecuteReader())
                         {
-                            double value = 0;
                             while (reader.Read())
                                 returnList.Add(reader.GetDouble(0));
-                            //if (double.TryParse(reader.GetString(0), out value)) //Only add the value if it is actually a double
-
                         }
                     }
                     connection.Close();
