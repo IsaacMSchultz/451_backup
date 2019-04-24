@@ -2,8 +2,6 @@ YelpApp Bugs:
 
 Categories are not compounded (using or instead of and when querying businesses)
 
-A user can create multiple review/checkin windows (make it so user can only have one open or the other)
-
 Friends most recent review grid takes ~10 sec to populate (Use indexing once I learn how to)
 
 
