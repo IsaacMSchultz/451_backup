@@ -213,6 +213,27 @@
             this.FilterByMealLabel = new System.Windows.Forms.Label();
             this.FilterByMealPanel = new System.Windows.Forms.TableLayoutPanel();
             this.FilterByAttributesPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.Price1Check = new System.Windows.Forms.CheckBox();
+            this.Price2Check = new System.Windows.Forms.CheckBox();
+            this.Price3Check = new System.Windows.Forms.CheckBox();
+            this.Price4Check = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
+            this.checkBox6 = new System.Windows.Forms.CheckBox();
+            this.checkBox7 = new System.Windows.Forms.CheckBox();
+            this.checkBox8 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.checkBox9 = new System.Windows.Forms.CheckBox();
+            this.checkBox10 = new System.Windows.Forms.CheckBox();
+            this.BreakfastCheckbox = new System.Windows.Forms.CheckBox();
+            this.checkBox12 = new System.Windows.Forms.CheckBox();
+            this.BrunchCheckbox = new System.Windows.Forms.CheckBox();
+            this.checkBox14 = new System.Windows.Forms.CheckBox();
+            this.checkBox15 = new System.Windows.Forms.CheckBox();
+            this.checkBox16 = new System.Windows.Forms.CheckBox();
+            this.checkBox17 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).BeginInit();
             this.SearchCheckBoxPanel.SuspendLayout();
             this.StateDropdownPanel.SuspendLayout();
@@ -228,6 +249,7 @@
             this.SubmitReviewPanel.SuspendLayout();
             this.BusinessButtonsPanel.SuspendLayout();
             this.AttributesCheckboxPanel.SuspendLayout();
+            this.PriceFilterPanel.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.BusinessTabPage.SuspendLayout();
             this.UsersTabPage.SuspendLayout();
@@ -274,6 +296,8 @@
             this.KeywordDataLP.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ReviewKeywordGrid)).BeginInit();
             this.KeywordValueHeaderLP.SuspendLayout();
+            this.FilterByMealPanel.SuspendLayout();
+            this.FilterByAttributesPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // businessGrid
@@ -1007,6 +1031,10 @@
             this.PriceFilterPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.PriceFilterPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.PriceFilterPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.PriceFilterPanel.Controls.Add(this.Price4Check, 3, 0);
+            this.PriceFilterPanel.Controls.Add(this.Price3Check, 2, 0);
+            this.PriceFilterPanel.Controls.Add(this.Price2Check, 1, 0);
+            this.PriceFilterPanel.Controls.Add(this.Price1Check, 0, 0);
             this.PriceFilterPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PriceFilterPanel.Location = new System.Drawing.Point(0, 21);
             this.PriceFilterPanel.Margin = new System.Windows.Forms.Padding(0);
@@ -2869,21 +2897,28 @@
             // 
             this.FilterByMealPanel.ColumnCount = 1;
             this.FilterByMealPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.FilterByMealPanel.Controls.Add(this.checkBox17, 0, 5);
+            this.FilterByMealPanel.Controls.Add(this.checkBox16, 0, 4);
+            this.FilterByMealPanel.Controls.Add(this.checkBox15, 0, 3);
+            this.FilterByMealPanel.Controls.Add(this.checkBox14, 0, 2);
+            this.FilterByMealPanel.Controls.Add(this.BrunchCheckbox, 0, 1);
+            this.FilterByMealPanel.Controls.Add(this.checkBox12, 0, 1);
+            this.FilterByMealPanel.Controls.Add(this.BreakfastCheckbox, 0, 0);
             this.FilterByMealPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FilterByMealPanel.Location = new System.Drawing.Point(125, 83);
             this.FilterByMealPanel.Margin = new System.Windows.Forms.Padding(0);
             this.FilterByMealPanel.Name = "FilterByMealPanel";
-            this.FilterByMealPanel.RowCount = 10;
-            this.FilterByMealPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0017F));
-            this.FilterByMealPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.998701F));
-            this.FilterByMealPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.998701F));
-            this.FilterByMealPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.998701F));
-            this.FilterByMealPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.998701F));
-            this.FilterByMealPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.998699F));
-            this.FilterByMealPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0012F));
-            this.FilterByMealPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0012F));
-            this.FilterByMealPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0012F));
-            this.FilterByMealPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0012F));
+            this.FilterByMealPanel.RowCount = 9;
+            this.FilterByMealPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.999455F));
+            this.FilterByMealPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.998959F));
+            this.FilterByMealPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.999059F));
+            this.FilterByMealPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.999059F));
+            this.FilterByMealPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.999059F));
+            this.FilterByMealPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.999059F));
+            this.FilterByMealPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.999057F));
+            this.FilterByMealPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0021F));
+            this.FilterByMealPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0021F));
+            this.FilterByMealPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0021F));
             this.FilterByMealPanel.Size = new System.Drawing.Size(125, 183);
             this.FilterByMealPanel.TabIndex = 4;
             // 
@@ -2891,9 +2926,16 @@
             // 
             this.FilterByAttributesPanel.ColumnCount = 1;
             this.FilterByAttributesPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.FilterByAttributesPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.FilterByAttributesPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.FilterByAttributesPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.FilterByAttributesPanel.Controls.Add(this.checkBox10, 0, 9);
+            this.FilterByAttributesPanel.Controls.Add(this.checkBox9, 0, 8);
+            this.FilterByAttributesPanel.Controls.Add(this.checkBox3, 0, 7);
+            this.FilterByAttributesPanel.Controls.Add(this.checkBox2, 0, 6);
+            this.FilterByAttributesPanel.Controls.Add(this.checkBox8, 0, 5);
+            this.FilterByAttributesPanel.Controls.Add(this.checkBox7, 0, 4);
+            this.FilterByAttributesPanel.Controls.Add(this.checkBox6, 0, 3);
+            this.FilterByAttributesPanel.Controls.Add(this.checkBox5, 0, 2);
+            this.FilterByAttributesPanel.Controls.Add(this.checkBox4, 0, 1);
+            this.FilterByAttributesPanel.Controls.Add(this.checkBox1, 0, 0);
             this.FilterByAttributesPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FilterByAttributesPanel.Location = new System.Drawing.Point(0, 83);
             this.FilterByAttributesPanel.Margin = new System.Windows.Forms.Padding(0);
@@ -2911,6 +2953,237 @@
             this.FilterByAttributesPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.FilterByAttributesPanel.Size = new System.Drawing.Size(125, 183);
             this.FilterByAttributesPanel.TabIndex = 5;
+            // 
+            // Price1Check
+            // 
+            this.Price1Check.AutoSize = true;
+            this.Price1Check.Location = new System.Drawing.Point(0, 0);
+            this.Price1Check.Margin = new System.Windows.Forms.Padding(0);
+            this.Price1Check.Name = "Price1Check";
+            this.Price1Check.Size = new System.Drawing.Size(32, 17);
+            this.Price1Check.TabIndex = 0;
+            this.Price1Check.Text = "$";
+            this.Price1Check.UseVisualStyleBackColor = true;
+            // 
+            // Price2Check
+            // 
+            this.Price2Check.AutoSize = true;
+            this.Price2Check.Location = new System.Drawing.Point(62, 0);
+            this.Price2Check.Margin = new System.Windows.Forms.Padding(0);
+            this.Price2Check.Name = "Price2Check";
+            this.Price2Check.Size = new System.Drawing.Size(38, 17);
+            this.Price2Check.TabIndex = 1;
+            this.Price2Check.Text = "$$";
+            this.Price2Check.UseVisualStyleBackColor = true;
+            // 
+            // Price3Check
+            // 
+            this.Price3Check.AutoSize = true;
+            this.Price3Check.Location = new System.Drawing.Point(124, 0);
+            this.Price3Check.Margin = new System.Windows.Forms.Padding(0);
+            this.Price3Check.Name = "Price3Check";
+            this.Price3Check.Size = new System.Drawing.Size(44, 17);
+            this.Price3Check.TabIndex = 2;
+            this.Price3Check.Text = "$$$";
+            this.Price3Check.UseVisualStyleBackColor = true;
+            // 
+            // Price4Check
+            // 
+            this.Price4Check.AutoSize = true;
+            this.Price4Check.Location = new System.Drawing.Point(186, 0);
+            this.Price4Check.Margin = new System.Windows.Forms.Padding(0);
+            this.Price4Check.Name = "Price4Check";
+            this.Price4Check.Size = new System.Drawing.Size(50, 17);
+            this.Price4Check.TabIndex = 3;
+            this.Price4Check.Text = "$$$$";
+            this.Price4Check.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(0, 0);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(0);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(50, 17);
+            this.checkBox1.TabIndex = 4;
+            this.checkBox1.Text = "$$$$";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(0, 18);
+            this.checkBox4.Margin = new System.Windows.Forms.Padding(0);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(50, 17);
+            this.checkBox4.TabIndex = 7;
+            this.checkBox4.Text = "$$$$";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            // 
+            // checkBox5
+            // 
+            this.checkBox5.AutoSize = true;
+            this.checkBox5.Location = new System.Drawing.Point(0, 36);
+            this.checkBox5.Margin = new System.Windows.Forms.Padding(0);
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.Size = new System.Drawing.Size(50, 17);
+            this.checkBox5.TabIndex = 8;
+            this.checkBox5.Text = "$$$$";
+            this.checkBox5.UseVisualStyleBackColor = true;
+            // 
+            // checkBox6
+            // 
+            this.checkBox6.AutoSize = true;
+            this.checkBox6.Location = new System.Drawing.Point(0, 54);
+            this.checkBox6.Margin = new System.Windows.Forms.Padding(0);
+            this.checkBox6.Name = "checkBox6";
+            this.checkBox6.Size = new System.Drawing.Size(50, 17);
+            this.checkBox6.TabIndex = 9;
+            this.checkBox6.Text = "$$$$";
+            this.checkBox6.UseVisualStyleBackColor = true;
+            // 
+            // checkBox7
+            // 
+            this.checkBox7.AutoSize = true;
+            this.checkBox7.Location = new System.Drawing.Point(0, 72);
+            this.checkBox7.Margin = new System.Windows.Forms.Padding(0);
+            this.checkBox7.Name = "checkBox7";
+            this.checkBox7.Size = new System.Drawing.Size(50, 17);
+            this.checkBox7.TabIndex = 10;
+            this.checkBox7.Text = "$$$$";
+            this.checkBox7.UseVisualStyleBackColor = true;
+            // 
+            // checkBox8
+            // 
+            this.checkBox8.AutoSize = true;
+            this.checkBox8.Location = new System.Drawing.Point(0, 90);
+            this.checkBox8.Margin = new System.Windows.Forms.Padding(0);
+            this.checkBox8.Name = "checkBox8";
+            this.checkBox8.Size = new System.Drawing.Size(50, 17);
+            this.checkBox8.TabIndex = 11;
+            this.checkBox8.Text = "$$$$";
+            this.checkBox8.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(0, 108);
+            this.checkBox2.Margin = new System.Windows.Forms.Padding(0);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(50, 17);
+            this.checkBox2.TabIndex = 12;
+            this.checkBox2.Text = "$$$$";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(0, 126);
+            this.checkBox3.Margin = new System.Windows.Forms.Padding(0);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(50, 17);
+            this.checkBox3.TabIndex = 13;
+            this.checkBox3.Text = "$$$$";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            // 
+            // checkBox9
+            // 
+            this.checkBox9.AutoSize = true;
+            this.checkBox9.Location = new System.Drawing.Point(0, 144);
+            this.checkBox9.Margin = new System.Windows.Forms.Padding(0);
+            this.checkBox9.Name = "checkBox9";
+            this.checkBox9.Size = new System.Drawing.Size(50, 17);
+            this.checkBox9.TabIndex = 14;
+            this.checkBox9.Text = "$$$$";
+            this.checkBox9.UseVisualStyleBackColor = true;
+            // 
+            // checkBox10
+            // 
+            this.checkBox10.AutoSize = true;
+            this.checkBox10.Location = new System.Drawing.Point(0, 162);
+            this.checkBox10.Margin = new System.Windows.Forms.Padding(0);
+            this.checkBox10.Name = "checkBox10";
+            this.checkBox10.Size = new System.Drawing.Size(50, 17);
+            this.checkBox10.TabIndex = 15;
+            this.checkBox10.Text = "$$$$";
+            this.checkBox10.UseVisualStyleBackColor = true;
+            // 
+            // BreakfastCheckbox
+            // 
+            this.BreakfastCheckbox.AutoSize = true;
+            this.BreakfastCheckbox.Location = new System.Drawing.Point(0, 0);
+            this.BreakfastCheckbox.Margin = new System.Windows.Forms.Padding(0);
+            this.BreakfastCheckbox.Name = "BreakfastCheckbox";
+            this.BreakfastCheckbox.Size = new System.Drawing.Size(71, 17);
+            this.BreakfastCheckbox.TabIndex = 10;
+            this.BreakfastCheckbox.Text = "Breakfast";
+            this.BreakfastCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // checkBox12
+            // 
+            this.checkBox12.AutoSize = true;
+            this.checkBox12.Location = new System.Drawing.Point(0, 40);
+            this.checkBox12.Margin = new System.Windows.Forms.Padding(0);
+            this.checkBox12.Name = "checkBox12";
+            this.checkBox12.Size = new System.Drawing.Size(50, 17);
+            this.checkBox12.TabIndex = 11;
+            this.checkBox12.Text = "$$$$";
+            this.checkBox12.UseVisualStyleBackColor = true;
+            // 
+            // BrunchCheckbox
+            // 
+            this.BrunchCheckbox.AutoSize = true;
+            this.BrunchCheckbox.Location = new System.Drawing.Point(0, 20);
+            this.BrunchCheckbox.Margin = new System.Windows.Forms.Padding(0);
+            this.BrunchCheckbox.Name = "BrunchCheckbox";
+            this.BrunchCheckbox.Size = new System.Drawing.Size(60, 17);
+            this.BrunchCheckbox.TabIndex = 12;
+            this.BrunchCheckbox.Text = "Brunch";
+            this.BrunchCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // checkBox14
+            // 
+            this.checkBox14.AutoSize = true;
+            this.checkBox14.Location = new System.Drawing.Point(0, 60);
+            this.checkBox14.Margin = new System.Windows.Forms.Padding(0);
+            this.checkBox14.Name = "checkBox14";
+            this.checkBox14.Size = new System.Drawing.Size(50, 17);
+            this.checkBox14.TabIndex = 13;
+            this.checkBox14.Text = "$$$$";
+            this.checkBox14.UseVisualStyleBackColor = true;
+            // 
+            // checkBox15
+            // 
+            this.checkBox15.AutoSize = true;
+            this.checkBox15.Location = new System.Drawing.Point(0, 80);
+            this.checkBox15.Margin = new System.Windows.Forms.Padding(0);
+            this.checkBox15.Name = "checkBox15";
+            this.checkBox15.Size = new System.Drawing.Size(50, 17);
+            this.checkBox15.TabIndex = 14;
+            this.checkBox15.Text = "$$$$";
+            this.checkBox15.UseVisualStyleBackColor = true;
+            // 
+            // checkBox16
+            // 
+            this.checkBox16.AutoSize = true;
+            this.checkBox16.Location = new System.Drawing.Point(0, 100);
+            this.checkBox16.Margin = new System.Windows.Forms.Padding(0);
+            this.checkBox16.Name = "checkBox16";
+            this.checkBox16.Size = new System.Drawing.Size(50, 17);
+            this.checkBox16.TabIndex = 15;
+            this.checkBox16.Text = "$$$$";
+            this.checkBox16.UseVisualStyleBackColor = true;
+            // 
+            // checkBox17
+            // 
+            this.checkBox17.AutoSize = true;
+            this.checkBox17.Location = new System.Drawing.Point(0, 120);
+            this.checkBox17.Margin = new System.Windows.Forms.Padding(0);
+            this.checkBox17.Name = "checkBox17";
+            this.checkBox17.Size = new System.Drawing.Size(50, 17);
+            this.checkBox17.TabIndex = 16;
+            this.checkBox17.Text = "$$$$";
+            this.checkBox17.UseVisualStyleBackColor = true;
             // 
             // YelpGUI
             // 
@@ -2944,6 +3217,8 @@
             this.BusinessButtonsPanel.ResumeLayout(false);
             this.AttributesCheckboxPanel.ResumeLayout(false);
             this.AttributesCheckboxPanel.PerformLayout();
+            this.PriceFilterPanel.ResumeLayout(false);
+            this.PriceFilterPanel.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.BusinessTabPage.ResumeLayout(false);
             this.UsersTabPage.ResumeLayout(false);
@@ -3019,6 +3294,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.ReviewKeywordGrid)).EndInit();
             this.KeywordValueHeaderLP.ResumeLayout(false);
             this.KeywordValueHeaderLP.PerformLayout();
+            this.FilterByMealPanel.ResumeLayout(false);
+            this.FilterByMealPanel.PerformLayout();
+            this.FilterByAttributesPanel.ResumeLayout(false);
+            this.FilterByAttributesPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -3208,5 +3487,26 @@
         private System.Windows.Forms.TableLayoutPanel FilterByAttributesPanel;
         private System.Windows.Forms.TableLayoutPanel FilterByMealPanel;
         private System.Windows.Forms.Label FilterByMealLabel;
+        private System.Windows.Forms.CheckBox checkBox10;
+        private System.Windows.Forms.CheckBox checkBox9;
+        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBox8;
+        private System.Windows.Forms.CheckBox checkBox7;
+        private System.Windows.Forms.CheckBox checkBox6;
+        private System.Windows.Forms.CheckBox checkBox5;
+        private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBox17;
+        private System.Windows.Forms.CheckBox checkBox16;
+        private System.Windows.Forms.CheckBox checkBox15;
+        private System.Windows.Forms.CheckBox checkBox14;
+        private System.Windows.Forms.CheckBox BrunchCheckbox;
+        private System.Windows.Forms.CheckBox checkBox12;
+        private System.Windows.Forms.CheckBox BreakfastCheckbox;
+        private System.Windows.Forms.CheckBox Price4Check;
+        private System.Windows.Forms.CheckBox Price3Check;
+        private System.Windows.Forms.CheckBox Price2Check;
+        private System.Windows.Forms.CheckBox Price1Check;
     }
 }
