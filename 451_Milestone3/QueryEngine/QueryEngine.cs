@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using Npgsql;
 using Npgsql.Schema;
-using System.Text.RegularExpressions;
+using SpicyMap;
 
 namespace QueryEngine1
 {
@@ -17,6 +17,7 @@ namespace QueryEngine1
         List<List<string>> lastQuery;
         string currBusId;
         string currUserId;
+        MapNamesToAttrValPair attrList;        
 
         private static Random random = new Random();
         const string chars = "abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_- ";
@@ -30,6 +31,7 @@ namespace QueryEngine1
             searchParameters = new Dictionary<string, List<string>>();
             lastQuery = new List<List<string>>();
             currBusId = "";
+            attrList = new MapNamesToAttrValPair();            
         }
 
         /// <summary>
@@ -201,26 +203,40 @@ namespace QueryEngine1
                 foreach (KeyValuePair<string, List<string>> key in searchParams) //each keyValuePar
                 {
                     AND_OR = 0;
-                    // Build the subquery to find all tuples with the value from that keyPair
-                    if (key.Key != "category_name")
-                        if (searchParams.Keys.Last() != searchParams.Keys.ElementAt(currIndex)) //if this key is not the last one in the Dictionary, add the start of the next subquery
-                            orList += key.Key + " IN ( SELECT " + key.Key + " FROM business WHERE "; // ") AND <nextKey> IN ( SELECT  FROM business WHERE " (also increments the currIndex)
 
-                    foreach (string item in key.Value) //Each item in the list for each key      
+
+                    if (attrList.Contains(key.Key))
                     {
-                        if (key.Key != "category_name")
+                        if (searchParams.Keys.Last() != searchParams.Keys.ElementAt(currIndex)) //if this key is not the last one in the Dictionary, add the start of the next subquery
+                            orList += " business_id IN ( SELECT business_id FROM business WHERE "; // ") AND <nextKey> IN ( SELECT  FROM business WHERE " (also increments the currIndex)
+
+                        foreach (string item in key.Value) //Each item in the list for each key      
                         {
-                            orList += key.Key + " = '" + item + "' OR "; // "<key> = '<each item in the list with that key>' OR "
-                            AND_OR = 3;
-                        }
-                        else
-                        {
-                            orList += " business_id IN ( SELECT business_id FROM category WHERE ";
-                            orList += key.Key + " = '" + item + "') AND "; // "<key> = '<each item in the list with that key>' AND "
-                                                                           //if (AND_OR == 0)
-                                                                           //    AND_OR = 6;
-                                                                           //else
+                            orList += " business_id IN ( SELECT business_id FROM attributes WHERE ";
+                            orList += "attribute_name = '" + key.Key + "' AND attribute_value = '" + item + "') AND "; // "<key> = '<each item in the list with that key>' AND "
                             AND_OR = 4;
+                        }
+                    }
+                    else
+                    {
+                        // Build the subquery to find all tuples with the value from that keyPair
+                        if (key.Key != "category_name")
+                            if (searchParams.Keys.Last() != searchParams.Keys.ElementAt(currIndex)) //if this key is not the last one in the Dictionary, add the start of the next subquery
+                                orList += key.Key + " IN ( SELECT " + key.Key + " FROM business WHERE "; // ") AND <nextKey> IN ( SELECT  FROM business WHERE " (also increments the currIndex)
+
+                        foreach (string item in key.Value) //Each item in the list for each key      
+                        {
+                            if (key.Key != "category_name")
+                            {
+                                orList += key.Key + " = '" + item + "' OR "; // "<key> = '<each item in the list with that key>' OR "
+                                AND_OR = 3;
+                            }
+                            else
+                            {
+                                orList += " business_id IN ( SELECT business_id FROM category WHERE ";
+                                orList += key.Key + " = '" + item + "') AND "; // "<key> = '<each item in the list with that key>' AND "
+                                AND_OR = 4;
+                            }
                         }
                     }
 
@@ -231,10 +247,12 @@ namespace QueryEngine1
                 if (searchParams.Count == 1)
                     orList = orList.Substring(0, orList.Length - 6); // if there is just one parameter, we wont need parenthesis or and AND.
                 else
+                {
                     if (searchParams.ContainsKey("category_name"))
-                    orList = orList.Substring(0, orList.Length - (AND_OR + 2)); // Cuts off the last ") AND "
-                else
-                    orList = orList.Substring(0, orList.Length - 4); // Cuts off the last ") AND "              
+                        orList = orList.Substring(0, orList.Length - (AND_OR + 2)); // Cuts off the last ") AND "
+                    else
+                        orList = orList.Substring(0, orList.Length - 4); // Cuts off the last ") AND "
+                }
 
                 string query = "SELECT " + projection + " FROM " + tables + " WHERE " + orList + endQuery + " ORDER BY state;";
 
@@ -273,6 +291,25 @@ namespace QueryEngine1
                 searchParameters[key].Remove(value);
                 if (searchParameters[key].Count == 0) // if that was the last value in that keyValue pair, remove the key
                     searchParameters.Remove(key);
+            }
+        }
+
+        /// <summary>
+        /// Adds a value to the search parameters  
+        /// </summary>
+        public void AddSearchAttribute(string key, List<string> values)
+        {
+            searchParameters[key] = values;
+        }
+
+        /// <summary>
+        /// Removes a value from the search parameters    
+        /// </summary>
+        public void RemoveSearchAttribute(string key)
+        {
+            if (searchParameters.ContainsKey(key)) // can only remove something if its actually there.
+            {
+                searchParameters.Remove(key);
             }
         }
 

@@ -1043,6 +1043,7 @@
             this.TakeOutCheckbox.TabIndex = 15;
             this.TakeOutCheckbox.Text = "Take Out";
             this.TakeOutCheckbox.UseVisualStyleBackColor = true;
+            this.TakeOutCheckbox.CheckedChanged += new System.EventHandler(this.AttributesPanel_ItemCheck);
             // 
             // BikeParkingCheckbox
             // 
@@ -1055,6 +1056,7 @@
             this.BikeParkingCheckbox.TabIndex = 14;
             this.BikeParkingCheckbox.Text = "Bike Parking";
             this.BikeParkingCheckbox.UseVisualStyleBackColor = true;
+            this.BikeParkingCheckbox.CheckedChanged += new System.EventHandler(this.AttributesPanel_ItemCheck);
             // 
             // FreeWiFiCheckbox
             // 
@@ -1067,6 +1069,7 @@
             this.FreeWiFiCheckbox.TabIndex = 13;
             this.FreeWiFiCheckbox.Text = "Free Wi-Fi";
             this.FreeWiFiCheckbox.UseVisualStyleBackColor = true;
+            this.FreeWiFiCheckbox.CheckedChanged += new System.EventHandler(this.AttributesPanel_ItemCheck);
             // 
             // DeliveryCheckbox
             // 
@@ -1079,6 +1082,7 @@
             this.DeliveryCheckbox.TabIndex = 12;
             this.DeliveryCheckbox.Text = "Delivery";
             this.DeliveryCheckbox.UseVisualStyleBackColor = true;
+            this.DeliveryCheckbox.CheckedChanged += new System.EventHandler(this.AttributesPanel_ItemCheck);
             // 
             // GoodforGroupsCheckbox
             // 
@@ -1091,6 +1095,7 @@
             this.GoodforGroupsCheckbox.TabIndex = 11;
             this.GoodforGroupsCheckbox.Text = "Good for Groups";
             this.GoodforGroupsCheckbox.UseVisualStyleBackColor = true;
+            this.GoodforGroupsCheckbox.CheckedChanged += new System.EventHandler(this.AttributesPanel_ItemCheck);
             // 
             // GoodforKidsCheckbox
             // 
@@ -1103,6 +1108,7 @@
             this.GoodforKidsCheckbox.TabIndex = 10;
             this.GoodforKidsCheckbox.Text = "Good for Kids";
             this.GoodforKidsCheckbox.UseVisualStyleBackColor = true;
+            this.GoodforKidsCheckbox.CheckedChanged += new System.EventHandler(this.AttributesPanel_ItemCheck);
             // 
             // OutdoorSeatingCheckbox
             // 
@@ -1115,6 +1121,7 @@
             this.OutdoorSeatingCheckbox.TabIndex = 9;
             this.OutdoorSeatingCheckbox.Text = "Outdoor Seating";
             this.OutdoorSeatingCheckbox.UseVisualStyleBackColor = true;
+            this.OutdoorSeatingCheckbox.CheckedChanged += new System.EventHandler(this.AttributesPanel_ItemCheck);
             // 
             // WheelchairAccessibleCheckbox
             // 
@@ -1127,6 +1134,7 @@
             this.WheelchairAccessibleCheckbox.TabIndex = 8;
             this.WheelchairAccessibleCheckbox.Text = "Wheelchair Accessible";
             this.WheelchairAccessibleCheckbox.UseVisualStyleBackColor = true;
+            this.WheelchairAccessibleCheckbox.CheckedChanged += new System.EventHandler(this.AttributesPanel_ItemCheck);
             // 
             // TakesReservationsChecbox
             // 
@@ -1139,6 +1147,7 @@
             this.TakesReservationsChecbox.TabIndex = 7;
             this.TakesReservationsChecbox.Text = "Takes Reservations";
             this.TakesReservationsChecbox.UseVisualStyleBackColor = true;
+            this.TakesReservationsChecbox.CheckedChanged += new System.EventHandler(this.AttributesPanel_ItemCheck);
             // 
             // AcceptsCreditCardsCheckbox
             // 
@@ -1151,6 +1160,7 @@
             this.AcceptsCreditCardsCheckbox.TabIndex = 4;
             this.AcceptsCreditCardsCheckbox.Text = "Accepts Credit Cards";
             this.AcceptsCreditCardsCheckbox.UseVisualStyleBackColor = true;
+            this.AcceptsCreditCardsCheckbox.CheckedChanged += new System.EventHandler(this.AttributesPanel_ItemCheck);
             // 
             // FilterByMealPanel
             // 
@@ -1192,6 +1202,7 @@
             this.LateNightCheckbox.TabIndex = 15;
             this.LateNightCheckbox.Text = "Late Night";
             this.LateNightCheckbox.UseVisualStyleBackColor = true;
+            this.LateNightCheckbox.CheckedChanged += new System.EventHandler(this.AttributesPanel_ItemCheck);
             // 
             // DessertCheckbox
             // 
@@ -1204,6 +1215,7 @@
             this.DessertCheckbox.TabIndex = 14;
             this.DessertCheckbox.Text = "Dessert";
             this.DessertCheckbox.UseVisualStyleBackColor = true;
+            this.DessertCheckbox.CheckedChanged += new System.EventHandler(this.AttributesPanel_ItemCheck);
             // 
             // DinnerCheckbox
             // 
@@ -1216,6 +1228,7 @@
             this.DinnerCheckbox.TabIndex = 13;
             this.DinnerCheckbox.Text = "Dinner";
             this.DinnerCheckbox.UseVisualStyleBackColor = true;
+            this.DinnerCheckbox.CheckedChanged += new System.EventHandler(this.AttributesPanel_ItemCheck);
             // 
             // BrunchCheckbox
             // 
@@ -1228,6 +1241,7 @@
             this.BrunchCheckbox.TabIndex = 12;
             this.BrunchCheckbox.Text = "Brunch";
             this.BrunchCheckbox.UseVisualStyleBackColor = true;
+            this.BrunchCheckbox.CheckedChanged += new System.EventHandler(this.AttributesPanel_ItemCheck);
             // 
             // LunchCheckbox
             // 
@@ -1240,6 +1254,7 @@
             this.LunchCheckbox.TabIndex = 11;
             this.LunchCheckbox.Text = "Lunch";
             this.LunchCheckbox.UseVisualStyleBackColor = true;
+            this.LunchCheckbox.CheckedChanged += new System.EventHandler(this.AttributesPanel_ItemCheck);
             // 
             // BreakfastCheckbox
             // 
@@ -1252,6 +1267,7 @@
             this.BreakfastCheckbox.TabIndex = 10;
             this.BreakfastCheckbox.Text = "Breakfast";
             this.BreakfastCheckbox.UseVisualStyleBackColor = true;
+            this.BreakfastCheckbox.CheckedChanged += new System.EventHandler(this.AttributesPanel_ItemCheck);
             // 
             // FilterByAttributesLabel
             // 
@@ -1309,6 +1325,7 @@
             this.Price4Check.TabIndex = 3;
             this.Price4Check.Text = "$$$$";
             this.Price4Check.UseVisualStyleBackColor = true;
+            this.Price4Check.CheckedChanged += new System.EventHandler(this.AttributesPanel_ItemCheck);
             // 
             // Price3Check
             // 
@@ -1321,6 +1338,7 @@
             this.Price3Check.TabIndex = 2;
             this.Price3Check.Text = "$$$";
             this.Price3Check.UseVisualStyleBackColor = true;
+            this.Price3Check.CheckedChanged += new System.EventHandler(this.AttributesPanel_ItemCheck);
             // 
             // Price2Check
             // 
@@ -1333,6 +1351,7 @@
             this.Price2Check.TabIndex = 1;
             this.Price2Check.Text = "$$";
             this.Price2Check.UseVisualStyleBackColor = true;
+            this.Price2Check.CheckedChanged += new System.EventHandler(this.AttributesPanel_ItemCheck);
             // 
             // Price1Check
             // 
@@ -1345,6 +1364,7 @@
             this.Price1Check.TabIndex = 0;
             this.Price1Check.Text = "$";
             this.Price1Check.UseVisualStyleBackColor = true;
+            this.Price1Check.CheckedChanged += new System.EventHandler(this.AttributesPanel_ItemCheck);
             // 
             // FilterByMealLabel
             // 
@@ -2233,7 +2253,7 @@
             this.AdminCityLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.80269F));
             this.AdminCityLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.19731F));
             this.AdminCityLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 71F));
-            this.AdminCityLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 146F));
+            this.AdminCityLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 147F));
             this.AdminCityLP.Controls.Add(this.AdminStateHeaderTb, 0, 0);
             this.AdminCityLP.Controls.Add(this.AdminStateValue, 1, 0);
             this.AdminCityLP.Controls.Add(this.AdminCityValue, 3, 0);
@@ -2274,7 +2294,7 @@
             // 
             this.AdminCityValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.AdminCityValue.Enabled = false;
-            this.AdminCityValue.Location = new System.Drawing.Point(214, 1);
+            this.AdminCityValue.Location = new System.Drawing.Point(213, 1);
             this.AdminCityValue.Margin = new System.Windows.Forms.Padding(1);
             this.AdminCityValue.Name = "AdminCityValue";
             this.AdminCityValue.Size = new System.Drawing.Size(115, 20);
@@ -2286,7 +2306,7 @@
             this.CityHeaderTb.BackColor = System.Drawing.Color.White;
             this.CityHeaderTb.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.CityHeaderTb.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CityHeaderTb.Location = new System.Drawing.Point(146, 5);
+            this.CityHeaderTb.Location = new System.Drawing.Point(145, 5);
             this.CityHeaderTb.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.CityHeaderTb.Name = "CityHeaderTb";
             this.CityHeaderTb.ReadOnly = true;
@@ -2509,7 +2529,7 @@
             this.AdminReviewLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.45544F));
             this.AdminReviewLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.54456F));
             this.AdminReviewLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 61F));
-            this.AdminReviewLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 109F));
+            this.AdminReviewLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 110F));
             this.AdminReviewLP.Controls.Add(this.AdminReviewHeader, 0, 0);
             this.AdminReviewLP.Controls.Add(this.AdminReviewValue, 1, 0);
             this.AdminReviewLP.Controls.Add(this.AdminCheckinValue, 3, 0);
@@ -2540,7 +2560,7 @@
             // 
             this.AdminReviewValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.AdminReviewValue.Enabled = false;
-            this.AdminReviewValue.Location = new System.Drawing.Point(104, 1);
+            this.AdminReviewValue.Location = new System.Drawing.Point(103, 1);
             this.AdminReviewValue.Margin = new System.Windows.Forms.Padding(1);
             this.AdminReviewValue.Name = "AdminReviewValue";
             this.AdminReviewValue.Size = new System.Drawing.Size(59, 20);
@@ -2550,7 +2570,7 @@
             // 
             this.AdminCheckinValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.AdminCheckinValue.Enabled = false;
-            this.AdminCheckinValue.Location = new System.Drawing.Point(251, 1);
+            this.AdminCheckinValue.Location = new System.Drawing.Point(250, 1);
             this.AdminCheckinValue.Margin = new System.Windows.Forms.Padding(1);
             this.AdminCheckinValue.Name = "AdminCheckinValue";
             this.AdminCheckinValue.Size = new System.Drawing.Size(80, 20);
@@ -2562,7 +2582,7 @@
             this.AdminCheckinHeader.BackColor = System.Drawing.Color.White;
             this.AdminCheckinHeader.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.AdminCheckinHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AdminCheckinHeader.Location = new System.Drawing.Point(193, 5);
+            this.AdminCheckinHeader.Location = new System.Drawing.Point(192, 5);
             this.AdminCheckinHeader.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.AdminCheckinHeader.Name = "AdminCheckinHeader";
             this.AdminCheckinHeader.ReadOnly = true;
@@ -2576,7 +2596,7 @@
             this.AdminStarsLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.9505F));
             this.AdminStarsLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.0495F));
             this.AdminStarsLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 62F));
-            this.AdminStarsLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 109F));
+            this.AdminStarsLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 110F));
             this.AdminStarsLP.Controls.Add(this.AdminRevRatingHEad, 0, 0);
             this.AdminStarsLP.Controls.Add(this.AdminRatingValue, 1, 0);
             this.AdminStarsLP.Controls.Add(this.AdminStarsValue, 3, 0);
@@ -2617,7 +2637,7 @@
             // 
             this.AdminStarsValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.AdminStarsValue.Enabled = false;
-            this.AdminStarsValue.Location = new System.Drawing.Point(251, 1);
+            this.AdminStarsValue.Location = new System.Drawing.Point(250, 1);
             this.AdminStarsValue.Margin = new System.Windows.Forms.Padding(1);
             this.AdminStarsValue.Name = "AdminStarsValue";
             this.AdminStarsValue.Size = new System.Drawing.Size(80, 20);
@@ -2629,7 +2649,7 @@
             this.AdminStarsHeader.BackColor = System.Drawing.Color.White;
             this.AdminStarsHeader.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.AdminStarsHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AdminStarsHeader.Location = new System.Drawing.Point(192, 5);
+            this.AdminStarsHeader.Location = new System.Drawing.Point(191, 5);
             this.AdminStarsHeader.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.AdminStarsHeader.Name = "AdminStarsHeader";
             this.AdminStarsHeader.ReadOnly = true;

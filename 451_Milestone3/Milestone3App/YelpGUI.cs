@@ -11,6 +11,7 @@ using MapControlLibrary;
 using Microsoft.Maps.MapControl.WPF;
 using Microsoft.Maps.MapControl.WPF.Overlays;
 using System.Windows.Media;
+using SpicyMap;
 //using Microsoft.Maps.SpatialMath;
 //using Microsoft.Maps.SpatialMath.Geometry;
 
@@ -964,15 +965,29 @@ namespace Milestone2App
         //Implementing one function to add or remove ALL attribute checklists
         private void AttributesPanel_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            CheckedListBox senderCheckBox = (CheckedListBox)sender; //casts the sending object as a checkedbox            
-            mapNamesToAttrValPair.MapFrom(senderCheckBox.Name); //accesses a map that uses sender names to get the values needed from the database
+            CheckBox senderCheckBox = (CheckBox)sender; //casts the sending object as a CheckBox
+            Console.WriteLine(senderCheckBox.Text);
+            Tuple<string, string> attr = mapNamesToAttrValPair.MapFrom(senderCheckBox.Text); //accesses a map that uses sender names to get the values needed from the database
 
-            //if (e.NewValue == CheckState.Checked) //add or remove the check box item that just changed to the list            
-            //queryEngine.AddSearchParameter("attribute", true); //add the new item to the list if it is checked            
-            //else
-            //queryEngine.RemoveSearchParameter("attribute", false);//remove the new item to the list if its unchecked              
+            if (senderCheckBox.Checked == true) //add or remove the check box item that just changed to the list
+                queryEngine.AddSearchParameter(attr.Item1, attr.Item2); //add the new item to the list if it is checked
+            else
+                queryEngine.RemoveSearchParameter(attr.Item1, attr.Item2);//remove the new item to the list if its unchecked
 
-            UpdateCategories();
+            UpdateGrid();
+        }
+
+        private void AttributesPanel_ItemCheck(object sender, EventArgs e)
+        {
+            CheckBox senderCheckBox = (CheckBox)sender; //casts the sending object as a CheckBox
+            Console.WriteLine(senderCheckBox.Text);
+            Tuple<string, string> attr = mapNamesToAttrValPair.MapFrom(senderCheckBox.Text); //accesses a map that uses sender names to get the values needed from the database
+
+            if (senderCheckBox.Checked == true) //add or remove the check box item that just changed to the list
+                queryEngine.AddSearchParameter(attr.Item1, attr.Item2); //add the new item to the list if it is checked
+            else
+                queryEngine.RemoveSearchParameter(attr.Item1, attr.Item2);//remove the new item to the list if its unchecked
+
             UpdateGrid();
         }
     }
