@@ -89,7 +89,6 @@
     <Compile Include="MapForm.Designer.cs">
       <DependentUpon>MapForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MapNamesToAttr.cs" />
     <Compile Include="ReviewForm.cs">
       <SubType>Form</SubType>
     </Compile>
