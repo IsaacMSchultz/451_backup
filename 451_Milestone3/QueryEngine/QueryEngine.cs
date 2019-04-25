@@ -643,5 +643,40 @@ namespace QueryEngine1
             }
             return false;
         }
+
+        public List<KeyValuePair<String, int>> QueryCheckinsGraph(string busId = "--ab39IjZR_xUf81WyTyHg")
+        {
+            List<KeyValuePair<String, int>> myChartData = new List<KeyValuePair<string, int>>();
+
+            try
+            {
+                //Select business_id, SUM(num_checkins) from business Where business_id = '--ab39IjZR_xUf81WyTyHg' group by business_id order by business_id;
+                using (var conn = new NpgsqlConnection(LOGININFO))
+                {
+                    conn.Open();
+                    using (var cmd = new NpgsqlCommand())
+                    {
+                        cmd.Connection = conn;
+                        // Business ID needs to be specificly stated. Do we need to add an input for the button on the interface
+                        cmd.CommandText = "SELECT checkins.day, COUNT(checkins.day)FROM business JOIN checkins ON business.business_id = checkins.business_id WHERE business.business_id =@busId GROUP BY checkins.day ORDER BY CASE WHEN checkins.day = 'Monday' THEN '1' WHEN checkins.day = 'Tuesday' THEN '2' WHEN checkins.day = 'Wednesday' THEN '3' WHEN checkins.day = 'Thursday' THEN '4' WHEN checkins.day = 'Friday' THEN '5' WHEN checkins.day = 'Saturday' THEN '6' WHEN checkins.day = 'Sunday' THEN '7'ELSE checkins.day END ASC";
+                        cmd.Parameters.AddWithValue("@busId", busId);
+                        //cmd.CommandText = "SELECT checkins.day, COUNT(checkins.day) FROM business JOIN checkins ON business.business_id = checkins.business_id WHERE business.business_id = '--ab39IjZR_xUf81WyTyHg' GROUP BY checkins.day ORDER BY CASE WHEN checkins.day = 'Monday' THEN '1' WHEN checkins.day = 'Tuesday' THEN '2' WHEN checkins.day = 'Wednesday' THEN '3' WHEN checkins.day = 'Thursday' THEN '4' WHEN checkins.day = 'Friday' THEN '5' WHEN checkins.day = 'Saturday' THEN '6' WHEN checkins.day = 'Sunday' THEN '7'ELSE checkins.day END ASC";
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                myChartData.Add(new KeyValuePair<string, int>(reader.GetString(0), reader.GetInt32(1)));
+                            }
+                        }
+                    }
+                }
+            }
+            catch (NpgsqlException e)
+            {
+                Console.WriteLine(e.ToString());
+                return new List<KeyValuePair<string, int>>();
+            }
+            return myChartData;
+        }
     }
 }

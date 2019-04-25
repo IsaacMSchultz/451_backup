@@ -101,5 +101,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\QueryEngine\QueryEngine.csproj">
+      <Project>{76ba320a-32dd-414b-beb8-e6b86080c5c7}</Project>
+      <Name>QueryEngine</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
