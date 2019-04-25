@@ -47,8 +47,8 @@ namespace Milestone2App {
             queryEngine = new QueryEngine ();
             List<string> businessIds = new List<string> ();
             mapNamesToAttrValPair = new MapNamesToAttrValPair ();
-            currBusId = "";
-            currUserId = "";
+            currBusId = string.Empty;
+            currUserId = string.Empty;
             projection = proj;
 
             InitializeComponent ();
@@ -263,7 +263,7 @@ namespace Milestone2App {
                 DayOfTheWeek_Textbox.Text = today; //put the day of the week in the hours textbox
 
                 // replace the categories checkbox with all the categories that the selected business has
-                string categoriesStr = "";
+                string categoriesStr = string.Empty;
                 List<string> categories = queryEngine.GetCategories (currBusId);
                 if (categories.Count > 0) {
                     foreach (string category in categories) {
@@ -296,9 +296,9 @@ namespace Milestone2App {
         }
 
         private bool UpdateBusinessPageAttributes () {
-            if (currBusId != "") {
+            if (currBusId != string.Empty) {
                 // replace the attributes checkbox with all the categories that the selected business has
-                string attributesStr = "";
+                string attributesStr = string.Empty;
                 List<List<string>> attributes = queryEngine.GetAttributes (currBusId);
                 if (attributes.Count > 1) {
                     for (int i = 1; i < attributes.Count; i++)
@@ -338,16 +338,16 @@ namespace Milestone2App {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void SubmitReviewButton_Click (object sender, EventArgs e) {
-            if (currBusId != "" && currUserId != "" && ReviewStarsDropDown.SelectedItem != null) {
+            if (currBusId != string.Empty && currUserId != string.Empty && ReviewStarsDropDown.SelectedItem != null) {
                 queryEngine.PostReview (WriteReviewTextBox_Review.Text, int.Parse (ReviewStarsDropDown.SelectedItem as string), currBusId, currUserId);
                 UpdateGrid();
                 return;
             }
-            if (currUserId == "")
+            if (currUserId == string.Empty)
                 MessageBox.Show ("Please select a user to sign in as.");
             if (ReviewStarsDropDown.SelectedItem == null)
                 MessageBox.Show ("Please select a stars rating.");
-            if (currBusId == "")
+            if (currBusId == string.Empty)
                 MessageBox.Show ("Please select a business.");
 
             //UpdateGrid();
@@ -360,7 +360,7 @@ namespace Milestone2App {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void WriteReviewTextBox_Review_TextChanged (object sender, EventArgs e) {
-            if (WriteReviewTextBox_Review.Text != "" && ReviewStarsDropDown.SelectedItem as string != "Review Stars")
+            if (WriteReviewTextBox_Review.Text != string.Empty && ReviewStarsDropDown.SelectedItem as string != "Review Stars")
                 SubmitReviewButton.Enabled = true;
             else if (SubmitReviewButton.Enabled == true)
                 SubmitReviewButton.Enabled = false;
@@ -372,7 +372,7 @@ namespace Milestone2App {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void ReviewStarsDropDown_SelectedIndexChanged (object sender, EventArgs e) {
-            if (WriteReviewTextBox_Review.Text != "") {
+            if (WriteReviewTextBox_Review.Text != string.Empty) {
                 SubmitReviewButton.Enabled = true;
             }
         }
@@ -537,20 +537,20 @@ namespace Milestone2App {
         }
 
         private void CheckInButton_Click (object sender, EventArgs e) {
-            if (currBusId != "" && currUserId != "") {
+            if (currBusId != string.Empty && currUserId != string.Empty) {
                 // Make the new form open up and show it to the user.
                 CheckinForm checkinsWindow = new CheckinForm (currUserId, currBusId, DateTime.Now);
                 checkinsWindow.Show ();
             } else {
-                if (currUserId != "")
+                if (currUserId == string.Empty)
                     MessageBox.Show ("Please select a user to sign in as.");
-                if (currBusId != "")
+                else if (currBusId == string.Empty)
                     MessageBox.Show ("Please select a business");
             }
         }
 
         private void AddToFavoritesButton_Click (object sender, EventArgs e) {
-            if (currBusId != "" && currUserId != "") // Only try to add if there is a business selected and a user signed in
+            if (currBusId != string.Empty && currUserId != string.Empty) // Only try to add if there is a business selected and a user signed in
             {
                 if (queryEngine.AddToFavorites (currBusId, currUserId)) // Try to add the business to favorites
                 {
@@ -559,9 +559,9 @@ namespace Milestone2App {
                 } else
                     MessageBox.Show ("Business already in favorites"); //If the business wasnt added then its probably already in their favorites
             } else {
-                if (currUserId != "") // Show an error for the possible things that could have gome wrong
+                if (currUserId != string.Empty) // Show an error for the possible things that could have gome wrong
                     MessageBox.Show ("Please select a user to sign in as.");
-                if (currBusId != "")
+                if (currBusId != string.Empty)
                     MessageBox.Show ("Please select a business");
             }
         }
