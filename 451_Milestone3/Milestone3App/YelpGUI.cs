@@ -879,14 +879,10 @@ namespace Milestone2App
             }
             else
             {
-                if (currUserId != "")
-                {
-                    MessageBox.Show("Please select a user to sign in as.");
-                }
-                if (currBusId != "")
-                {
-                    MessageBox.Show("Please select a business");
-                }
+                if (currUserId != "")                
+                    MessageBox.Show("Please select a user to sign in as.");                
+                if (currBusId != "")                
+                    MessageBox.Show("Please select a business");                
             }
         }
 
@@ -922,26 +918,22 @@ namespace Milestone2App
 
         private void AddToFavoritesButton_Click(object sender, EventArgs e)
         {
-            if (currBusId != "" && currUserId != "")
+            if (currBusId != "" && currUserId != "") // Only try to add if there is a business selected and a user signed in
             {
-                if (queryEngine.AddToFavorites(currBusId, currUserId))
+                if (queryEngine.AddToFavorites(currBusId, currUserId)) // Try to add the business to favorites
                 {
-                    MessageBox.Show("Added to favorites");
+                    MessageBox.Show("Added to favorites"); // If the business was added, then tell the user
                     UpdateFavBusinessGrid();
                 }
                 else
-                    MessageBox.Show("Business already in favorites");
+                    MessageBox.Show("Business already in favorites"); //If the business wasnt added then its probably already in their favorites
             }
             else
             {
-                if (currUserId != "")
-                {
-                    MessageBox.Show("Please select a user to sign in as.");
-                }
-                if (currBusId != "")
-                {
-                    MessageBox.Show("Please select a business");
-                }
+                if (currUserId != "") // Show an error for the possible things that could have gome wrong
+                    MessageBox.Show("Please select a user to sign in as.");                
+                if (currBusId != "")                
+                    MessageBox.Show("Please select a business");                
             }
         }
 
