@@ -18,7 +18,7 @@ namespace CheckInChart
 
         private void columnChart(string busId = "")
         {
-            if (busId == string.Empty) //make sure that there is a business ID to query
+            if (busId.Length != 22) //make sure that there is a business ID to query
                 MessageBox.Show("No business selected!!!!");
             else
                 myChart.DataContext = queryEngine.QueryCheckinsGraph(busId);
