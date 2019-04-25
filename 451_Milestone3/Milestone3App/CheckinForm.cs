@@ -30,8 +30,13 @@ namespace Milestone2App
 
         private void SubmitCheckinButton_Click(object sender, EventArgs e)
         {
-            Console.WriteLine(CheckinTimeSelector.Value);            
-            queryEngine.AddCheckin(businessID, CheckinTimeSelector.Value);
+            Console.WriteLine(CheckinTimeSelector.Value);
+
+            if (queryEngine.AddCheckin(businessID, CheckinTimeSelector.Value)) //Insert the checkin and show a messege box to tell the user if it was successful
+                MessageBox.Show("Checkin accepted!");
+            else
+                MessageBox.Show("Checkin not inserted!");
+
             this.Close();
         }
     }
