@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WpfApp12.Properties
+namespace CheckInChart.Properties
 {
 
 

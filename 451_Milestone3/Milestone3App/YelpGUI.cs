@@ -726,8 +726,10 @@ namespace Milestone2App
             }
 
             // Launch check-in graph UI
-            System.Diagnostics.Process.Start("..\\..\\..\\WpfApp12\\WpfApp12\\bin\\Debug\\WpfApp12.exe", currBusId);
 
+            CheckInChart.MainWindow cic = new CheckInChart.MainWindow(currBusId);
+            cic.Show();
+  
             // create a new datagridview to pass to the new form that will open to show the reviews.
             DataGridView CheckinsGrid = new DataGridView();
             CheckinsGrid.RowHeadersVisible = false;

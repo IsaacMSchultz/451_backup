@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Npgsql;
 
-namespace WpfApp12
+namespace CheckInChart
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -26,6 +26,7 @@ namespace WpfApp12
             InitializeComponent();
             columnChart(busId);
         }
+
         private void columnChart(string busId = "--ab39IjZR_xUf81WyTyHg")
         {
             List<KeyValuePair<String, int>> myChartData = new List<KeyValuePair<string, int>>();
@@ -62,8 +63,8 @@ namespace WpfApp12
 
                 myChart.DataContext = myChartData;
 
-
             }
         }
     }
+
 }
