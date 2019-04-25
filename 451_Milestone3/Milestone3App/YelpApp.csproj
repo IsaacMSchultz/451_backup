@@ -140,6 +140,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CheckInChart\CheckInChart.csproj">
+      <Project>{50bfba41-8ad7-4228-bcec-86c59716e06d}</Project>
+      <Name>CheckInChart</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MapControlLibrary\MapControlLibrary.csproj">
       <Project>{43b06ca4-e433-4e88-95b2-cd0ffda9133f}</Project>
       <Name>MapControlLibrary</Name>

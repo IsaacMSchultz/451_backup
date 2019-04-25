@@ -426,45 +426,51 @@ namespace Milestone2App {
         }
 
         private void ShowCheckinsButton_Click (object sender, EventArgs e) {
-            foreach (Form form in Application.OpenForms) {
-                if (form is ReviewForm) {
-                    form.Hide ();
-                }
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form is ReviewForm)
+                    form.Hide();
             }
 
+            // Launch check-in graph UI
+
+            CheckInChart.MainWindow cic = new CheckInChart.MainWindow(currBusId);
+            cic.Show();
+
             // create a new datagridview to pass to the new form that will open to show the reviews.
-            DataGridView CheckinsGrid = new DataGridView ();
+            DataGridView CheckinsGrid = new DataGridView();
             CheckinsGrid.RowHeadersVisible = false;
 
             // Build the columns and headers for the new form
-            foreach (var column in checkinsCols) {
+            foreach (var column in checkinsCols)
+            {
                 // Create the column headers for the data grid view.
-                DataGridViewTextBoxColumn newColumn = new DataGridViewTextBoxColumn ();
+                DataGridViewTextBoxColumn newColumn = new DataGridViewTextBoxColumn();
                 newColumn.HeaderText = column;
 
                 newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells; //make the size fo the columns be only the size of the data inside them
 
-                CheckinsGrid.Columns.Add (newColumn);
+                CheckinsGrid.Columns.Add(newColumn);
             }
 
             //Query the database for the reviews of the current business
-            List<List<string>> checkins = queryEngine.GetCheckins (currBusId, "day, to_char(time, 'HH12:MI AM'), count");
-            checkins.RemoveAt (0); //we dont need the headers so we can remove them.
+            List<List<string>> checkins = queryEngine.GetCheckins(currBusId, "day, to_char(time, 'HH12:MI AM'), count");
+            checkins.RemoveAt(0); //we dont need the headers so we can remove them.
 
             // Add all the returned reviews to the new datagrid
             foreach (List<string> checkin in checkins)
-                CheckinsGrid.Rows.Add (checkin[0], checkin[1], checkin[2]);
+                CheckinsGrid.Rows.Add(checkin[0], checkin[1], checkin[2]);
 
             // Make the new form open up and show it to the user.
-            ReviewForm checkinsWindow = new ReviewForm (CheckinsGrid);
-            checkinsWindow.Show ();
+            ReviewForm checkinsWindow = new ReviewForm(CheckinsGrid);
+            checkinsWindow.Show();
 
             int width = 0; //find the width of all the columns and makes that the size of the window
             foreach (DataGridViewColumn column in CheckinsGrid.Columns)
                 if (column.Visible == true)
                     width += column.Width;
             width += 40;
-            checkinsWindow.Size = new System.Drawing.Size (width, checkinsWindow.Size.Height);
+            checkinsWindow.Size = new System.Drawing.Size(width, checkinsWindow.Size.Height);
         }
 
         private void MapButton_Click (object sender, EventArgs e) {

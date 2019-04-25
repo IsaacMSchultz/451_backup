@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueryEngine", "..\QueryEngi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapControlLibrary", "..\MapControlLibrary\MapControlLibrary.csproj", "{43B06CA4-E433-4E88-95B2-CD0FFDA9133F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckInChart", "..\CheckInChart\CheckInChart.csproj", "{50BFBA41-8AD7-4228-BCEC-86C59716E06D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{43B06CA4-E433-4E88-95B2-CD0FFDA9133F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43B06CA4-E433-4E88-95B2-CD0FFDA9133F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43B06CA4-E433-4E88-95B2-CD0FFDA9133F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50BFBA41-8AD7-4228-BCEC-86C59716E06D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50BFBA41-8AD7-4228-BCEC-86C59716E06D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50BFBA41-8AD7-4228-BCEC-86C59716E06D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50BFBA41-8AD7-4228-BCEC-86C59716E06D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
