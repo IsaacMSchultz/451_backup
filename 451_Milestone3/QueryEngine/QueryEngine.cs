@@ -23,8 +23,8 @@ namespace QueryEngine1
         const string chars = "abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_- ";
 
         public event PropertyChangedEventHandler YelpDataChanged; // event for notifying that there was a property changed. 
-        //private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone3db"; // cloud database
-        private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone3db";
+        private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone3db"; // cloud database
+        //private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone3db";
 
         public QueryEngine()
         {
@@ -163,6 +163,15 @@ namespace QueryEngine1
         public List<List<string>> GetUser(string id, string projection = "*")
         {
             return ExecuteCategorizedQuery("SELECT " + projection + " from yelpuser WHERE yelpuser.user_id = '" + id + "';");
+        }
+
+        public List<List<string>> GetFriendsWhoReviewedBus(string user_id, string business_id)
+        {
+            return ExecuteCategorizedQuery("select n2.name as name1, b.name as name2, n2.review_stars, n2.text from business as b inner join" +
+                "(select yu.name, n.text, n.review_stars, n.business_id from yelpuser as yu inner join" +
+                "(select user_id, text, business_id, review_stars from review) n on" +
+                "(yu.user_id = n.user_id and yu.user_id in (Select friend_id from friend where user_id = '" + currUserId + "'))) n2 on" +
+                "(n2.business_id = b.business_id and b.business_id = '" + business_id + "')");
         }
 
         public List<List<string>> GetReviewsByKeyword(string keyword, string projection = "*")
