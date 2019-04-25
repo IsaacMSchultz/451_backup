@@ -21,6 +21,8 @@ namespace CheckInChart
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone3db"; // cloud database
+
         public MainWindow(string busId)
         {
             InitializeComponent();
@@ -32,7 +34,7 @@ namespace CheckInChart
             List<KeyValuePair<String, int>> myChartData = new List<KeyValuePair<string, int>>();
 
             //Select business_id, SUM(num_checkins) from business Where business_id = '--ab39IjZR_xUf81WyTyHg' group by business_id order by business_id;
-            using (var conn = new NpgsqlConnection("Host = localhost; Username = postgres; Password = Xsandy9189; Database = milestone2db"))
+            using (var conn = new NpgsqlConnection(LOGININFO))
             {
                 conn.Open();
                 using (var cmd = new NpgsqlCommand())
