@@ -14,7 +14,7 @@ namespace Milestone2App {
         MapNamesToAttrValPair mapNamesToAttrValPair; // A hashmap-like class for finding the ID's for attribute searching
 
         // Used for dynamically creating different datagridviews
-        string[] cols = { "Name", "Address", "City", "State", "Stars Shown", "Reviews", "Checkins", "Stars", "Open?", "business_id", "Distance" }; //column titles for the main datagridview
+        string[] cols = { "Name", "Address", "City", "State", "Stars", "Reviews", "Checkins", "Avg Review Rating", "Open?", "business_id", "Distance" }; //column titles for the main datagridview
         string[] reviewCols = { "Stars", "Date", "Text", "Useful", "Funny", "Cool" }; //Column headers for the review form that can be opened from the GUI
         string[] checkinsCols = { "Day", "Time", "Count" }; //Column headers for the review form that can be opened from the GUI
 
@@ -70,7 +70,7 @@ namespace Milestone2App {
                 else
                     newColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
-                if (column == "business_id" || column == "Stars Shown") //TODO: see what this does???
+                if (column == "business_id") //TODO: see what this does???
                     newColumn.Visible = false;
                 businessGrid.Columns.Add (newColumn);
             }
@@ -340,16 +340,18 @@ namespace Milestone2App {
         private void SubmitReviewButton_Click (object sender, EventArgs e) {
             if (currBusId != "" && currUserId != "" && ReviewStarsDropDown.SelectedItem != null) {
                 queryEngine.PostReview (WriteReviewTextBox_Review.Text, int.Parse (ReviewStarsDropDown.SelectedItem as string), currBusId, currUserId);
+                UpdateGrid();
                 return;
             }
-            if (currUserId != "")
+            if (currUserId == "")
                 MessageBox.Show ("Please select a user to sign in as.");
-            if (ReviewStarsDropDown.SelectedItem as string != "Review Stars")
+            if (ReviewStarsDropDown.SelectedItem == null)
                 MessageBox.Show ("Please select a stars rating.");
-            if (currBusId != "")
+            if (currBusId == "")
                 MessageBox.Show ("Please select a business.");
 
-            UpdateGrid ();
+            //UpdateGrid();
+            //SearchButton_Click(null, null);
         }
 
         /// <summary>
