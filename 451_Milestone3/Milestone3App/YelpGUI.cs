@@ -41,7 +41,7 @@ namespace Milestone2App
         private static Random random = new Random();
         const string chars = "abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_- ";
 
-        //private static string LOGININFO = "Host=localhost; Username=postgres; Password=greatPassword; Database=milestone3db"; // Defines our connection to local databus
+        //private static string LOGININFO = "Host=localhost; Username=postgres; Password=Xsandy9189; Database=milestone2db"; // Defines our connection to local databus
         //private static string LOGININFO = "Host=35.230.13.126; Username=postgres; Password=oiAv4Kmdup8Pd4vd; Database=milestone3db"; // Defines our connection to cloud hosted databus
 
         /// <summary>
@@ -722,10 +722,11 @@ namespace Milestone2App
             foreach (Form form in Application.OpenForms)
             {
                 if (form is ReviewForm)
-                {
                     form.Hide();
-                }
             }
+
+            // Launch check-in graph UI
+            System.Diagnostics.Process.Start("..\\..\\..\\WpfApp12\\WpfApp12\\bin\\Debug\\WpfApp12.exe", currBusId);
 
             // create a new datagridview to pass to the new form that will open to show the reviews.
             DataGridView CheckinsGrid = new DataGridView();
