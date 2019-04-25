@@ -17,7 +17,7 @@ namespace QueryEngine1
         List<List<string>> lastQuery;
         string currBusId;
         string currUserId;
-        MapNamesToAttrValPair attrList;        
+        MapNamesToAttrValPair attrList;
 
         private static Random random = new Random();
         const string chars = "abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_- ";
@@ -31,7 +31,7 @@ namespace QueryEngine1
             searchParameters = new Dictionary<string, List<string>>();
             lastQuery = new List<List<string>>();
             currBusId = "";
-            attrList = new MapNamesToAttrValPair();            
+            attrList = new MapNamesToAttrValPair();
         }
 
         /// <summary>
@@ -195,70 +195,52 @@ namespace QueryEngine1
         {
             if (searchParams.Count != 0)
             {
-                int currIndex = 0; //keeps track of what key we are looking at from the dictionary                
-                string orList = ""; //building subquery to find all the cities in the listbox
-                int AND_OR = 0;
+                string queryList = ""; //building subquery to find all the cities in the listbox                
 
                 //iterate through all the Keys and values and build all the necesary subqueries
                 foreach (KeyValuePair<string, List<string>> key in searchParams) //each keyValuePar
                 {
-                    AND_OR = 0;
-
-
                     if (attrList.Contains(key.Key))
                     {
-                        if (searchParams.Keys.Last() != searchParams.Keys.ElementAt(currIndex)) //if this key is not the last one in the Dictionary, add the start of the next subquery
-                            orList += " business_id IN ( SELECT business_id FROM business WHERE "; // ") AND <nextKey> IN ( SELECT  FROM business WHERE " (also increments the currIndex)
-
                         foreach (string item in key.Value) //Each item in the list for each key      
                         {
-                            orList += " business_id IN ( SELECT business_id FROM attributes WHERE ";
-                            orList += "attribute_name = '" + key.Key + "' AND attribute_value = '" + item + "') AND "; // "<key> = '<each item in the list with that key>' AND "
-                            AND_OR = 4;
+                            queryList += " business_id IN ( SELECT business_id FROM attributes WHERE ";
+                            queryList += "attribute_name = '" + key.Key + "' AND attribute_value = '" + item + "') "; // "<key> = '<each item in the list with that key>' AND "                            
+                            if (key.Value.Last() != item) //Only add the AND to the end if it isnt the last one on the list
+                                queryList += " AND";
                         }
                     }
                     else
                     {
-                        // Build the subquery to find all tuples with the value from that keyPair
                         if (key.Key != "category_name")
-                            if (searchParams.Keys.Last() != searchParams.Keys.ElementAt(currIndex)) //if this key is not the last one in the Dictionary, add the start of the next subquery
-                                orList += key.Key + " IN ( SELECT " + key.Key + " FROM business WHERE "; // ") AND <nextKey> IN ( SELECT  FROM business WHERE " (also increments the currIndex)
-
-                        foreach (string item in key.Value) //Each item in the list for each key      
                         {
-                            if (key.Key != "category_name")
+                            queryList += key.Key + " IN ( SELECT " + key.Key + " FROM business WHERE "; // ") AND <nextKey> IN ( SELECT  FROM business WHERE " (also increments the currIndex)
+                            foreach (string item in key.Value) //Each item in the list for each key      
                             {
-                                orList += key.Key + " = '" + item + "' OR "; // "<key> = '<each item in the list with that key>' OR "
-                                AND_OR = 3;
+                                queryList += key.Key + " = '" + item + "' "; // "<key> = '<each item in the list with that key>' OR "
+                                if (key.Value.Last() != item) //Only add the OR to the end if it isnt the last one on the list
+                                    queryList += " OR ";
+                                else
+                                    queryList += ")"; // On the last item we need to close the parenthesis
                             }
-                            else
+                        }
+                        else
+                        {
+                            foreach (string item in key.Value) //Each item in the list for each key      
                             {
-                                orList += " business_id IN ( SELECT business_id FROM category WHERE ";
-                                orList += key.Key + " = '" + item + "') AND "; // "<key> = '<each item in the list with that key>' AND "
-                                AND_OR = 4;
+                                queryList += " business_id IN ( SELECT business_id FROM category WHERE ";
+                                queryList += key.Key + " = '" + item + "') "; // "<key> = '<each item in the list with that key>'"
+                                if (key.Value.Last() != item) //Only add the AND to the end if it isnt the last one on the list
+                                    queryList += " AND ";
                             }
                         }
                     }
 
-                    orList = orList.Substring(0, orList.Length - AND_OR); // Cuts off the final "AND "orList       
-                    orList += ") AND ";
+                    if (!searchParams.Last().Equals(key)) // Add an AND for each subquery only if this isnt the last element in te dictionary
+                        queryList += " AND ";
                 }
 
-                if (searchParams.Count == 1)
-                    orList = orList.Substring(0, orList.Length - 6); // if there is just one parameter, we wont need parenthesis or and AND.
-                else
-                {
-                    if (searchParams.ContainsKey("category_name"))
-                        orList = orList.Substring(0, orList.Length - (AND_OR + 2)); // Cuts off the last ") AND "
-                    else
-                        orList = orList.Substring(0, orList.Length - 4); // Cuts off the last ") AND "
-                }
-
-                string query = "SELECT " + projection + " FROM " + tables + " WHERE " + orList + endQuery + " ORDER BY state;";
-
-                if (searchParams.ContainsKey("category_name"))
-                    Console.WriteLine(query);
-
+                string query = "SELECT " + projection + " FROM " + tables + " WHERE " + queryList + endQuery + " ORDER BY state;"; //Broken up into 3 lines for debug purposes
                 lastQuery = ExecuteCategorizedQuery(query);
                 return lastQuery;
             }
