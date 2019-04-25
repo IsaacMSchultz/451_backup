@@ -1,0 +1,10 @@
+YelpApp Bugs:
+
+Friends most recent review grid takes ~10 sec to populate (Use indexing once I learn how to)
+
+Review stars drop down has values listed twice
+
+Adding a business review does not dynamically update the grid until you hit search button (even with updateGrid() call)
+
+
+Does adding a review check for review_id conflicts (ie: just try catch and try again)

@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2048
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YelpApp", "YelpApp.csproj", "{2CB1BFDE-3766-43B7-9BB0-B4FF18659E79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueryEngine", "..\QueryEngine\QueryEngine.csproj", "{76BA320A-32DD-414B-BEB8-E6B86080C5C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapControlLibrary", "..\MapControlLibrary\MapControlLibrary.csproj", "{43B06CA4-E433-4E88-95B2-CD0FFDA9133F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckInChart", "..\CheckInChart\CheckInChart.csproj", "{50BFBA41-8AD7-4228-BCEC-86C59716E06D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2CB1BFDE-3766-43B7-9BB0-B4FF18659E79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CB1BFDE-3766-43B7-9BB0-B4FF18659E79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CB1BFDE-3766-43B7-9BB0-B4FF18659E79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CB1BFDE-3766-43B7-9BB0-B4FF18659E79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76BA320A-32DD-414B-BEB8-E6B86080C5C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76BA320A-32DD-414B-BEB8-E6B86080C5C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76BA320A-32DD-414B-BEB8-E6B86080C5C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76BA320A-32DD-414B-BEB8-E6B86080C5C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43B06CA4-E433-4E88-95B2-CD0FFDA9133F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43B06CA4-E433-4E88-95B2-CD0FFDA9133F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43B06CA4-E433-4E88-95B2-CD0FFDA9133F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43B06CA4-E433-4E88-95B2-CD0FFDA9133F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50BFBA41-8AD7-4228-BCEC-86C59716E06D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50BFBA41-8AD7-4228-BCEC-86C59716E06D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50BFBA41-8AD7-4228-BCEC-86C59716E06D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50BFBA41-8AD7-4228-BCEC-86C59716E06D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {81DE3B2A-FFEE-4E55-B899-B5C4A62BDAC8}
+	EndGlobalSection
+EndGlobal
